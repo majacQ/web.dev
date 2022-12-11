@@ -12,6 +12,8 @@ description: |
   device or desktop.
 tags:
   - progressive-web-apps
+feedback:
+  - api
 ---
 
 The web app manifest is a JSON file that tells the browser about your
@@ -135,7 +137,7 @@ be made to launch full screen.
       <tr>
         <td><code>standalone</code></td>
         <td>
-          Opens the web app to look and feel like a standalone native
+          Opens the web app to look and feel like a standalone
           app. The app runs in its own window, separate from the browser, and
           hides standard browser UI elements like the URL bar.
           <figure class="w-figure">

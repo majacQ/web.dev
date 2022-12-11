@@ -9,13 +9,16 @@ date: 2020-07-17
 description: |
   Learn how to adapt your web-based payment app to work with Web Payments and provide a better user experience for customers.
 tags:
+  - blog
   - payments
+feedback:
+  - api
 ---
 
 [Web Payments](/empowering-payment-apps-with-web-payments/#what-is-web-payments)
 brings to the web a browser's built-in interface that allows users to enter
 required payment information easier than ever before. The APIs can invoke
-web-based payment apps, as well as [native payment
+web-based payment apps, as well as [Android payment
 apps](/android-payment-apps-developers-guide/).
 
 {% include 'content/payments/browser-compatibility.njk' %}
@@ -37,7 +40,7 @@ apps](/android-payment-apps-developers-guide/).
   redirects or pop-ups.
 * Web Payments APIs can be integrated into established websites allowing you to
   leverage the existing user base.
-* Unlike native apps, web-based payment apps don't need to be installed in
+* Unlike platform-specific apps, web-based payment apps don't need to be installed in
   advance.
 
 ## How does a web-based payment app work?
@@ -128,5 +131,5 @@ tracker](https://bugs.chromium.org/u/maxlg@chromium.org/hotlists/Expandable-paym
 To start building a web-based payment app, you have three distinct parts to implement:
 
 * [Registering a web-based payment app](/registering-a-web-based-payment-app)
-* Orchestrating a payment transaction on the service worker
-* Handling optional payment information on the service worker
+* [Orchestrating payment transactions with a service worker](/orchestrating-payment-transactions)
+* [Handling optional payment information with a service worker](/handling-optional-payment-information)

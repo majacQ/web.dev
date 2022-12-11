@@ -8,6 +8,7 @@ authors:
   - demianrenzulli
   - jeffposnick
 date: 2020-06-23
+updated: 2020-08-20
 description: |
   Even in locations with fast networks a user might lose connection or connect to a flaky network, at some moments of the day.
   Use the  Background Sync API and Web Push Notifications to provide a resilient search experience in these cases.
@@ -21,8 +22,10 @@ codelabs:
   - codelab-building-resilient-search-experiences
 ---
 
+{% YouTube 'fhqCwDP69PI', '35' %}
+
 Even in locations with fast networks a user might lose connection or connect to a flaky network, at some moments of the day.
-For example: a user is on the subway searching on the phone for a product on an e-commerce website. She types the product name, clicks the "search" button, and while waiting for the results, the connection is lost, leading to the standard browser offline page.
+For example: a user is on the subway searching on the phone for a product on an e-commerce website. They type the product name, click the "search" button, and while waiting for the results, the connection is lost, leading to the standard browser offline page.
 
 As a result, unless the user decides to come back to the site later, and repeat the same task, the site might lose a potential transaction and customer.
 
@@ -35,12 +38,12 @@ To provide a more resilient search experience in these cases you can use the [Ba
 
 ## Production case
 
-For concrete application of this technique let's take a look at Google Search for Chrome in Android. 
+For concrete application of this technique let's take a look at Google Search for Chrome in Android.
 When visiting the Google Search web app and going offline, instead of showing the standard network error page, the site serves a custom offline response, but allows users to enter their search query immediately.
 The page also prompts the user to opt-in for notifications, to receive a link to the search results page once the connection is recovered.
 
 <figure class="w-figure">
-  <img src="search-offline-screen.png" 
+  <img src="search-offline-screen.png"
        alt="A screenshot of the background retry interface in Google Search.">
 </figure>
 
@@ -54,13 +57,13 @@ Service workers allow Google Search to provide a [meaningful offline experience]
 
 While Google Search implements this functionality without using Workbox, the [Workbox library](https://developers.google.com/web/tools/workbox) makes it easier by providing a [Background Sync module](https://developers.google.com/web/tools/workbox/modules/workbox-background-sync), which takes care of many implementation details for us.
 
-![A service worker and a cache object communicating wiith each other.](workbox-background-sync.png)
+![A service worker and a cache object communicating with each other.](workbox-background-sync.png)
 
 To implement a resilient search experience in Workbox, first, import the following modules in your service worker:
 
 ```javascript
-import {BackgroundSyncPlugin} from 'workbox-background-sync'; 
-import {registerRoute} from 'workbox-routing'; 
+import {BackgroundSyncPlugin} from 'workbox-background-sync';
+import {registerRoute} from 'workbox-routing';
 import {NetworkOnly} from 'workbox-strategies';
 ```
 

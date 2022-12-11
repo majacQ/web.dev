@@ -12,14 +12,16 @@ tags:
   - blog
   - css
   - houdini
+feedback:
+  - api
 ---
 
 [CSS Houdini](https://ishoudinireadyyet.com) is an umbrella term that covers a
 set of low-level APIs that expose parts of the CSS rendering engine, and give
 developers access to the CSS Object Model. This is a huge
 change for the CSS ecosystem, as it enables developers to tell the browser how
-to read and parse custom CSS without waiting for browser vendors to natively
-implement these features. So exciting!
+to read and parse custom CSS without waiting for browser vendors to provide
+built-in support for these features. So exciting!
 
 One of the most exciting additions to CSS within the Houdini umbrella is the
 [Properties and Values

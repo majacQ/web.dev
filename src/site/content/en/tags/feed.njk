@@ -5,7 +5,7 @@ renderData:
     category: "{{ paged.title }}"
     icon: https://web.dev/images/social.png
     id: https://web.dev/
-    logo: https://web.dev/images/rss-banner.png
+    logo: https://web.dev/images/shared/rss-banner.png
     subtitle: "{{ paged.description }}"
     title: "{{ paged.title }} on web.dev"
     url: https://web.dev{{ paged.href }}feed.xml
@@ -21,7 +21,7 @@ pagination:
 <feed xmlns="http://www.w3.org/2005/Atom">
   <id>{{ renderData.metadata.id }}</id>
   <title>{{ renderData.metadata.title }}</title>
-  <updated>{{ paged.elements | reverse | rssLastUpdatedDate }}</updated>
+  <updated>{{ site.buildDate | rssDate }}</updated>
   <author>
     <name>{{ renderData.metadata.author }}</name>
   </author>
