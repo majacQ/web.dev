@@ -14,7 +14,17 @@ tags:
   - performance
 ---
 
-[Lighthouse](https://github.com/GoogleChrome/lighthouse) now supports performance budgets. This feature, [LightWallet](https://developers.google.com/web/tools/lighthouse/audits/budgets), can be set up in under five minutes and provides feedback on performance metrics and the size and quantity of page resources.
+[Lighthouse](https://github.com/GoogleChrome/lighthouse) now supports performance budgets. This feature, [LightWallet](/use-lighthouse-for-performance-budgets/), can be set up in under five minutes and provides feedback on performance metrics and the size and quantity of page resources.
+
+{% Aside 'important' %}
+While Lighthouse is an excellent tool for identifying performance improvement
+opportunities, it can't be stressed enough that Lighthouse is a tool that relies
+on [lab data](/lab-and-field-data-differences/#lab-data). While lab data is an
+integral part of any performance improvement effort, comparing and contrasting
+that data with [field data](/lab-and-field-data-differences/#field-data) collected
+from your website's actual users is key. Doing so will help you understand how the
+changes you make to your website affect real users.
+{% endAside %}
 
 ## Install Lighthouse
 
@@ -90,6 +100,6 @@ lighthouse https://example.com --budget-path=./budget.json
 
 If LightWallet has been configured correctly, the Lighthouse report will contain a **Budgets** section within the **Performance** category.
 
-<img src="./lightwallet.png" class="w-screenshot" alt="'Budgets' section of the Lighthouse report">
+{% Img src="image/admin/FdUeI8rKZtJB3Ol624S3.png", alt="'Budgets' section of the Lighthouse report", width="800", height="289" %}
 
 In the JSON version of the Lighthouse report, Lightwallet results can be found within the audit findings for the `performance-budget` audit.

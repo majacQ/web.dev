@@ -23,7 +23,7 @@ improves page performance.
 This codelab shows how to use **code splitting** to improve the performance of a
 simple application that sorts three numbers.
 
-![A browser window shows an application titled Magic Sorter with three fields for inputting numbers and a sort button.](./codelab-code-splitting-1.png)
+{% Img src="image/admin/1lb0XbGP6M4eShkmYaQW.png", alt="A browser window shows an application titled Magic Sorter with three fields for inputting numbers and a sort button.", width="800", height="504" %}
 
 ## Measure
 
@@ -39,7 +39,7 @@ attempting to add any optimizations.
 {% Instruction 'disable-cache', 'ol' %}
 {% Instruction 'reload-app', 'ol' %}
 
-<img class="w-screenshot" src="./codelab-code-splitting-3.png" alt="Network panel showing 71.2 KB JavaScript bundle.">
+{% Img src="image/admin/pyzLwutSzSx2qztQMXTM.png", alt="Network panel showing 71.2 KB JavaScript bundle.", width="800", height="153" %}
 
 71.2 KB worth of JavaScript just to sort a few numbers in a simple application.
 What gives?
@@ -115,7 +115,7 @@ form.addEventListener("submit", e => {
 Reload the application, open DevTools, and take a look at the **Network** panel
 once again.
 
-<img class="w-screenshot" src="./codelab-code-splitting-4.png" alt="Network panel showing 15.2 KB JavaScript bundle.">
+{% Img src="image/admin/J8c1PhqMDOJKjoenzMCN.png", alt="Network panel showing 15.2 KB JavaScript bundle.", width="800", height="148" %}
 
 For this application, the bundle size was reduced by over 4X with very little
 work, but there's still more room for improvement.
@@ -163,7 +163,7 @@ out by the proposal.
 
 {% Aside %}
 Read more about how dynamic imports work in this [Web Updates
-article](https://developers.google.com/web/updates/2017/11/dynamic-import).
+article](https://v8.dev/features/dynamic-import).
 {% endAside %}
 
 
@@ -226,12 +226,12 @@ Reload the application one last time and keep a close eye on the **Network**
 panel again. Only a small initial bundle is downloaded as soon as the app
 loads.
 
-<img class="w-screenshot" src="./codelab-code-splitting-5.png" alt="Network panel showing 2.7 KB JavaScript bundle.">
+{% Img src="image/admin/f1QZcSozkaA1rj52YWGV.png", alt="Network panel showing 2.7 KB JavaScript bundle.", width="800", height="151" %}
 
 After the button is pressed to sort the input numbers, the chunk that contains
 the sorting code gets fetched and executed.
 
-<img class="w-screenshot" src="./codelab-code-splitting-6.png" alt="Network panel showing 2.7 KB JavaScript bundle followed by a 13.9 KB JavaScript bundle.">
+{% Img src="image/admin/LPNj3JpAmzsGppwJl5fs.png", alt="Network panel showing 2.7 KB JavaScript bundle followed by a 13.9 KB JavaScript bundle.", width="800", height="211" %}
 
 Notice how the numbers still get sorted!
 
@@ -275,7 +275,7 @@ method recommended by your framework/library to lazy load specific modules.
 ### Preloading and prefetching
 
 Where possible, take advantage of browser hints such as `<link rel="preload">`
-or `<link rel="prefetch">` in order to try and load critical modules even
+or `<link rel="prefetch">` to try and load critical modules even
 sooner. webpack supports both hints through the use of magic comments in import
 statements. This is explained in more detail in the
 [Preload critical chunks](/preload-critical-assets) guide.

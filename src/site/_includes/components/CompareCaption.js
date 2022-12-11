@@ -14,15 +14,31 @@
  * limitations under the License.
  */
 
-const {oneLine} = require('common-tags');
-const md = require('markdown-it')();
+const isDesignSystemContext = require('../../../lib/utils/is-design-system-context');
 
-/* eslint-disable require-jsdoc */
+/* NOTE: This component is in a transition period to support both new design system contexts
+and the existing system. Once the new design system has been *fully* rolled out, this component
+can be cleaned up with the following:
 
-module.exports = (content) => {
-  return oneLine`
-    <figcaption class="w-compare__caption">
-      <p>${md.renderInline(content)}</p>
-    </figcaption>
-  `;
-};
+1. The isDesignSystemContext conditional can be removed and code in that block should run as normal
+2. Everything from the '/// DELETE THIS WHEN ROLLOUT COMPLETE' comment *downwards* can be removed
+*/
+
+/**
+ * @param {string} content Markdown with the content for the compare element.
+ * @return {string}
+ */
+function CompareCaption(content) {
+  // Whitespace is intentional to allow markdown parser to kick back in.
+  if (isDesignSystemContext(this.page.filePathStem)) {
+    return `<figcaption class="compare__caption">
+${content}</figcaption>`;
+  }
+
+  // Whitespace is intentional to allow markdown parser to kick back in.
+  return `<figcaption class="w-compare__caption">
+
+${content}</figcaption>`;
+}
+
+module.exports = CompareCaption;

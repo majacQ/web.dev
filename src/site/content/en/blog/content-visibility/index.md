@@ -4,8 +4,10 @@ subhead: Improve initial load time by skipping the rendering of offscreen conten
 authors:
   - una
   - vladimirlevin
+  - jlwagner
 date: 2020-08-05
-hero: hero.jpg
+updated: 2022-12-05
+hero: image/admin/lrAkOWYTyGkK2BKXoF9y.jpg
 alt: Stylized photo of a half-hidden person.
 description: >
     The CSS content-visibility property enables web content rendering
@@ -33,14 +35,14 @@ content is off-screen, leveraging the `content-visibility` property makes the
 initial user load much faster. It also allows for faster interactions with the
 on-screen content. Pretty neat.
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="demo.jpg" alt="demo with figures representing network results">
-  <figcaption class="w-figcaption">
-    In our article demo, applying <code>content-visibility: auto</code> to chunked content areas gives a <b>7x</b> rendering performance boost on initial load. Read on to learn more.</a>
-  </figcaption>
+<figure>
+  {% Img src="image/admin/v6WcSx9Fq76lCD0iqFCQ.jpg", alt="demo with figures representing network results", width="800", height="554" %}
+  <figcaption>In our article demo, applying <code>content-visibility: auto</code> to chunked content areas gives a <b>7x</b> rendering performance boost on initial load. Read on to learn more.</figcaption>
 </figure>
 
 ## Browser support {: #support }
+
+{% BrowserCompat 'css.properties.content-visibility' %}
 
 `content-visibility` relies on primitives within the [the CSS Containment
 Spec](http://drafts.csswg.org/css-contain/). While `content-visibility` is only
@@ -62,9 +64,9 @@ needing to consider state outside of the subtree. Knowing which bits of content
 decisions for page rendering.
 
 There are four types of [CSS
-containment](https://developers.google.com/web/updates/2016/06/css-containment),
+containment](/css-containment/),
 each a potential value for the `contain` CSS property, which can be combined
-together in a space-separated list of values:
+in a space-separated list of values:
 
 - `size`: Size containment on an element ensures that the element's box can be
   laid out without needing to examine its descendants. This means we can
@@ -88,11 +90,11 @@ together in a space-separated list of values:
 It may be hard to figure out which containment values to use, since browser
 optimizations may only kick in when an appropriate set is specified. You can
 play around with the values to see [what works
-best](https://developers.google.com/web/updates/2016/06/css-containment), or you
+best](/css-containment/), or you
 can use another CSS property called `content-visibility` to apply the needed
 containment automatically. `content-visibility` ensures that you get the largest
 performance gains the browser can provide with minimal effort from you as a
-developer. 
+developer.
 
 The content-visibility property accepts several values, but `auto` is the one
 that provides immediate performance improvements. An element that has
@@ -100,9 +102,9 @@ that provides immediate performance improvements. An element that has
 the element is off-screen (and not otherwise relevant to the user—relevant
 elements would be the ones that have focus or selection in their subtree), it
 also gains `size` containment (and it stops
-[painting](https://developers.google.com/web/updates/2018/09/inside-browser-part3#paint)
+[painting](https://developer.chrome.com/blog/inside-browser-part3/#paint)
 and
-[hit-testing](https://developers.google.com/web/updates/2018/09/inside-browser-part4#finding_the_event_target)
+[hit-testing](https://developer.chrome.com/blog/inside-browser-part4/#finding-the-event-target)
 its contents).
 
 What does this mean? In short, if the element is off-screen its descendants are
@@ -114,10 +116,29 @@ As the element approaches the viewport, the browser no longer adds the `size`
 containment and starts painting and hit-testing the element's content. This
 enables the rendering work to be done just in time to be seen by the user.
 
+{% Aside 'caution' %}
+The browser is only able to skip rendering work if you are also careful not to call any DOM API that [forces some of rendering
+to occur](https://gist.github.com/paulirish/5d52fb081b3570c81e3a#file-what-forces-layout-md) on one of the skipped subtrees.
+If you're using `content-visibility` to improve performance, audit your code to make sure these APIs are not getting called.
+To help find them, Chromium will print console messages if you call one of these APIs for a subtree of an
+element with `content-visibility:hidden`. To see the messages, [turn on verbose logging](https://developer.chrome.com/docs/devtools/console/log/).
+{% endAside %}
+
+
+## A note on accessibility
+
+One of the features of `content-visibility: auto` is that the off-screen content remains available in the document object model and therefore, the accessibility tree (unlike with `visibility: hidden`). This means, that content can be searched for on the page, and navigated to, without waiting for it to load or sacrificing rendering performance.
+
+The flip-side of this, however, is that [landmark](https://www.w3.org/TR/wai-aria-1.1/#landmark_roles) elements with style features such as `display: none` or `visibility: hidden` will also appear in the accessibility tree when off-screen, since the browser will not render these styles until they enter the viewport. To prevent these from being visible in the accessibility tree, potentially causing clutter, be sure to also add `aria-hidden="true"`.
+
+{% Aside 'caution' %}
+In Chromium 85-89, off-screen children within `content-visibility: auto` were marked as invisible. In particular, [headings](https://marcysutton.com/content-visibility-accessible-semantics) and landmark roles were not exposed to accessibility tools. In Chromium 90 this was updated so that they are exposed.
+{% endAside %}
+
 ## Example: a travel blog {: #example }
 
-<figure class='w-figure'>
-  <video controls autoplay loop muted playsinline class='w-screenshot'>
+<figure>
+  <video controls autoplay loop muted playsinline>
     <source src='https://storage.googleapis.com/web-dev-assets/content-visibility/travel_blog.mp4'>
   </video>
   <figcaption>In this example, we baseline our travel blog on the right, and apply <code>content-visibility: auto</code> to chunked areas on the left. The results show rendering times going from <b>232ms</b> to <b>30ms</b> on initial page load.</figcaption>
@@ -139,11 +160,9 @@ have changed. It updates the style and layout of any new elements, along with
 the elements that may have shifted as a result of new updates. This is rendering
 work. This takes time.
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="travelblog.jpg" alt="A screenshot of a travel blog.">
-  <figcaption class="w-figcaption">
-    An example of a travel blog. See <a href="https://codepen.io/una/pen/rNxEWLo">Demo on Codepen</a>
-  </figcaption>
+<figure>
+  {% Img src="image/admin/57Zh2hjcXJjJIBSE648j.jpg", alt="A screenshot of a travel blog.", width="800", height="563" %}
+  <figcaption>An example of a travel blog. See <a href="https://codepen.io/una/pen/rNxEWLo">Demo on Codepen</a></figcaption>
 </figure>
 
 Now consider what happens if you put `content-visibility: auto` on each of the
@@ -165,11 +184,9 @@ loading. In our example, we see a boost from a **232ms** rendering time to a
 What is the work that you need to do in order to reap these benefits? First, we
 chunk the content into sections:
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="travelblog-chunked.jpg" alt="An annotated screenshot of chunking content into sections with a CSS class.">
-  <figcaption class="w-figcaption">
-    Example of chunking content into sections with the <code>story</code> class applied, to receive <code>content-visibility: auto</code>. See <a href="https://codepen.io/vmpstr/pen/xxZoyMb">Demo on Codepen</a>
-  </figcaption>
+<figure>
+  {% Img src="image/admin/29uexe2kBwIsrAuILPnp.jpg", alt="An annotated screenshot of chunking content into sections with a CSS class.", width="800", height="563" %}
+  <figcaption>Example of chunking content into sections with the <code>story</code> class applied, to receive <code>content-visibility: auto</code>. See <a href="https://codepen.io/vmpstr/pen/xxZoyMb">Demo on Codepen</a></figcaption>
 </figure>
 
 Then, we apply the following style rule to the sections:
@@ -192,7 +209,7 @@ In order to realize the potential benefits of `content-visibility`, the browser
 needs to apply size containment to ensure that the rendering results of contents
 do not affect the size of the element in any way. This means that the element
 will lay out as if it was empty. If the element does not have a height specified
-in a regular block layout, then it will be of 0 height. 
+in a regular block layout, then it will be of 0 height.
 
 This might not be ideal, since the size of the scrollbar will shift, being
 reliant on each story having a non-zero height.
@@ -206,6 +223,25 @@ This means it will lay out as if it had a single child of "intrinsic-size"
 dimensions, ensuring that your unsized divs still occupy space.
 `contain-intrinsic-size` acts as a placeholder size in lieu of rendered content.
 
+In Chromium 98 and onward, there is a new [`auto`](https://drafts.csswg.org/css-sizing-4/#valdef-contain-intrinsic-width-auto-length)
+keyword for `contain-intrinsic-size`. When specified, the browser will remember
+the last-rendered size, if any, and use that instead of the developer-provided placeholder
+size. For example, if you specified `contain-intrinsic-size: auto 300px`, the
+element will start out with a `300px` intrinsic sizing in each dimension, but once
+the element's contents are rendered, it will retain the rendered intrinsic size.
+Any subsequent rendering size changes will also be remembered. In practice, this means that if you
+scroll an element with `content-visibility: auto` applied, and then scroll it back
+offscreen, it will automatically retain its ideal width and height, and not revert
+to the placeholder sizing. This feature is especially useful for infinite scrollers,
+which can now automatically improve sizing estimation over time as the user
+explores the page.
+
+{% Aside %}
+We can use `IntersectionObserver` and `MutationObserver` to set
+the correct sizes inline for each element. [Alex Russell](https://twitter.com/slightlylate) explains
+how this works in [`content-visibility` without jittery scrollbars](https://infrequently.org/2020/12/content-visibility-scroll-fix/), and [Resize-Resilient `content-visibility` Fixes](https://infrequently.org/2020/12/resize-resilient-deferred-rendering/).
+{% endAside %}
+
 ## Hiding content with `content-visibility: hidden`
 
 What if you want to keep the content unrendered regardless of whether or not it
@@ -215,10 +251,10 @@ is on-screen, while leveraging the benefits of cached rendering state? Enter:
 The `content-visibility: hidden` property gives you all of the same benefits of
 unrendered content and cached rendering state as `content-visibility: auto` does
 off-screen. However, unlike with `auto`, it does not automatically start to
-render on-screen. 
+render on-screen.
 
 This gives you more control, allowing you to hide an element's contents and
-later unhide them quickly. 
+later unhide them quickly.
 
 Compare it to other common ways of hiding element's contents:
 
@@ -236,7 +272,23 @@ happen, they only happen when the element is shown again (i.e. the
 `content-visibility: hidden` property is removed).
 
 Some great use cases for `content-visibility: hidden` are when implementing
-advanced virtual scrollers, and measuring layout.
+advanced virtual scrollers, and measuring layout. They're also great for
+single-page applications (SPA's). Inactive app views can be left in the DOM with
+`content-visibility: hidden` applied to prevent their display but maintain their
+cached state. This makes the view quick to render when it becomes active again.
+
+{% Aside 'note' %}
+In an experiment, Facebook engineers observed an up to 250ms improvement in
+navigation times when going back to previously cached views.
+{% endAside %}
+
+## Effects on Interaction to Next Paint (INP)
+
+[INP](/inp/) is a metric that evaluates a page's ability to be reliably responsive to user input. Responsiveness can be affected by any excessive amount of work that occurs on the main thread, including rendering work.
+
+Whenever you can reduce rendering work on any given page, you're giving the main thread an opportunity to respond to user inputs more quickly. This includes rendering work, and using the `content-visiblity` CSS property where appropriate can reduce rendering work—especially during startup, when most rendering and layout work is done.
+
+Reducing rendering work has a direct effect on INP. When users attempt to interact with a page that uses the `content-visibility` property properly to defer layout and rendering of offscreen elements, you're giving the main thread a chance to respond to critical user-visible work. This can improve your page's INP in some situations.
 
 ## Conclusion
 
@@ -246,5 +298,5 @@ properties, check out:
 
 - [The CSS Containment Spec](http://drafts.csswg.org/css-contain/)
 - [MDN Docs on CSS
-  Containment](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Containment)
+  Containment](https://developer.mozilla.org/docs/Web/CSS/CSS_Containment)
 - [CSSWG Drafts](https://github.com/w3c/csswg-drafts)

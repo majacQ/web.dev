@@ -5,8 +5,8 @@ subhead: Browser-level built-in lazy-loading for iframes is here
 authors:
   - addyosmani
 date: 2020-07-24
-#updated: 2020-07-21
-hero: hero.png
+updated: 2022-11-29
+hero: image/admin/dMCW2Qqi5Qp2DB3w4DyE.png
 alt: Phone outline with loading image and assets
 description: |
   This post covers the loading attribute and how it can be used
@@ -19,10 +19,10 @@ feedback:
   - api
 ---
 
-[Standardized lazy-loading for images](/native-lazy-loading) landed in Chrome 76 via
+[Standardized lazy-loading for images](/browser-level-image-lazy-loading/) landed in Chrome 76 via
 the `loading` attribute and later came to Firefox. We are happy to share that
 **browser-level lazy-loading for iframes** is now
-[standardized](https://github.com/whatwg/html/pull/5579) and is also 
+[standardized](https://github.com/whatwg/html/pull/5579) and is also
 supported in Chrome and Chromium-based browsers.
 
 ```html/1
@@ -39,8 +39,8 @@ other parts of the page, and reduces memory usage.
 This [demo](https://lazy-load.netlify.app/iframes/) of `<iframe loading=lazy>`
 shows lazy-loading video embeds:
 
-<figure class="w-figure w-figure--fullbleed">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure data-size="full">
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/iframe-lazy-loading/lazyload-iframes-compressed.webm" type="video/webm">
     <source src="https://storage.googleapis.com/web-dev-assets/iframe-lazy-loading/lazyload-iframes-compressed.mp4" type="video/mp4">
   </video>
@@ -55,11 +55,8 @@ the user's viewport. Rather, it's only seen once they scroll further down the
 page. Despite this, users pay the cost of downloading data and costly
 JavaScript for each frame, even if they don't scroll to it.
 
-<figure class="w-figure">
-<img src="./iframe-lazyloading.png" alt="Data-savings from using iframe
-lazy-loading for an iframe. Eager loading pulls in 3MB in this example, while
-lazy-loading does not pull in this code until the user scrolls closer to the
-iframe.">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/xqZMRuULxbz6DVXNP8ea.png", alt="Data-savings from using iframe lazy-loading for an iframe. Eager loading pulls in 3MB in this example, while lazy-loading does not pull in this code until the user scrolls closer to the iframe.", width="800", height="460" %}
 </figure>
 
 Based off Chrome's research into [automatically lazy-loading offscreen iframes
@@ -69,39 +66,40 @@ lazy-loading iframes could lead to 2-3% median data savings, 1-2% [First
 Contentful Paint](/fcp/) reductions at the median, and 2% [First Input
 Delay](/fid/) (FID) improvements at the 95th percentile.
 
+Additionally, lazy-loading off-screen iframes can impart benefits to [Largest Contentful Paint (LCP)](/lcp/).
+[LCP candidates](/lcp/#what-elements-are-considered), such as images or text dependent on web fonts
+in order to render. Because iframes can often require a significant amount of bandwidth in
+order to load all of their subresources, lazy-loading offscreen iframes can significantly
+reduce bandwidth contention on network-constrained devices, leaving more bandwidth to load
+resources which contribute to a page's LCP.
+
 ### How does built-in lazy-loading for iframes work?
 
 The `loading` attribute allows a browser to defer loading offscreen iframes and
-images until users scroll near them. `loading` supports three values:
+images until users scroll near them. `loading` supports two values:
 
 *   `lazy`: is a good candidate for lazy-loading.
 *   `eager`: is not a good candidate for lazy-loading. Load right away.
-*   `auto`: browser will determine whether or not to lazily load.
-
-{% Aside %}
-`auto` is currently a non-standard value, but is the default in Chrome today.
-Chrome intends on bringing a proposal for this value to the standards table.
-{% endAside %}
 
 Using the `loading` attribute on iframes works as follows:
 
 ```html
 <!-- Lazy-load the iframe -->
-<iframe src="https://example.com" 
-        loading="lazy" 
-        width="600" 
+<iframe src="https://example.com"
+        loading="lazy"
+        width="600"
         height="400"></iframe>
 
 <!-- Eagerly load the iframe -->
-<iframe src="https://example.com" 
-        width="600" 
+<iframe src="https://example.com"
+        width="600"
         height="400"></iframe>
 
-<!-- or use loading="eager" to opt out of automatic 
+<!-- or use loading="eager" to opt out of automatic
 lazy-loading in Lite Mode -->
-<iframe src="https://example.com" 
-        loading="eager" 
-        width="600" 
+<iframe src="https://example.com"
+        loading="eager"
+        width="600"
         height="400"></iframe>
 ```
 
@@ -137,7 +135,7 @@ whether an iframe is hidden:
 If an iframe meets any of these conditions, Chrome considers it hidden and
 won't lazy-load it in most cases. iframes that aren't hidden will only load
 when they're within the [load-in distance
-threshold](/native-lazy-loading/#load-in-distance-threshold). Chrome shows a
+threshold](/browser-level-image-lazy-loading/#load-in-distance-threshold). Chrome shows a
 placeholder for lazy-loaded iframes that are still being fetched.
 
 ### What impact might we see from lazy-loading popular iframe embeds?
@@ -149,13 +147,13 @@ Lazy-loading YouTube video embeds (saves ~500KB on initial page load):
 
 ```html/1
 <iframe src="https://www.youtube.com/embed/YJGCZCaIZkQ"
-        loading="lazy" 
-        width="560" 
-        height="315" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; 
-        encrypted-media; gyroscope; 
-        picture-in-picture" 
+        loading="lazy"
+        width="560"
+        height="315"
+        frameborder="0"
+        allow="accelerometer; autoplay;
+        encrypted-media; gyroscope;
+        picture-in-picture"
         allowfullscreen></iframe>
 ```
 
@@ -164,10 +162,8 @@ we saved 10 seconds off of how soon our pages could be interactive on mobile
 devices. I have opened an internal bug with YouTube to discuss adding
 `loading=lazy` to its embed code.
 
-<figure class="w-figure">
-<img src="./iframe-chromecom.png" alt="Chrome.com achieved a 10 second
-reduction in Time To Interactive by lazy-loading offscreen iframes for their
-YouTube video embed">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/HQkwBgEoyiZsiOaPyz8v.png", alt="Chrome.com achieved a 10 second reduction in Time To Interactive by lazy-loading offscreen iframes for their YouTube video embed", width="800", height="460" %}
 </figure>
 
 {% Aside %}
@@ -187,18 +183,18 @@ lazy-loading of their iframe.
 **Lazy-loading Spotify embeds (saves 514KB on initial load):**
 
 ```html
-<iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3" 
+<iframe src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3"
         loading="lazy"
-        width="300" 
-        height="380" 
-        frameborder="0" 
-        allowtransparency="true" 
+        width="300"
+        height="380"
+        frameborder="0"
+        allowtransparency="true"
         allow="encrypted-media"></iframe>
 ```
 
 Although the above embeds illustrate the potential benefits to lazy-loading
 iframes for media content, there's the potential to also see these benefits for
-ads.  
+ads.
 
 ### Case study: Lazy-loading the Facebook's social plugins
 
@@ -212,8 +208,8 @@ which is JavaScript. In many cases, the plugin may appear at the end of an
 article or near the end of a page, so loading it eagerly when it's offscreen
 may be suboptimal.
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="./fblike.png" alt="Facebook Like Button">
+<figure>
+  {% Img src="image/admin/fdy8o61jxPN560IkF2Ne.png", alt="Facebook Like Button", width="800", height="71" %}
 </figure>
 
 Thanks to engineer Stoyan Stefanov, [all of Facebook's social plugins now
@@ -225,22 +221,6 @@ nearby. This enables the embed to still fully function for users that need it,
 while offering data-savings for those who are not scrolling all the way down a
 page. We are hopeful this is the first of many embeds to explore standardized iframe
 lazy-loading in production.
-
-### Wait, can't browsers just automatically lazy-load offscreen iframes?
-
-They certainly can. In Chrome 77, Chrome added support for automatically
-lazy-loading offscreen images and iframes when a user has opted into
-[Lite Mode](https://blog.chromium.org/2019/04/data-saver-is-now-lite-mode.html)
-(Data Saver mode) in Chrome for Android. 
-
-Lite Mode is commonly used in regions of the world where network connection
-quality and data plans are not the greatest. Every byte matters and so
-lazy-loading iframes has the potential to make a meaningful difference for
-these users.
-
-Origins can detect what percentage of their traffic is coming from Lite Mode
-users by checking the `navigator.connection.saveData` property,
-which is part of the [`NetworkInformation` API](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation).
 
 ### Can I lazy-load iframes cross-browser? Yes
 
@@ -305,7 +285,7 @@ in a WordPress site. You can optionally add the following code to your WordPress
 theme's `functions.php` file to automatically insert `loading="lazy"` to your
 existing iframes without having to manually update them each individually.
 
-Note that [native support for lazy-loading iframes is also being worked on in WordPress core](https://core.trac.wordpress.org/ticket/50756).
+Note that [browser-level support for lazy-loading iframes is also being worked on in WordPress core](https://core.trac.wordpress.org/ticket/50756).
 The following snippet will check for the relevant flags so that, once WordPress has the
 functionality built-in, it will no longer manually add the `loading="lazy"` attribute,
 ensuring it is interoperable with those changes and will not result in a duplicate attribute.
@@ -338,4 +318,4 @@ And, in case you missed it, check out web.dev's [image and video lazy-loading
 collection](/fast/#lazy-load-images-and-video) for more lazy-loading ideas.
 
 _With thanks to Dom Farolino, Scott Little, Houssein Djirdeh, Simon Pieters, Kayce Basques, Joe Medley and Stoyan
-Stefanov for their reviews._ 
+Stefanov for their reviews._

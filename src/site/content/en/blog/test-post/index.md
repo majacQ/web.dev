@@ -1,4 +1,5 @@
 ---
+layout: post
 title: An example blog post used for screenshot testing.
 subhead: |
   A catchy subhead that previews the content and is a bit wordy to test what
@@ -17,7 +18,7 @@ updated: 2020-11-01
 
 # !!! IMPORTANT: If your post does not contain a hero image it will not appear
 # on the homepage.
-hero: hero.jpg
+hero: image/admin/t8pdBQKAaLW8lDp4UqfO.jpg
 # You can adjust the fit of your hero image with this property.
 # Values: contain | cover (default)
 # hero_fit: contain
@@ -80,15 +81,15 @@ sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
 at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
 porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
 quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
-ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi
 quam sem. Integer et erat ac mi scelerisque suscipit et vitae nulla. Aliquam
 scelerisque efficitur ante ut facilisis. Aenean et risus fringilla, hendrerit
 sapien et, tincidunt orci. Aenean sed tellus aliquam, consectetur metus in,
 tempus enim.
 
-<figure class="w-figure w-figure--fullbleed">
-  <img src="a.jpg" alt="">
-  <figcaption class="w-figcaption w-figcaption--fullbleed">
+<figure data-size="full">
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/Z77AxApfjYjrUlRWwWdW.jpg", alt="", width="400", height="263" %}
+  <figcaption>
     Large image.
   </figcaption>
 </figure>
@@ -101,9 +102,9 @@ quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
 ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
 quam sem.
 
-<figure class="w-figure">
-  <img src="image-small.png" alt="" width="400">
-  <figcaption class="w-figcaption">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/Z77AxApfjYjrUlRWwWdW.jpg", alt="", width="400", height="263" %}
+  <figcaption>
     Small image.
   </figcaption>
 </figure>
@@ -126,9 +127,9 @@ quam sem.
 
 ## Image, Inline
 
-<figure class="w-figure w-figure--inline-right">
-  <img class="w-screenshot" src="image-inline.png" alt="" width="200">
-  <figcaption class="w-figcaption">
+<figure data-float="right">
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/WHh2eQoyBxylhgPdYOis.png", alt="", width="200", height="306" %}
+  <figcaption>
     Inline right, outlined image.
   </figcaption>
 </figure>
@@ -147,9 +148,9 @@ augue. Nam quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce
 aliquet urna ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet
 velit. Morbi at quam sem.
 
-<figure class="w-figure w-figure--inline-left">
-  <img class="w-screenshot" src="image-inline.png" alt="" width="200">
-  <figcaption class="w-figcaption">
+<figure data-float="left">
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/WHh2eQoyBxylhgPdYOis.png", alt="", width="200", height="306" %}
+  <figcaption>
     Inline left, outlined image.
   </figcaption>
 </figure>
@@ -168,9 +169,9 @@ augue. Nam quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce
 aliquet urna ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet
 velit. Morbi at quam sem.
 
-<figure class="w-figure">
-  <img class="w-screenshot w-screenshot--filled" src="image-screenshot.png" alt="">
-  <figcaption class="w-figcaption">
+<figure data-screenshot>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/V9sy0IErc3V19nrodKb1.png", alt="", width="800", height="475" %}
+  <figcaption>
     Filled screenshot.
   </figcaption>
 </figure>
@@ -187,7 +188,7 @@ quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
 ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
 quam sem.
 
-<div class="w-table-wrapper">
+<div>
   <table>
     <thead>
       <tr>
@@ -261,9 +262,9 @@ quam sem.
   <li>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
   sit amet ullamcorper.
-  <figure class="w-figure">
-    <img class="w-screenshot w-screenshot--filled" src="image-screenshot.png" alt="">
-    <figcaption class="w-figcaption">
+  <figure>
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/V9sy0IErc3V19nrodKb1.png", alt="", width="800", height="475" %}
+    <figcaption>
       Filled screenshot.
     </figcaption>
   </figure>
@@ -308,9 +309,9 @@ quam sem.
   <li>
   Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
   sit amet ullamcorper.
-  <figure class="w-figure">
-    <img class="w-screenshot w-screenshot--filled" src="image-screenshot.png" alt="">
-    <figcaption class="w-figcaption">
+  <figure>
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/V9sy0IErc3V19nrodKb1.png", alt="", width="800", height="475" %}
+    <figcaption>
       Filled screenshot.
     </figcaption>
   </figure>
@@ -450,6 +451,40 @@ quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
 ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
 quam sem.
 
+<pullquote>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum
+    a massa sit amet ullamcorper.
+  </p>
+  <cite>
+</pullquote>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+{% Blockquote 'Jon Doe' %}
+  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum
+  a massa sit amet ullamcorper.
+{% endBlockquote %}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+{% Blockquote 'Jon Doe', 'pullquote' %}
+[Lorem ipsum](#) dolor sit amet, consectetur adipiscing elit. Proin dictum
+a massa sit amet ullamcorper.
+{% endBlockquote %}
+
 {% if site.percy %}
 <div style="background: aquamarine; width: 400px; height: 400px;">
   Glitch iframe placeholder
@@ -473,34 +508,14 @@ quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
 ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
 quam sem.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
-sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
-at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
-porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
-quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
-ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
-quam sem.
-
-<div class="w-stats">
-  <div class="w-stat">
-    <p class="w-stat__figure">30<sub class="w-stat__sub">%</sub></p>
-    <p class="w-stat__desc">Lower cost per conversion</p>
-  </div>
-  <div class="w-stat">
-    <p class="w-stat__figure">13<sub class="w-stat__sub">%</sub></p>
-    <p class="w-stat__desc">Higher CTR</p>
-  </div>
-  <div class="w-stat">
-    <p class="w-stat__figure">4<sub class="w-stat__sub">x</sub></p>
-    <p class="w-stat__desc">Faster load times</p>
-  </div>
-</div>
-
-<div class="w-text--center">
-  <a href="https://example.com/some.pdf" class="w-button w-button--with-icon" data-icon="file_download">
-    Download case study 
-  </a>
-</div>
+{% Codepen {
+  user: 'robdodson',
+  id: 'GRroyyX',
+  height: 300,
+  theme: 'dark',
+  tab: 'css,result',
+  allow: ['geolocation']
+} %}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
 sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
@@ -509,3 +524,147 @@ porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
 quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
 ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
 quam sem.
+
+<div class="switcher">
+  <figure>
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/amwrx4HVBEVTEzQspIWw.png", alt="", width="800", height="155" %}
+    <figcaption>
+      Small image.
+    </figcaption>
+  </figure>
+  <figure>
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/amwrx4HVBEVTEzQspIWw.png", alt="", width="800", height="155" %}
+    <figcaption>
+      Small image.
+    </figcaption>
+  </figure>
+</div>
+
+{% Compare 'worse' %}
+```text
+Bad code example
+```
+
+{% CompareCaption %}
+Explanation of why `example` is bad.
+{% endCompareCaption %}
+
+{% endCompare %}
+
+{% Compare 'better' %}
+```text
+Good code example
+```
+
+{% CompareCaption %}
+Explanation of why `example` is good.
+{% endCompareCaption %}
+
+{% endCompare %}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+<div class="stats">
+  <div class="stats__item">
+    <p class="stats__figure">30<sub>%</sub></p>
+    <p>Lower cost per conversion</p>
+  </div>
+  <div class="stats__item">
+    <p class="stats__figure">13<sub>%</sub></p>
+    <p>Higher CTR</p>
+  </div>
+  <div class="stats__item">
+    <p class="stats__figure">4<sub>x</sub></p>
+    <p>Faster load times</p>
+  </div>
+</div>
+
+<div class="all-center">
+  <p>
+    <a href="https://example.com/some.pdf" class="button">
+      {% include "icons/download.svg" %}
+      Download case study
+    </a>
+  </p>
+</div>
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+{% Widget 'example-set/graph', 540 %}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+{% Details %}
+
+{% DetailsSummary %}
+Details _summary_
+{% endDetailsSummary %}
+
+This is an optional preview. Make your preview text match the first paragraph
+of your panel text.
+
+Lorem ipsum [dolor sit amet](#), consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. `Suspendisse` auctor ultrices ante, nec tempus nibh varius
+at.
+
+{% endDetails %}
+
+{% Details %}
+
+{% DetailsSummary %}
+Details _summary_
+{% endDetailsSummary %}
+
+Lorem ipsum [dolor sit amet](#), consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. `Suspendisse` auctor ultrices ante, nec tempus nibh varius
+at.
+
+{% endDetails %}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin dictum a massa
+sit amet ullamcorper. Suspendisse auctor ultrices ante, nec tempus nibh varius
+at. Cras ligula lacus, porta vitae maximus a, ultrices a mauris. Vestibulum
+porta dolor erat, vel molestie dolor posuere in. Nam vel elementum augue. Nam
+quis enim blandit, posuere justo dignissim, scelerisque diam. Fusce aliquet urna
+ac blandit ullamcorper. Proin et semper nibh, sit amet imperdiet velit. Morbi at
+quam sem.
+
+### Test of Aside nested in an ordered list
+
+See the <a href="https://github.com/GoogleChrome/web.dev/issues/7640">underlying issue</a>.
+
+1. First item.
+   Another line.
+
+2. Second item.
+   {% Aside %}
+   This is an `<aside>`, including [Markdown](https://example.com/).
+   {% endAside %}
+
+3. Third item.

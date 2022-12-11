@@ -3,7 +3,7 @@ layout: post
 title: 'Get started: optimize your React app'
 subhead: |
   Want to make your React site as fast and accessible as possible? You've come to the right place!
-hero: hero-get-started-optimize-react.jpg
+hero: image/admin/seZsv5V8KU5oVlB7sO0b.jpg
 date: 2019-04-29
 description: |
   React is an open-source library that makes building UIs easier. This learning
@@ -40,7 +40,7 @@ The tutorials in this learning path do *not* focus on:
 Although both of these concepts will be touched on when needed, all the guides
 and codelabs in this section will instead focus on how to build fast and
 accessible React sites. For this reason, [a basic knowledge of React is
-required](https://reactjs.org/docs).
+required](https://reactjs.org/docs/getting-started.html).
 
 ## Create React App
 

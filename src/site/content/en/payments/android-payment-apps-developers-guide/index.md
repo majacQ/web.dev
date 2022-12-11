@@ -20,13 +20,14 @@ The [Payment Request API](https://www.w3.org/TR/payment-request/) brings to the
 web a built-in browser-based interface that allows users to enter required payment
 information easier than ever before. The API can also invoke platform-specific payment
 apps.
+{% BrowserCompat 'api.PaymentRequest' %}
 
-<figure class="w-figure" style="width:300px; margin:auto;">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure style="width:300px; margin:auto;">
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/payments/native-payment-app.webm" type="video/webm">
     <source src="https://storage.googleapis.com/web-dev-assets/payments/native-payment-app.mp4" type="video/mp4">
   </video>
-  <figcaption class="w-figcaption">Checkout flow with platform-specific Google Pay app that uses Web Payments</a>.
+  <figcaption>Checkout flow with platform-specific Google Pay app that uses Web Payments.
   </figcaption>
 </figure>
 
@@ -251,7 +252,7 @@ to verify that the calling package has the right signature.
 ## Step 3: Let a customer make payment
 
 The merchant calls `show()` to [launch the payment
-app](/life-of-a-payment-transaction#step-4:-the-browser-launches-the-payment-app)
+app](/life-of-a-payment-transaction#launch)
 so the customer can make a payment. The payment app is invoked via an Android
 intent `PAY` with transaction information in the intent parameters.
 

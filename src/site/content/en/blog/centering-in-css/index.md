@@ -6,19 +6,20 @@ authors:
   - adamargyle
 description: Follow 5 centering techniques as they go through a series of tests to see which one is the most resilient to change.
 date: 2020-12-16
-hero: hero.png
-thumbnail: thumb.png
+hero: image/admin/uz0bDoJvK4kbtjozekGA.png
+alt: An element centered on a page.
+thumbnail: image/admin/4NFENgpVrXHi2O42mv0K.png
 codelabs: codelab-centering-in-css
 tags:
   - blog
   - css
   - layout
-  - internationalization
+  - intl
 ---
 
 Centering in CSS is a notorious challenge, fraught with jokes and mockery. 2020
 CSS is all grown up and now we can laugh at those jokes honestly, not through
-clenched teeth. 
+clenched teeth.
 
 If you prefer video, here's a YouTube version of this post:
 
@@ -26,11 +27,11 @@ If you prefer video, here's a YouTube version of this post:
 
 ## The challenge
 
-**There are difference types of centering.** From differing use cases, number of things 
+**There are different types of centering.** From differing use cases, number of things
 to center, etc. In order to demonstrate a rationale behind "a winning" centering technique, I
 created The Resilience Ringer. It's a series of stress tests for each centering
-strategy to balance within and you to observe their performance. 
-At the end, I reveal the highest scoring technique, as well as a "most valuable." 
+strategy to balance within and you to observe their performance.
+At the end, I reveal the highest scoring technique, as well as a "most valuable."
 Hopefully you walk away with new centering techniques and solutions.
 
 ### The Resilience Ringer
@@ -40,16 +41,16 @@ strategy should be resilient to international layouts, variable sized viewports,
 content. These tenets helped shape the following resilience tests for the
 centering techniques to endure:
 
-1. **Squished:**  
-centering should be able to handle changes to width  
-1. **Squashed:**  
-centering should be able to handle changes to height  
-1. **Duplicate:**  
-centering should be dynamic to number of items  
-1. **Edit:**  
-centering should be dynamic to length and language of content  
-1. **Flow:**  
-centering should be document direction and writing mode agnostic  
+1. **Squished:**
+centering should be able to handle changes to width
+1. **Squashed:**
+centering should be able to handle changes to height
+1. **Duplicate:**
+centering should be dynamic to number of items
+1. **Edit:**
+centering should be dynamic to length and language of content
+1. **Flow:**
+centering should be document direction and writing mode agnostic
 
 The winning solution should demonstrate its resilience by keeping contents in
  center while being squished, squashed, duplicated, edited, and swapped to
@@ -60,9 +61,9 @@ various language modes and directions. Trustworthy and resilient center, a safe 
 I've provided some visual color hinting to help you keep some meta information
 in context:
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="./legend.png" alt="">
-  <figcaption class="w-figcaption"></figcaption>
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/4K35cL1tVpEsGqb4FgKp.png", alt="", width="800", height="438" %}
+  <figcaption></figcaption>
 </figure>
 
 - A pink border indicates ownership of centering styles
@@ -73,12 +74,12 @@ in context:
 
 ## The 5 Contestants
 5 centering techniques enter the Resilience Ringer, only one will receive the
-Resilience Crown 👸. 
+Resilience Crown 👸.
 
 ### 1. Content Center
 
-<figure class="w-figure w-figure--fullbleed">
-  <video playsinline controls autoplay loop muted class="w-screenshot">
+<figure data-size="full">
+  <video playsinline controls autoplay loop muted>
     <source src="https://storage.googleapis.com/atoms-sandbox.google.com.a.appspot.com/content-center-ringer-cycle.mp4">
   </video>
   <figcaption>
@@ -105,18 +106,18 @@ it's a solid centering technique for groups of elements meant to be read.
 }
 ```
 
-<div class="w-columns">
+<div class="switcher">
 {% Compare 'better', 'Pros' %}
-- Content is centered even under constrained space and overflow  
-- Centering edits and maintenance are all in one spot  
-- Gap guarantees equal spacing amongst _n_ children  
-- Grid creates rows by default  
+- Content is centered even under constrained space and overflow
+- Centering edits and maintenance are all in one spot
+- Gap guarantees equal spacing amongst _n_ children
+- Grid creates rows by default
 
 {% endCompare %}
 
 {% Compare 'worse', 'Cons' %}
 - The widest child (`max-content`) sets the width for all the rest. This will be
-  discussed more in [Gentle Flex](#gentle-flex).  
+  discussed more in [Gentle Flex](#gentle-flex).
 
 {% endCompare %}
 </div>
@@ -130,11 +131,11 @@ can also benefit from `place-content` and `place-item`
 
 ### 2. Gentle Flex
 
-<figure class="w-figure w-figure--fullbleed">
-  <video playsinline controls autoplay loop muted class="w-screenshot">
+<figure data-size="full">
+  <video playsinline controls autoplay loop muted>
     <source src="https://storage.googleapis.com/atoms-sandbox.google.com.a.appspot.com/gentle-flex-ringer-cycle.mp4">
   </video>
-</figure> 
+</figure>
 
 1. **Squish:** great!
 2. **Squash:** great!
@@ -144,7 +145,7 @@ can also benefit from `place-content` and `place-item`
 
 Gentle Flex is a truer centering-*only* strategy. It's soft and gentle, because
 unlike `place-content: center`, no children's box sizes are changed during the
-centering. As gently as possible, all items are stacked, centered, and spaced. 
+centering. As gently as possible, all items are stacked, centered, and spaced.
 
 ```css
 .gentle-flex {
@@ -156,7 +157,7 @@ centering. As gently as possible, all items are stacked, centered, and spaced.
 }
 ```
 
-<div class="w-columns">
+<div class="switcher">
 {% Compare 'better', 'Pros' %}
 - Only handles alignment, direction, and distribution
 - Edits and maintenance are all in one spot
@@ -180,11 +181,11 @@ centering. As gently as possible, all items are stacked, centered, and spaced.
 
 ### 3. Autobot
 
-<figure class="w-figure w-figure--fullbleed">
-  <video playsinline controls autoplay loop muted class="w-screenshot">
+<figure data-size="full">
+  <video playsinline controls autoplay loop muted>
     <source src="https://storage.googleapis.com/atoms-sandbox.google.com.a.appspot.com/autobot-ringer-cycle.mp4">
   </video>
-</figure> 
+</figure>
 
 1. **Squish:** great
 2. **Squash:** great
@@ -205,7 +206,7 @@ are styled with auto margins. There's something nostalgic and wonderful about
 }
 ```
 
-<div class="w-columns">
+<div class="switcher">
 {% Compare 'better', 'Pros' %}
 - Fun trick
 - Quick and dirty
@@ -226,11 +227,11 @@ are styled with auto margins. There's something nostalgic and wonderful about
 
 ### 4. Fluffy Center
 
-<figure class="w-figure w-figure--fullbleed">
-  <video playsinline controls autoplay loop muted class="w-screenshot">
+<figure data-size="full">
+  <video playsinline controls autoplay loop muted>
     <source src="https://storage.googleapis.com/atoms-sandbox.google.com.a.appspot.com/fluffy-center-ringer-cycle.mp4">
   </video>
-</figure> 
+</figure>
 
 1. **Squish:** bad
 2. **Squash:** bad
@@ -240,7 +241,7 @@ are styled with auto margins. There's something nostalgic and wonderful about
 
 Contestant "fluffy center" is by far our tastiest sounding contender, and is the only
 centering technique that's entirely element/child owned. See our solo inner pink
-border!? 
+border!?
 
 ```css
 .fluffy-center {
@@ -248,7 +249,7 @@ border!?
 }
 ```
 
-<div class="w-columns">
+<div class="switcher">
 {% Compare 'better', 'Pros' %}
 - Protects content
 - Atomic
@@ -270,11 +271,11 @@ more.
 
 ### 5. Pop & Plop
 
-<figure class="w-figure w-figure--fullbleed">
-  <video playsinline controls autoplay loop muted class="w-screenshot">
+<figure data-size="full">
+  <video playsinline controls autoplay loop muted>
     <source src="https://storage.googleapis.com/atoms-sandbox.google.com.a.appspot.com/popnplop-ringer-cycle.mp4">
   </video>
-</figure> 
+</figure>
 
 1. **Squish:** okay
 2. **Squash:** okay
@@ -288,7 +289,7 @@ plopping it on top of other stuff. It's a classic and handy overlay centering
 technique that's flexible and dynamic to content size. Sometimes you just need
 to plop UI on top of other UI.
 
-<div class="w-columns">
+<div class="switcher">
 {% Compare 'better', 'Pros' %}
 - Useful
 - Reliable
@@ -339,7 +340,7 @@ outweighs the extra code.
 .fluffy-center {
   padding: 2ch;
 }
-``` 
+```
 
 Fluffy Center is so micro that it's easy to overlook as a centering technique,
 but it's a staple of my centering strategies. It's so atomic that sometimes I

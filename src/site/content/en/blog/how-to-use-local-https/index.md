@@ -4,14 +4,18 @@ subhead: Sometimes, you need to run your local development site with HTTPS. Tool
 authors:
   - maudn
 date: 2021-01-25
-hero: hero.jpg
-thumbnail: thumbnail.jpg
+hero: image/admin/ZvW6VM0GEScldWHBvXJ4.jpg
+thumbnail: image/admin/OG8YksgOnzGfnurzncWO.jpg
 tags:
   - blog
   - security
 ---
 
-Also see: [When to use HTTPS for local development](/when-to-use-local-https).
+{% Aside 'caution' %}
+Most of the time, `http://localhost` does what you need: in browsers, it mostly behaves like HTTPS 🔒. That's why some APIs that won't work on a deployed HTTP site, will work on `http://localhost`.
+
+What this means is that you need to use HTTPS locally **only in special cases** (see [When to use HTTPS for local development](/when-to-use-local-https)), like custom hostnames or Secure cookies across browsers. Keep reading if that's you!
+{% endAside %}
 
 _In this post, statements about `localhost` are valid for `127.0.0.1` and `[::1]` as well, since they both describe the local computer address, also called "loopback address". Also, to keep things simple, the port number isn't specified._
 _So when you see `http://localhost`, read it as `http://localhost:{PORT}` or `http://127.0.0.1:{PORT}`._
@@ -23,7 +27,7 @@ cases](/when-to-use-local-https), you need to run your site locally with HTTPS. 
 at how to do this.
 
 **⏩ Are you looking for quick instructions, or have you been here before?
-Skip to the [Cheatsheet](#using-mkcert:-cheatsheet).**
+Skip to the [Cheatsheet](#using-mkcert-cheatsheet).**
 
 ## Running your site locally with HTTPS using mkcert (recommended)
 
@@ -43,9 +47,9 @@ and browser. [mkcert](https://github.com/FiloSottile/mkcert) is a tool that help
 - mkcert is listed as a trusted authority, so your browser trusts the
   certificate and creates an HTTPS connection.
 
-<figure class="w-figure">
-  <img src="./mkcert.jpg" alt="A diagram of how mkcert works.">
-  <figcaption class="w-figcaption">A diagram of how mkcert works.</figcaption>
+<figure>
+  {% Img src="image/admin/3kdjci7NORnOw54fMia9.jpg", alt="A diagram of how mkcert works.", width="800", height="787" %}
+  <figcaption>A diagram of how mkcert works.</figcaption>
 </figure>
 
 mkcert (and similar tools) provide several benefits:
@@ -56,7 +60,7 @@ mkcert (and similar tools) provide several benefits:
   certificates!
 - mkcert is a cross-platform tool. Anyone on your team can use it.
 
-mkcert is the tool we recommend for creating a TLS certificate for local development. You can check out [other options](#running-your-site-locally-with-https:-other-options) too.
+mkcert is the tool we recommend for creating a TLS certificate for local development. You can check out [other options](#running-your-site-locally-with-https-other-options) too.
 
 Many operating systems may include libraries to produce certificates, such as [openssl](https://www.openssl.org/). Unlike mkcert
 and similar tools, such libraries may not consistently produce correct certificates, may require
@@ -68,13 +72,13 @@ The mkcert we're interested in in this post is [this one](https://github.com/Fil
 
 ### Caution
 
-{% Banner 'caution' %}
+{% Aside 'caution' %}
 
 - Never export or share the file `rootCA-key.pem` mkcert creates automatically when you run `mkcert -install`. **An attacker getting hold of this file can create on-path attacks for any site you may be visiting**. They could intercept secure requests from your machine to any site—your bank, healthcare provider, or social networks. If you need to know where `rootCA-key.pem` is located to make sure it's safe, run `mkcert -CAROOT`.
 - Only use mkcert for **development purposes**—and by extension, never ask end-users to run mkcert commands.
 - Development teams: all members of your team should install and run mkcert **separately** (not store and share the CA and certificate).
 
-{% endBanner %}
+{% endAside %}
 
 ### Setup
 
@@ -232,11 +236,11 @@ To run your local development site with HTTPS:
 3.  Configure your development server to use HTTPS and the certificate you've created in Step 2.
 4.  ✨ You're done! You can now access `https://{YOUR HOSTNAME}` in your browser, without warnings
 
-{% Banner 'caution' %}
+{% Aside 'caution' %}
 
 Do this only for **development purposes** and **never export or share** the file `rootCA-key.pem` (if you need to know where this file is located to make sure it's safe, run `mkcert -CAROOT`).
 
-{% endBanner %}
+{% endAside %}
 
 {% endDetails %}
 
@@ -254,9 +258,9 @@ Beware of a few pitfalls with this approach:
 - It's not necessarily easier or faster than using a local CA like mkcert.
 - If you're not using this technique in a browser context, you may need to disable certificate verification for your server. Omitting to re-enable it in production would be dangerous.
 
-<figure class="w-figure">
-  <img src="./warnings.jpg" alt="Screenshots of the warnings browsers show when a self-signed certificate is used.">
-    <figcaption class="w-figcaption">The warnings browsers show when a self-signed certificate is used.</figcaption>
+<figure>
+  {% Img src="image/admin/KxLz7mcUudiFwWBIdhH8.jpg", alt="Screenshots of the warnings browsers show when a self-signed certificate is used.", width="800", height="598" %}
+  <figcaption>The warnings browsers show when a self-signed certificate is used.</figcaption>
 </figure>
 
 {% Aside %}
@@ -270,9 +274,9 @@ Why don't browsers trust self-signed certificates?
 
 If you open your locally running site in your browser using HTTPS, your browser will check the certificate of your local development server. When it sees that the certificate has been signed by yourself, it checks whether you're registered as a trusted certificate authority. Because you're not, your browser can't trust the certificate; it displays a warning telling you that your connection is not secure. You may proceed at your own risk—if you do, an HTTPS connection will be created.
 
-<figure class="w-figure">
-  <img src="./selfSigned.jpg" alt="Why browsers don't trust self-signed certificates: a diagram.">
-  <figcaption class="w-figcaption">Why browsers don't trust self-signed certificates.</figcaption>
+<figure>
+  {% Img src="image/admin/V2SAcIzuofqzUuestOOX.jpg", alt="Why browsers don't trust self-signed certificates: a diagram.", width="800", height="833" %}
+  <figcaption>Why browsers don't trust self-signed certificates.</figcaption>
 </figure>
 
 {% endDetails %}

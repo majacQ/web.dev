@@ -3,20 +3,20 @@ layout: post
 title: 'Route-level code splitting in Angular'
 subhead: |
   Improve the performance of your app by using route-level code splitting!
-hero: route-level-code-splitting.jpg
+hero: image/admin/WVwZbWEEXUfXzVTtAlha.jpg
 date: 2019-06-24
 description: |
   Learn how to make your initial app bundle smaller by using route-level code splitting.
 authors:
   - mgechev
 tags:
-  - angular
+  # - angular
   - performance
 feedback:
   - api
 ---
 
-This post explains how to set up route-level [code splitting](/reduce-javascript-payloads-with-code-splitting/) in an Angular application, which can reduce JavaScript bundle size and dramatically improve [Time to Interactive](/interactive).
+This post explains how to set up route-level [code splitting](/reduce-javascript-payloads-with-code-splitting/) in an Angular application, which can reduce JavaScript bundle size and dramatically improve [Time to Interactive](/tti/).
 
 _You can find the code samples from this article on [GitHub](https://github.com/mgechev/code-splitting-web-dev). The eager routing example is available in the [eager branch](https://github.com/mgechev/code-splitting-web-dev/tree/eager). The route-level code splitting example is in the [lazy branch](https://github.com/mgechev/code-splitting-web-dev/tree/lazy)._
 
@@ -34,7 +34,7 @@ The most efficient way to shrink JavaScript bundles without sacrificing features
 
 {% Aside 'note' %}
 
-By using code splitting, [Twitter and Tinder](https://medium.com/@addyosmani/the-cost-of-javascript-in-2018-7d8950fbb5d4) observed improvements of up to 50% for their [Time to Interactive](/interactive).
+By using code splitting, [Twitter and Tinder](https://medium.com/@addyosmani/the-cost-of-javascript-in-2018-7d8950fbb5d4) observed improvements of up to 50% for their [Time to Interactive](/tti/).
 
 {% endAside %}
 
@@ -147,7 +147,7 @@ To check that the Angular router downloads the `nyan.module` lazily in your loca
 1. Click **NYAN** in the sample app.
 1. Note that the `nyan-nyan-module.js` file appears in the network tab.
 
-![Lazy-loading of JavaScript bundles with route-level code splitting](code-splitting-network-tab.png "Lazy-loading of JavaScript bundles with route-level code-splitting")
+{% Img src="image/admin/wT4xLV2OkrZ2b7QaQz8L.png", alt="Lazy-loading of JavaScript bundles with route-level code splitting", width="800", height="524" %}
 
 _Find this example [on GitHub](https://github.com/mgechev/code-splitting-web-dev/tree/lazy/src)._
 

@@ -6,6 +6,7 @@ subhead: |
 authors:
   - agektmr
 date: 2020-07-17
+updated: 2021-09-14
 description: |
   Learn how to adapt your web-based payment app to work with Web Payments and provide a better user experience for customers.
 tags:
@@ -25,12 +26,12 @@ apps](/android-payment-apps-developers-guide/).
 
 ## Benefits of web-based payment apps
 
-<figure class="w-figure" style="width:300px; margin:auto;">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure style="width:300px; margin:auto;">
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/payments/skip-the-sheet.webm" type="video/webm">
     <source src="https://storage.googleapis.com/web-dev-assets/payments/skip-the-sheet.mp4" type="video/mp4">
   </video>
-  <figcaption class="w-figcaption">
+  <figcaption>
     Checkout flow with a web-based payment app.
   </figcaption>
 </figure>
@@ -49,7 +50,7 @@ Web-based payment apps are built using the standard web technologies. Every
 web-based payment app must include a service worker.
 
 {% Aside %}
-A [Service worker](https://developers.google.com/web/fundamentals/primers/service-workers)
+A [Service worker](https://developer.chrome.com/docs/workbox/service-worker-overview/)
 is an event-driven script that runs in the background even if the registering
 website is not open in the browser. Service workers enable websites to work
 offline and send push notifications, because they can respond to requests with
@@ -72,11 +73,11 @@ transaction](/life-of-a-payment-transaction/).
 In order for a merchant to use your payment app, they need to use the [Payment
 Request API](https://developer.mozilla.org/docs/Web/API/Payment_Request_API) and
 specify the payment method you support using the [payment method
-identifier](/setting-up-a-payment-method/#step-1:-provide-the-payment-method-identifier).
+identifier](/setting-up-a-payment-method/#step-1-provide-the-payment-method-identifier).
 
 If you have a payment method identifier that is unique to your payment app, you
 can set up your own [payment method
-manifest](/setting-up-a-payment-method/#step-2:-serve-the-payment-method-manifest)
+manifest](/setting-up-a-payment-method/#step-2-serve-the-payment-method-manifest)
 and let browsers discover your app.
 
 Learn how it works and how you can set up a new payment method in [Setting up a
@@ -100,7 +101,7 @@ API](https://groups.google.com/g/mozilla.dev.platform/c/gBQp1URD1lE/m/Fswh-5-ZBg
 
 ### WebAuthn support
 
-[WebAuthn](https://developers.google.com/web/updates/2018/05/webauthn) is an
+[WebAuthn](https://developer.chrome.com/blog/webauthn/) is an
 authentication mechanism based on the public key cryptography. You can let users
 sign-in through a biometric verification. WebAuthn is already supported in the
 payment handler window on Chrome, and the standard body is looking into creating
@@ -109,7 +110,7 @@ an even-tighter connection between Web Payments and WebAuthn.
 ### Credential Management API support
 
 [The Credential Management
-API](https://developers.google.com/web/fundamentals/security/credential-management/)
+API](/security-credential-management/)
 provides a programmatic interface between the site and the browser for seamless
 sign-in across devices. You can let users sign-in to your website automatically
 based on the information stored to the browser's password manager. It's planned
@@ -118,7 +119,7 @@ development](https://bugs.chromium.org/p/chromium/issues/detail?id=1052383).
 
 ### WebOTP support
 
-[The Web OTP API](/web-otp/) helps you programmatically obtain an
+[The WebOTP API](/web-otp/) helps you programmatically obtain an
 OTP from an SMS message and verify a phone number for the user more easily. It's
 planned to be enabled in Chrome, but still [under
 development](https://bugs.chromium.org/p/chromium/issues/detail?id=1051930).

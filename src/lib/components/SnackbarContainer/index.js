@@ -18,12 +18,11 @@
  * @fileoverview A Snackbar container for handling Redux state and actions.
  */
 
-import {html} from 'lit-element';
+import {html} from 'lit';
 import {BaseElement} from '../BaseElement';
 import {store} from '../../store';
 import {setUserAcceptsCookies, checkIfUserAcceptsCookies} from '../../actions';
 import '../Snackbar';
-import './_styles.scss';
 
 class SnackbarContainer extends BaseElement {
   static get properties() {
@@ -84,9 +83,9 @@ class SnackbarContainer extends BaseElement {
 
     return html`
       <web-snackbar
-        .type=${this.type}
-        .open=${this.open}
-        .stacked=${isStacked}
+        .type="${this.type}"
+        .open="${this.open}"
+        .stacked="${isStacked}"
         .action="${action}"
       ></web-snackbar>
     `;

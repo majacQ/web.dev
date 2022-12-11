@@ -1,4 +1,5 @@
 ---
+layout: post
 title: Accessibility tips for web developers
 subhead: Improving accessibility makes your site more useable for everyone.
 description: |
@@ -10,7 +11,7 @@ description: |
 authors:
   - addyosmani
 date: 2019-12-06
-hero: hero.jpg
+hero: image/admin/whvrlDQbdAnmwbnZH7qX.jpg
 alt: Illustration showing images of common disabilities pinned to a corkboard.
 tags:
   - blog # blog is a required tag for the article to show up in the blog.
@@ -38,7 +39,7 @@ Moreover, sites should be usable by the broadest group of users,
 including those with disabilities.
 Here's a sample of just a few disabilities your users may have:
 
-<div class="w-table-wrapper">
+<div class="table-wrapper">
   <table>
     <thead>
       <tr>
@@ -128,7 +129,7 @@ Here's a sample of just a few disabilities your users may have:
 tools displays a tooltip of CSS properties
 that includes a quick check for color contrast ratio.
 
-![Screenshot of the Chrome DevTools Inspect Element tooltip.](./inspect-element.jpg)
+{% Img src="image/admin/avwZaOjEWT7pES1OqUly.jpg", alt="Screenshot of the Chrome DevTools Inspect Element tooltip.", width="800", height="370" %}
 
 I personally live with low vision, and I often find myself zooming in on sites,
 their DevTools, and the terminal.
@@ -143,7 +144,7 @@ it can make a world of difference to users like me.🤓
 - Test that your UI components are still functional
   [without sound](http://www.w3.org/TR/2008/REC-WCAG20-20081211/#content-structure-separation-understanding).
 
-![Screenshot of the ChromeVox screen reader reading a web page.](screen-reader.jpg)
+{% Img src="image/admin/ZIbJHF5vyMxmKAN9juO1.jpg", alt="Screenshot of the ChromeVox screen reader reading a web page.", width="800", height="500" %}
 
 **Mobility issues** can include the inability to operate a mouse, a keyboard, or a touch screen.
 
@@ -162,7 +163,7 @@ to help them with reading text, so it's important to ensure text alternatives ex
   or flash, which can cause [issues](http://www.w3.org/TR/WCAG20/#seizure)
   for some users.
 
-  The [`prefers-reduced-motion`](https://developers.google.com/web/updates/2019/03/prefers-reduced-motion#too_much_motion_in_real_life_and_on_the_web)
+  The [`prefers-reduced-motion`](/prefers-reduced-motion/#too-much-motion-in-real-life-and-on-the-web)
   CSS media query allows you to limit animations
   and autoplaying videos for users who prefer reduced motion:
 
@@ -188,11 +189,11 @@ and then improving the accessibility of your UI components.
 [accessibility dos and don'ts digital posters](https://accessibility.blog.gov.uk/2016/09/02/dos-and-donts-on-designing-for-accessibility/)
 to spread awareness of best practices in your team:
 
-![Digital posters showing accessibility dos and don'ts.](dos-donts.jpg)
+{% Img src="image/admin/lmcS2dTmBHuUo3j0ERCp.jpg", alt="Digital posters showing accessibility dos and don'ts.", width="800", height="721" %}
 
 ## Are your UI components accessible?
 
-**Summary (tl;dr)**
+**Summary**
 
 When auditing your page's UI components for accessibility, ask yourself:
 
@@ -245,11 +246,11 @@ depending on how complex your component is).
 **Tip:** Most browser developer tools support inspecting the accessibility tree of a page.
 In Chrome DevTools, this is available via the **Accessibility** tab in the **Elements** panel:
 
-![Screenshot of the accessibility tree view in Chrome DevTools.](./a11y-tree-chrome.png)
+{% Img src="image/admin/FcpD3oNA1C39KbQuNinf.png", alt="Screenshot of the accessibility tree view in Chrome DevTools.", width="800", height="486" %}
 
 Firefox also has an **Accessibility** panel:
 
-![Screenshot of the accessibility tree view in FireFox DevTools.](./a11y-tree-ff.jpg)
+{% Img src="image/admin/DRqDC9mtfcejAIjLImdR.jpg", alt="Screenshot of the accessibility tree view in FireFox DevTools.", width="800", height="500" %}
 
 Safari exposes accessibility information in the **Elements** panel's **Node** tab.
 
@@ -267,11 +268,9 @@ First, ensure that you have a sensible focus target for each component.
 For example, a complex component like a menu may be one focus target within a page
 but should then manage focus within itself so that the active menu item always takes focus.
 
-<figure class="w-figure">
-  <img src="./manage-focus.png" alt="A screenshot of a menu and submenu that requires focus management.">
-  <figcaption class="w-figcaption">
-    Managing focus within a complex element.
-  </figcaption>
+<figure>
+  {% Img src="image/admin/8zpJMaaY0DuAHdugbSr3.png", alt="A screenshot of a menu and submenu that requires focus management.", width="800", height="377" %}
+  <figcaption>Managing focus within a complex element.</figcaption>
 </figure>
 
 ### Using tabindex
@@ -291,7 +290,7 @@ Also ensure that focus is always visible, whether by allowing the default focus 
 
 {% Aside %}
 You may also be interested in the roving `tabindex` or `aria-activedescendant` approaches,
-[covered over on MDN](https://developer.mozilla.org/en-US/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets#Technique_1_Roving_tabindex).
+[covered over on MDN](https://developer.mozilla.org/docs/Web/Accessibility/Keyboard-navigable_JavaScript_widgets#Technique_1_Roving_tabindex).
 {% endAside %}
 
 ### Using autofocus
@@ -302,7 +301,7 @@ when the page is loaded.
 [all web form controls](https://html.spec.whatwg.org/multipage/forms.html#association-of-controls-and-forms),
 including buttons.
 To autofocus elements in your own custom UI components,
-call the [`focus()`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement.focus) method,
+call the [`focus()`](https://developer.mozilla.org/docs/Web/API/HTMLElement.focus) method,
 supported on all HTML elements that can be focused
 (for example, `document.querySelector('myButton').focus()`).
 
@@ -335,8 +334,8 @@ to automate running keyboard accessibility tests for toggling UI states.
 [WalkMe Engineering](https://medium.com/walkme-engineering/web-accessibility-testing-d499a7f7a032)
 has a great guide on this I recommend reading.
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="./aria-expanded.gif" alt="WalkMe state toggle test.">
+<figure>
+  {% Img src="image/admin/3lZosaL1YXafLn4ZRINl.gif", alt="WalkMe state toggle test.", width="441", height="400" %}
 </figure>
 
 ```js
@@ -404,11 +403,9 @@ By binding these attributes to the relevant properties on your custom component,
 you can allow users of assistive technology to interact with the element,
 change its value, and even cause the element's visual presentation to change accordingly.
 
-<figure class="w-figure">
-  <img src="./slider.png" class="w-screenshot" alt="A screenshot of a slider.">
-  <figcaption class="w-figcaption">
-    A range slider component.
-  </figcaption>
+<figure>
+  {% Img src="image/admin/BD2bS6XEEUlORVOGHwhe.png", alt="A screenshot of a slider.", width="159", height="56" %}
+  <figcaption>A range slider component.</figcaption>
 </figure>
 
 ```html
@@ -425,9 +422,9 @@ provide labels and values for each slice
 so users who have visual impairments can understand the information
 even if they can't tell where the slices begin and end:
 
-<figure class="w-figure">
-  <img src="./pie-chart.png" alt="A pie chart with labels and values to ensure accessibility.">
-  <figcaption class="w-figcaption">An accessible pie chart. (From the <a href="https://www.w3.org/WAI/GL/low-vision-a11y-tf/wiki/Informational_Graphic_Contrast_(Minimum)" rel="noopener">W3C Web Accessibility Initiative</a>.)</figcaption>
+<figure>
+  {% Img src="image/admin/4DlbNfCX7AYYrPSpQg4L.png", alt="A pie chart with labels and values to ensure accessibility.", width="500", height="442" %}
+  <figcaption>An accessible pie chart. (From the <a href="https://www.w3.org/WAI/GL/low-vision-a11y-tf/wiki/Informational_Graphic_Contrast_(Minimum)" rel="noopener">W3C Web Accessibility Initiative</a>.)</figcaption>
 </figure>
 
 ### Is there sufficient contrast between text and images and their background?
@@ -456,35 +453,35 @@ debugging the accessibility of your visual components.
   for your framework or browser of choice.
   [Axe Puppeteer](https://www.deque.com/blog/axe-and-attest-integration-puppeteer/)
   can be used for writing automated accessibility tests.
-- The [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+- The [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
   Accessibility audits provide helpful insights for discovering common accessibility issues.
   The accessibility score is a weighted average of all accessibility audits
   based on [Axe user impact assessments](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md).
   For monitoring accessibility via continuous integration, see [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci).
 
-![Screenshot of the Lighthouse accessibility audit.](./lh-a11y-audit.png)
+{% Img src="image/admin/Bft9DABqWge4ZRpF6wzK.png", alt="Screenshot of the Lighthouse accessibility audit.", width="800", height="649" %}
 
 - [Tenon.io](https://tenon.io/) is useful for testing common accessibility problems.
   Tenon has strong integration support across build tools, browsers (via extensions), and even text editors.
 - There are many library- and framework-specific tools
   for highlighting accessibility issues with components.
-  For example, [web.dev](https://web.dev/accessibility-auditing-react/)
+  For example, [web.dev](/accessibility-auditing-react/)
   explains how to use [eslint-plugin-jsx-a11y](https://www.npmjs.com/package/eslint-plugin-jsx-a11y)
   to highlight accessibility issues for React components in your editor:
 
-  ![Screenshot of a code editor with an accessibility issue flagged by eslint-plugin-jsx-a11y.](./react-a11y-testing.png)
+  {% Img src="image/admin/9bAOYq7Cr11vzf4P04d2.png", alt="Screenshot of a code editor with an accessibility issue flagged by eslint-plugin-jsx-a11y.", width="800", height="500" %}
 
   If you use Angular, [codelyzer](/accessible-angular-with-codelyzer)
   provides in-editor accessibility audits too:
 
-  ![Screenshot of a code editor with an accessibility issue flagged by codelyzer.](./angular-a11y-testing.png)
+  {% Img src="image/admin/Ca3rCQlJ53C7ILx3hwot.png", alt="Screenshot of a code editor with an accessibility issue flagged by codelyzer.", width="800", height="433" %}
 
 - You can examine the way that assistive technologies see web content by using
   [Accessibility Inspector](https://developer.apple.com/library/archive/documentation/Accessibility/Conceptual/AccessibilityMacOSX/OSXAXTestingApps.html#//apple_ref/doc/uid/TP40001078-CH210-SW1) (Mac)
   or [Windows Automation API Testing Tools](http://msdn.microsoft.com/en-us/library/windows/desktop/dd373661(v=vs.85).aspx)
   and [AccProbe](http://accessibility.linuxfoundation.org/a11yweb/util/accprobe/) (Windows).
   You can also see the full accessibility tree that Chrome creates
-  by navigating to `chrome://accessibility`.
+  by navigating to `about://accessibility`.
 - The best way to test for screen reader support on a Mac is using the VoiceOver utility.
   Use `⌘F5` to enable or disable it, `Ctrl+Option ←→` to move through the page,
   and `Ctrl+Shift+Option + ↑↓` to move up and down the accessibility tree.
@@ -501,7 +498,7 @@ debugging the accessibility of your visual components.
 - [ChromeLens](http://chromelens.xyz/) helps develop for the visually impaired.
   It also has great support for visualizing keyboard navigation paths.
 
-  ![Screenshot of ChromeLens.](./chromelens.jpg)
+  {% Img src="image/admin/RcDZ95ALFvNeDdpdv2Mo.jpg", alt="Screenshot of ChromeLens.", width="800", height="514" %}
 
 - [ChromeVox](http://www.chromevox.com/) is a screen reader available as a Chrome extension and built into ChromeOS devices.
 
@@ -519,4 +516,4 @@ To learn more about accessibility fundamentals and help improve those statistics
 I recommend the [Accessible to all](/accessible/) docs on web.dev.
 There's much we can do to build experiences that are more accessible for everyone.
 
-![Screenshot of the web.dev "Accessible to all" collection page.](./web-dev-a11y.jpg)
+{% Img src="image/admin/iMaXm08LsbVKpkNCZEwA.jpg", alt="Screenshot of the web.dev 'Accessible to all' collection page.", width="800", height="513" %}

@@ -6,7 +6,7 @@ subhead: |
 authors:
   - agektmr
 date: 2020-07-17
-updated: 2020-07-20
+updated: 2021-09-14
 description: |
   Learn how to register a web-based payment app to a customers' browser. You'll also learn how to debug them.
 tags:
@@ -23,16 +23,15 @@ requests from a merchant, launches the payment app, and mediates the
 communication with the merchant.
 
 To configure a web-based payment app, you need to register available payment
-methods, delegation options, and a service worker. You can configure your
-web-based payment app declaratively with a web app manifest or imperatively with
-JavaScript.
+methods, and a service worker. You can configure your web-based payment app
+declaratively with a web app manifest or imperatively with JavaScript.
 
 {% include 'content/payments/browser-compatibility.njk' %}
 
 ## Configuring a payment app with a web app manifest
 
 To configure your web-based payment app declaratively, [serve a web app
-manifest](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest).
+manifest](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest).
 
 The following properties in the web app manifest are relevant for web-based payment apps:
 * `name`
@@ -41,11 +40,9 @@ The following properties in the web app manifest are relevant for web-based paym
     * `src`
     * `scope`
     * `use_cache`
-* `payment`
-    * `supported_delegations`
 
 Check out [Setting up a payment
-method](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest)
+method](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest)
 to make sure your payment method manifest points to your web app manifest
 properly.
 
@@ -59,7 +56,7 @@ registration*.
 {% endAside %}
 
 The JIT registration requires only serving [the web app
-manifest](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest)
+manifest](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest)
 and no additional coding. If you've already configured your web app manifest and
 are serving it properly, you should be all set. The browser will handle the
 rest.
@@ -111,7 +108,7 @@ if ('serviceWorker' in navigator) {
 
 {% Aside %}
 If you are new to the service worker, learn more at [Service Workers: an
-Introduction](https://developers.google.com/web/fundamentals/primers/service-workers).
+Introduction](https://developer.chrome.com/docs/workbox/service-worker-overview/).
 {% endAside %}
 
 ### Set a payment instrument
@@ -153,7 +150,7 @@ contains details about the instrument.
   );
 ```
 
-<div class="w-table-wrapper">
+<div class="table-wrapper">
   <table>
     <thead>
       <tr>
@@ -203,73 +200,15 @@ contains details about the instrument.
           A supported payment method identifier.
         </td>
       </tr>
-      <tr>
-        <td>
-          <code>capabilities</code>
-        </td>
-        <td>
-          Sets the <a href="https://w3c.github.io/payment-handler/#capabilities-example">payment method specific parameters as an object</a>. As of July 2020, basic-card is the only payment method that accepts capabilities.
-        </td>
-      </tr>
     </tbody>
   </table>
 </div>
 
 {% Aside %}
 Chrome ignores the `name` and `icons` properties. It respects the [web app
-manifest](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest)'s
+manifest](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest)'s
 respective properties instead, but other browsers may behave differently.
 {% endAside %}
-
-### Enable delegations
-
-Entering shipping address and contact information through a web form can be a
-cumbersome experience for customers. It can cause errors and lower conversion
-rate.
-
-That's why the Payment Request API supports a feature to request shipping
-address and contact information. This provides multiple benefits:
-
-* Users can pick the right address with just a few taps.
-* The address is always returned in [the standardized
-  format](https://w3c.github.io/payment-request/#paymentaddress-interface).
-* Submitting an incorrect address is less likely.
-
-Payment apps can integrate this functionality to offer a more unified payment
-experience. This is called *delegation*.
-
-<figure class="w-figure" style="width:300px; margin:auto;">
-  <video controls autoplay loop muted class="w-screenshot">
-    <source src="https://storage.googleapis.com/web-dev-assets/payments/skip-the-sheet.webm" type="video/webm">
-    <source src="https://storage.googleapis.com/web-dev-assets/payments/skip-the-sheet.mp4" type="video/mp4">
-  </video>
-  <figcaption class="w-figcaption">
-    Checkout flow with a web-based payment app.
-  </figcaption>
-</figure>
-
-Web-based payment apps can declare their support for delegation using the web
-app manifest's `payment.supported_delegations` field or through JavaScript.
-
-To let the browser know that the payment app accepts a delegation, use
-[`PaymentManager.enableDelegations()`](https://w3c.github.io/payment-handler/#enabledelegations-method).
-
-{% Label %}[payment handler] payment app's landing page{% endLabel %}
-
-```js
-…
- await registration.paymentManager.enableDelegations([
-  'shippingAddress', 'payerName'
-]);
-…
-```
-
-You can declare supported delegation options as an array of strings:
-
-* `shippingAddress`: The payment handler can provide a shipping address.
-* `payerName`: The payment handler can provide the payer's name.
-* `payerPhone`: The payment handler can provide the payer's phone number.
-* `payerEmail`: The payment handler can provide the payer's address.
 
 ## Debugging a web-based payment app
 
@@ -314,13 +253,13 @@ flags](https://www.chromium.org/developers/how-tos/run-chromium-with-flags).
 You can port forward the local web server to an Android device using Chrome's
 DevTools and test how it works from a mobile browser. To learn how to do it,
 check out [Access Local
-Servers](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/local-server).
+Servers](https://developer.chrome.com/docs/devtools/remote-debugging/local-server/).
 
 ### Remote debugging a website on Android Chrome from desktop DevTools
 
 You can also debug Android Chrome on desktop DevTools. To learn how to do it,
 check out [Get Started with Remote Debugging Android
-Devices](https://developers.google.com/web/tools/chrome-devtools/remote-debugging).
+Devices](https://developer.chrome.com/docs/devtools/remote-debugging/).
 
 ### Payment Handler event logging
 
@@ -331,20 +270,18 @@ easier local development. Open DevTools on the merchant context and go to the
 from other domains" and click the "Record" button to start capturing events sent
 to the service worker that handles payments.
 
-<figure class="w-figure">
-  <img class="w-screenshot w-screenshot--filled" 
-       src="./debug-payment-handler.png" 
-       alt="A screenshot of Payment Handler event logging.">
-  <figcaption class="w-figcaption">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/FixX1Ld3y0Vgb4ZcSBGc.png", alt="A screenshot of Payment Handler event logging.", width="800", height="585" %}
+  <figcaption>
     Payment Handler event logging.
   </figcaption>
 </figure>
 
 ## Next steps
 
-You learned how to register a service worker, set payment instruments, and
-define delegation availability for a web-based payment app. The next step is to
-learn how the service worker can orchestrate a payment transaction at runtime.
+You learned how to register a service worker, set payment instruments for a
+web-based payment app. The next step is to learn how the service worker can
+orchestrate a payment transaction at runtime.
 
 * [Orchestrating payment transactions with a service
   worker](/orchestrating-payment-transactions)
