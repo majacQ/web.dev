@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 
-const {DateTime} = require("luxon");
+const {DateTime} = require('luxon');
 
 /**
  * Convert a JavaScript Date object into a human readable string.
  * @param {Date} date The date to convert.
- * @return {string} A human readable date string.
+ * @return {string|undefined} A human readable date string.
  */
 module.exports = (date) => {
   if (!date) {
@@ -28,7 +28,7 @@ module.exports = (date) => {
     return;
   }
 
-  return DateTime.fromISO(date.toISOString(), {zone: "utc"}).toLocaleString(
+  return DateTime.fromISO(date.toISOString(), {zone: 'utc'}).toLocaleString(
     DateTime.DATE_MED,
   );
 };

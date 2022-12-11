@@ -17,9 +17,8 @@ alt: |
 description: |
     Understand the value of fast ads and how to think about ad speed.
 tags:
-  - post
+  - blog
   - performance
-  - fast
   - ads
 ---
 
@@ -85,7 +84,7 @@ rate.
 With 1&nbsp;s of added delay, impressions decreased by 1.1% for mobile traffic
 and 1.9% for desktop traffic:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./ad-latency-injected-vs-impressions-change.svg" alt="Chart showing latency injected vs. impressions change">
   <figcaption class="w-figcaption">
     Source: Google Internal Data, December 2016 to January 2017.
@@ -95,7 +94,7 @@ and 1.9% for desktop traffic:
 With 1&nbsp;s of added delay, viewability rate decreased by 3.6% for mobile
 traffic and 2.9% for desktop traffic:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./ad-latency-injected-vs-viewability-rate-change.svg" alt="Chart showing latency injected vs. viewability rate change">
   <figcaption class="w-figcaption">
     Source: Google Internal Data, December 2016 to January 2017.
@@ -158,10 +157,35 @@ type.](./mobile-banner.svg)
 Then, use this information to create a simple table like the one below, which
 maps each inventory type to its dependencies in an easily digestible format.
 
-| Type of inventory   | Consent management platform | Audience script    | Header bidding script | Rendering framework |
-|:--------------------|:---------------------------:|:------------------:|:---------------------:|:-------------------:|
-| Desktop leaderboard |  &#x2714;                   | &#x2714; (X)       | &#x2714; (A)          | -                   |
-| Mobile banner       |  &#x2714;                   | &#x2714; (X and Y) | &#x2714; (A and B)    | &#x2714;            |
+<div class="w-table-wrapper">
+  <table>
+    <thead>
+      <tr>
+      <th>Type of inventory</th>
+      <th>Consent management platform</th>
+      <th>Audience script</th>
+      <th>Header bidding script</th>
+      <th>Rendering framework</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Desktop leaderboard</td>
+        <td>&#x2714;</td>
+        <td>&#x2714; (X)</td>
+        <td>&#x2714; (A)</td>
+        <td>-</td>
+      </tr>
+      <tr>
+        <td>Mobile banner</td>
+        <td>&#x2714;</td>
+        <td>&#x2714; (X and Y)</td>
+        <td>&#x2714; (A and B)</td>
+        <td>&#x2714;</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 Creating an overview of inventory types and dependencies like this helps to
 identify critical paths and areas for optimization. For example, you may find
@@ -187,7 +211,7 @@ down into three main intervals:
 Before you start making any changes, you need to decide which of these metrics
 to focus on. While the ultimate goal is to minimize them all, the relative
 importance of improving each (and the methods you use to do so) will greatly
-depend on your specific setup. 
+depend on your specific setup.
 
 You can use a tool like [Publisher Ads Audits for
 Lighthouse](https://developers.google.com/publisher-ads-audits) to help you

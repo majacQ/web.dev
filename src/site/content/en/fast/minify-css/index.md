@@ -6,6 +6,8 @@ authors:
 description: |
   Learn how to minify CSS files, to improve performance, without affecting how the browser process the styles.
 date: 2019-05-02
+tags:
+  - performance
 ---
 
 CSS files can contain unnecessary characters, such as comments, whitespaces, and indentation.
@@ -60,16 +62,17 @@ As a first step, you need to understand what would be the opportunity after mini
 1. Click **View report**.
 1. Click on **Performance** and go the **Opportunities** section.
 
-The resulting report shows that up to **16KB** can be saved from the **animate.css** file:
+The resulting report shows that up to **16&nbsp;KB** can be saved from the **animate.css** file:
 
 <img class="screenshot" width="700px" height="150px" src="./lighthouse-unoptimized.png" alt="Lighthouse: Minify CSS opportunity.">
 
-Now you'll inspect the content of the CSS:
+Now inspect the content of the CSS:
 
-1. Open the [Fav Kitties site](https://fav-kitties-animated.glitch.me/) in Chrome (it might take a while for Glitch servers to respond the first time).
-1. Press `Control+Shift+J` or `Cmd+Option+J` (Mac), to open DevTools.
-1. Click on the **Network** panel and filter for **CSS**.
-1. Make sure **Disable Cache** is checked and reload the page.
+1. Open the [Fav Kitties site](https://fav-kitties-animated.glitch.me/) in Chrome. (It might take a while for Glitch servers to respond the first time.)
+{% Instruction 'devtools-network', 'ol' %}
+1. Click the **CSS** filter.
+1. Select the **Disable cache** checkbox.
+{% Instruction 'reload-app', 'ol' %}
 
 <img class="w-screenshot" width="700px" height="120px" src="./cdt-css-unoptimized.png" alt="DevTools CSS unoptimized trace">
 
@@ -92,14 +95,11 @@ Next, you'll add some webpack plugins to your build process to minify these file
 
 Before jumping into the optimizations, take some time understanding how build process for the [Fav Kitties site](https://glitch.com/edit/#!/fav-kitties-animated?path=webpack.config.js:1:0]) works:
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/fav-kitties-animated?path=webpack.config.js&previewSize=0"
-    alt="fav-kitties-animated on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'fav-kitties-animated',
+  path: 'webpack.config.js',
+  previewSize: 0
+} %}
 
 By default, the resulting JS bundle that webpack produces would contain the content of the CSS files inlined. Since we want to maintain separate CSS files, we are using two complementary plugins:
 
@@ -109,9 +109,9 @@ By default, the resulting JS bundle that webpack produces would contain the cont
 You will now make some changes in the project:
 
 1. Open [the Fav Kitties project in Glitch](https://glitch.com/~fav-kitties-animated).
-1. Click **View Source**.
-1. Click the project name in the upper-left corner. Choose **Remix and Edit** 🎤, from the drop-down menu, to make your own, editable copy of the project.
-1. Once in the cloned project, click **Tools** (in the lower-left corner of the edit view), then select **Console**. The Glitch console opens in a new browser tab.
+{% Instruction 'source', 'ol' %}
+{% Instruction 'remix', 'ol' %}
+{% Instruction 'console', 'ol' %}
 
 To minify the resulting CSS, you'll use the [optimize-css-assets-webpack-plugin](https://github.com/NMFR/optimize-css-assets-webpack-plugin):
 
@@ -137,26 +137,28 @@ Then, pass an instance of the plugin to the **plugins** array:
 After making the changes a rebuild of the project will be triggered.
 This is how the resulting **webpack.config.js** will look like:
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/fav-kitties-animated-min?path=webpack.config.js&previewSize=0"
-    alt="fav-kitties-animated-min on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'fav-kitties-animated-min',
+  path: 'webpack.config.js',
+  previewSize: 0
+} %}
 
 Next, you'll check the result of this optimization with performance tools.
 
 ## Verify
 
-Click **Show live** and then, **In New Window**, to open your optimized app in a new window. If you got lost in any previous step, you can click [here](https://fav-kitties-animated-min.glitch.me/), to open an optimized version of the site.
+{% Instruction 'preview' %}
+
+If you got lost in any previous step, you can click
+[here](https://fav-kitties-animated-min.glitch.me/), to open an optimized
+version of the site.
 
 To inspect the size and content of the files:
 
-1. Open DevTools.
-1. Click in the **Network** panel and filter for "CSS".
-1. Make sure "Disable Cache" is checked and reload the page.
+{% Instruction 'devtools-network', 'ol' %}
+1. Click the **CSS** filter.
+1. Select the **Disable cache** checkbox if it isn't already.
+{% Instruction 'reload-app', 'ol' %}
 
 <img class="w-screenshot" width="700px" height="120px" src="./cdt-css-optimized.png" alt="DevTools CSS unoptimized response">
 

@@ -1,9 +1,12 @@
-import createStore from "unistore";
-import devtools from "unistore/devtools";
-import getMeta from "./utils/meta";
-import config from "webdev_config";
+import createStore from 'unistore';
+import devtools from 'unistore/devtools';
+import getMeta from './utils/meta';
+import {getTimeOffset} from './utils/time-offset';
+import {localStorage} from './utils/storage';
+import {isProd} from 'webdev_config';
 
-/* eslint-disable require-jsdoc */
+const initialParams = new URLSearchParams(window.location.search);
+const timeOffset = getTimeOffset(initialParams.get('_now'));
 
 const initialState = {
   // The first time the app boots we won't know whether the user is signed
@@ -13,7 +16,7 @@ const initialState = {
   checkingSignedInState: true,
 
   // The user has successfully signed in; default to cached value to help prevent FOUC
-  isSignedIn: Boolean(window.localStorage["webdev_isSignedIn"]),
+  isSignedIn: Boolean(localStorage['webdev_isSignedIn']),
   user: null,
 
   // The most recent URL measured and the Date when it was first analyzed by the user.
@@ -33,8 +36,10 @@ const initialState = {
   lighthouseError: null,
 
   currentUrl: window.location.pathname,
-  isOffline: Boolean(getMeta("offline")),
+  currentLanguage: document.documentElement.getAttribute('lang'),
+  isOffline: Boolean(getMeta('offline')),
   isSideNavExpanded: false,
+  isModalOpen: false,
   isSearchExpanded: false,
 
   // Whether to show the progressbar and mark the main content as busy, during a load.
@@ -42,15 +47,26 @@ const initialState = {
 
   // When a user lands on the page, check if they have accepted our
   // cookie policy.
-  userAcceptsCookies: false,
+  // We automatically accept cookies in dev and test environments so the cookie
+  // banner doesn't interfere with tests.
+  userAcceptsCookies: !isProd,
 
   // Handle hiding/showing the snackbar.
   showingSnackbar: false,
   snackbarType: null,
+
+  userPreferredLanguage: '',
+
+  // Used to override the current time for web.dev/LIVE testing.
+  timeOffset,
+
+  // Data for the current web.dev/LIVE event.
+  eventDays: [],
+  activeEventDay: null, // livestream shown for this day
 };
 
 let store;
-if (config.prod) {
+if (isProd) {
   store = createStore(initialState);
 } else {
   store = devtools(createStore(initialState));

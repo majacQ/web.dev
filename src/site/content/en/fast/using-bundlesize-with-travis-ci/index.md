@@ -6,6 +6,10 @@ authors:
 description: |
   Define performance budgets with minimal setup and enforce them as part of your development workflow using bundlesize with Travis CI.
 date: 2019-02-01
+tags:
+  - performance
+feedback:
+  - api
 ---
 
 Using [bundlesize](https://github.com/siddharthkp/bundlesize) with [Travis
@@ -38,8 +42,9 @@ kitty](https://glitch.com/edit/#!/scarce-pixie).
 ## Set the performance budget
 
 [This Glitch](https://glitch.com/edit/#!/scarce-pixie) already contains
-bundlesize. To start, click the **Remix to Edit** button to make the project
-editable.
+bundlesize.
+
+{% Instruction 'remix' %}
 
 The main bundle of this app is in the public folder. To test its size, add the
 following section to the `package.json` file:

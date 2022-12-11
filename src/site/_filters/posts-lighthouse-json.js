@@ -13,14 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-const stripLanguage = require("../_filters/strip-language");
-
 const reUnescapedHtml = /[<>]/g;
 const reHasUnescapedHtml = RegExp(reUnescapedHtml.source);
 const htmlEscapes = {
-  "<": "&lt;",
-  ">": "&gt;",
+  '<': '&lt;',
+  '>': '&gt;',
 };
 
 /**
@@ -48,17 +45,17 @@ module.exports = (posts) => {
   const toArray = (raw) => (raw instanceof Array ? raw : [raw]);
 
   if (!posts) {
-    throw new Error("No posts were passed to the filter!");
+    throw new Error('No posts were passed to the filter!');
   }
 
   const guides = posts.map((post) => {
     const out = {
-      path: "",
-      topic: "",
+      path: '',
+      topic: '',
       id: post.fileSlug, // e.g. "test-post"
       lighthouse: toArray(post.data.web_lighthouse),
       title: escapeHtml(post.data.title),
-      url: stripLanguage(post.url),
+      url: post.data.canonicalUrl,
     };
 
     const host = post.data.postHost[out.id];

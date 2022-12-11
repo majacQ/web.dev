@@ -8,9 +8,11 @@ description: stale-while-revalidate helps developers balance between immediacyâ€
 hero: hero.jpg
 alt: A photograph of a half-painted wall.
 tags:
-  - post
+  - blog
   - speed
   - caching
+feedback:
+  - api
 ---
 
 ## What shipped?
@@ -71,13 +73,11 @@ with a fresh response.
 Below is a simple example of an HTTP API for returning the current timeâ€”more
 specifically, the current number of minutes past the hour.
 
-<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/s-w-r-demo?path=server.js:20:15&previewSize=100&attributionHidden=true"
-    alt="Stale-while-revalidate Demo on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 's-w-r-demo',
+  path: 'server.js:20:15',
+  height: 346
+} %}
 
 In this scenario, the web server uses this `Cache-Control` header in its HTTP response:
 
@@ -172,4 +172,4 @@ into effect.
 * [The HTTP cache: your first line of defense](/http-cache/), from the "Network
   reliability" guide on this site.
 
-_Hero image by Samuel Zeller on [Unsplash](https://unsplash.com/photos/oBb-Y26PJgg)._
+_Hero image by Samuel Zeller._

@@ -8,10 +8,11 @@ authors:
 description: |
     Learn about rel=prefetch resource hint and how to use it.
 tags:
-  - post
+  - blog
   - performance
-  - fast  
 codelabs: codelab-two-ways-to-prefetch
+feedback:
+  - api
 ---
 
 Research shows that [faster load times result in higher conversion rates](https://wpostats.com/) and better user experiences. If you have insight into how users move through your website and which pages they will likely visit next, you can improve load times of future navigations by downloading the resources for those pages ahead of time.
@@ -23,7 +24,7 @@ This guide explains how to achieve that with `<link rel=prefetch>`, a [resource 
 Adding `<link rel=prefetch>` to a web page tells the browser to download entire pages, or some of the resources (like scripts or CSS files), that the user might need in the future. This can improve metrics like [First Contentful Paint](/first-contentful-paint) and [Time to Interactive](/interactive/) and can often make subsequent navigations appear to load instantly.
 
 ```html
-<link rel="prefetch" href="index.html" as="document">
+<link rel="prefetch" href="/articles/" as="document">
 ```
 
 ![A diagram showing how link prefetch works.](prefetch.png)
@@ -67,7 +68,7 @@ The simplest way to implement `prefetch` is adding a `<link>` tag to the `<head>
 ```html
 <head>
 	...
-	<link rel="prefetch" href="index.html" as="document">
+	<link rel="prefetch" href="/articles/" as="document">
 	...
 </head>
 
@@ -92,24 +93,24 @@ webpack enables you to prefetch scripts for routes or functionality you're reaso
 The following code snippet lazy-loads a sorting functionality from the [lodash](https://lodash.com/) library to sort a group of numbers that will be submitted by a form:
 
 ```js
-form.addEventListener("submit", e => { 
-	e.preventDefault() 
+form.addEventListener("submit", e => {
+	e.preventDefault()
 	import('lodash.sortby')
 		.then(module => module.default)
-		.then(sortInput()) 
-		.catch(err => { alert(err) }); 
+		.then(sortInput())
+		.catch(err => { alert(err) });
 });
 ```
 
 Instead of waiting for the 'submit' event to take place to load this functionality, you can prefetch this resource to increase the chances of having it available in the cache by the time the user submits the form. webpack allows that using the [magic comments](https://webpack.js.org/api/module-methods/#magic-comments) inside `import()`:
 
 ```js/2
-form.addEventListener("submit", e => { 
-   e.preventDefault() 
+form.addEventListener("submit", e => {
+   e.preventDefault()
    import(/* webpackPrefetch: true */ 'lodash.sortby')
          .then(module => module.default)
-         .then(sortInput()) 
-         .catch(err => { alert(err) }); 
+         .then(sortInput())
+         .catch(err => { alert(err) });
 });
 ```
 

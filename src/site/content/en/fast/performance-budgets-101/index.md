@@ -7,6 +7,8 @@ description: |
   Good performance is rarely a side effect. Learn about performance budgets and
   how they can set you on track for success.
 date: 2018-11-05
+tags:
+  - performance
 ---
 
 Performance is an important part of the user experience and it [affects business metrics](https://wpostats.com/). It's tempting to think that if you are a good developer you'll end up with a performant site, but the truth is that good performance is rarely a side effect. As with most other things—to reach a goal you have to define it clearly. Start the journey by setting a **performance budget**.
@@ -32,7 +34,7 @@ We've already mentioned a few things you can include in a performance budget suc
 
 However, these numbers don't tell you much about the user experience. Two pages with the same number of requests or same weight can render differently depending on the order in which resources get requested. If a [critical resource](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/) like a hero image or a stylesheet on one of the pages is loaded late in the process, the users will wait longer to see something useful and perceive the page as slower. If on the other page the most important parts load quickly, they may not even notice if the rest of the page doesn't.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./progressive-page-rendering.png" alt="Image of progressive page rendering based on the critical-path" class="w-screenshot">
 </figure>
 
@@ -80,7 +82,7 @@ Choosing a tool for this will depend a lot on the scale of your project and reso
 
 * [Webpack performance features](https://webpack.js.org/configuration/performance/)
 * [bundlesize](https://github.com/siddharthkp/bundlesize)
-* [Lighthouse CI](https://github.com/ebidel/lighthouse-ci)
+* [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci)
 
 If something goes over a defined threshold, you can either:
 

@@ -1,20 +1,16 @@
 ---
 layout: layout
-permalink: /en/{{page.fileSlug}}/index.html
+permalink: "/{{lang}}/{{page.fileSlug}}/index.html"
+show_banner: false
 ---
 
 <div class="codelab-landing-page">
-  {% if site.env === 'prod' %}
-    <style>
-      devsite-content-footer,
-      devsite-footer-promos,
-      devsite-footer-linkboxes,
-      devsite-footer-utility {
-        display: none;
-      }
-    </style>
+  {% if path === undefined  %}
+    {% set postPaths = page | getPaths %}
+    {# Use first found path as a default path. #}
+    {% set path = paths[postPaths[0]] %}
   {% endif %}
-  <web-codelab glitch="{{ glitch }}" {% if glitch_path %}path="{{ glitch_path }}{% endif %}">
+  <web-codelab glitch="{{ glitch }}" {% if glitch_path %}path="{{ glitch_path }}"{% endif %} {% if site.env === 'test' %}testmode{% endif %}>
     <div class="web-codelab__instructions">
       <h1 class="w-headline w-headline--two web-codelab__headline">{{ title }}</h1>
       {% if date %}
@@ -28,10 +24,10 @@ permalink: /en/{{page.fileSlug}}/index.html
         <div class="w-authors w-mt--xl w-pt--sm">
           {% for author in authors %}
             {% Author {
-              post: page,
-              author: contributors[author],
-              avatar: author,
-              showSocialMedia: true}
+              id: author,
+              author: collections.authors[author],
+              showSocialMedia: true
+              }
             %}
           {% endfor %}
         </div>
@@ -49,10 +45,11 @@ permalink: /en/{{page.fileSlug}}/index.html
           back: '/' + related_post,
           backLabel: 'Return to article'
         } %}
-      {% else %}
+      {% elif path %}
         {% ArticleNavigation {
           back: '/' + path.slug,
-          backLabel: 'Return to all articles'
+          backLabel: 'Return to all articles',
+          path: page
         } %}
       {% endif %}
     </div>

@@ -13,13 +13,15 @@ description: |
   Learn how to add background effects like blurring and transparency to UI
   elements on the web using the CSS backdrop-filter property.
 tags:
-  - post
+  - blog
   - css
   - backdrop-filter
+feedback:
+  - api
 ---
 Translucence, blurring, and other effects are useful ways of creating depth while keeping the context of the background content. They support a host of use cases such as frosted glass, video overlays, translucent navigation headers, inappropriate image censoring, image loading, and so on. You may recognize these effects from two popular operating systems: [Windows 10](https://i.kinja-img.com/gawker-media/image/upload/s--9RLXARU4--/c_scale,dpr_2.0,f_auto,fl_progressive,q_80,w_800/trgz8yivyyqrpcnwscu5.png) and [iOS](https://static.businessinsider.com/image/51fd2822eab8eae16e00000b-750.jpg).
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="weather_app.jpg" alt="An example of a frosted glass effect.">
   <figcaption class="w-figcaption">
     An example of a frosted glass effect. <a href="https://dribbble.com/shots/733714-Weather-App?list=tags&tag=android" target="_blank" rel="noopener noreferrer">Source</a>.
@@ -34,7 +36,7 @@ Historically, these techniques were difficult to implement on the web, requiring
     <source src="https://storage.googleapis.com/web-dev-assets/backdrop-filter/backdrop_filter-kitchen_sink2.mp4" type="video/mp4; codecs=h264">
   </video>
   <figcaption class="w-figcaption w-figcaption--fullbleed">
-    A demonstration of the filter functions for <code>backdrop-filter</code>. Try the example on <a href="https://codepen.io/robinrendle/pen/LmzLEL" target="_blank">CodePen</a>.
+    A demonstration of the filter functions for <code>backdrop-filter</code>. Try the example on <a href="https://codepen.io/robinrendle/pen/LmzLEL" target="_blank" rel="noopener">CodePen</a>.
   </figcaption>
 </figure>
 
@@ -98,7 +100,7 @@ As with many features of the modern web, you'll want to know whether the user's 
 ```
 ## Examples
 
-Design techniques and styles previously reserved for native operating systems are now performant and achievable with a single CSS declaration. Let's look at some examples.
+Design techniques and styles previously reserved for operating systems are now performant and achievable with a single CSS declaration. Let's look at some examples.
 
 ### Single filter
 
@@ -117,7 +119,7 @@ In the following example, the frosted effect is achieved by combining color and 
     <source src="https://storage.googleapis.com/web-dev-assets/backdrop-filter/backdrop_filter-rgb2.mp4" type="video/mp4; codecs=h264">
   </video>
   <figcaption class="w-figcaption">
-    Try this example for yourself in <a href="https://codepen.io/netsi1964/pen/JqBLPK" target="_blank">CodePen</a>.
+    Try this example for yourself in <a href="https://codepen.io/netsi1964/pen/JqBLPK" target="_blank" rel="noopener">CodePen</a>.
   </figcaption>
 </figure>
 
@@ -139,7 +141,7 @@ In the following example, each of the four panes has a different combination of 
     <source src="https://storage.googleapis.com/web-dev-assets/backdrop-filter/backdrop_filter-ambient_blur2.mp4" type="video/mp4; codecs=h264">
   </video>
   <figcaption class="w-figcaption">
-    Try this example for yourself in <a href="https://codepen.io/pepf/pen/GqZkdj" target="_blank">CodePen</a>.
+    Try this example for yourself in <a href="https://codepen.io/pepf/pen/GqZkdj" target="_blank" rel="noopener">CodePen</a>.
   </figcaption>
 </figure>
 
@@ -160,7 +162,7 @@ This example shows how to blur a semi-transparent background to make text readab
     <source src="https://storage.googleapis.com/web-dev-assets/backdrop-filter/backdrop_filter-modal2.mp4" type="video/mp4; codecs=h264">
   </video>
   <figcaption class="w-figcaption">
-    Try this <a href="https://mfreed7.github.io/backdrop-filter-feature/examples/scrollable.html" target="_blank">example</a> for yourself.
+    Try this <a href="https://mfreed7.github.io/backdrop-filter-feature/examples/scrollable.html" target="_blank" rel="noopener">example</a> for yourself.
   </figcaption>
 </figure>
 
@@ -187,12 +189,12 @@ As stated earlier, `backdrop-filter` allows performant effects that would be dif
     <source src="https://storage.googleapis.com/web-dev-assets/backdrop-filter/backdrop_filter-invert_color2.mp4" type="video/mp4; codecs=h264">
   </video>
   <figcaption class="w-figcaption">
-    Try this example from <a href="https://www.chenhuijing.com/#%F0%9F%91%9F">Chen Hui Jing</a> in <a href="https://tympanus.net/codrops-playground/huijing/Qqpwg5Iy/editor" target="_blank">Codrops</a>.
+    Try this example from <a href="https://www.chenhuijing.com/#%F0%9F%91%9F">Chen Hui Jing</a> in <a href="https://tympanus.net/codrops-playground/huijing/Qqpwg5Iy/editor" target="_blank" rel="noopener">Codrops</a>.
   </figcaption>
 </figure>
 
 ## Conclusion
-More than 560 of you have upvoted the [Chromium bug](https://crbug.com/497522) over the past few years, clearly marking this as a long awaited CSS feature. Chrome's release of `backdrop-filter` in version 76 brings the web a step closer to truly native-like UI presentation.
+More than 560 of you have upvoted the [Chromium bug](https://crbug.com/497522) over the past few years, clearly marking this as a long awaited CSS feature. Chrome's release of `backdrop-filter` in version 76 brings the web a step closer to truly OS-like UI presentation.
 
 ### Additional resources
 - [Specification](https://drafts.fxtf.org/filter-effects-2/#BackdropFilterProperty)

@@ -8,6 +8,12 @@ description: |
   User-centric performance metrics are a critical tool in understanding and
   improving the experience of your site in a way that benefits real
   users.
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+tags:
+  - performance
+  - metrics
+  =======
+  >>>>>>> metrics-overview
 ---
 
 We've all heard how important performance is. But when we talk about
@@ -51,10 +57,17 @@ the [W3C Web Performance Working Group](https://www.w3.org/webperf/)&mdash;have
 been working to standardize a set of new APIs and metrics that more accurately
 measure how users experience the performance of a web page.
 
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+To help ensure the metrics are relevant to users, we frame them around a few key
+questions:
+
+<table id="questions">
+  =======
 To help ensure the metrics are relevant to users, we frame them around a couple
 of key questions:
 
 <table id="user-centric-metric-questions">
+  >>>>>>> metrics-overview
   <tr>
     <td><strong>Is it happening?</strong></td>
     <td>Did the navigation start successfully? Has the server responded?</td>
@@ -78,7 +91,11 @@ of key questions:
 Performance metrics are generally measured in one of two ways:
 
 - **In the lab:** using tools to simulate a page load in a consistent,
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+  controlled environment
+  =======
   controlled environment.
+ >>>>>>> metrics-overview
 - **In the field**: on real users actually loading and interacting with the page
 
 Neither of these options is necessarily better or worse than the other&mdash;in
@@ -134,6 +151,28 @@ page.
 
 ## Important metrics to measure
 
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+- **[First contentful paint (FCP)](/fcp/):** measures the time from when the
+  page starts loading to when any part of the page's content is rendered on the
+  screen. _([lab](#in-the-lab), [field](#in-the-field))_
+- **[Largest contentful paint (LCP)](/lcp/):** measures the time from when the
+  page starts loading to when the largest text block or image element is
+  rendered on the screen. _([lab](#in-the-lab), [field](#in-the-field))_
+- **[First input delay (FID)](/fid/):** measures the time from when a user first
+  interacts with your site (i.e. when they click a link, tap a button, or use a
+  custom, JavaScript-powered control) to the time when the browser is actually
+  able to respond to that interaction. _([field](#in-the-field))_
+- **[Time to Interactive (TTI)](/tti/):** measures the time from when the page
+  starts loading to when it's visually rendered, its initial scripts (if any)
+  have loaded, and it's capable of reliably responding to user input quickly.
+  _([lab](#in-the-lab))_
+- **[Total blocking time (TBT)](/tbt/):** measures the total amount of time
+  between FCP and TTI where the main thread was blocked for long enough to
+  prevent input responsiveness. _([lab](#in-the-lab))_
+- **[Cumulative layout shift (CLS)](/cls/):** measures the cumulative score of
+  all unexpected layout shifts that occur between when the page starts loading
+  and when its [lifecycle
+  =======
 - **[First contentful paint
   (FCP)](/first-contentful-paint/):**
   measures the time from when the page starts loading to when any part of the
@@ -161,6 +200,7 @@ page.
   (CLS)](/layout-instability-api/):**
   measures the cumulative score of all layout shifts that occur between FCP and
   when the page's [lifecycle
+  >>>>>>> metrics-overview
   state](https://developers.google.com/web/updates/2018/07/page-lifecycle-api)
   changes to hidden. _([lab](#in-the-lab), [field](#in-the-field))_
 
@@ -180,10 +220,16 @@ performance against their competitors.
 
 However, there may be times when a specific site is unique in some way that
 requires additional metrics to capture the full performance picture. For
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+example, the LCP metric is intended to measure when a page's main content has
+finished loading, but there could be cases where the largest element is not part
+of the page's main content and thus LCP may not be relevant.
+  =======
 example, the Largest Contentful Paint metric is intended to measure when a
 page's main content has finished loading, but there could be cases where the
 largest element is not part of the page's main content and thus LCP may not be
 relevant.
+  >>>>>>> metrics-overview
 
 To address such cases, the Web Performance Working Group has also standardized
 lower-level APIs that can be useful for implementing your own custom metrics:

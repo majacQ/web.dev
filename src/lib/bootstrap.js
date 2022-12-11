@@ -1,39 +1,49 @@
 /**
- * @fileoverview Site bootstrap code.
+ * @fileoverview Bootstrap code run by all browsers inside `script defer`.
  *
- * This should import minimal site code, as it exists to load relevant polyfills and then the
- * correct entrypoint via our router.
+ * Used to trigger basic Analytics, including with our known previous signed-in
+ * state that was cached in `localStorage`.
+ *
+ *   * This file is built with Rollup, but separately to our core bundle: don't
+ *     import any core site code as it'll be duplicated.
+ *
+ *   * It's run in all browsers as a regular script (not "module"), and this
+ *     includes all ancient browsers, e.g., IE11 or older.
+ *
+ *   * It runs _before_ our core bundle (for supported browsers), as it inserts
+ *     the "entrypoint" script tag as part of its work.
  */
 
-import config from "webdev_config";
-import "./webcomponents-config"; // must go before -loader below
-import "@webcomponents/webcomponentsjs/webcomponents-loader.js";
-import {swapContent} from "./loader";
-import * as router from "./utils/router";
-import {store} from "./store";
+import {dimensions, id, version} from 'webdev_analytics';
+import entrypoint from 'webdev_entrypoint';
+import {localStorage} from './utils/storage';
+import removeServiceWorkers from './utils/sw-remove';
 
-console.info("web.dev", config.version);
+// @ts-ignore
+window.ga =
+  window.ga ||
+  function () {
+    (ga.q = ga.q || []).push(arguments);
+  };
+ga.l = +new Date();
+ga('create', id);
+ga('set', 'transport', 'beacon');
+ga('set', 'page', window.location.pathname);
+// nb. Analytics requires dimension values to be strings.
+ga('set', dimensions.SIGNED_IN, localStorage['webdev_isSignedIn'] ? '1' : '0');
+ga('set', dimensions.TRACKING_VERSION, version.toString());
+ga('send', 'pageview');
 
-WebComponents.waitFor(async () => {
-  // TODO(samthor): This isn't quite the right class name because not all Web Components are ready
-  // at this point due to code-splitting.
-  document.body.classList.remove("unresolved");
-
-  // Run as long-lived router w/ history & "<a>" bindings
-  // Also immediately calls `swapContent()` handler for current location,
-  // loading its required JS entrypoint
-  router.listen(swapContent);
-
-  // If the site becomes online again, and the special offline page was shown,
-  // then trigger a reload
-  window.addEventListener("online", () => {
-    const {isOffline} = store.getState();
-    if (isOffline) {
-      router.reload();
-    }
-  });
-});
-
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js");
+// In future, we can feature-detect other things here and prevent loading core
+// site code. This includes Shadow DOM.
+const browserSupport = 'noModule' in HTMLScriptElement.prototype;
+if (browserSupport) {
+  const s = document.createElement('script');
+  s.type = 'module';
+  s.src = '/' + entrypoint;
+  document.head.append(s);
+} else {
+  // If we've transitioned into becoming an unsupported browser, then any
+  // previous Service Worker won't be updated. Aggressively remove on load.
+  removeServiceWorkers();
 }

@@ -14,15 +14,19 @@
  * limitations under the License.
  */
 
-import {html} from "lit-element";
-import {BaseElement} from "../BaseElement";
-import {store} from "../../store";
-import "wicg-inert";
-import {collapseSideNav} from "../../actions";
+/* eslint lit-a11y/click-events-have-key-events: 0 */
+
+import {html} from 'lit-element';
+import {BaseElement} from '../BaseElement';
+import {store} from '../../store';
+import 'wicg-inert';
+import {collapseSideNav} from '../../actions';
+import './_styles.scss';
 
 class SideNav extends BaseElement {
   static get properties() {
     return {
+      logo: {type: String},
       animatable: {type: Boolean, reflect: true},
       expanded: {type: Boolean, reflect: true},
     };
@@ -32,6 +36,7 @@ class SideNav extends BaseElement {
     super();
 
     this.inert = true;
+    this.logo = '';
     this.animatable = false;
     this.expanded_ = false;
     this.startX_ = 0;
@@ -60,21 +65,28 @@ class SideNav extends BaseElement {
       <nav @click="${this.onBlockClicks}" class="web-side-nav__container">
         <div class="web-side-nav__header">
           <button
-            @click=${this.onCloseSideNav}
-            class="web-side-nav__hide"
-          ></button>
-          <a
-            href="/"
-            class="gc-analytics-event"
-            data-category="Site-Wide Custom Events"
-            data-label="Site logo"
+            @click="${this.onCloseSideNav}"
+            data-icon="close"
+            class="w-button--icon w-button--round web-side-nav__hide"
+            aria-label="Close"
           >
-            <img
-              class="web-side-nav__logo"
-              src="/images/lockup.svg"
-              alt="web.dev"
-            />
-          </a>
+            <span class="w-tooltip">Close</span>
+          </button>
+          ${this.logo &&
+          html`
+            <a
+              href="/"
+              class="gc-analytics-event"
+              data-category="Site-Wide Custom Events"
+              data-label="Site logo"
+            >
+              <img
+                class="web-side-nav__logo"
+                src="${this.logo}"
+                alt="web.dev"
+              />
+            </a>
+          `}
         </div>
         ${this.prerenderedChildren_}
       </nav>
@@ -88,26 +100,50 @@ class SideNav extends BaseElement {
   }
 
   firstUpdated() {
-    this.sideNavContainerEl = this.querySelector(".web-side-nav__container");
+    /** @type HTMLElement */
+    this.sideNavContainerEl = this.querySelector('.web-side-nav__container');
     this.addEventListeners();
     this.onStateChanged();
-    this.classList.remove("unresolved");
+    this.classList.remove('unresolved');
   }
 
   addEventListeners() {
-    this.addEventListener("click", this.onCloseSideNav);
-    this.addEventListener("touchstart", this.onTouchStart, {passive: true});
-    this.addEventListener("touchmove", this.onTouchMove, {passive: true});
-    this.addEventListener("touchend", this.onTouchEnd);
+    this.addEventListener('click', this.onCloseSideNav);
+    this.addEventListener('touchstart', this.onTouchStart, {passive: true});
+    this.addEventListener('touchmove', this.onTouchMove, {passive: true});
+    this.addEventListener('touchend', this.onTouchEnd);
   }
 
-  onStateChanged() {
+  onStateChanged({currentUrl} = {currentUrl: null}) {
     const {isSideNavExpanded} = store.getState();
     if (isSideNavExpanded === this.expanded) {
       return;
     }
 
     this.expanded = isSideNavExpanded;
+    if (currentUrl) {
+      // Ensure that the "active" attribute is applied to any matching header
+      // link, or to none (for random subpages or articles).
+      currentUrl = currentUrl.replace(/"/g, '\\"');
+      currentUrl = (currentUrl.match(/^\/\w+\//) || [''])[0];
+
+      const active = this.querySelector('[active]');
+      const updated = this.querySelector(`[href="${currentUrl}"]`);
+
+      if (active === updated) {
+        return;
+      }
+
+      if (active) {
+        active.removeAttribute('active');
+        active.removeAttribute('aria-current');
+      }
+
+      if (updated) {
+        updated.setAttribute('active', '');
+        updated.setAttribute('aria-current', 'page');
+      }
+    }
   }
 
   onTouchStart(e) {
@@ -130,7 +166,7 @@ class SideNav extends BaseElement {
     this.currentX_ = e.touches[0].pageX;
   }
 
-  onTouchEnd(e) {
+  onTouchEnd() {
     if (!this.touchingSideNav_) {
       return;
     }
@@ -138,7 +174,7 @@ class SideNav extends BaseElement {
     this.touchingSideNav_ = false;
 
     const translateX = Math.min(0, this.currentX_ - this.startX_);
-    this.sideNavContainerEl.style.transform = "";
+    this.sideNavContainerEl.style.transform = '';
 
     if (translateX < 0) {
       this.onCloseSideNav();
@@ -167,7 +203,7 @@ class SideNav extends BaseElement {
     // so the SideNav won't collapse.
     // If the click was outside of the container/on the overlay, we close the
     // SideNav.
-    const link = e.target.closest("a");
+    const link = e.target.closest('a');
     if (!link) {
       e.stopPropagation();
     }
@@ -184,7 +220,9 @@ class SideNav extends BaseElement {
       // hamburger button in the header. It might be more techincally pure to
       // use a unistore action for this, but it feels like a lot of ceremony
       // for a small behavior.
-      document.querySelector("web-header").manageFocus();
+      /** @type {import('../Header').Header} */
+      const webHeader = document.querySelector('web-header');
+      webHeader.manageFocus();
     }
     this.inert = !this.expanded_;
   }
@@ -198,9 +236,9 @@ class SideNav extends BaseElement {
   }
 
   onKeyUp(e) {
-    if (e.key === "Escape") {
+    if (e.key === 'Escape') {
       collapseSideNav();
-      document.removeEventListener("keyup", this.onKeyUp);
+      document.removeEventListener('keyup', this.onKeyUp);
     }
   }
 
@@ -213,10 +251,10 @@ class SideNav extends BaseElement {
     this.expanded_ = val;
     this.animatable = true;
     if (this.expanded_) {
-      document.addEventListener("keyup", this.onKeyUp);
+      document.addEventListener('keyup', this.onKeyUp);
     }
-    this.addEventListener("transitionend", this.onTransitionEnd, {once: true});
-    this.requestUpdate("expanded", oldVal);
+    this.addEventListener('transitionend', this.onTransitionEnd, {once: true});
+    this.requestUpdate('expanded', oldVal);
   }
 
   get expanded() {
@@ -229,4 +267,4 @@ class SideNav extends BaseElement {
   }
 }
 
-customElements.define("web-side-nav", SideNav);
+customElements.define('web-side-nav', SideNav);

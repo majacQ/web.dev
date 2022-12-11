@@ -8,6 +8,8 @@ description: |
   Workbox is a high-level service worker toolkit built on top of the Service
   Worker and Cache Storage APIs. It provides a production-ready set of libraries
   for adding offline support to web apps.
+feedback:
+  - api
 ---
 
 Two APIs play a crucial role in building reliable web apps:
@@ -116,7 +118,6 @@ Workbox integration found in many popular starter kits and add-on plugins:
 +  [preact-cli](https://github.com/prateekbh/preact-cli-workbox-plugin/blob/master/README.md)
 +  [Gatsby](https://www.gatsbyjs.org/packages/gatsby-plugin-offline/)
 +  [Next.js](https://github.com/hanford/next-offline/blob/master/readme.md)
-+  [PWA Starter Kit](https://polymer.github.io/pwa-starter-kit/what's-in-the-box/)
 
 ### Add Workbox to your existing build process
 

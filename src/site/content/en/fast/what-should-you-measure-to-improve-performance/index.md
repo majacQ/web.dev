@@ -10,7 +10,7 @@ alt: A row of shopping carts.
 description: |
   Learn what impact website performance has on different parts of the e-commerce funnel
 tags:
-  - post
+  - blog
   - performance
   - ecommerce
 ---
@@ -18,7 +18,7 @@ tags:
 The different steps of a purchase funnel are prone to performance issues in
 different ways, and therefore need different measurement and optimizations:
 
-<figure class="w-figure  w-figure--center">
+<figure class="w-figure">
   <img src="./funnel.png" alt="A conversion funnel going from discover to engage to convert to re-engage." style="max-width: 600px; width: 100%;">
   <figcaption class="w-figcaption">
     A conversion funnel.
@@ -95,21 +95,21 @@ There are two convenient ways of doing this:
 ### WebPageTest
 
 [WebPageTest](https://www.webpagetest.org/) offers a very flexible [scripting
-solution](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting).
+solution](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md).
 The basic idea is to:
 
 +   Tell WebPageTest to navigate through the pages of the flow with the
-    [`navigate`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-navigate)
+    [`navigate`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#navigate)
     command.
 +   If needed script the clicking of buttons via
-    [`clickAndWait`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-clickAndWait)
+    [`clickAndWait`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#clickandwait)
     commands and fill text fields via
-    [`setValue`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-setValue).
+    [`setValue`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#selectvalue).
     For testing of Single Page Applications use `clickAndWait` rather than
     `navigate` commands for all steps after the first, as `navigate` will do a
     full load instead of the lightweight virtual page load.
 +   Make sure to combine the different steps of the flow in the analysis via
-    [`combineSteps`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-combineSteps)
+    [`combineSteps`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#combinesteps)
     to produce a single overall result report for the complete flow.
 
 Such a script could look like this:
@@ -125,7 +125,7 @@ navigate	https://www.store.google.com/checkout
 
 With a script like this in place you can easily measure and compare performance
 over time. This can even be automated through the
-[WebPageTest API](https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis).
+[WebPageTest API](https://github.com/WPO-Foundation/webpagetest-docs/blob/5337749ae99d0529fc0ae690d402fd4f88766be9/dev/api.md).
 
 ### Puppeteer
 
@@ -181,7 +181,7 @@ an eye on this though, and a great lab test tool for repeat visits is
 [WebPageTest](https://www.webpagetest.org/), which has a dedicated option for a
 direct repeat visit:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot" src="./webpagetest_repeat.png" alt="The WebPageTest homepage form for auditing a site. The repeat view option is highlighted.">
   <figcaption class="w-figcaption w-figcaption--center">
     Webpagetest offers options to test first load and repeat load as well
@@ -192,7 +192,7 @@ To get a better feeling for repeat visit performance in the field use your
 analytics package of choice to segment your performance metrics by user type.
 Here is an example of such a report in Google Analytics:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot" src="./ga_speed_repeat.png" alt="A Google Analytics dashboard shows a number of fields being added to a custom report.">
   <figcaption class="w-figcaption w-figcaption--center">
     A Google Analytics custom report can be used to report speed metrics for new and returning users.

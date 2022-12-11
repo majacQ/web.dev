@@ -9,7 +9,11 @@ description: |
 date: 2018-11-05
 glitch: code-splitting-starter
 related_post: reduce-javascript-payloads-with-code-splitting
+tags:
+  - performance
 ---
+
+{% include 'content/devtools-headsup.njk' %}
 
 Most web pages and applications are made up of many different parts. Instead of
 sending all the JavaScript that makes up the application as soon as the first
@@ -30,11 +34,10 @@ Since webpack is used in this application, any changes made to the code will tri
 Like always, it's important to first measure how well a website performs before
 attempting to add any optimizations.
 
-- To preview the site, mouse over the editor, press the **App** button, then the
-  **Show** button.
--  Open the DevTools by pressing `CMD + OPTION + i` / `CTRL + SHIFT + i`.
--  Click on the **Network** panel.
--  Make sure `Disable Cache` is checked and reload the app.
+{% Instruction 'preview', 'ol' %}
+{% Instruction 'devtools-network', 'ol' %}
+{% Instruction 'disable-cache', 'ol' %}
+{% Instruction 'reload-app', 'ol' %}
 
 <img class="w-screenshot" src="./codelab-code-splitting-3.png" alt="Network panel showing 71.2 KB JavaScript bundle.">
 

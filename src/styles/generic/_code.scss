@@ -1,5 +1,4 @@
-@import '../settings/colors';
-@import '../settings/type';
+@import '../tools/mixins';
 
 // =============================================================================
 // CODE OVERVIEW
@@ -15,13 +14,13 @@
 // TODO (robdodson): Need to revsit this color palette.
 $CODE_COLORS: (
   blue: #183691,
-  teal: #0086b3,
+  bright-blue: #007aa2,
   black: $PRIMARY_TEXT_COLOR,
   purple: #a71d5d,
-  maroon: #a71d5d,
-  green: #63a35c,
+  maroon:#9f1c59,
+  green:#385d34,
   light-gray: #f7f7f7,
-  dark-gray: #969896
+  dimgrey: #696969
 );
 
 code {
@@ -49,10 +48,21 @@ pre {
 // Code block
 pre,
 pre[class*='language-'] {
-  margin: 32px 0;
+  @include scrollbars();
+  margin: 32px -24px;
+  border-width: 1px 0;
   overflow: auto;
   padding: 16px;
   white-space: pre;
+
+  @include bp(sm) {
+    margin: 32px -32px;
+  }
+
+  @include bp(md) {
+    margin: 32px 0;
+    border-width: 1px;
+  }
 }
 
 pre code,
@@ -82,12 +92,13 @@ h6 code {
   font-size: inherit;
   margin: 0;
   padding: 0;
-  white-space: nowrap;
+  white-space: normal;
 }
 
-// Figcaptions are smaller than body text,
+// Figcaptions and citations are smaller than body text,
 // so code should be based on their font size.
-figcaption code {
+figcaption code,
+cite code {
   font-size: .9em;
 }
 
@@ -103,7 +114,7 @@ figcaption code {
   &.prolog,
   &.doctype,
   &.cdata {
-    color: map-get($CODE_COLORS, dark-gray);
+    color: map-get($CODE_COLORS, dimgrey);
   }
 
   &.punctuation,
@@ -120,7 +131,7 @@ figcaption code {
 
   &.boolean,
   &.number {
-    color: map-get($CODE_COLORS, teal);
+    color: map-get($CODE_COLORS, bright-blue);
   }
 
   &.selector,

@@ -18,11 +18,12 @@
  * @fileoverview A Snackbar container for handling Redux state and actions.
  */
 
-import {html} from "lit-element";
-import {BaseElement} from "../BaseElement";
-import {store} from "../../store";
-import {setUserAcceptsCookies} from "../../actions";
-import "../Snackbar";
+import {html} from 'lit-element';
+import {BaseElement} from '../BaseElement';
+import {store} from '../../store';
+import {setUserAcceptsCookies, checkIfUserAcceptsCookies} from '../../actions';
+import '../Snackbar';
+import './_styles.scss';
 
 class SnackbarContainer extends BaseElement {
   static get properties() {
@@ -34,31 +35,46 @@ class SnackbarContainer extends BaseElement {
 
   constructor() {
     super();
+    this.onBeforeInstallPrompt = this.onBeforeInstallPrompt.bind(this);
     this.onStateChanged = this.onStateChanged.bind(this);
   }
 
   connectedCallback() {
     super.connectedCallback();
+    checkIfUserAcceptsCookies();
     store.subscribe(this.onStateChanged);
     this.onStateChanged();
+
+    window.addEventListener('beforeinstallprompt', this.onBeforeInstallPrompt);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     store.unsubscribe(this.onStateChanged);
+    window.removeEventListener(
+      'beforeinstallprompt',
+      this.onBeforeInstallPrompt,
+    );
+  }
+
+  onBeforeInstallPrompt(e) {
+    if (!this.acceptedCookies) {
+      e.preventDefault();
+    }
   }
 
   onStateChanged() {
     const state = store.getState();
     this.open = state.showingSnackbar;
     this.type = state.snackbarType;
+    this.acceptedCookies = state.userAcceptsCookies;
   }
 
   render() {
     let action;
     let isStacked;
     switch (this.type) {
-      case "cookies":
+      case 'cookies':
         action = setUserAcceptsCookies;
         isStacked = true;
         break;
@@ -77,4 +93,4 @@ class SnackbarContainer extends BaseElement {
   }
 }
 
-customElements.define("web-snackbar-container", SnackbarContainer);
+customElements.define('web-snackbar-container', SnackbarContainer);

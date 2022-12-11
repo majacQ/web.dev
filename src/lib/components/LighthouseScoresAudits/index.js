@@ -2,15 +2,16 @@
  * @fileoverview An element which shows a friendly list of failing audits and related guides.
  */
 
-import {html} from "lit-element";
-import {BaseElement} from "../BaseElement";
-import {getAuditGuideMapping} from "../../lighthouse/mapping";
+import {html} from 'lit-element';
+import {BaseElement} from '../BaseElement';
+import {getAuditGuideMapping} from '../../lighthouse/mapping';
 import {
   computeWeightForAuditResult,
   filterAuditResult,
   sortOnWeights,
   getAuditReferenceDocLink,
-} from "../../lighthouse";
+} from '../../lighthouse';
+import './_styles.scss';
 
 const NUM_AUDITS_TO_SHOW = 10;
 
@@ -22,7 +23,8 @@ const NUM_AUDITS_TO_SHOW = 10;
  * @return {!TemplateResult}
  */
 function createRowForAuditCategory(lhr, category) {
-  let relevantGuides = ["Guide coming soon"];
+  /** @type TemplateResult | string[] */
+  let relevantGuides = ['Guide coming soon'];
   const audit = lhr.audits[category.ref.id];
 
   const auditGuideMapping = getAuditGuideMapping();
@@ -113,7 +115,7 @@ class LighthouseScoresAudits extends BaseElement {
 
     const oldValue = this._lhr;
     this._lhr = value;
-    this.requestUpdate("lhr", oldValue);
+    this.requestUpdate('lhr', oldValue);
   }
 
   get lhr() {
@@ -121,8 +123,8 @@ class LighthouseScoresAudits extends BaseElement {
   }
 
   firstUpdated() {
-    this.setAttribute("role", "table");
-    this.setAttribute("aria-label", "Lighthouse audits and suggested guides");
+    this.setAttribute('role', 'table');
+    this.setAttribute('aria-label', 'Lighthouse audits and suggested guides');
   }
 
   /**
@@ -154,6 +156,7 @@ class LighthouseScoresAudits extends BaseElement {
 
   render() {
     const lhr = this.lhr;
+    /** @type TemplateResult | string[] */
     let rows = html``;
     let allRowsShown = false;
 
@@ -166,8 +169,8 @@ class LighthouseScoresAudits extends BaseElement {
         .map((category) => createRowForAuditCategory(lhr, category));
     } else {
       // Render placeholder rows for hydrating.
-      const dummyArray = Array(NUM_AUDITS_TO_SHOW * this.timesExpanded).keys();
-      rows = Array.from(dummyArray).map(() => {
+      const testArray = Array(NUM_AUDITS_TO_SHOW * this.timesExpanded).keys();
+      rows = Array.from(testArray).map(() => {
         return html`
           <div class="lh-audit-list-row" role="row">
             <span
@@ -249,4 +252,4 @@ class LighthouseScoresAudits extends BaseElement {
   }
 }
 
-customElements.define("web-lighthouse-scores-audits", LighthouseScoresAudits);
+customElements.define('web-lighthouse-scores-audits', LighthouseScoresAudits);

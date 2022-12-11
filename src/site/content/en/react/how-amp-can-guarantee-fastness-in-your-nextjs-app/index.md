@@ -5,8 +5,7 @@ authors:
   - houssein
 subhead: |
   Learn about the benefits and tradeoffs of supporting AMP in your Next.js app
-date: 2019-10-29
-draft: true
+date: 2019-11-08
 codelabs: how-to-use-amp-in-nextjs
 ---
 
@@ -20,7 +19,7 @@ explains [the different ways you can support AMP in a Next.js app](#strategies),
 then helps you [decide which approach is best for you](#guidance).
 
 The intended audience for this guide is a web developer who has decided to use Next.js but is
-unsure of whether to support AMP. 
+unsure of whether to support AMP.
 
 {% Aside %}
   This guide was not written for web developers who have decided to use AMP but are unsure of what
@@ -64,7 +63,7 @@ framework but rather a server-side templating engine for generating AMP pages.
 If you're serious about load performance, an AMP-only page could be a good way to make sure
 that your page gets fast and stays fast. But here's the catch: in order to guarantee fastness,
 AMP prohibits certain architectural patterns and HTML elements that often lead to slow pages.
-For example, AMP doesn't allow custom synchronous JavaScript because 
+For example, AMP doesn't allow custom synchronous JavaScript because
 [render-blocking resources][blockers] are a common cause of slow page loads.
 
 In order to understand whether an AMP-only approach is right for you, you need to figure out
@@ -84,10 +83,12 @@ The Hybrid AMP approach in Next.js provides a way to conditionally serve AMP pag
 it also creates a higher maintenance cost because it requires you to maintain
 two versions of each page.
 
-## Next steps
+## Conclusion
 
-Check out the rest of the guides in [web.dev's Next.js collection][collection] to discover
-other ways that you can optimize your Next.js app.
+AMP guarantees that your site gets fast and stays fast by enforcing patterns that lead to
+fastness and prohibiting patterns that lead to slowness. AMP HTML and AMP Caches are the two
+main ways that AMP guarantees fastness. But before adopting AMP you should make sure that it
+can support all of your site's requirements.
 
 [intro]: /performance-as-a-default-with-nextjs
 [collection]: /react#nextjs

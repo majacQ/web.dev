@@ -6,7 +6,7 @@ subhead:
 authors:
   - rowan_m
 date: 2019-10-30
-updated: 2019-10-31
+updated: 2020-05-28
 hero: cookie-hero.jpg
 description: |
   With the introduction of the new SameSite=None attribute value, sites can now
@@ -16,16 +16,20 @@ description: |
   Learn how to mark up your cookies to ensure your first-party and third-party
   cookies continue to work once this change comes into effect.
 tags:
-  - post
+  - blog
   - security
   - cookies
+  - chrome80
+  - test-post
+feedback:
+  - api
 ---
 
 {% Aside %}
-
-For how cookies and `SameSite` work, see part 1:
-[SameSite cookies explained](/samesite-cookies-explained).
-
+This article is part of a series on the `SameSite` cookie attribute changes:
+- [SameSite cookies explained](/samesite-cookies-explained/)
+- [SameSite cookies recipes](/samesite-cookie-recipes/)
+- [Schemeful Same-Site](/schemeful-samesite)
 {% endAside %}
 
 [Chrome](https://www.chromium.org/updates/same-site),
@@ -36,17 +40,23 @@ proposal,
 [Incrementally Better Cookies](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00)
 so that:
 
-1. Cookies without a `SameSite` attribute will be treated as `SameSite=Lax`,
-   meaning the default behavior will be to restrict cookies to first party
-   contexts **only**.
-2. Cookies for cross-site usage **must** specify `SameSite=None; Secure` to
-   enable inclusion in third party context.
+- Cookies without a `SameSite` attribute will be treated as `SameSite=Lax`,
+  meaning the default behavior will be to restrict cookies to first party
+  contexts **only**.
+- Cookies for cross-site usage **must** specify `SameSite=None; Secure` to
+  enable inclusion in third party context.
 
-This will become the
-[default behavior in Chrome 80](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html),
-planned for a stable release in February 2020. If you currently provide cookies
-that are intended for cross-site usage you will need to make changes before that
-date to support the new default.
+This feature is the [default behavior from Chrome 84 stable
+onward](https://blog.chromium.org/2020/05/resuming-samesite-cookie-changes-in-july.html).
+If you have not already done so, you should update the attributes for your
+third-party cookies so they will not be blocked in the future.
+
+## Cross-browser support
+
+See the
+[Browser compatibility](https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie#Browser_compatibility)
+section of MDN's [`Set-Cookie`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Set-Cookie)
+page.
 
 ## Use cases for cross-site or third-party cookies
 
@@ -71,7 +81,7 @@ Cookies may be used here to, among other things, maintain session state, store
 general preferences, enable statistics, or personalize content for users with
 existing accounts.
 
-<figure class="w-figure  w-figure--center">
+<figure class="w-figure">
   <img src="iframe.png"
       alt="Diagram of a browser window where the URL of embedded content does
         not match the URL of the page."
@@ -98,7 +108,7 @@ Cookies marked as `SameSite=Lax` will be sent on safe top-level navigations,
 e.g. clicking a link to go to a different site. However something like a
 `<form>` submission via POST to a different site would not include cookies.
 
-<figure class="w-figure  w-figure--center">
+<figure class="w-figure">
   <img src="safe-navigation.png"
       alt="Diagram of a request moving from one page to another."
       style="max-width: 35vw;">
@@ -134,11 +144,11 @@ included in cross-site requests.
 
 ### Content within a WebView
 
-A WebView in a native app is powered by a browser and you will need to test if
+A WebView in a platform-specific app is powered by a browser and you will need to test if
 the same restrictions or issues apply. In Android, if the WebView is powered by
-Chrome the new defaults **will not** immediately be applied with Chrome 80.
+Chrome the new defaults **will not** immediately be applied with Chrome 84.
 However the intent is to apply them in the future, so you should still test and
-prepare for this. Additionally, Android allows native apps to set cookies
+prepare for this. Additionally, Android allows its platform-specific apps to set cookies
 directly via the
 [CookieManager API](https://developer.android.com/reference/android/webkit/CookieManager).
 As with cookies set via headers or JavaScript, consider including
@@ -166,56 +176,6 @@ you may need to use some of the mitigating strategies described in
 ```text
 Set-Cookie: third_party_var=value; SameSite=None; Secure
 ```
-
-### Identifying cookie usage
-
-As of Chrome 77, you will see warnings in the DevTools Console for cross-site
-cookies that do not currently have a `SameSite` attribute and cookies that have
-been marked with `SameSite=None` but are missing `Secure`.
-
-<figure class="w-figure  w-figure--center">
-  <img src="chrome-console-warning.png"
-      alt="Chrome DevTools Console warnings for SameSite cookie misconfiguration."
-      style="max-width: 40vw;">
-</figure>
-
-For missing `SameSite` attributes you will see:
-
-```text
-A cookie associated with a cross-site resource at (cookie domain)
-was set without the `SameSite` attribute. A future release of Chrome
-will only deliver cookies with cross-site requests if they are set
-with `SameSite=None` and `Secure`. You can review cookies in developer
-tools under Application>Storage>Cookies and see more details at
-https://www.chromestatus.com/feature/5088147346030592 and
-https://www.chromestatus.com/feature/5633521622188032.
-```
-
-And for `None` without `Secure`, you will see:
-
-```text
-A cookie associated with a resource at (cookie domain) was set with
-`SameSite=None` but without `Secure`. A future release of Chrome will only
-deliver cookies marked `SameSite=None` if they are also marked `Secure`. You
-can review cookies in developer tools under Application>Storage>Cookies and
-see more details at https://www.chromestatus.com/feature/5633521622188032.
-```
-
-Each of these warnings will contain the cookie domain. If you're responsible for
-that domain, then you will need to update the cookies. Otherwise, you may need
-to contact the owner of the site or service responsible for that cookie to
-ensure they're making the necessary changes. The warnings themselves do not
-affect the functionality of the site, this is purely to inform developers of the
-upcoming changes.
-
-<figure class="w-figure  w-figure--center">
-  <img src="samesite-devtools.png"
-      alt="The Cookies pane of Chrome DevTools."
-      style="max-width: 40vw;">
-  <figcaption class="w-figcaption">
-    The <a href="https://devtools.chrome.com/storage/cookies">Cookies pane</a>.
-  </figcaption>
-</figure>
 
 ### Handling incompatible clients
 
@@ -285,7 +245,7 @@ behavior and ensure third-party cookies continue to function as before.
 Alternatively at the point of sending the `Set-Cookie` header, you can choose to
 detect the client via the user agent string. Refer to the
 [list of incompatible clients](https://www.chromium.org/updates/same-site/incompatible-clients)
-and then make use of an appropriate library for your plaform, for example
+and then make use of an appropriate library for your platform, for example
 [ua-parser-js](https://www.npmjs.com/package/ua-parser-js) library on Node.js.
 It's advisable to find a library to handle user agent detection as you most
 probably don't want to write those regular expressions yourself.
@@ -321,7 +281,7 @@ anyone has encountered it - so don't hesitate to reach out:
 
 - Raise an issue on the
   [`SameSite` examples repo on GitHub](https://github.com/GoogleChromeLabs/samesite-examples).
-- Post a question on the
+- blog a question on the
   ["samesite" tag on StackOverflow](https://stackoverflow.com/questions/tagged/samesite).
 - For issues with Chromium's behavior, raise a bug via the
   [\[SameSite cookies\] issue template](https://bit.ly/2lJMd5c).

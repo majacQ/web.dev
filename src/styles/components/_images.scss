@@ -6,10 +6,14 @@
 // -----------------------------------------------------------------------------
 
 .w-hero {
-  display: block;
-  margin: 0 auto;
-  max-height: 480px;
-  width: 1600px;
+  display: none;
+
+  @include bp(sm) {
+    display: block;
+    margin: 0 auto;
+    max-height: 480px;
+    width: 1600px;
+  }
 }
 
 .w-hero--top {
@@ -47,6 +51,12 @@
 .w-figure--screenshot > img {
   border: 1px solid $GREY_300;
   padding: 4px;
+
+  // This ensures images are scaled to the exact size specified by the
+  // width attribute, preventing HiDPI screenshots from being blurry:
+  //  <img src="800x500.png" width="400" class="w-screenshot">
+  box-sizing: content-box;
+  margin-left: -5px;
 }
 
 .w-screenshot--filled,
@@ -71,16 +81,13 @@
 
 .w-figure {
   margin: 32px 0;
+  text-align: center;
 }
 
 // Allow images contained within a figure to be break outside of the main
 // container in articles and be full bleed on mobile.
 .w-figure--fullbleed {
   margin: 64px -32px;
-}
-
-.w-figure--center {
-  text-align: center;
 }
 
 // Inline images are typically quite small so we'll center them on smaller

@@ -1,6 +1,11 @@
-import {store} from "./store";
-import {saveUserUrl} from "./fb";
-import {runLighthouse, fetchReports} from "./lighthouse-service";
+import {store} from './store';
+import {saveUserUrl} from './fb';
+import {runLighthouse, fetchReports} from './lighthouse-service';
+import lang from './utils/language';
+import {localStorage} from './utils/storage';
+import {getCanonicalPath} from './urls';
+import cookies from 'js-cookie';
+import {trackEvent} from './analytics';
 
 export const clearSignedInState = store.action(() => {
   const {isSignedIn} = store.getState();
@@ -56,7 +61,7 @@ export const requestRunLighthouse = store.action((state, url) => {
   })();
 
   return p.catch((err) => {
-    console.warn("failed to run Lighthouse", url, err);
+    console.warn('failed to run Lighthouse', url, err);
 
     const update = {
       lighthouseError: err.toString(),
@@ -74,7 +79,7 @@ export const requestRunLighthouse = store.action((state, url) => {
   });
 });
 
-export const requestFetchReports = store.action((state, url, startDate) => {
+export const requestFetchReports = store.action((_, url, startDate) => {
   const p = (async () => {
     const runs = await fetchReports(url, startDate);
 
@@ -96,7 +101,7 @@ export const requestFetchReports = store.action((state, url, startDate) => {
   })();
 
   return p.catch((err) => {
-    console.warn("failed to fetch reports for", url, err);
+    console.warn('failed to fetch reports for', url, err);
 
     // Don't show an error for another active Lighthouse fetch.
     const {activeLighthouseUrl} = store.getState();
@@ -121,35 +126,61 @@ export const requestFetchReports = store.action((state, url, startDate) => {
 });
 
 export const expandSideNav = store.action(() => {
-  document.body.classList.add("web-side-nav--expanded");
-  const main = document.querySelector("main");
-  const header = document.querySelector("web-header");
-  main.inert = true;
-  header.inert = true;
+  openModal();
   return {isSideNavExpanded: true};
 });
 
 export const collapseSideNav = store.action(() => {
-  document.body.classList.remove("web-side-nav--expanded");
-  const main = document.querySelector("main");
-  const header = document.querySelector("web-header");
-  main.inert = false;
-  header.inert = false;
+  closeModal();
   return {isSideNavExpanded: false};
 });
 
-export const checkIfUserAcceptsCookies = store.action(() => {
-  if (localStorage.getItem("web-accepts-cookies")) {
-    return {
-      userAcceptsCookies: true,
-    };
-  }
+export const openModal = store.action(() => {
+  const main = document.querySelector('main');
+  /** @type import('./components/Header').Header */
+  const header = document.querySelector('web-header');
+  /** @type {HTMLElement} */
+  const footer = document.querySelector('.w-footer');
 
-  return {showingSnackbar: true, snackbarType: "cookies"};
+  document.documentElement.classList.add('web-modal__overflow-hidden');
+  main.inert = true;
+  header.inert = true;
+  footer.inert = true;
+  return {isModalOpen: true};
 });
 
+export const closeModal = store.action(() => {
+  const main = document.querySelector('main');
+  /** @type import('./components/Header').Header */
+  const header = document.querySelector('web-header');
+  /** @type {HTMLElement} */
+  const footer = document.querySelector('.w-footer');
+
+  document.documentElement.classList.remove('web-modal__overflow-hidden');
+  main.inert = false;
+  header.inert = false;
+  footer.inert = false;
+  return {isModalOpen: false};
+});
+
+export const checkIfUserAcceptsCookies = store.action(
+  ({userAcceptsCookies}) => {
+    if (userAcceptsCookies) {
+      return;
+    }
+
+    if (localStorage['web-accepts-cookies']) {
+      return {
+        userAcceptsCookies: true,
+      };
+    }
+
+    return {showingSnackbar: true, snackbarType: 'cookies'};
+  },
+);
+
 export const setUserAcceptsCookies = store.action(() => {
-  localStorage.setItem("web-accepts-cookies", 1);
+  localStorage['web-accepts-cookies'] = '1';
   return {
     userAcceptsCookies: true,
     showingSnackbar: false,
@@ -157,5 +188,63 @@ export const setUserAcceptsCookies = store.action(() => {
     // snackbar to re-render and break the animation.
     // Instead, snackbarType is allowed to stick around and future updates can
     // overwrite it.
+  };
+});
+
+export const checkUserPreferredLanguage = store.action(
+  ({userPreferredLanguage}) => {
+    userPreferredLanguage =
+      // Use currently set language.
+      userPreferredLanguage ||
+      // Or check in the url.
+      lang.getLanguageFromPath(location.pathname) ||
+      // Or check in a cookie.
+      cookies.get('preferred_lang') ||
+      // Or check in the browser setting.
+      navigator.language.split('-')[0];
+    if (!lang.isValidLanguage(userPreferredLanguage)) {
+      userPreferredLanguage = '';
+    }
+    return {userPreferredLanguage};
+  },
+);
+
+export const setLanguage = store.action((state, preferredLanguage) => {
+  const options = {
+    expires: 10 * 365, // 10 years
+    samesite: 'strict',
+  };
+  cookies.set('preferred_lang', preferredLanguage, options);
+  if (preferredLanguage !== state.userPreferredLanguage) {
+    location.pathname = getCanonicalPath(location.pathname);
+  }
+  return {
+    userPreferredLanguage: preferredLanguage,
+  };
+});
+
+export const closeToC = store.action(() => {
+  trackEvent({
+    category: 'Site-Wide Custom Events',
+    action: 'click',
+    label: 'ToC',
+    value: 0,
+  });
+  document.querySelector('main').classList.remove('w-toc-open');
+  return {
+    isTocOpened: false,
+  };
+});
+
+export const openToC = store.action(() => {
+  trackEvent({
+    category: 'Site-Wide Custom Events',
+    action: 'click',
+    label: 'ToC',
+    value: 1,
+  });
+  document.querySelector('main').classList.add('w-toc-open');
+  return {
+    isTocOpened: true,
   };
 });

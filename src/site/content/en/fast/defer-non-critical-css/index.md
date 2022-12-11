@@ -7,7 +7,9 @@ description: |
   Learn how to defer non-critical CSS with the goal of optimizing the Critical
   Rendering Path, and improving FCP (First Contentful Paint).
 date: 2019-02-17
-updated: 2019-10-30
+updated: 2020-06-12
+tags:
+  - performance
 ---
 
 CSS files are [render-blocking resources](https://developers.google.com/web/tools/lighthouse/audits/blocking-resources):
@@ -20,14 +22,10 @@ In this guide, you'll learn how to defer non-critical CSS with the goal of optim
 
 The following example contains an accordion with three hidden paragraphs of text, each of which is styled with a different class:
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/defer-css-unoptimized?path=index.html&previewSize=100&attributionHidden=true"
-    alt="defer-css-unoptimized on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'defer-css-unoptimized',
+  path: 'index.html'
+} %}
 
 This page requests a CSS file with eight classes, but not all of them are
 necessary to render the "visible" content.
@@ -52,7 +50,7 @@ the opportunity **Eliminate render-blocking resources**, pointing to the
 {% Aside %}
 The CSS we are using for this demo site is quite small. If you were requesting
 larger CSS files (which are not uncommon in production scenarios), and if
-Lighthouse detects that a page has, at least, 2048 bytes of CSS rules that
+Lighthouse detects that a page has at least 2048&nbsp;bytes of CSS rules that
 weren't used while rendering the **above the fold** content, you'll
 also receive a suggestion called **Remove Unused CSS**.
 {% endAside %}
@@ -60,8 +58,8 @@ also receive a suggestion called **Remove Unused CSS**.
 To visualize how this CSS blocks rendering:
 
 1. Open [the page](https://defer-css-unoptimized.glitch.me/) in Chrome.
-1. Press Control+Shift+J or Cmd+Option+J (Mac), to open DevTools.
-1. Go to the **Performance** tab and click on the **Reload** button.
+{% Instruction 'devtools-performance', 'ol' %}
+1. In the Performance panel, click **Reload**.
 
 In the resulting trace, you'll see that the **FCP** marker is placed immediately
 after the CSS finishes loading:
@@ -77,9 +75,9 @@ before painting a single pixel on the screen.
 ## Optimize
 
 To optimize this page, you need to know which classes are considered "critical".
-You'll use the the [Coverage Tool](https://developers.google.com/web/updates/2017/04/devtools-release-notes#coverage) for that:
+You'll use the [Coverage Tool](https://developers.google.com/web/updates/2017/04/devtools-release-notes#coverage) for that:
 
-1. In DevTools, open the [Command Menu](https://developers.google.com/web/tools/chrome-devtools/ui#command-menu), by pressing `Control+Shift+P` or `Command+Shift+P` (Mac).
+1. In DevTools, open the [Command Menu](https://developers.google.com/web/tools/chrome-devtools/command-menu), by pressing `Control+Shift+P` or `Command+Shift+P` (Mac).
 1. Type "Coverage" and select **Show Coverage**.
 1. Click the **Reload** button, to reload the page and start capturing the
    coverage.
@@ -126,17 +124,21 @@ This is not the standard way of loading CSS. Here's how it works:
 * "nulling" the `onload` handler once it is used helps some browsers avoid re-calling the handler upon switching the rel attribute.
 * The reference to the stylesheet inside of a `noscript` element works as a fallback for browsers that don't execute JavaScript.
 
+{% Aside %}
+In this guide, you used vanilla code to implement this optimization. In a real
+production scenario, it's a good practice to use functions like
+[loadCSS](https://github.com/filamentgroup/loadCSS/blob/master/README.md), that
+can encapsulate this behavior and work well across browsers. 
+{% endAside %}
+
 The [resulting page](https://defer-css-optimized.glitch.me/) looks exactly like the previous version, even when most styles load asynchronously. Here's how the inlined styles and asynchronous request to the CSS file look like in the HTML file:
 
 <!-- Copy and Paste Me -->
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/defer-css-optimized?path=index.html&previewSize=0&attributionHidden=true"
-    alt="defer-css-optimized on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'defer-css-optimized',
+  path: 'index.html',
+  previewSize: 0
+} %}
 
 ## Monitor
 
@@ -172,11 +174,8 @@ The **Eliminate render-blocking resources** suggestion is no longer under
 
 ## Next steps & references
 
-In this guide, you used vanilla code to implement this optimization. In a real
-production scenario, it's a good practice to use functions like
-[loadCSS](https://github.com/filamentgroup/loadCSS/blob/master/README.md), that
-can encapsulate this behavior and work well across browsers. As a complement to
-this, the [extract critical CSS guide](/extract-critical-css/)
+In this  guide, you learned how to defer non-critical CSS by manually extracting the unused code in the page.
+As a complement to this, the [extract critical CSS guide](/extract-critical-css/)
 covers some of the most popular tools to extract critical CSS and includes
 [a codelab](/codelab-extract-and-inline-critical-css/) to see how
 they work in practice.

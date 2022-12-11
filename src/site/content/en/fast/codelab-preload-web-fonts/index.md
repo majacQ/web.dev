@@ -7,8 +7,13 @@ description: |
   In this codelab, learn how to improve the performance of a page by preloading
   web fonts.
 date: 2018-04-23
-glitch: web-dev-preload-webfont
+glitch: web-dev-preload-webfont?path=index.html
+related_post: preload-critical-assets
+tags:
+  - performance
 ---
+
+{% include 'content/devtools-headsup.njk' %}
 
 This codelab shows you how to preload web fonts using `rel="preload"` to remove
 any flash of unstyled text (FOUT).
@@ -16,12 +21,8 @@ any flash of unstyled text (FOUT).
 ## Measure
 
 First measure how the website performs before adding any optimizations.
-1. To preview the site, mouse over the editor, press the **App** button, then the
-  **Show** button.
-2. Open DevTools by pressing `CMD + OPTION + i `/ `CTRL + SHIFT + i`.
-3. Click on the **Audits** panel.
-4. Select the **Performance** checkbox.
-5. Click **Run Audits** to generate a report.
+{% Instruction 'preview', 'ol' %}
+{% Instruction 'audit-performance', 'ol' %}
 
 The Lighthouse report that is generated will show you the fetching sequence of resources under **Maximum critical path latency**.
 

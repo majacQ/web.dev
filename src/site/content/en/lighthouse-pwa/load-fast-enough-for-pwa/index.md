@@ -6,7 +6,7 @@ description: |
 web_lighthouse:
   - load-fast-enough-for-pwa
 date: 2019-05-04
-updated: 2019-09-19
+updated: 2020-06-10
 ---
 
 Many users of your page visit on a slow cellular network connection.
@@ -16,7 +16,7 @@ helps to ensure a positive experience for your mobile users.
 {% Aside 'note' %}
 A fast page load on a mobile network is a baseline requirement for a site
 to be considered a Progressive Web App. See the
-[Baseline Progressive Web App Checklist](https://developers.google.com/web/progressive-web-apps/checklist#baseline).
+[Core Progressive Web App checklist](/pwa-checklist/#core).
 {% endAside %}
 
 ## How the Lighthouse page load speed audit fails
@@ -52,6 +52,6 @@ If the time to interactive is more than 10&nbsp;seconds, the audit fails.
 - [Baseline Progressive Web App Checklist](https://developers.google.com/web/progressive-web-apps/checklist#baseline)
 - [Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/)
 - [Get Started With Analyzing Runtime Performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/)
-- [Record load performance](/web/tools/chrome-devtools/evaluate-performance/reference#record-load)
+- [Record load performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#record-load)
 - [Optimizing Content Efficiency](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/)
 - [Rendering Performance](https://developers.google.com/web/fundamentals/performance/rendering/)

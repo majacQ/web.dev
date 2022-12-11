@@ -9,6 +9,8 @@ description: |
   fit together but still can be used independently to achieve performance
   results.
 date: 2018-11-05
+tags:
+  - performance
 ---
 
 PRPL is an acronym that describes a pattern used to make web pages load and
@@ -27,9 +29,9 @@ used independently to achieve performance results.
 Run Lighthouse to identify opportunities for improvement aligned with the PRPL
 techniques:
 
-1. Navigate to the **Audits** panel in DevTools.
-2. Select the **Performance** and **Progressive Web App** checkboxes.
-3. Click **Run Audits** to generate a report.
+{% Instruction 'devtools-lighthouse', 'ol' %}
+1. Select the **Performance** and **Progressive Web App** checkboxes.
+1. Click **Run Audits** to generate a report.
 
 For more information, see [Discover performance opportunities with Lighthouse](/discover-performance-opportunities-with-lighthouse).
 

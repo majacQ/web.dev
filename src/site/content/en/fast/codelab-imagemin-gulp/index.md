@@ -9,6 +9,8 @@ description: |
   PNG images for faster download.
 glitch: imagemin-gulp
 related_post: use-imagemin-to-compress-images
+tags:
+  - performance
 ---
 
 ## Setup the Imagemin Gulp plugin
@@ -16,7 +18,7 @@ related_post: use-imagemin-to-compress-images
 This Glitch already contains `gulp`, `gulp-cli`, and the `gulp-imagemin` plugin.
 To add the configuration for Imagemin, you'll need to edit your `gulpfile.js` file.
 
-- Click the **Remix to Edit** button to make the project editable.
+{% Instruction 'remix' %}
 - First, initialize the `gulp-imagemin` plugin by adding this code at the top of
 `gulpfile.js`:
 
@@ -184,8 +186,7 @@ made.
 Lighthouse's "Efficiently encode images" performance audit can let you know if
 the JPEG images on your page are optimally compressed.
 
-- To preview the site, mouse over the editor, press the **App** button, then the
-  **Show** button.
+{% Instruction 'preview' %}
 - Run the Lighthouse performance audit (Lighthouse > Options > Performance) on
   the live version of your Glitch and verify that the "Efficiently encode
   images" audit was passed.

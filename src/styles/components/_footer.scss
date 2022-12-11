@@ -2,8 +2,16 @@
 @import '../settings/type';
 @import '../tools/breakpoints';
 
+@mixin w-footer__link-padding {
+  padding: 16px 0;
+}
+
 .w-footer {
   border-top: 1px solid $GREY_300;
+
+  @media print {
+    display: none;
+  }
 }
 
 .w-footer__license {
@@ -65,7 +73,7 @@
 .w-footer__linkbox-link {
   color: $PRIMARY_TEXT_COLOR;
   display: block;
-  padding: 8px 0;
+  @include w-footer__link-padding;
 }
 
 .w-footer__linkbox-link:focus,
@@ -118,7 +126,7 @@
 .w-footer__utility-link {
   color: #202124;
   display: block;
-  padding: 8px 0;
+  @include w-footer__link-padding;
 }
 
 .w-footer__utility-link:focus,

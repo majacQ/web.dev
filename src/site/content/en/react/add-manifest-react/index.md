@@ -22,7 +22,7 @@ Create React App (CRA) includes a web app manifest by default. Modifying this
 file will allow you to change how your application is displayed when installed
 on the user's device.
 
-<figure class="w-figure  w-figure--center">
+<figure class="w-figure">
   <img src="./icon-home-screen.png" alt="A progressive web app icon on a mobile phone's home screen">
 </figure>
 
@@ -74,21 +74,18 @@ includes a `<link>` element to load the manifest.
 Here is an example of an application built with CRA that has a modified manifest
 file:
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/cra-web-app-manifest-defaut?path=public/manifest.json&previewSize=0"
-    alt="cra-web-app-manifest-defaut on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'cra-web-app-manifest-defaut',
+  path: 'public/manifest.json',
+  previewSize: 0,
+  height: 480
+} %}
 
 To find out if all the properties are working correctly in this example:
 
-+  Mouse over the editor, press the **App** button, then press the **Show**
-   button to preview the app.
-+  Open the DevTools by pressing `CMD + OPTION + i` / `CTRL + SHIFT + i`.
-+  Click on the **Application** panel.
-+  Switch to the **Manifest** tab.
+{% Instruction 'preview' %}
+{% Instruction 'devtools-application' %}
+-  In the **Application** panel, click the **Manifest** tab.
 
 <img class="w-screenshot w-screenshot--filled" src="./devtools.png" alt="DevTool's Manifest tab shows the properties from the app manifest file.">
 

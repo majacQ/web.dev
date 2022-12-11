@@ -14,18 +14,17 @@
  * limitations under the License.
  */
 
-const {html} = require("common-tags");
-const {findBySlug} = require("../../_filters/find-by-slug");
-const stripLanguage = require("../../_filters/strip-language");
-const md = require("../../_filters/md");
+const {html} = require('common-tags');
+const {findByUrl} = require('../../_filters/find-by-url');
+const md = require('../../_filters/md');
 
 /* eslint-disable require-jsdoc */
 
-module.exports = (slugs) => {
+module.exports = (slugs, lang) => {
   // Coerce slugs to Array just in case someone pasted in a single slug string.
   slugs = slugs instanceof Array ? slugs : [slugs];
 
-  const codelabs = slugs.map((slug) => findBySlug(slug));
+  const codelabs = slugs.map((slug) => findByUrl(`/${lang}/${slug}/`));
   if (!codelabs.length) {
     /* eslint-disable-next-line */
     console.warn(`Did not find any matching codelabs.`);
@@ -34,10 +33,10 @@ module.exports = (slugs) => {
 
   function renderCodelab(codelab) {
     return html`
-      <li class="w-codelabs-callout__listitem">
+      <li class="w-callout__listitem">
         <a
-          class="w-codelabs-callout__link"
-          href="${stripLanguage(codelab.url)}"
+          class="w-callout__link w-callout__link--codelab"
+          href="${codelab.data.canonicalUrl}"
         >
           ${md(codelab.data.title)}
         </a>
@@ -46,15 +45,15 @@ module.exports = (slugs) => {
   }
 
   return html`
-    <div class="w-codelabs-callout">
-      <div class="w-codelabs-callout__header">
-        <h2 class="w-codelabs-callout__lockup">Codelabs</h2>
-        <div class="w-codelabs-callout__headline">See it in action</div>
-        <div class="w-codelabs-callout__blurb">
+    <div class="w-callout w-callout--2col">
+      <div class="w-callout__header">
+        <h2 class="w-callout__lockup w-callout__lockup--codelab">Codelabs</h2>
+        <div class="w-callout__headline">See it in action</div>
+        <div class="w-callout__blurb">
           Learn more and put this guide into action.
         </div>
       </div>
-      <ul class="w-unstyled-list w-codelabs-callout__list">
+      <ul class="w-unstyled-list w-callout__list">
         ${codelabs.map(renderCodelab)}
       </ul>
     </div>

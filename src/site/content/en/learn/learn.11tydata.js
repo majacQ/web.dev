@@ -1,3 +1,7 @@
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+const livePaths = require('../../../_filters/live-paths');
+const allPaths = require('../../../_data/paths');
+  =======
 const livePaths = require("../../../_filters/live-paths");
 
 const fast = require("../fast/fast.11tydata.js").path;
@@ -23,6 +27,7 @@ const lighthouseAccessibility = require("../lighthouse-accessibility/lighthouse-
   .path;
 const lighthouseSeo = require("../lighthouse-seo/lighthouse-seo.11tydata.js")
   .path;
+  >>>>>>> metrics-overview
 
 // =============================================================================
 // LEARN OVERVIEW
@@ -32,8 +37,18 @@ const lighthouseSeo = require("../lighthouse-seo/lighthouse-seo.11tydata.js")
 //
 // =============================================================================
 
-module.exports = function() {
+module.exports = function () {
   const paths = [
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+    allPaths['progressive-web-apps'],
+    allPaths['accessible'],
+    allPaths['reliable'],
+    allPaths['secure'],
+    allPaths['discoverable'],
+    allPaths['payments'],
+    allPaths['media'],
+    allPaths['devices'],
+  =======
     fast,
     accessible,
     reliable,
@@ -42,21 +57,29 @@ module.exports = function() {
     pwa,
     installable,
     metrics,
+  >>>>>>> metrics-overview
   ].filter(livePaths);
 
-  const frameworks = [react, angular].filter(livePaths);
+  const performance = [
+    allPaths['learn-web-vitals'],
+    allPaths['metrics'],
+    allPaths['fast'],
+  ];
+
+  const frameworks = [allPaths['react'], allPaths['angular']].filter(livePaths);
 
   const audits = [
-    lighthousePerformance,
-    lighthousePwa,
-    lighthouseBestPractices,
-    lighthouseAccessibility,
-    lighthouseSeo,
+    allPaths['lighthouse-performance'],
+    allPaths['lighthouse-pwa'],
+    allPaths['lighthouse-best-practices'],
+    allPaths['lighthouse-accessibility'],
+    allPaths['lighthouse-seo'],
   ].filter(livePaths);
 
   return {
     learn: {
       paths,
+      performance,
       frameworks,
       audits,
     },

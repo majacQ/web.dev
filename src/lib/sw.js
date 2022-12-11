@@ -1,191 +1,178 @@
-// Architecture revision of the Service Worker. If the previously saved revision doesn't match,
-// then this will cause clients to be aggressively claimed and reloaded on install/activate.
-// Used when the design of the SW changes dramatically, e.g. from DevSite to v2.
-const serviceWorkerArchitecture = "v2";
+/**
+ * @fileoverview Service Worker entrypoint for web.dev.
+ */
 
-const normalizeIndexCacheKeyPlugin = {
-  cacheKeyWillBeUsed({request, mode}) {
-    // Take advantage of Workbox's built-in handling of .../index.html routes and ensure that its
-    // cache keys always include it. (e.g., requests for foo/ will load foo/index.html: but
-    // foo/index.html will not load foo/).
-    if (request.url.endsWith("/")) {
-      return request.url + "index.html";
+import * as idb from 'idb-keyval';
+import {initialize as initializeGoogleAnalytics} from 'workbox-google-analytics';
+import * as workboxRouting from 'workbox-routing';
+import * as workboxStrategies from 'workbox-strategies';
+import {ExpirationPlugin} from 'workbox-expiration';
+import {matchPrecache, precacheAndRoute} from 'workbox-precaching';
+import {cacheNames as workboxCacheNames} from 'workbox-core';
+import {matchSameOriginRegExp} from './utils/sw-match.js';
+
+const cacheNames = {
+  webDevFonts: 'webdev-fonts-cache-v1',
+  webDevHtml: 'webdev-html-cache-v1',
+  webDevAssets: 'webdev-assets-cache-v1',
+  ...workboxCacheNames,
+};
+
+/**
+ * Configure default cache for some common web.dev assets: images, CSS, JS, offline page.
+ *
+ * This must occur first, as we cache images that are also matched by runtime handlers below. See
+ * this workbox issue for updates: https://github.com/GoogleChrome/workbox/issues/2402
+ */
+precacheAndRoute(self.__WB_MANIFEST, {
+  cleanURLs: false, // don't allow "foo" for "foo.html"
+});
+
+/**
+ * Architecture revision of the Service Worker. If the previously saved revision doesn't match,
+ * then this will cause clients to be aggressively claimed and reloaded on install/activate.
+ * Used when the design of the SW changes dramatically.
+ */
+const serviceWorkerArchitecture = 'v4';
+
+self.addEventListener('install', (event) => {
+  const p = Promise.resolve().then(async () => {
+    const previousArchitecture = await idb.get('arch');
+    if (previousArchitecture === serviceWorkerArchitecture) {
+      return; // no arch change, don't force reload, upgrade will happen over time
+    }
+    await idb.set('arch', serviceWorkerArchitecture);
+    if (previousArchitecture) {
+      console.warn(
+        'previous SW arch was',
+        previousArchitecture,
+        'new',
+        serviceWorkerArchitecture,
+      );
+    }
+    await self.skipWaiting();
+  });
+  event.waitUntil(p);
+});
+
+self.addEventListener('activate', (event) => {
+  // Define a list of allowed caches.
+  // If a cache does not appear in the list then it will be deleted.
+  const p = Promise.resolve().then(async () => {
+    const allowedCaches = new Set(Object.values(cacheNames));
+    const cacheKeys = await caches.keys();
+    for (const cacheKey of cacheKeys) {
+      if (!allowedCaches.has(cacheKey)) {
+        await caches.delete(cacheKey);
+      }
+    }
+  });
+  event.waitUntil(p);
+});
+
+self.addEventListener('activate', (event) => {
+  // This deletes the default Workbox runtime cache, which was previously growing unbounded. At the
+  // start of March 2020, caches must now have explicit expirations and custom names.
+  event.waitUntil(caches.delete(cacheNames.runtime));
+});
+
+self.addEventListener('activate', (event) => {
+  // Claim unclaimed clients (only relevant for new installs).
+  event.waitUntil(self.clients.claim());
+});
+
+initializeGoogleAnalytics();
+
+const fontExpirationPlugin = new ExpirationPlugin({
+  maxAgeSeconds: 60 * 60 * 24 * 365, // 1 yr
+});
+
+const contentExpirationPlugin = new ExpirationPlugin({
+  maxEntries: 50, // store the most recent ~50 articles
+});
+
+const assetExpirationPlugin = new ExpirationPlugin({
+  maxAgeSeconds: 60 * 60 * 24 * 7, // 1 wk
+  maxEntries: 100, // allow a large number of images, but expire quickly
+});
+
+// Cache the underlying font files with a cache-first strategy for 1 year.
+workboxRouting.registerRoute(
+  ({request}) => request.destination === 'font',
+  new workboxStrategies.CacheFirst({
+    cacheName: cacheNames.webDevFonts,
+    plugins: [fontExpirationPlugin],
+  }),
+);
+
+/**
+ * Matches normal web.dev routes. This will match pages like:
+ *   - /
+ *   - /foo-bar               # without trailing slash
+ *   - /foo-bar/
+ *   - /zing/hello/
+ *   - /test/page/index.html
+ *   - /hello/other.html      # allows any html page, not just index.html
+ *   - ///////////.html       # valid but wrong
+ *
+ * This won't match any URL that contains a "." except for a trailing ".html".
+ */
+const pagePathRe = new RegExp('^/[\\w-/]*(?:|\\.html)$');
+
+/**
+ * Provides a plugin that ensures requests for "/index.html" are cached with the naked folder
+ * instead. We need consistent keys as the Content Indexing API integration looks up pages by
+ * key.
+ */
+const indexHtmlCacheKeyPlugin = {
+  cacheKeyWillBeUsed: async ({request}) => {
+    const u = new URL(request.url);
+    if (u.pathname.endsWith('/index.html')) {
+      // strip "index.html"
+      const normalized = u.pathname.substr(
+        0,
+        u.pathname.length - 'index.html'.length,
+      );
+      return normalized + u.search;
     }
     return request;
   },
 };
 
-import * as idb from "idb-keyval";
-import manifest from "cache-manifest";
-
-importScripts(
-  "https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js",
-);
-
-let replacingPreviousServiceWorker = false;
-
-self.addEventListener("install", (event) => {
-  // This is non-null if there was a previous Service Worker registered. Record for "activate", so
-  // that a lack of current architecture can be seen as a reason to reload our clients.
-  if (self.registration.active) {
-    replacingPreviousServiceWorker = true;
-  }
-
-  event.waitUntil(self.skipWaiting());
+const pageStrategy = new workboxStrategies.NetworkFirst({
+  cacheName: cacheNames.webDevHtml,
+  plugins: [indexHtmlCacheKeyPlugin, contentExpirationPlugin],
 });
+const pageMatch = matchSameOriginRegExp(pagePathRe);
+workboxRouting.registerRoute(pageMatch, pageStrategy);
 
-self.addEventListener("activate", (event) => {
-  const p = Promise.resolve().then(async () => {
-    const previousArchitecture = await idb.get("arch");
-    if (previousArchitecture === undefined && replacingPreviousServiceWorker) {
-      // We're replacing a Service Worker that didn't have architecture info. Force reload.
-    } else if (
-      !replacingPreviousServiceWorker ||
-      previousArchitecture === serviceWorkerArchitecture
-    ) {
-      // The architecture didn't change (or this is a brand new install), don't force a reload,
-      // upgrades will happen in due course.
-      return;
-    }
-    console.debug(
-      "web.dev SW upgrade from",
-      previousArchitecture,
-      "to arch",
-      serviceWorkerArchitecture,
-    );
-
-    await self.clients.claim();
-
-    // Reload all open pages (includeUncontrolled shouldn't be needed as we've _just_ claimed
-    // clients, but include it anyway for sanity).
-    const windowClients = await self.clients.matchAll({
-      includeUncontrolled: true,
-      type: "window",
-    });
-
-    // It's impossible to 'await' this navigation because this event would literally be blocking
-    // our fetch handlers from running. These navigates must be 'fire-and-forget'.
-    windowClients.map((client) => client.navigate(client.url));
-
-    await idb.set("arch", serviceWorkerArchitecture);
-  });
-  event.waitUntil(p);
+/**
+ * Cache images at runtime that aren't included in the original manifest, such as author profiles.
+ */
+const assetStrategy = new workboxStrategies.StaleWhileRevalidate({
+  cacheName: cacheNames.webDevAssets,
+  plugins: [assetExpirationPlugin],
 });
-
-workbox.googleAnalytics.initialize();
-
-// Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
-workbox.routing.registerRoute(
-  /^https:\/\/fonts\.googleapis\.com/,
-  new workbox.strategies.StaleWhileRevalidate({
-    cacheName: "google-fonts-stylesheets",
-  }),
+workboxRouting.registerRoute(new RegExp('/images/.*'), assetStrategy);
+workboxRouting.registerRoute(
+  ({request}) => request.destination === 'image',
+  assetStrategy,
 );
 
-// Cache the underlying font files with a cache-first strategy for 1 year.
-workbox.routing.registerRoute(
-  /^https:\/\/fonts\.gstatic\.com/,
-  new workbox.strategies.CacheFirst({
-    cacheName: "google-fonts-webfonts",
-    plugins: [
-      new workbox.cacheableResponse.Plugin({
-        statuses: [0, 200],
-      }),
-      new workbox.expiration.Plugin({
-        maxAgeSeconds: 60 * 60 * 24 * 365,
-        maxEntries: 30,
-      }),
-    ],
-  }),
-);
+workboxRouting.setCatchHandler(async ({url}) => {
+  // If we see an internal error in pageMatch above, assume we're offline and serve the page from
+  // the cache.
+  if (pageMatch({url})) {
+    // TODO(ewag): for now, just match English
+    const response = await matchPrecache('/en/offline/index.html');
 
-workbox.precaching.precacheAndRoute(manifest);
-
-/**
- * Match "/foo-bar/ "and "/foo-bar/as/many/of-these-as-you-like/" (with optional trailing
- * "index.html"), normal page nodes for web.dev.
- */
-const contentPageRe = new RegExp("/([\\w-]+/)*(|index.html)$");
-
-/**
- * Match "/foo-bar" and "/foo-bar/as-many/but/no/trailing/slash" (but not "/foo/bar/index.html").
- * This roots at the left "/" as it's not given to Workbox, which does this for us.
- */
-const untrailedContentPageRe = new RegExp("^(/[\\w-]+)+$");
-
-/**
- * Send normal nodes to cache first.
- */
-workbox.routing.registerRoute(
-  contentPageRe,
-  new workbox.strategies.StaleWhileRevalidate({
-    plugins: [normalizeIndexCacheKeyPlugin],
-  }),
-);
-
-/**
- * Cache images that aren't included in the original manifest, such as author profiles.
- */
-workbox.routing.registerRoute(
-  new RegExp("/images/.*"),
-  new workbox.strategies.StaleWhileRevalidate(),
-);
-
-/**
- * Untrailed requests are network-only, but with a fallback to redirecting to the same page with a
- * trailing slash.
- */
-self.addEventListener("fetch", (event) => {
-  const u = new URL(event.request.url);
-  if (
-    !untrailedContentPageRe.exec(u.pathname) ||
-    self.location.host !== u.host
-  ) {
-    return;
-  }
-
-  const p = Promise.resolve().then(async () => {
-    // First, check if there's actually something in the cache already.
-    const cacheKey = workbox.precaching.getCacheKeyForURL(
-      u.pathname + "/index.html",
-    );
-    const cached = await caches.match(cacheKey);
-    if (!cached) {
-      // If there's not, then try the network.
-      try {
-        return await fetch(event.request);
-      } catch (e) {
-        // If fetch fails, just redirect below.
-      }
-    }
-
-    // Either way, redirect to the updated Location.
-    const headers = new Headers();
-    headers.append("Location", event.request.url + "/");
-    const redirectResponse = new Response("", {
-      status: 301,
+    // Build a new Response so we can set the X-Offline header. Can't modify a previously cached
+    // response.
+    const headers = new Headers(response.headers);
+    headers.set('X-Offline', '1');
+    const clone = new Response(await response.text(), {
       headers,
     });
-    return redirectResponse;
-  });
-
-  event.respondWith(p);
-});
-
-workbox.routing.setCatchHandler(async ({event}) => {
-  // Destination is set by loading this content normally; it's not set for fetch(), so look for our
-  // custom header.
-  const isDocumentRequest =
-    event.request.destination === "document" ||
-    event.request.headers.get("X-Document");
-  if (isDocumentRequest) {
-    const cacheKey = workbox.precaching.getCacheKeyForURL(
-      "/offline/index.html",
-    );
-    if (!cacheKey) {
-      // This occurs in development when the offline page is in the runtime cache.
-      return caches.match("/offline/index.html", {ignoreSearch: true});
-    }
-    return caches.match(cacheKey);
+    return clone;
   }
 });

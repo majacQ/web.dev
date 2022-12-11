@@ -1,7 +1,9 @@
 ---
 layout: layout
-permalink: /en/handbook/{{page.fileSlug}}/index.html
 noindex: true
+permalink: "/{{lang}}/handbook/{{page.fileSlug}}/index.html"
+eleventyComputed:
+  canonicalUrl: "/handbook/{{page.fileSlug}}/"
 ---
 
 {% include 'partials/post.njk' %}

@@ -11,8 +11,11 @@ description: |
 glitch: 3rd-party-optimization-starter
 related_post: efficiently-load-third-party-javascript
 tags:
-  - fast
+  - performance
 ---
+
+{% include 'content/devtools-headsup.njk' %}
+
 [Third-party scripts impact performance](/third-party-javascript), which is why it's important to [audit them regularly](/identify-slow-third-party-javascript) and use [efficient techniques for loading](/efficiently-load-third-party-javascript) them. This codelab shows you how to optimize the loading of third-party resources. It covers the following techniques:
 
 * Deferring script loading
@@ -44,7 +47,7 @@ First open the sample app in the fullscreen view:
 
 Run a [Lighthouse](https://developers.google.com/web/tools/lighthouse/) [performance audit](/lighthouse-performance) on the page to establish baseline performance:
 
-{% Instruction 'devtools-audits', 'ol' %}
+{% Instruction 'devtools-lighthouse', 'ol' %}
 1. Click **Mobile**.
 1. Select the **Performance** checkbox. (You can clear the rest of the checkboxes in the Audits section.)
 1. Click **Simulated Fast 3G, 4x CPU Slowdown**.

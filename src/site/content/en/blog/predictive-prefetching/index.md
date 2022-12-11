@@ -9,8 +9,10 @@ authors:
 description: |
   Code splitting allows you to speed up your applications, but it may slow down subsequent navigation. Predictive prefetching is an efficient way to use data analytics to smartly prefetch what the user is likely to use next, optimizing network utilization.
 tags:
-  - post
+  - blog
   - performance
+feedback:
+  - api
 ---
 
 In my [Faster Web Navigation with Predictive Prefetching](https://www.youtube.com/watch?v=0jB4YWgAxUo) session at Google I/O 2019, I began by talking about optimizing web apps with code splitting and the potential performance implications for subsequent page navigation. In the second part of the talk, I discussed how to improve navigation speed by using Guess.js to set up predictive prefetching:

@@ -9,6 +9,8 @@ description: |
   quality of their connection.
 codelabs:
   - codelab-adapt-video-to-image-serving-based-on-network-quality
+tags:
+  - performance
 ---
 
 Loading a website can be a very different experience depending on the network
@@ -45,7 +47,7 @@ Netflix and most other video (or video calling) services automatically adjust
 the resolution during streaming. When Gmail is loading, it provides users with a
 link to "load basic HTML (for slow connections)".
 
-<figure class="w-figure  w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot" src="./loading_gmail_slow_connection.png" alt="A link to load basic HTML version of Gmail when users are on slow connections">
 </figure>
 
@@ -88,7 +90,7 @@ Here's what this looks like when you run it in the browser's console:
 <img class="w-screenshot" src="./network_information_in_console.jpg" alt="Chrome DevTools console displaying the values of navigator.connection object's properties">
 
 The `effectiveType` values are also available via
-[Client Hints](https://www.chromestatus.com/features/5407907378102272)
+[Client Hints](https://www.chromestatus.com/feature/5407907378102272)
 and allow you to communicate the browser's connection type to servers.
 
 {% Aside %}

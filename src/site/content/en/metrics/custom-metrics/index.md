@@ -7,6 +7,12 @@ date: 2019-11-08
 description: |
   Custom metrics allow you to measure and optimize aspects of your site's
   experience that are unique to your site.
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+tags:
+  - performance
+  - metrics
+  =======
+  >>>>>>> metrics-overview
 ---
 
 There's a lot of value in having [user-centric metrics](/user-centric-performance-metrics/)
@@ -70,6 +76,22 @@ entries to listen for via the
 method:
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      // Log the entry and all associated details.
+      console.log(entry.toJSON());
+    }
+  });
+
+  po.observe({type: 'some-entry-type'});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+  =======
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
     // Log the entry and all associated details.
@@ -78,6 +100,7 @@ const po = new PerformanceObserver((list) => {
 });
 
 po.observe({type: 'some-entry-type'});
+  >>>>>>> metrics-overview
 ```
 
 The sections below list all the various entry types available for observing, but
@@ -166,6 +189,23 @@ To report User Timing measurements, you can use
 type `measure`:
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      // Log the entry and all associated details.
+      console.log(entry.toJSON());
+    }
+  });
+  // Start listening for `measure` entries to be dispatched.
+  po.observe({type: 'measure', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+  =======
 // Create the performance observer.
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
@@ -175,6 +215,7 @@ const po = new PerformanceObserver((list) => {
 });
 // Start listening for `measure` entries to be dispatched.
 po.observe({type: 'measure', buffered: true});
+  >>>>>>> metrics-overview
 ```
 
 ### Long Tasks API
@@ -195,6 +236,28 @@ To determine when long tasks happen, you can use
 and register to observe entries of type `longtask`:
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      // Log the entry and all associated details.
+      console.log(entry.toJSON());
+    }
+  });
+  // Start listening for `longtask` entries to be dispatched.
+  po.observe({type: 'longtask', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+```
+
+### Element Timing API
+
+The [Largest Contentful Paint (LCP)](/lcp/) metric is
+  =======
 // Create the performance observer.
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
@@ -216,6 +279,7 @@ po.observe({type: 'longtask', buffered: true});
 ### Element Timing API
 
 The [Largest Contentful Paint (LCP)](/largest-contentful-paint/) metric is
+  >>>>>>> metrics-overview
 useful for knowing when the largest image or text block was painted to the
 screen, but in some cases you want to measure the render time of a different
 element.
@@ -228,6 +292,27 @@ elements by explicitly adding the `elementtiming` attribute to them, and
 registering a PerformanceObserver to observe the element entry type.
 
 ```html
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+<img elementtiming="hero-image" />
+<p elementtiming="important-paragraph">This is text I care about.</p>
+...
+<script>
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((entryList) => {
+    for (const entry of entryList.getEntries()) {
+      // Log the entry and all associated details.
+      console.log(entry.toJSON());
+    }
+  });
+  // Start listening for `element` entries to be dispatched.
+  po.observe({type: 'element', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+  =======
 <img elementtiming="hero-image"' />
 <p elementtiming="important-paragraph">This is text I care about.</p>
 ...
@@ -241,6 +326,7 @@ const observer = new PerformanceObserver((list) => {
 });
 // Start listening for `element` entries to be dispatched.
 observer.observe({type: 'element', buffered: true});
+  >>>>>>> metrics-overview
 </script>
 ```
 
@@ -251,6 +337,74 @@ observer.observe({type: 'element', buffered: true});
   attribute will be ignored.
 {% endAside %}
 
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+### Event Timing API
+
+The [First Input Delay (FID)](/fid/) metric measures the time from when a user
+first interacts with a page to the time when the browser is actually able to
+begin processing event handlers in response to that interaction. However, in
+some cases it may also be useful to measure the event processing time itself as
+well as the time until the next frame can be rendered.
+
+This is possible with the [Event Timing
+API](https://wicg.github.io/event-timing/) (which is used to measure FID) as it
+exposes a number of timestamps in the event lifecycle, including:
+
+- [`startTime`](https://w3c.github.io/performance-timeline/#dom-performanceentry-starttime):
+  the time when the browser receives the event.
+- [`processingStart`](https://wicg.github.io/event-timing/#dom-performanceeventtiming-processingstart):
+  the time when the browser is able to begin processing event handlers for
+  the event.
+- [`processingEnd`](https://wicg.github.io/event-timing/#dom-performanceeventtiming-processingend):
+  time when the browser finishes executing all synchronous code initiated from
+  event handlers for this event.
+- [`duration`](https://wicg.github.io/event-timing/#dom-performanceeventtiming-processingstart):
+  the time (rounded to 8ms for security reasons) between when the browser
+  receives the event until it's able to paint the next frame after finishing
+  executing all synchronous code initiated from the event handlers.
+
+The following example shows how to use these these values to create custom
+measurements:
+
+```js
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  const po = new PerformanceObserver((entryList) => {
+    const firstInput = entryList.getEntries()[0];
+
+    // Measure First Input Delay (FID).
+    const firstInputDelay = firstInput.processingStart - firstInput.startTime;
+
+    // Measure the time it takes to run all event handlers
+    // Note: this does not include work scheduled asynchronously using
+    // methods like `requestAnimationFrame()` or `setTimeout()`.
+    const firstInputProcessingTime = firstInput.processingEnd - firstInput.processingStart;
+
+    // Measure the entire duration of the event, from when input is received by
+    // the browser until the next frame can be painted after processing all
+    // event handlers.
+    // Note: similar to above, this value does not include work scheduled
+    // asynchronously using `requestAnimationFrame()` or `setTimeout()`.
+    // And for security reasons, this value is rounded to the nearest 8ms.
+    const firstInputDuration = firstInput.duration;
+
+    // Log these values the console.
+    console.log({
+      firstInputDelay,
+      firstInputProcessingTime,
+      firstInputDuration,
+    });
+  });
+
+  po.observe({type: 'first-input', buffered: true});
+} catch (error) {
+  // Do nothing if the browser doesn't support this API.
+}
+```
+
+  =======
+  >>>>>>> metrics-overview
 ### Resource Timing API
 
 The [Resource Timing API](https://w3c.github.io/resource-timing/) gives
@@ -282,6 +436,23 @@ The following example logs all resources requested by the page and indicates
 whether or not each resource was fulfilled via the cache.
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      // If transferSize is 0, the resource was fulfilled via the cache.
+      console.log(entry.name, entry.transferSize === 0);
+    }
+  });
+  // Start listening for `resource` entries to be dispatched.
+  po.observe({type: 'resource', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+  =======
 // Create the performance observer.
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
@@ -291,6 +462,7 @@ const po = new PerformanceObserver((list) => {
 });
 // Start listening for `resource` entries to be dispatched.
 po.observe({type: 'resource', buffered: true});
+  >>>>>>> metrics-overview
 ```
 
 ### Navigation Timing API
@@ -309,6 +481,26 @@ First Byte](https://en.wikipedia.org/wiki/Time_to_first_byte)) is available via
 the Navigation Timing API—specifically it's entry's `responseStart` timestamp.
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      // If transferSize is 0, the resource was fulfilled via the cache.
+      console.log('Time to first byte', entry.responseStart);
+    }
+  });
+  // Start listening for `navigation` entries to be dispatched.
+  po.observe({type: 'navigation', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+```
+
+Another metric developers who use service worker may care about is the service
+  =======
 // Create the performance observer.
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
@@ -321,6 +513,7 @@ po.observe({type: 'navigation', buffered: true});
 ```
 
 Another metric developers who user service worker may care about is the service
+  >>>>>>> metrics-overview
 worker startup time for navigation requests. This is the amount of time it takes
 the browser to start the service worker thread before it can start intercepting
 fetch events.
@@ -329,6 +522,23 @@ The service worker startup time for a particular navigation request can be
 determined from the delta between `entry.responseStart` and `entry.workerStart`.
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      console.log('Service Worker startup time:',
+          entry.responseStart - entry.workerStart);
+    }
+  });
+  // Start listening for `navigation` entries to be dispatched.
+  po.observe({type: 'navigation', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+  =======
 // Create the performance observer.
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
@@ -338,6 +548,7 @@ const po = new PerformanceObserver((list) => {
 });
 // Start listening for `navigation` entries to be dispatched.
 po.observe({type: 'navigation', buffered: true});
+  >>>>>>> metrics-overview
 ```
 
 ### Server Timing API
@@ -365,6 +576,26 @@ Then, from your pages, you can read this data on both `resource` or `navigation`
 entries from the Resource Timing and Navigation Timing APIs.
 
 ```js
+  <<<<<<< dependabot/npm_and_yarn/minimist-and-sass-lint-1.2.7
+// Catch errors since some browsers throw when using the new `type` option.
+// https://bugs.webkit.org/show_bug.cgi?id=209216
+try {
+  // Create the performance observer.
+  const po = new PerformanceObserver((list) => {
+    for (const entry of list.getEntries()) {
+      // Logs all server timing data for this response
+      console.log('Server Timing', entry.serverTiming);
+    }
+  });
+  // Start listening for `navigation` entries to be dispatched.
+  po.observe({type: 'navigation', buffered: true});
+} catch (e) {
+  // Do nothing if the browser doesn't support this API.
+}
+```
+
+[devtools]: https://developers.google.com/web/updates/2018/04/devtools#tabs
+  =======
 // Create the performance observer.
 const po = new PerformanceObserver((list) => {
   for (const entry of list.getEntries()) {
@@ -377,3 +608,4 @@ po.observe({type: 'navigation', buffered: true});
 ```
 
 [devtools]: https://developers.google.com/web/updates/2018/04/devtools#tabs
+  >>>>>>> metrics-overview
