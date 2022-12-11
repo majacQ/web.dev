@@ -4,28 +4,28 @@ subhead: With a new event, and custom elements APIs, participating in forms just
 authors:
   - arthurevans
 date: 2019-08-08
-hero: hero.jpg
+hero: image/admin/53I7AEmEaedcAo6hOlBK.jpg
 # You can adjust the position of your hero image with this property.
 # Values: top | bottom | center (default)
 # hero_position: bottom
 alt: DJ mixer controls.
 description: |
   New web platform features make it easier to build
-  custom elements that work like native form controls.
+  custom elements that work like built-in form controls.
 tags:
   - blog # blog is a required tag for the article to show up in the blog.
   - forms
-  - web-components
+  # - web-components
 ---
 
 
-Many developers build custom form controls, either to provide controls that aren't built in to the browser, or to customize the look and feel beyond what's possible with the native form controls.
+Many developers build custom form controls, either to provide controls that aren't built in to the browser, or to customize the look and feel beyond what's possible with the built-in form controls.
 
 However, it can be difficult to replicate the features of built-in HTML form controls. Consider some of the features an `<input>` element gets automatically when you add it to a form:
 
 *   The input is automatically added to the form's list of controls.
 *   The input's value is automatically submitted with the form.
-*   The input participates in [form validation](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation). You can style the input using the `:valid` and `:invalid` pseudoclasses.
+*   The input participates in [form validation](https://developer.mozilla.org/docs/Learn/HTML/Forms/Form_validation). You can style the input using the `:valid` and `:invalid` pseudoclasses.
 *   The input is notified when the form is reset, when the form is reloaded, or when the browser tries to autofill form entries.
 
 Custom form controls typically have few of these features. Developers can work around some of the limitations in JavaScript, like adding a hidden `<input>` to a form to participate in form submission. But other features just can't be replicated in JavaScript alone.
@@ -35,16 +35,16 @@ Two new web features make it easier to build custom form controls, and remove th
 *   The `formdata` event lets an arbitrary JavaScript object participate in form submission, so you can add form data without using a hidden `<input>`.
 *   The Form-associated custom elements API lets custom elements act more like built-in form controls.
 
-These two features can be used to create new kinds of controls that work better with native web forms.
+These two features can be used to create new kinds of controls that work better.
 
-{% Aside %}Building custom form controls is an advanced topic. This article assumes a certain knowledge of forms and form controls. When building a custom form control, there are many factors to consider, especially making sure that your controls are accessible to all users. To learn more about forms, go to the [MDN guide on forms](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms).{% endAside %}
+{% Aside %}Building custom form controls is an advanced topic. This article assumes a certain knowledge of forms and form controls. When building a custom form control, there are many factors to consider, especially making sure that your controls are accessible to all users. To learn more about forms, go to the [MDN guide on forms](https://developer.mozilla.org/docs/Learn/HTML/Forms).{% endAside %}
 
 ## Event-based API
 
 The `formdata` event is a low-level API that lets any JavaScript code participate in form submission. The mechanism works like this:
 
 1.  You add a `formdata` event listener to the form you want to interact with.
-1.  When a user clicks the submit button, the form fires a `formdata` event, which includes a [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object that holds all of the data being submitted.
+1.  When a user clicks the submit button, the form fires a `formdata` event, which includes a [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData) object that holds all of the data being submitted.
 1.  Each `formdata` listener gets a chance to add to or modify the data before the form is submitted.
 
 Here's an example of sending a single value in a `formdata` event listener:
@@ -54,29 +54,30 @@ const form = document.querySelector('form');
 // FormData event is sent on <form> submission, before transmission.
 // The event has a formData property
 form.addEventListener('formdata', ({formData}) => {
-  // https://developer.mozilla.org/en-US/docs/Web/API/FormData
+  // https://developer.mozilla.org/docs/Web/API/FormData
   formData.append('my-input', myInputValue);
 });
 ```
 
 Try this out using our example on Glitch. Be sure to run it on Chrome 77 or later to see the API in action.
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/formdata-event?path=index.html&amp;previewSize=0"
-    alt="formdata event demo on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'formdata-event',
+  path: 'index.html',
+  previewSize: 0
+} %}
+
+## Browser compatibility
+
+{% BrowserCompat 'api.FormData' %}
 
 ## Form-associated custom elements
 
 You can use the event-based API with any kind of component, but it only allows you to interact with the submission process.
 
-Native form controls participate in many parts of the form lifecycle besides submission. Form-associated custom elements aim to bridge the gap between custom widgets and native controls. Form-associated custom elements match many of the features of native form elements:
+Standardized form controls participate in many parts of the form lifecycle besides submission. Form-associated custom elements aim to bridge the gap between custom widgets and built-in controls. Form-associated custom elements match many of the features of standardized form elements:
 
-*   When you place a form-associated custom element inside a `<form>`, it's automatically associated with the form, like a native control.
+*   When you place a form-associated custom element inside a `<form>`, it's automatically associated with the form, like a browser-provided control.
 *   The element can be labeled using a `<label>` element.
 *   The element can set a value that's automatically submitted with the form.
 *   The element can set a flag indicating whether or not it has valid input. If one of the form controls has invalid input, the form can't be submitted.
@@ -85,7 +86,7 @@ Native form controls participate in many parts of the form lifecycle besides sub
 
 That's a lot of features! This article won't touch on all of them, but will describe the basics needed to integrate your custom element with a form.
 
-{% Aside %}This section assumes a basic familiarity with custom elements. For an introduction to custom elements, see [Custom Elements v1: Reusable Web Components](https://developers.google.com/web/fundamentals/web-components/customelements) on Web Fundamentals.{% endAside %}
+{% Aside %}This section assumes a basic familiarity with custom elements. For an introduction to custom elements, see [Custom Elements v1: Reusable Web Components](/custom-elements-v1/) on Web Fundamentals.{% endAside %}
 
 ### Defining a form-associated custom element
 
@@ -118,8 +119,8 @@ class MyCounter extends HTMLElement {
   set value(v) { this.value_ = v; }
 
   // The following properties and methods aren't strictly required,
-  // but native form controls provide them. Providing them helps
-  // ensure consistency with native controls.
+  // but browser-level form controls provide them. Providing them helps
+  // ensure consistency with browser-provided controls.
   get form() { return this.internals_.form; }
   get name() { return this.getAttribute('name'); }
   get type() { return this.localName; }
@@ -135,7 +136,7 @@ class MyCounter extends HTMLElement {
 customElements.define('my-counter', MyCounter);
 ```
 
-Once registered, you can use this element wherever you'd use a native form control:
+Once registered, you can use this element wherever you'd use a browser-provided form control:
 
 ```html
 <form>
@@ -151,8 +152,8 @@ The `attachInternals()` method returns an `ElementInternals` object that provide
 The `setFormValue()` method can take one of three types of values:
 
 *   A string value.
-*   A [`File`](https://developer.mozilla.org/en-US/docs/Web/API/File) object.
-*   A [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData) object. You can use a `FormData` object to pass multiple values (for example, a credit card input control might pass a card number, expiration date, and verification code).
+*   A [`File`](https://developer.mozilla.org/docs/Web/API/File) object.
+*   A [`FormData`](https://developer.mozilla.org/docs/Web/API/FormData) object. You can use a `FormData` object to pass multiple values (for example, a credit card input control might pass a card number, expiration date, and verification code).
 
 To set a simple value:
 
@@ -212,7 +213,7 @@ Called after the `disabled` state of the element changes, either because the `di
 
 #### `void formResetCallback()`
 
-Called after the form is reset. The element should reset itself to some kind of default state. For native inputs, this usually involves setting the `value` property to match the `value` attribute set in markup (or in the case of a checkbox, setting the `checked` property to match the `checked` attribute.
+Called after the form is reset. The element should reset itself to some kind of default state. For `<input>` elements, this usually involves setting the `value` property to match the `value` attribute set in markup (or in the case of a checkbox, setting the `checked` property to match the `checked` attribute.
 
 #### `void formStateRestoreCallback(state, mode)`
 
@@ -272,14 +273,11 @@ formStateRestoreCallback(state, mode) {
 The following example puts together many of the features of form-associated custom elements.
 Be sure to run it on Chrome 77 or later to see the API in action.
 
-<div class="glitch-embed-wrap" style="height: 420px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/form-associated-ce?path=public%2Fmy-control.js&amp;previewSize=0"
-    alt="formdata event demo on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'form-associated-ce',
+  path: 'public/my-control.js',
+  previewSize: 0
+} %}
 
 ## Feature detection
 
@@ -291,7 +289,7 @@ if ('FormDataEvent' in window) {
 }
 
 if ('ElementInternals' in window &&
-    'setFormData' in window.ElementInternals) {
+    'setFormValue' in window.ElementInternals.prototype) {
   // Form-associated custom elements are supported
 }
 ```

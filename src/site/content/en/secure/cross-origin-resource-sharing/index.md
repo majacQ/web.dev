@@ -35,9 +35,9 @@ additional origin.
 
 ## How does a resource request work on the web?
 
-<figure class="w-figure w-figure--inline-right">
-  <img src="./request_response.png" alt="request and response">
-  <figcaption class="w-figcaption">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/8J6A0Bk5YXdvyoj8HVzs.png", alt="request and response", width="668", height="327" %}
+  <figcaption>
     Figure: Illustrated client request and server response
   </figcaption>
 </figure>
@@ -117,13 +117,11 @@ shared with the client site.
 
 Here is a tiny web server using Express.
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/cors-demo?path=server.js&attributionHidden=true"
-    alt="tabindex-zero on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'cors-demo',
+  path: 'server.js',
+  height: 480
+} %}
 
 The first endpoint (line 8) does not have any response header set, it just sends
 a file in response.
@@ -184,8 +182,8 @@ Access-Control-Allow-Credentials: true
 
 ## Preflight requests for complex HTTP calls
 
-If a web app needs a complex HTTP request, the browser adds a **preflight
-request** to the front of the request chain.
+If a web app needs a complex HTTP request, the browser adds a **[preflight
+request](https://developer.mozilla.org/docs/Web/HTTP/CORS#preflighted_requests)** to the front of the request chain.
 
 The CORS specification defines a **complex request** as
 

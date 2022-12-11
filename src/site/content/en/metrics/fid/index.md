@@ -4,7 +4,7 @@ title: First Input Delay (FID)
 authors:
   - philipwalton
 date: 2019-11-07
-updated: 2020-06-19
+updated: 2022-08-17
 description: |
   This post introduces the First Input Delay (FID) metric and explains
   how to measure it
@@ -30,42 +30,51 @@ becoming a loyal user or them leaving and never coming back. The question is,
 what makes for a good impression, and how do you measure what kind of impression
 you're likely making on your users?
 
-On the web, first impressions can take a lot of different forms&mdash;we have first
-impressions of a site's design and visual appeal as well as first impressions of
-its speed and responsiveness.
+On the web, first impressions can take a lot of different forms&mdash;we have
+first impressions of a site's design and visual appeal as well as first
+impressions of its speed and responsiveness.
 
 While it is hard to measure how much users like a site's design with web APIs,
 measuring its speed and responsiveness is not!
 
 The first impression users have of how fast your site loads can be measured with
-[First Contentful Paint (FCP)](/fcp/). But how fast your site can paint pixels to
-the screen is just part of the story. Equally important is how responsive your
-site is when users try to interact with those pixels!
+[First Contentful Paint (FCP)](/fcp/). But how fast your site can paint pixels
+to the screen is just part of the story. Equally important is how responsive
+your site is when users try to interact with those pixels!
 
 The First Input Delay (FID) metric helps measure your user's first impression of
 your site's interactivity and responsiveness.
 
 ## What is FID?
 
-FID measures the time from when a user first interacts with a page (i.e. when
+FID measures the time from when a user first interacts with a page (that is, when
 they click a link, tap on a button, or use a custom, JavaScript-powered control)
 to the time when the browser is actually able to begin processing event handlers
 in response to that interaction.
 
-<picture>
-  <source srcset="../vitals/fid_8x2.svg" media="(min-width: 640px)">
-  <img class="w-screenshot w-screenshot--filled"
-      src="../vitals/fid_4x3.svg"
-      alt="Good fid values are 2.5 seconds, poor values are greater than 4.0
-            seconds and anything in between needs improvement">
-</picture>
-
 ### What is a good FID score?
 
 To provide a good user experience, sites should strive to have a First Input
-Delay of less than **100 milliseconds**. To ensure you're hitting this target
-for most of your users, a good threshold to measure is the **75th percentile**
-of page loads, segmented across mobile and desktop devices.
+Delay of **100 milliseconds** or less. To ensure you're hitting this target for
+most of your users, a good threshold to measure is the **75th percentile** of
+page loads, segmented across mobile and desktop devices.
+
+<figure>
+  <picture>
+    <source
+      srcset="{{ "image/tcFciHGuF3MxnTr1y5ue01OGLBn2/eXyvkqRHQZ5iG38Axh1Z.svg" | imgix }}"
+      media="(min-width: 640px)"
+      width="800"
+      height="200">
+    {%
+      Img
+        src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/Se4TiXIdp8jtLJVScWed.svg",
+        alt="Good FID values are 2.5 seconds or less, poor values are greater than 4.0 seconds, and anything in between needs improvement",
+        width="640",
+        height="480"
+    %}
+  </picture>
+</figure>
 
 {% Aside %}
   To learn more about the research and methodology behind this recommendation,
@@ -88,19 +97,18 @@ a large JavaScript file loaded by your app. While it's doing that, it can't run
 any event listeners because the JavaScript it's loading might tell it to do
 something else.
 
-{% Aside 'gotchas' %}
-  FID only measures the "delay" in event processing. It does not measure the
-  event processing time itself nor the time it takes the browser to update the
-  UI after running event handlers. While this time does affect the user
-  experience, including it as part of FID would incentivize developers to
-  respond to events asynchronously—which would improve the metric but likely
-  make the experience worse. See [why only consider the input
-  delay](#why-only-consider-the-input-delay) below for more details.
-{% endAside %}
+{% Aside 'gotchas' %} FID only measures the "delay" in event processing. It does
+  not measure the event processing time itself nor the time it takes the browser
+  to update the UI after running event handlers. While this time does affect the
+  user experience, including it as part of FID would incentivize developers to
+  respond to events asynchronously&mdash;which would improve the metric but
+  likely make the experience worse. See [why only consider the input
+  delay](#why-only-consider-the-input-delay) below for more details. {% endAside
+  %}
 
 Consider the following timeline of a typical web page load:
 
-[![Example page load trace](fid-base.svg)](fid-base.svg)
+{% Img src="image/admin/9tm3f6pwlHMqNKuFvaP0.svg", alt="Example page load trace", width="800", height="260", linkTo=true %}
 
 The above visualization shows a page that's making a couple of network requests
 for resources (most likely CSS and JS files), and&mdash;after those resources
@@ -116,18 +124,18 @@ Long first input delays typically occur between [First Contentful Paint
 rendered some of its content but isn't yet reliably interactive. To illustrate
 how this can happen, FCP and TTI have been added to the timeline:
 
-[![Example page load trace with FCP and TTI](fid-fcp-tti.svg)](fid-fcp-tti.svg)
+{% Img src="image/admin/24Y3T5sWNuZD9fKhkuER.svg", alt="Example page load trace with FCP and TTI", width="800", height="340", linkTo=true %}
 
 You may have noticed that there's a fair amount of time (including three [long
 tasks](/custom-metrics/#long-tasks-api)) between FCP and TTI, if a user tries to
-interact with the page during that time (e.g. click on a link), there will be a
+interact with the page during that time (for example, by clicking on a link), there will be a
 delay between when the click is received and when the main thread is able to
 respond.
 
 Consider what would happen if a user tried to interact with the page near the
 beginning of the longest task:
 
-[![Example page load trace with FCP, TTI, and FID](fid-full.svg)](fid-full.svg)
+{% Img src="image/admin/krOoeuQ4TWCbt9t6v5Wf.svg", alt="Example page load trace with FCP, TTI, and FID", width="800", height="380", linkTo=true %}
 
 Because the input occurs while the browser is in the middle of running a task,
 it has to wait until the task completes before it can respond to the input. The
@@ -151,7 +159,7 @@ listener has not been registered.** The reason is because many user interactions
 do not require an event listener but _do_ require the main thread to be idle in
 order to run.
 
-For example, all of the following native HTML elements need to wait for
+For example, all of the following HTML elements need to wait for
 in-progress tasks on the main thread to complete prior to responding to user
 interactions:
 
@@ -189,7 +197,7 @@ hide their latency by running them on a separate thread).
 
 To put this another way, FID focuses on the R (responsiveness) in the [RAIL
 performance
-model](https://developers.google.com/web/fundamentals/performance/rail), whereas
+model](/rail/), whereas
 scrolling and zooming are more related to A (animation), and their performance
 qualities should be evaluated separately.
 
@@ -216,11 +224,11 @@ to update the UI after running event handlers.
 
 Even though this time is important to the user and _does_ affect the experience,
 it's not included in this metric because doing so could incentivize developers
-to add workarounds that actually make the experience worse—that is, they could
-wrap their event handler logic in an asynchronous callback (via `setTimeout()`
-or `requestAnimationFrame()`) in order to separate it from the task associated
-with the event. The result would be an improvement in the metric score but a
-slower response as perceived by the user.
+to add workarounds that actually make the experience worse&mdash;that is, they
+could wrap their event handler logic in an asynchronous callback (via
+`setTimeout()` or `requestAnimationFrame()`) in order to separate it from the
+task associated with the event. The result would be an improvement in the metric
+score but a slower response as perceived by the user.
 
 However, while FID only measure the "delay" portion of event latency, developers
 who want to track more of the event lifecycle can do so using the [Event Timing
@@ -244,61 +252,86 @@ user to interact with your page. You can measure FID with the following tools.
 ### Field tools
 
 - [Chrome User Experience
-  Report](https://developers.google.com/web/tools/chrome-user-experience-report)
-- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+  Report](https://developer.chrome.com/docs/crux/)
+- [PageSpeed Insights](https://pagespeed.web.dev/)
 - [Search Console (Core Web Vitals
   report)](https://support.google.com/webmasters/answer/9205520)
-- [Firebase Performance Monitoring
-  (beta)](https://firebase.google.com/docs/perf-mon/get-started-web)
+- [`web-vitals` JavaScript library](https://github.com/GoogleChrome/web-vitals)
 
 ### Measure FID in JavaScript
 
-The easiest way to measure FID (as well as all Web Vitals [field
-metrics]((/metrics/#in-the-field))) is with the [`web-vitals` JavaScript
-library](https://github.com/GoogleChrome/web-vitals), which wraps all the
-complexity of manually measuring FID into a single function:
+{% BrowserCompat 'api.PerformanceEventTiming' %}
 
-```js
-import {getFID} from 'web-vitals';
-
-// Measure and log the current FID value,
-// any time it's ready to be reported.
-getFID(console.log);
-```
-
-To manually measure FID, you can use the [Event Timing
+To measure FID in JavaScript, you can use the [Event Timing
 API](https://wicg.github.io/event-timing). The following example shows how to
 create a
-<code>[PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver)</code>
+[`PerformanceObserver`](https://developer.mozilla.org/docs/Web/API/PerformanceObserver)
 that listens for
-<code>[first-input](https://wicg.github.io/event-timing/#sec-performance-event-timing)</code>
-entries, calculates FID, and logs the value to the console:
-
-{% set entryType = 'first-input' %}
-{% set entryCallback = 'onFirstInputEntry' %}
+[`first-input`](https://wicg.github.io/event-timing/#sec-performance-event-timing)
+entries and logs them to the console:
 
 ```js
-{% include 'content/metrics/first-hidden-time.njk' %}
-{% include 'content/metrics/send-to-analytics.njk' %}
-{% include 'content/metrics/performance-observer-try.njk' %}
-  function onFirstInputEntry(entry, po) {
-    // Only report FID if the page wasn't hidden prior to
-    // the entry being dispatched. This typically happens when a
-    // page is loaded in a background tab.
-    if (entry.startTime < firstHiddenTime) {
-      const fid = entry.processingStart - entry.startTime;
-
-      // Disconnect the observer.
-      po.disconnect();
-
-      // Report the FID value to an analytics endpoint.
-      sendToAnalytics({fid});
-    }
+new PerformanceObserver((entryList) => {
+  for (const entry of entryList.getEntries()) {
+    const delay = entry.processingStart - entry.startTime;
+    console.log('FID candidate:', delay, entry);
   }
-
-{% include 'content/metrics/performance-observer-init.njk' %}
-{% include 'content/metrics/performance-observer-catch.njk' %}
+}).observe({type: 'first-input', buffered: true});
 ```
+
+{% Aside 'warning' %}
+  This code shows how to log `first-input` entries to the console and calculate
+  their delay. However, measuring FID in JavaScript is more complicated. See
+  below for details:
+{% endAside %}
+
+In the above example, the `first-input` entry's delay value is measured by
+taking the delta between the entry's `startTime` and `processingStart`
+timestamps. In most cases this will be the FID value; however, not all
+`first-input` entries are valid for measuring FID.
+
+The following section lists the differences between what the API reports and how
+the metric is calculated.
+
+#### Differences between the metric and the API
+
+- The API will dispatch `first-input` entries for pages loaded
+  in a background tab but those pages should be ignored when calculating FID.
+- The API will also dispatch `first-input` entries if the page was backgrounded
+  prior to the first input occurring, but those pages should also be ignored
+  when calculating FID (inputs are only considered if the page was in the
+  foreground the entire time).
+- The API does not report `first-input` entries when the page is restored from
+  the [back/forward cache](/bfcache/#impact-on-core-web-vitals), but FID should
+  be measured in these cases since users experience them as distinct page
+  visits.
+- The API does not report inputs that occur within iframes but the metric does
+  as they are part of the user experience of the page. This can
+  [show as a difference between CrUX and RUM](/crux-and-rum-differences/#iframes).
+  To properly measure FID you should consider them. Sub-frames can use the API
+  to report their `first-input` entries to the parent frame for aggregation.
+
+Rather than memorizing all these subtle differences, developers can use the
+[`web-vitals` JavaScript library](https://github.com/GoogleChrome/web-vitals) to
+measure FID, which handles these differences for you (where possible):
+
+```js
+import {onFID} from 'web-vitals';
+
+// Measure and log FID as soon as it's available.
+onFID(console.log);
+```
+
+You can refer to [the source code for
+`onFID)`](https://github.com/GoogleChrome/web-vitals/blob/main/src/onFID.ts)
+for a complete example of how to measure FID in JavaScript.
+
+{% Aside %}
+  In some cases (such as cross-origin iframes) it's not possible to measure FID
+  in JavaScript. See the
+  [limitations](https://github.com/GoogleChrome/web-vitals#limitations) section
+  of the `web-vitals` library for details.
+{% endAside %}
 
 ### Analyzing and reporting on FID data
 
@@ -322,7 +355,7 @@ percentile of mobile users.
 
 To learn how to improve FID for a specific site, you can run a Lighthouse
 performance audit and pay attention to any specific
-[opportunities](/lighthouse-performance/#opportunities) the audit suggests.
+[opportunities](https://developer.chrome.com/docs/lighthouse/performance/#opportunities) the audit suggests.
 
 While FID is a field metric (and Lighthouse is a lab metric tool), the guidance
 for improving FID is the same as that for improving the lab metric [Total
@@ -332,9 +365,9 @@ For a deep dive on how to improve FID, see [Optimize FID](/optimize-fid/). For
 additional guidance on individual performance techniques that can also improve
 FID, see:
 
-- [Reduce the impact of third-party code](/third-party-summary/)
-- [Reduce JavaScript execution time](/bootup-time/)
-- [Minimize main thread work](/mainthread-work-breakdown/)
-- [Keep request counts low and transfer sizes small](/resource-summary/)
+- [Reduce the impact of third-party code](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [Reduce JavaScript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [Minimize main thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [Keep request counts low and transfer sizes small](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)
 
 {% include 'content/metrics/metrics-changelog.njk' %}

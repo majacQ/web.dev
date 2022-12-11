@@ -1,30 +1,30 @@
 ---
+layou: post
 title: Preparing for AppCache removal
 subhead: Chrome 85 removes support for AppCache by default. Most developers should migrate off AppCache now, and not wait any longer.
 authors:
   - jeffposnick
 description: Details of Chrome's and other browsers' plans to remove AppCache.
 date: 2020-05-18
-updated: 2020-05-18
-scheduled: true
+updated: 2021-08-23
 tags:
-  - appcache
+  # - appcache
   - blog
-  - chrome84
-  - deprecation
-  - origin-trial
-  - removal
+  - chrome-84
+  # - deprecation
+  - origin-trials
+  # - removal
   - service-worker
-hero: hero.jpg
+hero: image/admin/YDs2H4gLPhIwPMjPtc8o.jpg
 alt: An old-fashioned storage container.
 origin_trial:
   url: https://developers.chrome.com/origintrials/#/view_trial/1776670052997660673
 ---
 
-Following up on [previous announcements](https://blog.chromium.org/2020/01/appcache-scope-restricted.html), support for [AppCache](https://developer.mozilla.org/docs/Web/HTML/Using_the_application_cache) will be removed from Chrome and other Chromium-based browsers. We encourage developers to migrate off of AppCache now, rather than waiting any longer.
+Following up on [previous announcements](https://blog.chromium.org/2020/01/appcache-scope-restricted.html), support for [AppCache](https://developer.mozilla.org/docs/Web/API/Window/applicationCache) will be removed from Chrome and other Chromium-based browsers. We encourage developers to migrate off of AppCache now, rather than waiting any longer.
 
-[Service workers](https://developers.google.com/web/fundamentals/primers/service-workers), 
-which are widely supported in current browsers, offer an alternative to providing the offline 
+[Service workers](https://developer.chrome.com/docs/workbox/service-worker-overview/),
+which are widely supported in current browsers, offer an alternative to providing the offline
 experience that AppCache had offered. See [Migration strategies](#migration-strategies).
 
 ## Timeline
@@ -33,7 +33,7 @@ experience that AppCache had offered. See [Migration strategies](#migration-stra
 
 A "deprecated" feature still exists, but logs warning messages discouraging use. A "removed" feature no longer exists in the browser.
 
-<div class="w-table-wrapper">
+<div>
   <table>
     <tr>
     <td><a href="https://groups.google.com/a/chromium.org/g/blink-dev/c/UKF8cK0EwMI/m/NLhsIrs-AQAJ">Deprecation in non-secure contexts</a>
@@ -56,26 +56,22 @@ A "deprecated" feature still exists, but logs warning messages discouraging use.
     <tr>
     <td><a href="https://blog.chromium.org/2020/01/appcache-scope-restricted.html">AppCache scope restriction</a>
     </td>
-    <td>Chrome 80 (February 2020)
-    </td>
+    <td>Chrome 80 (February 2020)</td>
     </tr>
     <tr>
     <td>"Reverse" origin trial begins
     </td>
-    <td>Chrome 84 (<a href="https://chromiumdash.appspot.com/schedule">estimated July 2020</a>)
-    </td>
+    <td>Chrome 84 (July 2020)</td>
     </tr>
     <tr>
     <td><a href="https://groups.google.com/a/chromium.org/g/blink-dev/c/FvM-qo7BfkI/m/AvxoE6JpBgAJ">Removal from secure contexts</a>, except for those opted-in to the origin trial
     </td>
-    <td>Chrome 85 (<a href="https://chromiumdash.appspot.com/schedule">estimated August 2020</a>)
-    </td>
+    <td>Chrome 85 (August 2020)</td>
     </tr>
     <tr>
     <td>Complete removal from secure contexts for everyone, with completion of origin trial
     </td>
-    <td>Chrome 90 (<a href="https://chromiumdash.appspot.com/schedule">estimated April 2021</a>)
-    </td>
+    <td>October 5th, 2021 (roughly Chrome 95)</td>
     </tr>
   </table>
 </div>
@@ -86,7 +82,7 @@ This timeline applies to Chrome on **all platforms other than iOS**. There is al
 
 ## Origin trial
 
-The timeline lists two upcoming milestones for removal. Beginning with Chrome 85, AppCache will no longer be available in Chrome by default. Developers who require additional time to migrate off of AppCache can [sign up](https://developers.chrome.com/origintrials/#/register_trial/1776670052997660673) for a "reverse" [origin trial](https://github.com/GoogleChrome/OriginTrials/blob/gh-pages/developer-guide.md) to extend the availability of AppCache for their web apps. The origin trial will start in Chrome 84 (in advance of the default removal in Chrome 85), and will be active through Chrome 89. Starting with Chrome 90, AppCache will be fully removed for everyone, even those who had signed up for the origin trial.
+The timeline lists two upcoming milestones for removal. Beginning with Chrome 85, AppCache will no longer be available in Chrome by default. Developers who require additional time to migrate off of AppCache can [sign up](https://developers.chrome.com/origintrials/#/register_trial/1776670052997660673) for a "reverse" [origin trial](https://github.com/GoogleChrome/OriginTrials/blob/gh-pages/developer-guide.md) to extend the availability of AppCache for their web apps. The origin trial will start in Chrome 84 (in advance of the default removal in Chrome 85), and will be active through October 5th, 2021 (roughly Chrome 95). At that point, AppCache will be fully removed for everyone, even those who had signed up for the origin trial.
 
 {% Aside %}
 Why are we calling this a "reverse" origin trial? Normally, an origin trial allows developers to opt-in to early access to new functionality before it has shipped by default in Chrome. In this case, we're allowing developers to opt-in to using legacy technology even after it's been removed from Chrome, but only temporarily.
@@ -127,11 +123,11 @@ The token for a manifest **must** be in an `ORIGIN-TRIAL` field of the manifest 
 
 You can see a sample project embedded below that demonstrates adding the correct origin trial tokens into both the `index.html` and `manifest.appcache` files.
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe src="https://glitch.com/embed/#!/embed/appcache-reverse-ot?path=manfiest.appcache&attributionHidden=true"
-          alt="An example web app that is registered for the AppCache origin trial."
-          style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
+{% Glitch {
+  id: 'appcache-reverse-ot',
+  path: 'manfiest.appcache',
+  height: 480
+} %}
 
 ### Why are tokens needed in multiple places?
 
@@ -150,15 +146,15 @@ Adding the origin trial token to your AppCache manifests indicates that each man
 
 While the "reverse" origin trial officially starts with Chrome 84, you can [sign up](https://developers.chrome.com/origintrials/#/register_trial/1776670052997660673) for the origin trial today and add the tokens to your HTML and AppCache manifests. As your web app's audience gradually upgrades to Chrome 84, any tokens that you've already added will go into effect.
 
-Once you've added a token to your AppCache manifest, visit `chrome://appcache-internals` to confirm that your local instance of Chrome (version 84 or later) has properly associated the origin trial token with your manifest's cached entries. If your origin trial is recognized, you should see a field with `Token Expires: Tue Apr 06 2021...` on that page, associated with your manifest:
+Once you've added a token to your AppCache manifest, visit `about://appcache-internals` to confirm that your local instance of Chrome (version 84 or later) has properly associated the origin trial token with your manifest's cached entries. If your origin trial is recognized, you should see a field with `Token Expires: Tue Apr 06 2021...` on that page, associated with your manifest:
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="appcache-token.jpg" alt="chrome://appcache-internals interface showing a recognized token." width="550">
+<figure>
+  {% Img src="image/admin/Xid94kdPT5yGbQzBL4at.jpg", alt="about://appcache-internals interface showing a recognized token.", width="550", height="203" %}
 </figure>
 
 ## Testing prior to removal
 
-We strongly encourage you to migrate off of AppCache as soon as is feasible. If you want to test removal of AppCache on your web apps, use the `chrome://flags/#app-cache` [flag](https://www.chromium.org/developers/how-tos/run-chromium-with-flags) to simulate its removal. This flag is available starting with Chrome 84.
+We strongly encourage you to migrate off of AppCache as soon as is feasible. If you want to test removal of AppCache on your web apps, use the `about://flags/#app-cache` [flag](https://www.chromium.org/developers/how-tos/run-chromium-with-flags) to simulate its removal. This flag is available starting with Chrome 84.
 
 ## Migration strategies {: #migration-strategies }
 
@@ -166,11 +162,11 @@ Service workers, which are [widely supported in current browsers](https://develo
 
 We've provided a [polyfill](https://github.com/GoogleChromeLabs/sw-appcache-behavior) that uses a service worker to replicate some of the functionality of AppCache, though it does not replicate the entire AppCache interface. In particular, it does not provide a replacement for the `window.applicationCache` interface or the related AppCache events.
 
-For more complex cases, libraries like [Workbox](https://developers.google.com/web/tools/workbox/) provide an easy way to create a modern service worker for your web app.
+For more complex cases, libraries like [Workbox](https://developer.chrome.com/docs/workbox/) provide an easy way to create a modern service worker for your web app.
 
 ### Service workers and AppCache are mutually exclusive
 
-While working on your migration strategy, please keep in mind that Chrome will disable AppCache functionality on any page that's loaded under the [control](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#scope_and_control) of a service worker. In other words, as soon as you deploy a service worker that controls a given page, you're no longer able to use AppCache on that page.
+While working on your migration strategy, please keep in mind that Chrome will disable AppCache functionality on any page that's loaded under the [control](/service-worker-lifecycle/#scope-and-control) of a service worker. In other words, as soon as you deploy a service worker that controls a given page, you're no longer able to use AppCache on that page.
 
 Because of this, we recommend that you do not attempt to migrate to service workers piece-by-piece. It would be a mistake to deploy a service worker that only contains some of your caching logic. You cannot fall back on AppCache to "fill in the gaps."
 
@@ -194,7 +190,7 @@ Chrome for iOS is a special case, as it uses a different browser engine than Chr
 
 ### Android WebViews
 
-Some developers of native Android applications use Chrome [WebView](https://developer.android.com/reference/android/webkit/WebView) to display web content, and might also use AppCache. However, it's not possible to enable an origin trial for a WebView. In light of that, Chrome WebView will support AppCache without an origin trial until the final removal takes place, expected in Chrome 90.
+Some developers of Android applications use Chrome [WebView](https://developer.android.com/reference/android/webkit/WebView) to display web content, and might also use AppCache. However, it's not possible to enable an origin trial for a WebView. In light of that, Chrome WebView will support AppCache without an origin trial until the final removal takes place, expected in Chrome 90.
 
 ## Learn more
 
@@ -202,15 +198,15 @@ Here are some resources for developers migrating from AppCache to service worker
 
 ### Articles
 
-- [Service Workers: an Introduction](https://developers.google.com/web/fundamentals/primers/service-workers)
-- [The Service Worker Lifecycle](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle)
-- [Progressive Web Apps Training](https://developers.google.com/web/ilt/pwa)
+- [Service Workers: an Introduction](https://developer.chrome.com/docs/workbox/service-worker-overview/)
+- [The Service Worker Lifecycle](/service-worker-lifecycle/)
+- [Progressive Web Apps Training](/learn/pwa/)
 - [Network Reliability](/reliable/)
 
 ### Tools
 
 - [AppCache Polyfill](https://github.com/GoogleChromeLabs/sw-appcache-behavior)
-- [Workbox](https://developers.google.com/web/tools/workbox/)
+- [Workbox](https://developer.chrome.com/docs/workbox/)
 - [PWA Builder](https://www.pwabuilder.com/)
 
 ## Getting help

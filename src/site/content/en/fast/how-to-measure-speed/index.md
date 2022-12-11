@@ -10,6 +10,7 @@ description: |
   tools that can help you collect lab or field data to assess page performance.
 web_lighthouse: N/A
 date: 2019-05-01
+updated: 2022-07-18
 tags:
   - performance
 ---
@@ -18,7 +19,7 @@ Real-world performance is highly variable due to differences in users' devices, 
 
 ## Lab data vs Field data
 
-<img src="./measure-speed-cover.png" alt="Speed tools graphics">
+{% Img src="image/admin/6OMEfvIKRuDWWSiVDto4.png", alt="Speed tools graphics", width="800", height="232" %}
 
 **Lab data** is performance data collected within a controlled environment with predefined device and network settings, while **Field data** is performance data collected from real page loads experienced by your users in the wild. Each type has its own strengths and limitations.
 
@@ -31,14 +32,14 @@ Real-world performance is highly variable due to differences in users' devices, 
 
 ### Lab data
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse/) takes a URL and runs a series of audits against the page, generating a report on how well the page did. There are multiple ways to run Lighthouse, including an option to easily audit a page from within Chrome DevTools.
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) takes a URL and runs a series of audits against the page, generating a report on how well the page did. There are multiple ways to run Lighthouse, including an option to easily audit a page from within Chrome DevTools.
 
 ### Field data
 
-[Chrome User Experience Report (CrUX)](https://developers.google.com/web/tools/chrome-user-experience-report/) provides metrics showing how real-world Chrome users experience popular destinations on the web.
+[Chrome User Experience Report (CrUX)](https://developer.chrome.com/docs/crux/) provides metrics showing how real-world Chrome users experience popular destinations on the web.
 
 ### Other tools
 
-[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) provides both lab and field data about a page. It uses Lighthouse to collect and analyze lab data about the page, while real-world field data is based on the Chrome User Experience Report dataset.
+[PageSpeed Insights](https://pagespeed.web.dev/) provides both lab and field data about a page. It uses Lighthouse to collect and analyze lab data about the page, while real-world field data is based on the Chrome User Experience Report dataset.
 
-[Chrome Developer Tools](https://developers.google.com/web/tools/chrome-devtools/) is a set of web developer tools built directly into the Google Chrome browser. It allows you to profile the runtime of a page, as well as identify and debug performance bottlenecks.
+[Chrome Developer Tools](https://developer.chrome.com/docs/devtools/) is a set of web developer tools built directly into the Google Chrome browser. It allows you to profile the runtime of a page, as well as identify and debug performance bottlenecks.

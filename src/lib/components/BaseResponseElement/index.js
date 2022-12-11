@@ -15,7 +15,7 @@
  */
 
 import {BaseElement} from '../BaseElement';
-import './_styles.scss';
+import {debounce} from '../../utils/debounce';
 
 /**
  * Base element used by all self-assessment response components.
@@ -33,10 +33,15 @@ export class BaseResponseElement extends BaseElement {
   constructor() {
     super();
     this.state = 'unanswered';
+    this.correctAnswer = '';
+    this.maxSelections = null;
+    this.minSelections = null;
 
+    this.deselectOption = this.deselectOption.bind(this);
     this.enforceCardinality = this.enforceCardinality.bind(this);
     this.submitResponse = this.submitResponse.bind(this);
     this.reset = this.reset.bind(this);
+    this.scrollToOption = debounce(this.scrollToOption.bind(this), 100);
   }
 
   /**
@@ -59,8 +64,7 @@ export class BaseResponseElement extends BaseElement {
       min = parseInt(cardinality);
       max = 0;
     } else if (/^\d-\d+$/.test(cardinality)) {
-      [min, max] = cardinality.split('-');
-      [min, max] = [parseInt(min), parseInt(max)];
+      [min, max] = cardinality.split('-').map(parseInt);
     }
     // Input errors handled in src/site/_includes/components/Assessment.js
 
@@ -169,10 +173,26 @@ export class BaseResponseElement extends BaseElement {
     return correctAnswersArr.every((val) => selections.includes(val));
   }
 
+  /**
+   * @param {HTMLElement} option HTML ELement to scroll to.
+   */
+  scrollToOption(option) {
+    const paddingTop = parseFloat(
+      window.getComputedStyle(option, null).getPropertyValue('padding-top'),
+    );
+    this.parentElement.scrollTo({
+      // Deduct offset of parent from top from element's offset and add padding.
+      top: option.offsetTop - this.parentElement.offsetTop - paddingTop,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
   // Updates option states when response component is submitted.
   // NOTE: Assumes client components have a deselectOption() method.
   // (Necessary because selection mechanisms will vary by response type.)
   submitResponse() {
+    /** @type {NodeListOf<HTMLElement>} */
     const options = this.querySelectorAll('[data-role=option]');
 
     for (const option of options) {
@@ -187,13 +207,16 @@ export class BaseResponseElement extends BaseElement {
         } else if (isSelected && !isCorrect) {
           option.setAttribute('data-submitted', '');
           this.disableOption(option);
-          this.deselectOption(option);
+          if (typeof this.deselectOption === 'function') {
+            this.deselectOption(option);
+          }
         } else if (!isSelected && !isSubmitted) {
           this.enableOption(option);
         }
       } else if (this.state === 'answeredCorrectly') {
         this.disableOption(option);
         if (isSelected) {
+          this.scrollToOption(option);
           option.setAttribute('data-submitted', '');
         }
       }
@@ -221,6 +244,10 @@ export class BaseResponseElement extends BaseElement {
       this.enableOption(option);
     }
   }
+
+  // @ts-ignore-start
+  deselectOption(option) {} // eslint-disable-line no-unused-vars
+  // @ts-ignore-end
 
   disableOption(option) {
     const inputs = option.querySelectorAll('input, button');

@@ -3,7 +3,7 @@ layout: post
 title: 'Get started: optimize an Angular application'
 subhead: |
   Want to make your Angular site as fast and accessible as possible? You've come to the right place!
-hero: get-started-optimize-angular.jpg
+hero: image/admin/DX8MXZivFjz3NqMtFcK4.jpg
 alt: A hand dipping a paintbrush in one of several buckets of paint.
 date: 2019-06-24
 description: |
@@ -11,7 +11,7 @@ description: |
 authors:
   - mgechev
 tags:
-  - angular
+  # - angular
 ---
 
 ## What's Angular?
@@ -25,7 +25,7 @@ This collection focuses on five major areas for optimizing an Angular applicatio
 * Improving the **performance** of your application to increase user conversion and engagement
 * Improving your application's **reliability** on poor networks by precaching assets with the Angular service worker
 * Making your application **discoverable** for search engines and social media bots using prerendering and server-side rendering
-* Making your application **installable** to provide a user experience similar to a native app's
+* Making your application **installable** to provide a user experience similar to an iOS/Android app's
 * Improving the **accessibility of** your application to make it usable and understandable for all users
 
 Each post in the collection will describe techniques that you can directly apply to your own applications.
@@ -70,7 +70,7 @@ Once the setup process completes successfully, start your application by running
 
 ```bash
 cd my-app
-ng start
+ng serve
 ```
 
 You should now be able to access your application at [http://localhost:4200](http://localhost:4200).

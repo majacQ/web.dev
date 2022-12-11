@@ -7,7 +7,7 @@ authors:
 date: 2019-07-12
 # Add an updated date to your post if you edit in the future.
 # updated: 2019-06-27
-hero: hero.jpg
+hero: image/admin/bGHUmFg8d3zHg6dJ29YT.jpg
 # You can adjust the position of your hero image with this property.
 # Values: top | bottom | center (default)
 # hero_position: bottom
@@ -15,8 +15,10 @@ alt: Stacks of vinyl records.
 description: |
   Learn how to make large lists more responsive by implementing virtual scrolling with the Angular Component Dev Kit.
 tags:
-  - angular
+  # - angular
   - performance
+feedback:
+  - api
 ---
 
 The scrolling list is one of the most common UI patterns today, whether it's browsing an infinitely scrolling feed on your favorite social media site, or navigating an enterprise dashboard. When scrolling lists become very long (hundreds, thousands, or hundreds of thousands of items), application performance can suffer.
@@ -35,10 +37,9 @@ Instead of rendering the entire list at a time, only a subset of the items that 
 The rest of this post walks through how to set up basic virtual scrolling. You can see a full working example in this sample app:
 
 <div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://stackblitz.com/edit/scroll-list?embed=1&file=src/app/app.component.ts&view=preview"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
+  {% IFrame {
+    src: 'https://stackblitz.com/edit/scroll-list?embed=1&file=src/app/app.component.ts&view=preview'
+  } %}
 </div>
 
 ## Setting up virtual scrolling
@@ -67,7 +68,7 @@ To see how the package works, try creating a component with a simple list of num
 
 ```js
 @Component({
-  template: `<div *ngFor="let item of list">{% raw %}{% verbatim %}{{item}}{% endverbatim %}{% endraw %}</div>`
+  template: `<div *ngFor="let item of list">{% raw %}{{item}}{% endraw %}</div>`
 })
 export class ScrollComponent {
   list = Array.from({length: 100000}).map((_, i) => i);
@@ -81,7 +82,7 @@ To add virtual scrolling and avoid those problems, you need to create a viewport
 ```js/1-3
 @Component({
   template: `<cdk-virtual-scroll-viewport>
-    <div *ngFor="let item of list">{% raw %}{% verbatim %}{{item}}{% endverbatim %}{% endraw %}</div>
+    <div *ngFor="let item of list">{% raw %}{{item}}{% endraw %}</div>
     </cdk-virtual-scroll-viewport>`
 })
 export class ScrollComponent {
@@ -94,7 +95,7 @@ Because `ScrollingModule` dynamically renders subsets of the list, you have to s
 ```js/1
 @Component({
   template: `<cdk-virtual-scroll-viewport itemSize="18" style="height:80vh">
-    <div *ngFor="let item of list">{% raw %}{% verbatim %}{{item}}{% endverbatim %}{% endraw %}</div>
+    <div *ngFor="let item of list">{% raw %}{{item}}{% endraw %}</div>
     </cdk-virtual-scroll-viewport>`
 })
 export class ScrollComponent {
@@ -107,7 +108,7 @@ Finally, convert `*ngFor` to `*cdkVirtualFor`:
 ```js
 @Component({
   template: `<cdk-virtual-scroll-viewport itemSize="18" style="height:80vh">
-    <div *cdkVirtualFor="let item of list">{% raw %}{% verbatim %}{{item}}{% endverbatim %}{% endraw %}</div>
+    <div *cdkVirtualFor="let item of list">{% raw %}{{item}}{% endraw %}</div>
     </cdk-virtual-scroll-viewport>`
 })
 export class ScrollComponent {
@@ -118,10 +119,13 @@ export class ScrollComponent {
  Instead of iterating through the entire list, the viewport will dynamically identify and iterate through the correct subset of the list for the user. Now when the user loads the page, the CDK should render the subset of the list that fits on the screen (plus a bit of buffer), and any scrolling events in the viewport will load and render the appropriate subset of the list:
 
 <figure>
-  <video autoplay loop muted playsinline>
-    <source src="./render-subset.webm" type="video/webm">
-    <source src="./render-subset.mp4" type="video/mp4">
-  </video>
+  {% Video
+    src=["video/tcFciHGuF3MxnTr1y5ue01OGLBn2/hplr8uuGGlq7xhxfkeca.webm", "video/tcFciHGuF3MxnTr1y5ue01OGLBn2/tVvS430R28iEmDEGLewX.mp4"],
+    autoplay=true,
+    loop=true,
+    muted=true,
+    playsinline=true
+  %}
   <figcaption>
     The CDK rendering subsets of a list as the user scrolls.
   </figcaption>

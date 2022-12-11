@@ -33,7 +33,7 @@ is called the **tab order**.
 Interactive HTML elements like text fields, buttons, and select lists are
 **implicitly focusable**: they are automatically inserted into the tab order
 based on their position in the
-[DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model).
+[DOM](https://developer.mozilla.org/docs/Web/API/Document_Object_Model).
 These interactive elements also have built-in keyboard event handling. Elements
 such as paragraphs and divs are not implicitly focusable because users typically
 do not need to interact with them.
@@ -61,23 +61,19 @@ order versus an illogical tab order:
 
 **Logical tab order**
 
-<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/logical-tab-order?path=index.html&previewSize=100&attributionHidden=true"
-    alt="logical-tab-order on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'logical-tab-order',
+  path: 'index.html',
+  height: 346
+} %}
 
 **Illogical tab order**
 
-<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/illogical-tab-order?path=index.html&previewSize=100&attributionHidden=true"
-    alt="illogical-tab-order on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'illogical-tab-order',
+  path: 'index.html',
+  height: 346
+} %}
 
 The code for these two examples is compared below:
 

@@ -1,4 +1,5 @@
 ---
+layout: post
 title: |
   Wake Lock API case study: 300% increase in purchase intent indicators on BettyCrocker.com
 subhead: |
@@ -10,14 +11,14 @@ authors:
   - phillipkriegel
 date: 2020-05-19
 updated: 2020-05-19
-hero: hero.jpg
+hero: image/admin/uWpEHKUQjInjnw4h1YIC.jpg
 alt: Betty Crocker Cake Mix—Coffee Cinnamon.
 description: |
   Case study of cooking site BettyCrocker.com's experiences with implementing the Wake Lock API.
 tags:
   - blog
   - case-study
-  - wake-lock
+  # - wake-lock
   - capabilities
 ---
 For nearly a century, Betty Crocker has been America's source for modern cooking instruction
@@ -32,17 +33,17 @@ were about 300% higher** for wake lock users compared to all users.
 ## The retired iOS and Android apps
 
 Released to [much fanfare](https://consumergoods.com/betty-crocker-launches-cookbook-app) in 2014,
-Betty Crocker recently took their native apps out of the Apple App Store and the Google Play Store
+Betty Crocker recently took their apps out of the Apple App Store and the Google Play Store
 after they had been deprioritized.
 For a long time, the Betty Crocker team has preferred adding new features to the mobile site
-instead of the native apps.
-The technical platform the native apps were created on was outdated,
+instead of the iOS/Android apps.
+The technical platform the iOS/Android apps were created on was outdated,
 and the business did not have the resources
 to support updating and maintaining the apps moving forward.
 The web app also was objectively way bigger traffic-wise,
 more modern, and easier to enhance.
 
-The native apps did have one *killer feature*, though, that their users loved:
+The iOS/Android apps did have one *killer feature*, though, that their users loved:
 
 > Millennial cooking pro tip: the [@BettyCrocker](https://twitter.com/BettyCrocker) mobile app
   doesn't dim or lock when you're following a recipe.
@@ -57,17 +58,17 @@ The native apps did have one *killer feature*, though, that their users loved:
 
 When cooking with a device, there is nothing more frustrating
 than having to touch the screen with messy hands or even your nose when the screen turns off.
-Betty Crocker asked themselves how they could port the killer feature of their native app
+Betty Crocker asked themselves how they could port the killer feature of their iOS/Android apps
 over to the web app.
 This is when they learned about
-[Project Fugu](https://developers.google.com/web/updates/capabilities) and the
-[Wake Lock API](https://web.dev/wakelock/).
+[Project Fugu](https://developer.chrome.com/blog/capabilities/) and the
+[Wake Lock API](/wakelock/).
 
-![A person kneading dough on a kitchen table covered in flour](doughy-fingers.jpg)
+{% Img src="image/admin/Yoj65m20XpoPdaL8ejAv.jpg", alt="A person kneading dough on a kitchen table covered in flour", width="800", height="533" %}
 
 The Wake Lock API provides a way to prevent the device
 from dimming or locking the screen.
-This capability enables new experiences that, until now, required a native app.
+This capability enables new experiences that, until now, required an iOS/Android app.
 The Wake Lock API reduces the need for hacky and potentially power-hungry workarounds.
 
 ### Requesting a wake lock
@@ -123,24 +124,24 @@ After the prototype proved useful, they designed a
 [Vue.js component](https://vuejs.org/v2/guide/components.html)
 that could be shared across all their brands ([BettyCrocker](https://www.bettycrocker.com/),
 [Pillsbury](https://www.pillsbury.com/), and [Tablespoon](https://www.tablespoon.com/)).
-Even though only Betty Crocker had a native app,
+Even though only Betty Crocker had iOS and Android apps,
 the three sites do have a shared code base,
 so they were able to implement the component once, and deploy it everywhere,
 as shown in the screenshots below.
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="www.bettycrocker.com.png" alt="BettyCrocker.com wake lock toggle" width="600">
-  <figcaption class="w-figcaption">BettyCrocker.com wake lock toggle.</figcaption>
+<figure>
+  {% Img src="image/admin/I9y4AIPEK9P4V0JFn4y1.png", alt="BettyCrocker.com wake lock toggle", width="600", height="170" %}
+  <figcaption>BettyCrocker.com wake lock toggle.</figcaption>
 </figure>
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="www.pillsbury.com.png" alt="Pillsbury.com wake lock toggle" width="600">
-  <figcaption class="w-figcaption">Pillsbury.com wake lock toggle.</figcaption>
+<figure>
+  {% Img src="image/admin/PXS7bnWxYiLKtmLekulr.png", alt="Pillsbury.com wake lock toggle", width="600", height="152" %}
+  <figcaption>Pillsbury.com wake lock toggle.</figcaption>
 </figure>
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="www.tablespoon.com.png" alt="Tablespoon.com wake lock toggle" width="600">
-  <figcaption class="w-figcaption">Tablespoon.com wake lock toggle.</figcaption>
+<figure>
+  {% Img src="image/admin/S5NQabO9qJTwlidx2eZo.png", alt="Tablespoon.com wake lock toggle", width="600", height="152" %}
+  <figcaption>Tablespoon.com wake lock toggle.</figcaption>
 </figure>
 
 When developing the component based on the new site's modernized framework,
@@ -318,18 +319,18 @@ BettyCrocker.com reported the following metrics:
   than for those not using the wake lock feature.
 - Indicators of purchase intent were about 300% higher for wake lock users compared to all users.
 
-<div class="w-stats">
-  <div class="w-stat">
-    <p class="w-stat__figure">3.1<sub class="w-stat__sub">×</sub></p>
-    <p class="w-stat__desc">Longer session duration</p>
+<div class="stats">
+  <div class="stats__item">
+    <p class="stats__figure">3.1<sub>×</sub></p>
+    <p>Longer session duration</p>
   </div>
-  <div class="w-stat">
-    <p class="w-stat__figure">50<sub class="w-stat__sub">%</sub></p>
-    <p class="w-stat__desc">Lower bounce rate</p>
+  <div class="stats__item">
+    <p class="stats__figure">50<sub>%</sub></p>
+    <p>Lower bounce rate</p>
   </div>
-  <div class="w-stat">
-    <p class="w-stat__figure">300<sub class="w-stat__sub">%</sub></p>
-    <p class="w-stat__desc">Higher purchase intent indicators</p>
+  <div class="stats__item">
+    <p class="stats__figure">300<sub>%</sub></p>
+    <p>Higher purchase intent indicators</p>
   </div>
 </div>
 
@@ -346,7 +347,7 @@ Other examples are boarding pass or ticket apps that need to keep the screen on
 until the barcode has been scanned, kiosk-style apps that keep the screen on continuously,
 or web-based presentation apps that prevent the screen from sleeping during a presentation.
 
-We have compiled [everything you need to know about the Wake Lock API](https://web.dev/wakelock/)
+We have compiled [everything you need to know about the Wake Lock API](/wakelock/)
 in a comprehensive article on this very site.
 Happy reading, and happy cooking!
 

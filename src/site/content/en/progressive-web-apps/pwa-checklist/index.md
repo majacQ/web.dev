@@ -5,7 +5,7 @@ authors:
   - samrichard
   - petelepage
 date: 2020-01-06
-updated: 2020-02-24
+updated: 2022-07-18
 description: |
   What makes a good, or great Progressive Web App?
 tags:
@@ -16,7 +16,7 @@ tags:
 <!--lint disable heading-increment-->
 
 Progressive Web Apps (PWA) are built and enhanced with modern APIs to deliver
-native-like capabilities, reliability, and installability while reaching
+enhanced capabilities, reliability, and installability while reaching
 _anyone, anywhere, on any device_ with a single codebase. To help you create
 the best possible experience, use the [core](#core) and [optimal](#optimal)
 checklists and recommendations to guide you.
@@ -53,11 +53,11 @@ application to how it actually performs.
 
 While all applications have different needs, the performance audits in
 Lighthouse are based on the
-[RAIL user-centric performance model](https://developers.google.com/web/fundamentals/performance/rail),
+[RAIL user-centric performance model](/rail/),
 and scoring high on those audits will make it more likely that your users have
 an enjoyable experience. You can also use
-[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
-or the [Chrome User Experience Report](https://developers.google.com/web/tools/chrome-user-experience-report/)
+[PageSpeed Insights](https://pagespeed.web.dev/)
+or the [Chrome User Experience Report](https://developer.chrome.com/docs/crux/)
 to get real-world performance data for your web app.
 
 #### How
@@ -119,7 +119,7 @@ cross-browser, progressive methodology.
   [Progressive Enhancement: What It Is, And How To Use It?](https://www.smashingmagazine.com/2009/04/progressive-enhancement-what-it-is-and-how-to-use-it/)
   gives a practical introduction and links to more advanced topics.
 * MDN has an article titled
-  [Implementing feature detection](https://developer.mozilla.org/en-US/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection)
+  [Implementing feature detection](https://developer.mozilla.org/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection)
   that talks about how to detect a feature  by directly querying it.
 
 {% endDetails %}
@@ -179,24 +179,23 @@ as they are to mobile.
 Provides a custom offline page
 
 When users are offline, keeping them in your PWA provides a more seamless
-and native-like experience than dropping back to the default browser offline
+experience than dropping back to the default browser offline
 page.
 
 {% endDetailsSummary %}
 
 When users are offline, keeping them in your PWA provides a more seamless
-and native-like experience than dropping back to the default browser offline
+experience than dropping back to the default browser offline
 page.
 
 #### Why
 
 Users expect installed apps to work regardless of their connection status.
-A native app never shows a blank page when it is offline, and a Progressive
+A platform-specific app never shows a blank page when it is offline, and a Progressive
 Web App should never show the browser default offline page. Providing a
 custom offline experience, both when a user navigates to a URL that hasn't
 been cached and when a user tries to use a feature that requires a connection,
-helps to bridge the native-web app gap and makes your experience feel more
-native.
+helps your web experience feel like it's part of the device it's running on.
 
 #### How
 
@@ -232,7 +231,7 @@ appears in the task list, just like other apps.
 Why would you want a user to install your PWA? The same reason you'd want a
 user to install your app from an app store. Users who install your apps
 are your most engaged audience, and have better engagement metrics than
-typical visitors, often at parity with native app users on mobile devices.
+typical visitors, often at parity with app users on mobile devices.
 These metrics include more repeat visits, longer times on your site and
 higher conversion rates.
 
@@ -248,8 +247,8 @@ doing it yourself.
 
 To create a truly great Progressive Web App, one that feels like a
 best-in-class app, you need more than just the core checklist. The optimal
-Progressive Web App checklist is about making your PWA feel native while
-taking advantage of what makes the web powerful.
+Progressive Web App checklist is about making your PWA feel like it's part
+of the device it's running on while taking advantage of what makes the web powerful.
 
 
 {% Details %}
@@ -281,14 +280,14 @@ for users.
 After determining which features your users expect to work offline, you'll
 need to make your content available and adaptable to offline contexts. In
 addition, you can use
-[IndexedDB](https://developers.google.com/web/ilt/pwa/working-with-indexeddb),
+[IndexedDB](/indexeddb/),
 an in-browser NoSQL storage system, to store and retrieve data, and
-[background sync](https://developers.google.com/web/updates/2015/12/background-sync)
+[background sync](https://developer.chrome.com/blog/background-sync/)
 to allow users to take actions while offline and defer server communications
 until the user has a stable connection again. You can also use service
 workers to store other kinds of content, such as images, video files, and
 audio files for offline use, as well as use them to implement
-[safe, long-lived sessions](https://developers.google.com/web/updates/2016/06/2-cookie-handoff)
+[safe, long-lived sessions](https://developer.chrome.com/blog/2-cookie-handoff/)
 to keep users authenticated. From a user experience perspective, you can use
 [skeleton screens](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a)
 that give users a perception of speed and content while loading that can
@@ -322,7 +321,7 @@ making your PWA accessible, you ensure it's usable for everyone.
 
 W3C's [Introduction to Web Accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/)
 is a good place to start. A majority of accessibility testing
-must be done manually. Tools like the [Accessibility](/lighthouse-accessibility/)
+must be done manually. Tools like the [Accessibility](https://developer.chrome.com/docs/lighthouse/accessibility/)
 audits in Lighthouse, [axe](https://github.com/dequelabs/axe-core), and
 [Accessibility Insights](https://accessibilityinsights.io/) can help you
 automate some accessibility testing. It's also important to use semantically
@@ -362,7 +361,7 @@ client-side rendering.
 Start by ensuring that each URL has a unique, descriptive title and meta
 description. Then you can use the
 [Google Search Console](https://search.google.com/search-console/about)
-and the [Search Engine Optimization audits](/lighthouse-seo/) in Lighthouse to
+and the [Search Engine Optimization audits](https://developer.chrome.com/docs/lighthouse/seo/) in Lighthouse to
 help you debug and fix discoverability issues with your PWA. You can also use
 [Bing](https://www.bing.com/toolbox/webmaster)'s or
 [Yandex](https://webmaster.yandex.com/welcome/)'s webmaster tools, and
@@ -396,7 +395,7 @@ input-specific controls as well (such as pull-to-refresh).
 
 #### How
 
-The [Pointer Events API](https://developers.google.com/web/updates/2016/10/pointer-events)
+The [Pointer Events API](https://developer.chrome.com/blog/pointer-events/)
 provides a unified interface for working with various input options, and is
 especially good for adding stylus support. For supporting both touch and
 keyboard, ensure that you're using the correct semantic elements (anchors,
@@ -432,7 +431,7 @@ in-context rationale to the user for why you need that permission.
 
 #### How
 
-The [Permission UX](https://developers.google.com/web/fundamentals/push-notifications/permission-ux)
+The [Permission UX](/push-notifications-permissions-ux/)
 article and UX Planet's
 [The Right Ways to Ask Users for Permissions](https://uxplanet.org/mobile-ux-design-the-right-ways-to-ask-users-for-permissions-6cdd9ab25c27)
 are good resources to understand how to design permission prompts that, while

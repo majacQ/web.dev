@@ -1,10 +1,11 @@
 ---
 layout: post
 title: Accessibility auditing with react-axe and eslint-plugin-jsx-a11y
-hero: hero-accessibility-auditing-react.jpg
+hero: image/admin/CYDdWUK4iah3Xe8yEfoR.jpg
 subhead: |
   Your React site is not progressive if it's not accessible. Auditing during development can help you spot any issues.
 date: 2019-04-29
+updated: 2020-07-16
 description: |
   react-axe is a library that audits a React application and logs any
   accessibility issues to the Chrome DevTools console. eslint-plugin-jsx-a11y
@@ -78,7 +79,7 @@ To enable pre-configured linting provided by CRA:
 
 Some common accessibility issues will now show up.
 
-![Image accessibility warning in linter](./img-a11y-lint.png)
+{% Img src="image/admin/n8Da1iOU3XCpu7avccaS.png", alt="Image accessibility warning in linter", width="800", height="500" %}
 
 To check for even more accessibility rules, modify the file to automatically
 include all the recommended rules by the plugin:
@@ -97,7 +98,7 @@ If you would like an even stricter subset of rules, switch to strict mode:
 }
 ```
 
-![Label accessibility error in linter](./label-a11y-lint.png)
+{% Img src="image/admin/LVsEpuH55MeHaY7RIpl3.png", alt="Label accessibility error in linter", width="800", height="500" %}
 
 The project
 [documentation](https://github.com/evcohen/eslint-plugin-jsx-a11y#difference-between-recommended-and-strict-mode)
@@ -121,7 +122,7 @@ You now only need to initialize the module in `index.js`:
 ```js
 if (process.env.NODE_ENV !== 'production') {
   import('react-axe').then(axe => {
-    axe(React, ReactDOM, 1000);
+    axe.default(React, ReactDOM, 1000);
     ReactDOM.render(<App />, document.getElementById('root'));
   });
 } else {
@@ -130,15 +131,15 @@ if (process.env.NODE_ENV !== 'production') {
 ```
 
 A
-[dynamic import](https://developers.google.com/web/updates/2017/11/dynamic-import)
+[dynamic import](https://v8.dev/features/dynamic-import)
 is used here to only load the library when it is not in production mode before
 rendering and booting up the root `App` component. This ensures that it is not
-unecessarily included in the final production bundle.
+unnecessarily included in the final production bundle.
 
 Now when you run the application during development, issues are surfaced
 directly to the Chrome DevTools console.
 
-<img class="w-screenshot w-screenshot--filled" src="./react-axe-devtools.png" alt="React Axe in Chrome DevTools">
+{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/7kiPTpXD47VBf83n6mqz.png", alt="React Axe in Chrome DevTools", width="800", height="430" %}
 
 A severity level is also assigned for each violation. These levels are:
 

@@ -4,7 +4,7 @@ title: Using a PWA in your Android app
 authors:
   - andreban
 date: 2020-03-19
-updated: 2020-04-30
+updated: 2021-12-06
 description: |
   How to open a Progressive Web App in an Android app.
 tags:
@@ -14,7 +14,7 @@ tags:
 ## Start a PWA in an Android app
 
 [Progressive Web Apps][1] (PWA) are web applications that use app-like features to create
-high quality experiences that are fast, reliable and engaging.
+high quality experiences that are fast, reliable, and engaging.
 
 The web has incredible reach and offers powerful ways for users to discover new experiences. But
 users are also used to searching for applications in their operating system store. Those users are,
@@ -26,7 +26,7 @@ Apps from their Android apps.
 
 Trusted Web Activity is an open standard that allows browsers to provide a fully web platform
 compatible container that renders PWAs inside an Android app. The feature
-is available in [Chrome][2], and in development in [Firefox Preview Nightly][3].
+is available in [Chrome][2], and in development in [Firefox Nightly][3].
 
 ### Existing solutions were limited
 
@@ -66,8 +66,23 @@ nightly version.
 ### Quality Criteria
 
 Web developers should use a Trusted Web Activity when they want to include web content in an
-Android app. Web content in a Trusted Web Activity must meet Lighthouse's PWA install quality
-criteria and additional Android-specific criteria such as [policy compliance][9].
+Android app.
+
+Web content in a Trusted Web Activity must meet the PWA installability criteria.
+
+Additionally, to match the behavior users expect from Android applications,
+[Chrome 86 introduced a change][18] where failing to handle the following scenarios is considered a
+crash:
+
+  - Failure to verify digital asset links at application launch.
+  - Failure to return HTTP 200 for an offline network resource request.
+  - A navigation request returning an HTTP 404 or 5xx error".
+
+When one of those scenarios happens in the Trusted Web Activity, it causes a user visible
+crash of the Android application. Check out the [guidance][19] on handling those scenarios in your
+service worker.
+
+The application must also meet additional Android-specific criteria such as [policy compliance][9].
 
 {% Aside 'caution' %}
   When your app is designed primarily for children under 13, additional
@@ -75,11 +90,10 @@ criteria and additional Android-specific criteria such as [policy compliance][9]
   with using Trusted Web Activity.
 {% endAside %}
 
-<figure class="w-figure w-figure--center">
-  <img src="lh-score.png" style="max-width: 100%;"
-    alt="A screenshot showing the Lighthouse score for AirHorn, with the PWA badge and a performance score of 100."/>
-  <figcaption class="w-figcaption w-figcaption--fullbleed">
-    The PWA badge and a minimum Lighthouse score of 80 are required.
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/9Z70W3aCI8ropKpMXHcz.png", alt="A screenshot showing the Lighthouse score for AirHorn, with the PWA badge and a performance score of 100.", width="800", height="141" %}
+  <figcaption>
+    The PWA badge in Lighthouse shows if your PWA passes the installability criteria.
   </figcaption>
 </figure>
 
@@ -157,11 +171,11 @@ Finally, move your application from the closed test channel to production!
 
 [1]: /progressive-web-apps/
 [2]: https://play.google.com/store/apps/details?id=com.android.chrome
-[3]: https://play.google.com/store/apps/details?id=org.mozilla.fenix.nightly
+[3]: https://play.google.com/store/apps/details?id=org.mozilla.fenix
 [4]: https://developer.android.com/reference/android/webkit/WebView
 [5]: https://cordova.apache.org/
 [6]: /contact-picker/
-[7]: /native-file-system/
+[7]: /file-system-access/
 [8]: https://developers.google.com/web/updates/2019/02/using-twa
 [9]: https://play.google.com/about/developer-content-policy/
 [10]: https://github.com/GoogleChromeLabs/bubblewrap
@@ -170,5 +184,7 @@ Finally, move your application from the closed test channel to production!
 [13]: https://www.davrous.com/2020/02/07/publishing-your-pwa-in-the-play-store-in-a-couple-of-minutes-using-pwa-builder/
 [14]: https://developers.google.com/digital-asset-links/v1/getting-started
 [15]: https://play.google.com/store/apps/details?id=dev.conn.assetlinkstool
-[16]: https://developers.google.com/web/tools/lighthouse
+[16]: https://developer.chrome.com/docs/lighthouse/overview/
 [17]: /fugu-status/
+[18]: https://blog.chromium.org/2020/06/changes-to-quality-criteria-for-pwas.html
+[19]: https://developer.chrome.com/docs/android/trusted-web-activity/whats-new/#updates-to-the-quality-criteria

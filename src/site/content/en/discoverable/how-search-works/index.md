@@ -50,7 +50,7 @@ local storage (like IndexedDB) are available.
 After retrieving a document, the crawler hands the content to the search engine
 to add it to the index. The search engine now renders and analyzes the content
 to understand it. Rendering means displaying the page as a browser would
-([with some limitations](https://developers.google.com/search/docs/guides/rendering)).
+([with some limitations](https://developers.google.com/search/docs/crawling-indexing/javascript/fix-search-javascript)).
 
 Search engines look at keywords, the title, links, headings, text, and many
 other things. These are called **signals** which describe the content and
@@ -65,7 +65,7 @@ the same content.
 
 ## Serving the most useful results
 
-Search engines do more work then just matching the query to keywords in the
+Search engines do more work than just matching the query to keywords in the
 index. To give useful results, they might consider context, alternative wording,
 location of the user, and more. For example, "silicon valley" might refer to the
 geographic region or the TV show. But if the query is "silicon valley cast",

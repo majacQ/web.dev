@@ -18,9 +18,8 @@
  * @fileoverview A Material snackbar for showing notifications.
  */
 
-import {html} from 'lit-element';
+import {html} from 'lit';
 import {BaseElement} from '../BaseElement';
-import './_styles.scss';
 
 const OPENING_ANIMATION_TIME = 150;
 const CLOSING_ANIMATION_TIME = 75;
@@ -33,6 +32,12 @@ class Snackbar extends BaseElement {
       type: {type: String},
       action: {type: Object}, // action is a Function
     };
+  }
+
+  constructor() {
+    super();
+    this.action = null;
+    this.type = null;
   }
 
   get open() {
@@ -59,15 +64,13 @@ class Snackbar extends BaseElement {
         We serve cookies on this site to analyze traffic, remember your
         preferences, and optimize your experience.
       </div>
-      <div class="web-snackbar__actions">
+      <div class="web-snackbar__actions cluster gutter-base">
         <a
           href="https://policies.google.com/technologies/cookies"
-          class="w-button web-snackbar__action"
+          class="button"
           >More details</a
         >
-        <button @click=${this.action} class="w-button web-snackbar__action">
-          OK
-        </button>
+        <button @click=${this.action} class="button">OK</button>
       </div>
     `;
   }
@@ -82,11 +85,7 @@ class Snackbar extends BaseElement {
         break;
     }
 
-    return html`
-      <div class="web-snackbar__surface">
-        ${template}
-      </div>
-    `;
+    return html` <div class="web-snackbar__surface flow">${template}</div> `;
   }
 }
 

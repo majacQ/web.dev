@@ -13,114 +13,103 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+const yaml = require('js-yaml');
 const fs = require('fs');
 const path = require('path');
-const contributors = require('../_data/contributors');
-const {livePosts} = require('../_filters/live-posts');
-const setdefault = require('../_utils/setdefault');
 
-/**
- * Generate map the posts by author's username/key
- *
- * @param {Array<{ data: { authors: any[] }}>} posts
- * @return {Map<string, Array<Object>>} Map of posts by author's username/key
- */
-const findAuthorsPosts = (posts) => {
-  const authorsMap = new Map();
-  posts.forEach((post) => {
-    const authors = post.data.authors || [];
-    authors.forEach((author) => {
-      const postsByAuthor = setdefault(authorsMap, author, []);
-      postsByAuthor.push(post);
-      authorsMap.set(author, postsByAuthor);
-    });
-  });
-  return authorsMap;
-};
+/** @type AuthorsData */
+const authorsData = require('../_data/authorsData.json');
+const authorsYaml = yaml.safeLoad(
+  fs.readFileSync(
+    path.join(__dirname, '..', '_data', 'i18n', 'authors.yml'),
+    'utf-8',
+  ),
+);
+const {isLive} = require('../_filters/is-live');
+const {sortByUpdated} = require('../_utils/sort-by-updated');
 
-/**
- * Finds image of author, returns path.
- *
- * @param {string} key
- * @return {string | void} Path for image.
- */
-const findAuthorsImage = (key) => {
-  for (const size of ['@3x', '@2x', '']) {
-    const jpegPath = path.join('src/images/authors', `${key}${size}.jpg`);
-    if (fs.existsSync(jpegPath)) {
-      return path.join('/images/authors', `${key}${size}.jpg`);
-    }
-  }
-};
+/** @type Authors */
+let processedCollection;
+const PLACEHOLDER_IMG = 'image/admin/1v5F1SOBl46ZghbHQMle.svg';
 
 /**
  * Returns all authors with their posts.
  *
- * @param {any} collections Eleventy collection object
- * @return {Object.<string, Author>}
+ * @param {EleventyCollectionObject} [collections] Eleventy collection object
+ * @return {Authors}
  */
 module.exports = (collections) => {
-  // Get all posts and sort them
-  const posts = collections
-    .getFilteredByGlob('**/*.md')
-    .filter(livePosts)
-    .sort((a, b) => b.date - a.date);
+  if (processedCollection) {
+    return processedCollection;
+  }
 
-  const authorsPosts = findAuthorsPosts(posts);
-
-  /** @constant @type {Object.<string, Author>} @default */
+  /** @type Authors */
   const authors = {};
 
-  Object.values(contributors)
-    .sort((a, b) => a.title.localeCompare(b.title))
-    .forEach((author) => {
-      // This updates the shared contributors object with meta information and is safe to be called multiple times.
-      author.url = path.join('/en', author.href);
-      author.data = {
-        title: author.title,
-        subhead: author.description,
-      };
+  Object.keys(authorsYaml).forEach((key) => {
+    const authorData = authorsData[key] || {};
+    const href = `/authors/${key}/`;
+    let elements = [];
+    let date, updated;
+    const image = authorData.image || PLACEHOLDER_IMG;
 
-      author.elements = authorsPosts.has(author.key)
-        ? authorsPosts.get(author.key)
-        : [];
+    // Get posts
+    if (collections) {
+      elements = collections
+        .getFilteredByGlob('**/*.md')
+        .filter(
+          (item) =>
+            isLive(item) &&
+            !item.data.excludeFromAuthors &&
+            (item.data.authors || []).includes(key),
+        )
+        .sort(sortByUpdated);
+    }
 
-      // If the author doesn't have any posts, use their Twitter profile.
-      if (author.elements.length === 0) {
-        if (!author.twitter) {
-          // If we're screenshot testing just ignore it.
-          if (process.env.PERCY) {
-            return;
-          }
+    // Limit posts for percy
+    if (process.env.PERCY) {
+      elements = elements.slice(-6);
+    }
 
-          // posts.length might be empty if we're generating partials so only
-          // log a warning if it has a value and we're doing a regular build.
-          // Note this is checking for _all_ posts and not just the posts
-          // by this specific author.
-          if (posts.length) {
-            console.warn(
-              `author ${
-                author.title
-              } has no posts and no social: ${JSON.stringify(author)}\n`,
-            );
-          }
-        } else {
-          author.href = `https://twitter.com/${author.twitter}`;
-        }
+    // Set created on date and updated date to be used for indexing to detect updates
+    if (elements.length > 0) {
+      date = elements.slice(-1).pop().data.date;
+      const tempUpdated = elements.slice(0, 1).pop().data.date;
+      if (date !== tempUpdated) {
+        updated = tempUpdated;
       }
+    }
 
-      const authorsImage = findAuthorsImage(author.key);
-      if (authorsImage) {
-        author.data.hero = authorsImage;
-        author.data.alt = author.title;
-      }
+    /** @type AuthorsItem */
+    const author = {
+      ...authorData,
+      data: {
+        date,
+        hero: image,
+        updated,
+      },
+      description: `i18n.authors.${key}.description`,
+      elements,
+      href,
+      image,
+      key,
+      title: `i18n.authors.${key}.title`,
+      url: href,
+    };
 
-      if (process.env.PERCY) {
-        author.elements = author.elements.slice(-6);
-      }
+    // If author has no posts, point to their Twitter
+    if (author.elements.length === 0 && author.twitter) {
+      author.href = `https://twitter.com/${author.twitter}`;
+    }
 
+    if (author.elements.length > 0 || !collections || author.twitter) {
       authors[author.key] = author;
-    });
+    }
+  });
+
+  if (collections) {
+    processedCollection = authors;
+  }
 
   return authors;
 };

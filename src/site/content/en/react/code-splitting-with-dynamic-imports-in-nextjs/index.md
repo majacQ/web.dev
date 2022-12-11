@@ -6,13 +6,15 @@ authors:
 subhead: |
   How to speed up your Next.js app with code splitting and smart loading strategies.
 date: 2019-11-08
+feedback:
+  - api
 ---
 
 ## What will you learn?
 
 This post explains different types of [code
 splitting](/reduce-javascript-payloads-with-code-splitting/) and how to use
-dynamic imports to speed up your Next.js apps. 
+dynamic imports to speed up your Next.js apps.
 
 ## Route-based and component-based code splitting
 
@@ -21,13 +23,13 @@ When users load your application, Next.js only sends the code needed for the
 initial route. When users navigate around the application, they fetch the chunks
 associated with the other routes. Route-based code splitting minimizes the
 amount of script that needs to be parsed and compiled at once, which results in
-faster page load times. 
+faster page load times.
 
 While route-based code splitting is a good default, you can further optimize the
 loading process with code splitting on the component level. If you have large
 components in your app, it's a great idea to split them into separate chunks.
 That way, any large components that are not critical or only render on certain
-user interactions (like clicking a button) can be lazy-loaded. 
+user interactions (like clicking a button) can be lazy-loaded.
 
 Next.js supports [dynamic `import()`](https://v8.dev/features/dynamic-import),
 which allows you to import JavaScript modules (including React components)
@@ -35,7 +37,7 @@ dynamically and load each import as a separate chunk. This gives you
 component-level code splitting and enables you to control resource loading so
 that users only download the code they need for the part of the site that
 they're viewing. In Next.js, these components are [server-side rendered
-(SSR)](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
+(SSR)](/rendering-on-the-web/)
 by default.
 
 ## Dynamic imports in action
@@ -44,7 +46,7 @@ This post includes several versions of a sample app that consists of a simple
 page with one button. When you click the button, you get to see a cute puppy. As
 you move through each version of the app, you'll see how dynamic imports are
 different from [static
-imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+imports](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Statements/import)
 and how to work with them.
 
 In the first version of the app, the puppy lives in `components/Puppy.js`. To
@@ -55,12 +57,12 @@ display the puppy on the page, the app imports the `Puppy` component in
 import Puppy from "../components/Puppy";
 ```
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-<iframe src="https://glitch.com/embed/#!/embed/static-import?path=pages/index.js&previewSize=0" allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-        alt="A basic Next.js app on Glitch"
-        style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
-
+{% Glitch {
+  id: 'static-import',
+  path: 'index.js',
+  previewSize: 0,
+  height: 480
+} %}
 
 To see how Next.js bundles the app, inspect the network trace in DevTools:
 
@@ -75,15 +77,15 @@ To see how Next.js bundles the app, inspect the network trace in DevTools:
 When you load the page, all the necessary code, including the `Puppy.js`
 component, is bundled in `index.js`:
 
-<figure class="w-figure">
-<img src="./network1.png" alt="DevTools Network tab showing showing six JavaScript files: index.js, app.js, webpack.js, main.js, 0.js and the dll (dynamic-link library) file.">
+<figure>
+{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/6KWlTYFhoIEIGqnuMwlh.png", alt="DevTools Network tab showing showing six JavaScript files: index.js, app.js, webpack.js, main.js, 0.js and the dll (dynamic-link library) file.", width="800", height="665" %}
 </figure>
 
 When you press the **Click me** button, only the request for the puppy JPEG is
 added to the **Network** tab:
 
-<figure class="w-figure">
-<img src="./network2.png" alt="DevTools Network tab after the button click, showing the same six JavaScript files and one image.">
+<figure>
+{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/7MkXVqnqfIbW74VV48kB.png", alt="DevTools Network tab after the button click, showing the same six JavaScript files and one image.", width="800", height="665" %}
 </figure>
 
 The downside of this approach is that even if users don't click the button to
@@ -105,11 +107,11 @@ import dynamic from "next/dynamic";
 const Puppy = dynamic(import("../components/Puppy"));
 ```
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-<iframe src="https://glitch.com/embed/#!/embed/dynamic-import-nextjs?path=pages/index.js:29:10&attributionHidden=true"
-        alt="A basic Next.js app on Glitch"
-        style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
+{% Glitch {
+  id: 'dynamic-import-nextjs',
+  path: 'pages/index.js:29:10',
+  height: 480
+} %}
 
 Follow the steps from the first example to inspect the network trace.
 
@@ -117,15 +119,15 @@ When you first load the app, only `index.js` is downloaded. This time it's
 0.5&nbsp;KB smaller (it went down from 37.9&nbsp;KB to 37.4&nbsp;KB) because it
 doesn't include the code for the `Puppy` component:
 
-<figure class="w-figure">
-<img src="./network3.png" alt="DevTools Network showing the same six JavaScript files, except index.js is now 0.5 KB smaller.">
+<figure>
+{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/K7Ii3bxUkb37LrZjjWT1.png", alt="DevTools Network showing the same six JavaScript files, except index.js is now 0.5 KB smaller.", width="800", height="665" %}
 </figure>
 
 The `Puppy` component is now in a separate chunk, `1.js`, which is loaded only
 when you press the button:
 
-<figure class="w-figure">
-<img src="./network4.png" alt="DevTools Network tab after the button click, showing the additional 1.js file and the image added to the bottom of the file list.">
+<figure>
+{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/1DfVDv5poQmwXwOKmnvd.png", alt="DevTools Network tab after the button click, showing the additional 1.js file and the image added to the bottom of the file list.", width="800", height="665" %}
 </figure>
 
 {% Aside %} By default, Next.js names these dynamic chunks _number_.js, where
@@ -147,11 +149,11 @@ const Puppy = dynamic(() => import("../components/Puppy"), {
 });
 ```
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-<iframe src="https://glitch.com/embed/#!/embed/dynamic-import-loading?path=pages/index.js:7:27&attributionHidden=true"
-        alt="A basic Next.js app on Glitch"
-        style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
+{% Glitch {
+  id: 'dynamic-import-loading',
+  path: 'pages/index.js:7:27',
+  height: 480
+} %}
 
 To see the loading indictor in action, simulate slow network connection in
 DevTools:
@@ -169,8 +171,8 @@ DevTools:
 Now when you click the button it takes a while to load the component and the app
 displays the "Loading…" message in the meantime.
 
-<figure class="w-figure">
-<img src="./loading.png" alt='A dark screen with the text "Loading...".'>
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/tjlpmwolBVp1jh948Fln.png", alt="A dark screen with the text \"Loading...\".", width="800", height="663" %}
 </figure>
 
 ## Dynamic imports without SSR
@@ -184,11 +186,11 @@ const Puppy = dynamic(() => import("../components/Puppy"), {
 });
 ```
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-<iframe src="https://glitch.com/embed/#!/embed/dynamic-import-no-ssr?path=pages/index.js:5:0&attributionHidden=true"
-        alt="A basic Next.js app on Glitch"
-        style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
+{% Glitch {
+  id: 'dynamic-import-no-ssr',
+  path: 'pages/index.js:5:0',
+  height: 480
+} %}
 
 ## Conclusion
 

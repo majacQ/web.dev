@@ -4,7 +4,7 @@ subhead: Building games for the modern web.
 authors:
   - tomgreenaway
 date: 2019-08-21
-hero: hero.jpg
+hero: image/admin/d14lKdJ4iYwr1wI8AgA3.jpg
 hero_position: center
 hero_fit: contain
 alt: Game design, business and tools for modern web games.
@@ -15,7 +15,7 @@ description: |
 tags:
   - blog # blog is a required tag for the article to show up in the blog.
   - games
-  - game-design
+  # - game-design
   - monetization
   - tools
 ---
@@ -45,13 +45,13 @@ By "functional game" I refer to the three most core elements of what makes a gam
 - Visuals
 - Audio
 
-In each of these areas, the web platform has made significant strides in the past few years. For CPU performance we have access to a [performant new standard called Web Assembly](https://www.youtube.com/watch?v=njt-Qzw0mVY). From the graphics side, [WebGL 1.0](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API) has [good cross-browser support](https://developer.mozilla.org/en-US/docs/Web/API/WebGL_API#WebGL_1) and future standards such as [WebGPU](https://www.youtube.com/watch?v=K2JzIUIHIhc) are positioning the web platform for an extensible future of graphics programming similar to Vulkan and Metal. Finally, for web audio we have the [common Web Audio API and more recently the Audio Worklet API](https://www.youtube.com/watch?v=-GaD0RCp-Q0).
+In each of these areas, the web platform has made significant strides in the past few years. For CPU performance we have access to a [performant new standard called WebAssembly](https://www.youtube.com/watch?v=njt-Qzw0mVY). From the graphics side, [WebGL 1.0](https://developer.mozilla.org/docs/Web/API/WebGL_API) has [good cross-browser support](https://developer.mozilla.org/docs/Web/API/WebGL_API#WebGL_1) and future standards such as [WebGPU](https://www.youtube.com/watch?v=K2JzIUIHIhc) are positioning the web platform for an extensible future of graphics programming similar to Vulkan and Metal. Finally, for web audio we have the [common Web Audio API and more recently the Audio Worklet API](https://www.youtube.com/watch?v=-GaD0RCp-Q0).
 
 Recently, Unity previewed a new runtime called Project Tiny which is focused on building 2D games for HTML5-based platforms. Project Tiny applies a new modular design to the engine structure of Unity enabling the core Unity engine to be under 1 megabyte in size.
 
-<figure class="w-figure">
-  <img src="./unity-tanks.gif" alt="Two tanks engaged in a battle.">
-  <figcaption class="w-figcaption">Unity's Tanks Demo exported via HTML5.</figcaption>
+<figure>
+  {% Img src="image/admin/NAydOzjTBzlBnom2SubM.gif", alt="Two tanks engaged in a battle.", width="800", height="449" %}
+  <figcaption>Unity's Tanks Demo exported via HTML5.</figcaption>
 </figure>
 
 From the technical side, there has never been a better time to embrace web game development.
@@ -66,13 +66,13 @@ Good game developers know that to capitalise on a particular platform–whether 
 
 In other words, you must respect the expectations of the users of the platform you're building for. What do users of the web expect? They expect web content to load fast and be interactive quickly. In my talk, I covered several examples of ways–both on and off the web–that games have been designed to load quickly, pull users into their game worlds, engage those users, and provide users with additional incentives to share their experiences.
 
-![Three games with minimalist art styles.](./minimalist-games.png)
+{% Img src="image/admin/ppUw6LsWIqub2vRiMuaG.png", alt="Three games with minimalist art styles.", width="800", height="368" %}
 
 I personally believe that the key to building a successful web game is to lean into this unique characteristic of the web. Specifically, the strength of the web's URL structure and the sharing loop that users can join in.
 
 Here's an example of a web game I built using [Construct 3](http://construct.net) that leverages the URL in a fun and engaging way.
 
-![A level editor interface for a game.](./space-board.png)
+{% Img src="image/admin/L0wolsGPYf4pQjlI4i1g.png", alt="A level editor interface for a game.", width="800", height="608" %}
 
 [Space Board](https://io-space-board.firebaseapp.com) is a very simple game that can be played on either mobile with touch controls or on desktop with keyboard input. The objective is to navigate a maze of obstacles to reach a goal at the end.
 
@@ -97,20 +97,20 @@ At present, there are ultimately two schools of thought with regards to how a ga
 - Monetizing the games directly
 - Treating them as an acquisition channel
 
-Treating web games as an acquisition channel means leveraging the web version of your native game as a mechanism to get your players hooked and convincing them to download your larger native binary. You then generate revenue with the native platform's built-in payment and billing backends.
+Treating web games as an acquisition channel means leveraging the web version of your iOS/Android/desktop game as a mechanism to get your players hooked and convincing them to download your larger iOS/Android/desktop binary. You then generate revenue with the iOS/Android/desktop platform's built-in payment and billing backends.
 
-Monetization is usually a mixture of advertising and microtransactions. There is still work to be done for the web to compete with native mobile platforms in game advertising. For example, formats like Rewarded Video Ads have been extremely popular for native mobile games for several years and yet we're only now seeing ad networks deploy these formats on the web.
+Monetization is usually a mixture of advertising and microtransactions. There is still work to be done for the web to compete with mobile platforms in game advertising. For example, formats like Rewarded Video Ads have been extremely popular for mobile games for several years and yet we're only now seeing ad networks deploy these formats on the web.
 
 Nonetheless, there are game developers who continue to be successful on the open web through advertising via traditional banner ads and interstitial video ads. Take a look at [Adsense for Games](https://support.google.com/adsense/answer/1705831) for more information on these formats.
 
-For microtransactions, the web offers complete flexibility due to the limitless number of payment methods that can be implemented. However this quality is a double-edged sword. The negative side of this is that players have less implicit trust towards a new website they discover versus the familiarity of the native mobile store payment methods.
+For microtransactions, the web offers complete flexibility due to the limitless number of payment methods that can be implemented. However this quality is a double-edged sword. The negative side of this is that players have less implicit trust towards a new website they discover versus the familiarity of the platform-specific mobile store payment methods.
 
 One solution that brings a more consistent payment UI to the web is the [Payment Request API](https://developers.google.com/web/fundamentals/payments/). This API invokes a UI that is shown by the browser and streamlines the acquisition of payment details such as credit cards and billing addresses. However, acquiring payment details is just the first step of making a transaction. You need a backend billing platform as well.
 
 ## The future
 
-We've seen several surprisingly successful web games over the past few years. Slither.io has built a mixed web and native business that demonstrates the tremendous reach and viral growth opportunity that the web offers. Portals such as [Poki.com](https://poki.com/) are innovating in their user experience and releasing new games every day including titles that match the fidelity of their mobile counterparts, such as Subway Surfers or Crossy Road.
+We've seen several surprisingly successful web games over the past few years. Slither.io has built a mixed web and platform-specific business that demonstrates the tremendous reach and viral growth opportunity that the web offers. Portals such as [Poki.com](https://poki.com/) are innovating in their user experience and releasing new games every day including titles that match the fidelity of their mobile counterparts, such as Subway Surfers or Crossy Road.
 
-Furthermore, if you look outside of the open web you can see that web games are already taking off. Closed ecosystems such as WeChat and LINE offer satisfying games which aren't playable on the open web but which are built on top of web technologies like HTML5 and WebViews. This is a clear sign that the web has reached a level of fidelity that's capable of rivaling native mobile games–perhaps not in a textbook definition of fidelity but in a more important metric: player attention.
+Furthermore, if you look outside of the open web you can see that web games are already taking off. Closed ecosystems such as WeChat and LINE offer satisfying games which aren't playable on the open web but which are built on top of web technologies like HTML5 and WebViews. This is a clear sign that the web has reached a level of fidelity that's capable of rivaling platform-specific mobile games–perhaps not in a textbook definition of fidelity but in a more important metric: player attention.
 
 

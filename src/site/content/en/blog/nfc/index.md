@@ -4,24 +4,24 @@ subhead: Reading and writing to NFC tags is now possible.
 authors:
   - beaufortfrancois
 date: 2020-02-12
-updated: 2020-06-04
-hero: hero.jpg
-thumbnail: thumbnail.jpg
+updated: 2022-01-27
+hero: image/admin/TqG3qb5MiLGNTnAgKtqO.jpg
+thumbnail: image/admin/8tWkeYbKLxSd2YgTUSGv.jpg
 alt: A photo of NFC tags
 description: |
   Reading and writing to NFC tags is now possible on Chrome for Android.
-origin_trial:
-  url: https://developers.chrome.com/origintrials/#/view_trial/236438980436951041
 tags:
   - blog # blog is a required tag for the article to show up in the blog.
   - capabilities
+  - devices
+feedback:
+  - api
+stack_overflow_tag: webnfc
 ---
 
-{% Aside %}
-Web apps should be able to do anything native apps can. The [Capabilities
-project](/fugu-status/), of which Web NFC is only a part, aims to do just that.
-To learn about other capabilities and to keep up with their progress, follow
-[Unlocking new capabilities for the web](/fugu-status/).
+{% Aside 'success' %}
+Web NFC, part of the [capabilities project](https://developer.chrome.com/blog/fugu-status/), launched in
+Chrome&nbsp;89 for Android.
 {% endAside %}
 
 ## What is Web NFC? {: #what }
@@ -35,9 +35,9 @@ in close proximity to the user's device (usually 5-10 cm, 2-4 inches).
 The current scope is limited to NFC Data Exchange Format (NDEF), a lightweight
 binary message format that works across different tag formats.
 
-<figure class="w-figure">
-  <img src="./nfc-operation-diagram.png" alt="Phone powering up an NFC tag to exchange data">
-  <figcaption class="w-figcaption">Diagram of an NFC operation</figcaption>
+<figure>
+  {% Img src="image/admin/jWmCabXZCB6zNwQIR90I.png", alt="Phone powering up an NFC tag to exchange data", width="800", height="489" %}
+  <figcaption>Diagram of an NFC operation</figcaption>
 </figure>
 
 ## Suggested use cases {: #use-cases }
@@ -52,64 +52,43 @@ Examples of sites that may use Web NFC include:
   when the user touches their device to an NFC card near the exhibit.
 - Inventory management sites can read or write data to the NFC tag on a
   container to update information on its contents.
-- Conference sites can use it to scan NFC badges during the event.
+- Conference sites can use it to scan NFC badges during the event and make sure
+  they are locked to prevent further changes to the information written on them.
 - Sites can use it for sharing initial secrets needed for device or service
   provisioning scenarios and also to deploy configuration data in operational
   mode.
 
-<figure class="w-figure">
-  <img src="./nfc-inventory-management.png" alt="Phone scanning several NFC tags">
-  <figcaption class="w-figcaption">NFC inventory management illustrated</figcaption>
+<figure>
+  {% Img src="image/admin/zTEXhIx9nDWtbKrIPN0x.png", alt="Phone scanning several NFC tags", width="800", height="383" %}
+  <figcaption>NFC inventory management illustrated</figcaption>
 </figure>
 
 ## Current status {: #status }
 
-<div class="w-table-wrapper">
+<div>
 
 | Step                                       | Status                       |
 | ------------------------------------------ | ---------------------------- |
 | 1. Create explainer                        | [Complete][explainer]        |
 | 2. Create initial draft of specification   | [Complete][spec]             |
-| **3. Gather feedback and iterate design**  | [**In Progress**](#feedback) |
-| **4. Origin trial**                        | [**In Progress**][ot]        |
-| 5. Launch                                  | Not Started                  |
+| 3. Gather feedback & iterate on design     | [Complete](#feedback)        |
+| 4. Origin trial                            | [Complete][ot]               |
+| **5. Launch**                              | **Complete**                 |
 
 </div>
 
 ## Using Web NFC {: #use }
 
-### Enabling support during the origin trial phase
-
-Web NFC will be available on Android as an origin trial in Chrome 81. The origin
-trial is expected to end in Chrome 84.
-
-{% include 'content/origin-trials.njk' %}
-
-### Register for the origin trial {: #register-for-ot }
-
-{% include 'content/origin-trial-register.njk' %}
-
-### Enabling via chrome://flags
-
-To experiment with Web NFC locally on Android, without an origin trial token,
-enable the `#experimental-web-platform-features` flag in `chrome://flags`.
-
-<figure class="w-figure">
-  <img src="./chrome-flag.jpg" alt="Screenshot of the chrome://flags internal page to enable for Web NFC on Android">
-  <figcaption class="w-figcaption">Experimental flag for Web NFC on Android</figcaption>
-</figure>
-
 ### Feature detection {: #feature-detection }
 
 Feature detection for hardware is different from what you're probably used to.
-The presence of `NDEFReader` and `NDEFWriter` tells you that the browser
-supports Web NFC, but not whether the required hardware is present. In
-particular, if the hardware is missing, the promised returned by certain calls
-will reject. I'll provide details when I describe `NDEFReader` and `NDEFWriter`.
+The presence of `NDEFReader` tells you that the browser supports Web NFC, but
+not whether the required hardware is present. In particular, if the hardware is
+missing, the promise returned by certain calls will reject. I'll provide
+details when I describe `NDEFReader`.
 
 ```js
-if ('NDEFReader' in window) { /* Scan NFC tags */ }
-if ('NDEFWriter' in window) { /* Write NFC tags */ }
+if ('NDEFReader' in window) { /* Scan and write NFC tags */ }
 ```
 
 ### Terminology {: #terminology }
@@ -118,20 +97,18 @@ An NFC tag is a passive NFC device, meaning that is powered by magnetic
 induction when an active NFC device (.e.g a phone) is in proximity. NFC tags
 come in many forms and fashions, as stickers, credit cards, arm wrists, etc.
 
-<figure class="w-figure">
-  <img src="./nfc-tag.jpg" alt="Photo of a transparent NFC tag">
-  <figcaption class="w-figcaption">A transparent NFC tag</figcaption>
+<figure>
+  {% Img src="image/admin/uUBxSkSc3MJBG8Lw52fV.jpg", alt="Photo of a transparent NFC tag", width="800", height="450" %}
+  <figcaption>A transparent NFC tag</figcaption>
 </figure>
 
-The `NDEFReader` and `NDEFWriter` objects are the two entry points in Web NFC
-that expose functionality for preparing reading and/or writing actions that are
-fulfilled when an NDEF tag comes in proximity. The `NDEF` in `NDEFReader` and
-`NDEFWriter` stands for NFC Data Exchange Format, a lightweight binary message
-format standardized by the [NFC Forum].
+The `NDEFReader` object is the entry point in Web NFC that exposes functionality
+for preparing reading and/or writing actions that are fulfilled when an NDEF tag
+comes in proximity. The `NDEF` in `NDEFReader` stands for NFC Data Exchange
+Format, a lightweight binary message format standardized by the [NFC Forum].
 
 The `NDEFReader` object is for acting on incoming NDEF messages from NFC tags
-while the `NDEFWriter` object is for writing NDEF messages to NFC tags within
-range.
+and for writing NDEF messages to NFC tags within range.
 
 An NFC tag that supports NDEF is like a post-it note. Anyone can read it, and
 unless it is read-only, anyone can write to it. It contains a single NDEF
@@ -141,9 +118,9 @@ Web NFC supports the following NFC Forum standardized record types: empty, text,
 URL, smart poster, MIME type, absolute URL, external type, unknown, and local
 type.
 
-<figure class="w-figure">
-  <img src="./ndef-message-diagram.png" alt="Diagram of an NDEF message">
-  <figcaption class="w-figcaption">Diagram of an NDEF message</figcaption>
+<figure>
+  {% Img src="image/admin/50clBWSJbKkyumsxrioB.png", alt="Diagram of an NDEF message", width="800", height="243" %}
+  <figcaption>Diagram of an NDEF message</figcaption>
 </figure>
 
 ### Scan NFC tags {: #scan }
@@ -152,24 +129,25 @@ To scan NFC tags, first instantiate a new `NDEFReader` object. Calling `scan()`
 returns a promise. The [user may be prompted] if access was not previously
 granted. The promise will resolve if the following conditions are all met:
 
-- User has allowed the website to interact with NFC devices when they tap their
-  phone.
+- It was only called in response to a user gesture such as a touch gesture or
+  mouse click.
+- The user has allowed the website to interact with NFC devices.
 - The user's phone supports NFC.
 - The user has enabled NFC on their phone.
 
 Once the promise is resolved, incoming NDEF messages are available by
-subscribing to "reading" events via an event listener. You should also subscribe
-to "error" events to be notified when incompatible NFC tags are in proximity
-range.
+subscribing to `reading` events via an event listener. You should also subscribe
+to `readingerror` events to be notified when incompatible NFC tags are in
+proximity.
 
 ```js
-const reader = new NDEFReader();
-reader.scan().then(() => {
+const ndef = new NDEFReader();
+ndef.scan().then(() => {
   console.log("Scan started successfully.");
-  reader.onerror = () => {
+  ndef.onreadingerror = () => {
     console.log("Cannot read data from the NFC tag. Try another one?");
   };
-  reader.onreading = event => {
+  ndef.onreading = event => {
     console.log("NDEF message read.");
   };
 }).catch(error => {
@@ -190,7 +168,7 @@ The `data` member is exposed as a <code>[DataView]</code> as it allows handling
 cases where data is encoded in UTF-16.
 
 ```js
-reader.onreading = event => {
+ndef.onreading = event => {
   const message = event.message;
   for (const record of message.records) {
     console.log("Record type:  " + record.recordType);
@@ -210,53 +188,21 @@ reader.onreading = event => {
 };
 ```
 
-
-
 {% Aside %}
 The [cookbook](#cookbook) contains many examples of how to read NDEF records based on
 their types.
 {% endAside %}
 
-You can also filter NDEF messages by passing options to `scan()`.
-
-- `id` matches the record identifier of each NDEFRecord.
-- `recordType` matches the type of each NDEFRecord.
-- `mediaType` pattern matches the `mediaType` property of each NDEFRecord.
-
-```js
-// Accept only NDEF messages with JSON content
-const reader = new NDEFReader();
-await reader.scan({
-  mediaType: "application/*json"  // pattern matching any JSON-based MIME type
-});
-```
-
-```js
-// Accept only NDEF messages with binary content and a custom record identifier
-const reader = new NDEFReader();
-await reader.scan({
-  id: "my-restaurant-daily-menu",
-  mediaType: "application/octet-stream"
-});
-```
-
-```js
-// Accept only NDEF messages with custom external type
-const reader = new NDEFReader();
-await reader.scan({
-  recordType: "example.com:shoppingItem"
-});
-```
-
 ### Write NFC tags {: #write }
 
-To write NFC tags, first instantiate a new `NDEFWriter` object. Calling
+To write NFC tags, first instantiate a new `NDEFReader` object. Calling
 `write()` returns a promise. The [user may be prompted] if access was not
 previously granted. At this point, an NDEF message is "prepared" and promise
 will resolve if the following conditions are all met:
 
-- User has allowed the website to interact with NFC devices when they tap their
-  phone.
+- It was only called in response to a user gesture such as a touch gesture or
+  mouse click.
+- The user has allowed the website to interact with NFC devices.
 - The user's phone supports NFC.
 - The user has enabled NFC on their phone.
 - User has tapped an NFC tag and an NDEF message has been successfully written.
@@ -264,8 +210,8 @@ will resolve if the following conditions are all met:
 To write text to an NFC tag, pass a string to the `write()` method.
 
 ```js
-const writer = new NDEFWriter();
-writer.write(
+const ndef = new NDEFReader();
+ndef.write(
   "Hello World"
 ).then(() => {
   console.log("Message written.");
@@ -281,8 +227,8 @@ record defined as an object with a `recordType` key set to `"url"` and a `data`
 key set to the URL string.
 
 ```js
-const writer = new NDEFWriter();
-writer.write({
+const ndef = new NDEFReader();
+ndef.write({
   records: [{ recordType: "url", data: "https://w3c.github.io/web-nfc/" }]
 }).then(() => {
   console.log("Message written.");
@@ -294,8 +240,8 @@ writer.write({
 It is also possible to write multiple records to an NFC tag.
 
 ```js
-const writer = new NDEFWriter();
-writer.write({ records: [
+const ndef = new NDEFReader();
+ndef.write({ records: [
     { recordType: "url", data: "https://w3c.github.io/web-nfc/" },
     { recordType: "url", data: "https://web.dev/nfc/" }
 ]}).then(() => {
@@ -310,38 +256,71 @@ The [cookbook](#cookbook) contains many examples of how to write other types of
 NDEF records.
 {% endAside %}
 
-If an NFC tag should be read while performing an NFC write operation, set the
-`ignoreRead` property to `false` in the options passed to the `write()` method.
-
-```js
-const reader = new NDEFReader();
-reader.scan().then(() => {
-
-  reader.onreading = event => {
-    // TODO: Handle incoming NDEF messages.
-  };
-
-  const writer = new NDEFWriter();
-  return writer.write("Writing data is fun!", { ignoreRead: false });
-
-}).catch(error => {
-  console.log(`Write failed :-( try again: ${error}.`);
-});
-```
-
 If the NFC tag contains an NDEF message that is not meant to be overwritten, set
 the `overwrite` property to `false` in the options passed to the `write()`
 method. In that case, the returned promise will reject if an NDEF message is
 already stored in the NFC tag.
 
 ```js
-const writer = new NDEFWriter();
-writer.write("Writing data on an empty NFC tag is fun!", { overwrite: false })
+const ndef = new NDEFReader();
+ndef.write("Writing data on an empty NFC tag is fun!", { overwrite: false })
 .then(() => {
   console.log("Message written.");
-}).catch(_ => {
+}).catch(error => {
   console.log(`Write failed :-( try again: ${error}.`);
 });
+```
+
+### Make NFC tags read-only {: #make-read-only }
+
+To prevent malicious users from overwriting an NFC tag's content, it is possible to
+make NFC tags permanently read-only. This operation is a one-way process and
+cannot be reversed. Once an NFC tag has been made read-only, it can't be written
+to anymore.
+
+To make NFC tags read-only, first instantiate a new `NDEFReader` object. Calling
+`makeReadOnly()` returns a promise. The [user may be prompted] if access was not
+previously granted. The promise will resolve if the following conditions are all
+met:
+
+- It was only called in response to a user gesture such as a touch gesture or
+  mouse click.
+- The user has allowed the website to interact with NFC devices.
+- The user's phone supports NFC.
+- The user has enabled NFC on their phone.
+- The user has tapped an NFC tag and the NFC tag has been successfully made read-only.
+
+```js
+const ndef = new NDEFReader();
+ndef.makeReadOnly()
+.then(() => {
+  console.log("NFC tag has been made permanently read-only.");
+}).catch(error => {
+  console.log(`Operation failed: ${error}`);
+});
+```
+
+Here's how to make an NFC tag permanently read-only after writing to it.
+
+```js
+const ndef = new NDEFReader();
+try {
+  await ndef.write("Hello world");
+  console.log("Message written.");
+  await ndef.makeReadOnly();
+  console.log("NFC tag has been made permanently read-only after writing to it.");
+} catch (error) {
+  console.log(`Operation failed: ${error}`);
+}
+```
+
+As `makeReadOnly()` is available on Android in Chrome&nbsp;100 or later, check
+if this feature is supported with the following:
+
+```js
+if ("NDEFReader" in window && "makeReadOnly" in NDEFReader.prototype) {
+  // makeReadOnly() is supported.
+}
 ```
 
 ### Security and permissions {: #security-and-permissions }
@@ -354,22 +333,23 @@ Because NFC expands the domain of information potentially available to malicious
 websites, the availability of NFC is restricted to maximize users' awareness and
 control over NFC use.
 
-<figure class="w-figure">
-  <img src="./nfc-prompt.png" alt="Screenshot of a Web NFC prompt on a website">
-  <figcaption class="w-figcaption">Web NFC user prompt</figcaption>
+<figure>
+  {% Img src="image/admin/PjUcOk4zbtOFJLXfSeSD.png", alt="Screenshot of a Web NFC prompt on a website", width="800", height="407" %}
+  <figcaption>Web NFC user prompt</figcaption>
 </figure>
 
 Web NFC is only available to top-level frames and secure browsing contexts (HTTPS
 only). Origins must first request the `"nfc"` [permission] while handling a
-user gesture (e.g a button click). The NDEFReader `scan()` and NDEFWriter
-`write()` methods trigger a user prompt, if access was not previously granted.
+user gesture (e.g a button click). The `NDEFReader` `scan()`, `write()`, and
+`makeReadOnly()` methods trigger a user prompt, if access was not previously
+granted.
 
 ```js
   document.querySelector("#scanButton").onclick = async () => {
-    const reader = new NDEFReader();
+    const ndef = new NDEFReader();
     // Prompt user to allow website to interact with NFC devices.
-    await reader.scan();
-    reader.onreading = event => {
+    await ndef.scan();
+    ndef.onreading = event => {
       // TODO: Handle incoming NDEF messages.
     };
   };
@@ -411,17 +391,17 @@ mechanism works for writing NFC tags as it uses the same permission under the
 hood.
 
 ```js
-const reader = new NDEFReader();
+const ndef = new NDEFReader();
 
 async function startScanning() {
-  await reader.scan();
-  reader.onreading = event => {
+  await ndef.scan();
+  ndef.onreading = event => {
     /* handle NDEF messages */
   };
 }
 
 const nfcPermissionStatus = await navigator.permissions.query({ name: "nfc" });
-if (permissionStatus.state === "granted") {
+if (nfcPermissionStatus.state === "granted") {
   // NFC access was previously granted, so we can start NFC scanning now.
   startScanning();
 } else {
@@ -436,10 +416,10 @@ if (permissionStatus.state === "granted") {
 
 ### Abort NFC operations
 
-Using the <code>[AbortController]</code> primitive makes it easy to abort NFC operations. The
-example below shows you how to pass the `signal` of an AbortController through
-the options of NDEFReader `scan()` and NDEFWriter `write()` methods and abort
-both NFC operations at the same time.
+Using the <code>[AbortController]</code> primitive makes it easy to abort NFC
+operations. The example below shows you how to pass the `signal` of an
+`AbortController` through the options of NDEFReader `scan()`, `makeReadOnly()`,
+`write()` methods and abort both NFC operations at the same time.
 
 ```js
 const abortController = new AbortController();
@@ -447,11 +427,11 @@ abortController.signal.onabort = event => {
   // All NFC operations have been aborted.
 };
 
-const reader = new NDEFReader();
-await reader.scan({ signal: abortController.signal });
+const ndef = new NDEFReader();
+await ndef.scan({ signal: abortController.signal });
 
-const writer = new NDEFWriter();
-await writer.write("Hello world", { signal: abortController.signal });
+await ndef.write("Hello world", { signal: abortController.signal });
+await ndef.makeReadOnly({ signal: abortController.signal });
 
 document.querySelector("#abortButton").onclick = event => {
   abortController.abort();
@@ -472,11 +452,11 @@ function readTextRecord(record) {
 }
 ```
 
-To write a simple text record, pass a string to the NDEFWriter `write()` method.
+To write a simple text record, pass a string to the NDEFReader `write()` method.
 
 ```js
-const writer = new NDEFWriter();
-await writer.write("Hello World");
+const ndef = new NDEFReader();
+await ndef.write("Hello World");
 ```
 
 Text records are UTF-8 by default and assume the current document's language but
@@ -499,8 +479,8 @@ const textRecord = {
   data: a2utf16("Bonjour, François !")
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [textRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [textRecord] });
 ```
 
 ### Read and write a URL record
@@ -515,7 +495,7 @@ function readUrlRecord(record) {
 }
 ```
 
-To write a URL record, pass an NDEF message dictionary to the NDEFWriter
+To write a URL record, pass an NDEF message dictionary to the NDEFReader
 `write()` method. The URL record contained in the NDEF message is defined as an
 object with a `recordType` key set to `"url"` and a `data` key set to the URL
 string.
@@ -526,8 +506,8 @@ const urlRecord = {
   data:"https://w3c.github.io/web-nfc/"
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [urlRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [urlRecord] });
 ```
 
 ### Read and write a MIME type record
@@ -555,7 +535,7 @@ function readMimeRecord(record) {
 }
 ```
 
-To write a MIME type record, pass an NDEF message dictionary to the NDEFWriter
+To write a MIME type record, pass an NDEF message dictionary to the NDEFReader
 `write()` method. The MIME type record contained in the NDEF message is defined
 as an object with a `recordType` key set to `"mime"`, a `mediaType` key set to
 the actual MIME type of the content, and a `data` key set to an object that can
@@ -580,8 +560,8 @@ const imageRecord = {
   data: await (await fetch("icon1.png")).arrayBuffer()
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [jsonRecord, imageRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [jsonRecord, imageRecord] });
 ```
 
 ### Read and write an absolute-URL record
@@ -597,7 +577,7 @@ function readAbsoluteUrlRecord(record) {
 ```
 
 To write an absolute URL record, pass an NDEF message dictionary to the
-NDEFWriter `write()` method. The absolute-URL record contained in the NDEF
+NDEFReader `write()` method. The absolute-URL record contained in the NDEF
 message is defined as an object with a `recordType` key set to `"absolute-url"`
 and a `data` key set to the URL string.
 
@@ -607,8 +587,8 @@ const absoluteUrlRecord = {
   data:"https://w3c.github.io/web-nfc/"
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [absoluteUrlRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [absoluteUrlRecord] });
 ```
 
 ### Read and write a smart poster record
@@ -620,10 +600,6 @@ of records contained in the smart poster record. It should have a URL record, a
 text record for the title, a MIME type record for the image, and some [custom
 local type records] such as `":t"`, `":act"`, and `":s"` respectively for the
 type, action, and size of the smart poster record.
-
-{% Aside 'caution' %}
-Smart poster records will be supported in a later version of Chrome.
-{% endAside %}
 
 Local type records are unique only within the local context of the containing
 NDEF record. Use them when the meaning of the types doesn't matter outside
@@ -665,7 +641,7 @@ function readSmartPosterRecord(smartPosterRecord) {
 }
 ```
 
-To write a smart poster record, pass an NDEF message to the NDEFWriter `write()`
+To write a smart poster record, pass an NDEF message to the NDEFReader `write()`
 method. The smart poster record contained in the NDEF message is defined as an
 object with a `recordType` key set to `"smart-poster"` and a `data` key set to
 an object that represents (once again) an NDEF message contained in the
@@ -712,8 +688,8 @@ const smartPosterRecord = {
   }
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [smartPosterRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [smartPosterRecord] });
 ```
 
 ### Read and write an external type record
@@ -740,7 +716,7 @@ function readExternalTypeRecord(externalTypeRecord) {
 ```
 
 To write an external type record, pass an NDEF message dictionary to the
-NDEFWriter `write()` method. The external type record contained in the NDEF
+NDEFReader `write()` method. The external type record contained in the NDEF
 message is defined as an object with a `recordType` key set to the name of the
 external type and a `data` key set to an object that represents an NDEF message
 contained in the external type record. Note that the `data` key can also be
@@ -769,15 +745,15 @@ const externalTypeRecord = {
   }
 };
 
-const writer = new NDEFWriter();
-writer.write({ records: [externalTypeRecord] });
+const ndef = new NDEFReader();
+ndef.write({ records: [externalTypeRecord] });
 ```
 
 ### Read and write an empty record
 
 An empty record has no payload.
 
-To write an empty record, pass an NDEF message dictionary to the NDEFWriter
+To write an empty record, pass an NDEF message dictionary to the NDEFReader
 `write()` method. The empty record contained in the NDEF message is defined as
 an object with a `recordType` key set to `"empty"`.
 
@@ -786,15 +762,19 @@ const emptyRecord = {
   recordType: "empty"
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [emptyRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [emptyRecord] });
 ```
+
+## Browser support {: #browser-support }
+
+Web NFC is available on Android in Chrome 89.
 
 ## Dev Tips
 
 Here's a list of things I wish I had known when I started playing with Web NFC:
 
-- Android natively handles NFC tags before Web NFC is operational.
+- Android handles NFC tags at the OS-level before Web NFC is operational.
 - You can find an NFC icon on [material.io].
 - Use NDEF record `id` to easily identifying a record when needed.
 - An unformatted NFC tag that supports NDEF contains a single record of the empty type.
@@ -807,8 +787,8 @@ const aarRecord = {
   data: encoder.encode("com.example.myapp")
 };
 
-const writer = new NDEFWriter();
-await writer.write({ records: [aarRecord] });
+const ndef = new NDEFReader();
+await ndef.write({ records: [aarRecord] });
 ```
 
 ## Demos {: #demos }
@@ -819,11 +799,11 @@ Try out the [official sample] and check out some cool Web NFC demos:
 - [Intel RSP Sensor NFC]
 - [Media MEMO]
 
-<figure class="w-figure">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure>
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/webfundamentals-assets/videos/web-nfc-cards-demo.mp4">
   </video>
-  <figcaption class="w-figcaption">
+  <figcaption>
     Web NFC cards demo at Chrome Dev Summit 2019
   </figcaption>
 </figure>
@@ -857,14 +837,14 @@ Are you planning to use Web NFC? Your public support helps the Chrome team
 prioritize features and shows other browser vendors how critical it is to
 support them.
 
-Send a Tweet to [@ChromiumDev][cr-dev-twitter] and let us know where and how
-you're using it.
+Send a tweet to [@ChromiumDev][cr-dev-twitter] using the hashtag
+[`#WebNFC`](https://twitter.com/search?q=%23WebNFC&src=typed_query&f=live)
+and let us know where and how you're using it.
 
 ## Helpful links {: #helpful }
 
 * [Specification][spec]
 * [Web NFC Demo][demo] | [Web NFC Demo source][demo-source]
-* [Origin Trial][ot]
 * [Tracking bug][cr-bug]
 * [ChromeStatus.com entry][cr-status]
 * Blink Component: [`Blink>NFC`](https://chromestatus.com/features#component%3ABlink%3ENFC)
@@ -876,7 +856,6 @@ depends on a community of committers working together to move the Chromium
 project forward. Not every Chromium committer is a Googler, and these
 contributors deserve special recognition!
 
-<!-- lint disable definition-case -->
 [explainer]: https://github.com/w3c/web-nfc/blob/gh-pages/EXPLAINER.md#web-nfc-explained
 [spec]: https://w3c.github.io/web-nfc/
 [ot]: https://developers.chrome.com/origintrials/#/view_trial/236438980436951041
@@ -887,10 +866,10 @@ contributors deserve special recognition!
 [cr-dev-twitter]: https://twitter.com/chromiumdev
 [cr-bug]: https://bugs.chromium.org/p/chromium/issues/detail?id=520391
 [cr-status]: https://www.chromestatus.com/feature/6261030015467520
-[powerful-apis]: https://chromium.googlesource.com/chromium/src/+/master/docs/security/permissions-for-powerful-web-platform-features.md
+[powerful-apis]: https://chromium.googlesource.com/chromium/src/+/main/docs/security/permissions-for-powerful-web-platform-features.md
 [Permissions API]: https://www.w3.org/TR/permissions/
-[AbortController]: https://developer.mozilla.org/en-US/docs/Web/API/AbortController
-[Page Visibility API]: https://developer.mozilla.org/en-US/docs/Web/API/Page_Visibility_API
+[AbortController]: https://developer.mozilla.org/docs/Web/API/AbortController
+[Page Visibility API]: https://developer.mozilla.org/docs/Web/API/Page_Visibility_API
 [user may be prompted]: #security-and-permissions
 [permission]: https://w3c.github.io/permissions/
 [folks at Intel]: https://github.com/w3c/web-nfc/graphs/contributors
@@ -905,5 +884,4 @@ contributors deserve special recognition!
 [material.io]: https://material.io/resources/icons/?icon=nfc&style=baseline
 [appropriately]: https://w3c.github.io/web-nfc/#data-mapping
 [custom local type records]: https://w3c.github.io/web-nfc/#smart-poster-record
-[DataView]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView
-<!-- lint enable definition-case -->
+[DataView]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/DataView

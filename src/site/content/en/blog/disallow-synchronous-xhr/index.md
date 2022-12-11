@@ -10,11 +10,12 @@ description: |
 authors:
   - joemedley
 date: 2019-12-18
-hero: hero.jpg
+updated: 2020-07-17
+hero: image/admin/DF5rqLYGcuCpQZv1vXKS.jpg
 alt: Roadblock barricades
 tags:
   - blog
-  - deprecation
+  # - deprecation
 ---
 
 It's common for a page or app to have unsubmitted analytics or other data at the
@@ -41,27 +42,27 @@ temporary opt-out options are available. For sites on the internet, [an origin
 trial is
 available](https://developers.chrome.com/origintrials/#/view_trial/4391009636686233601).
 With this, you add an origin-specific token to your page headers that enables
-synchronous `XMLHttpRequest()` calls. This option ends shortly before Chrome 86
-ships, sometime in late October of 2020. Enterprise Chrome customers can also
+synchronous `XMLHttpRequest()` calls. This option ends shortly before Chrome 89
+ships, sometime in March 2021. Enterprise Chrome customers can also
 use the  `AllowSyncXHRInPageDismissal` policy flag, which ends at the same time.
 
 ## Alternatives
 
 Regardless of how you send data back to the server, it's best to avoid waiting
 until page unload to send all the data at once. Aside from creating a bad user
-experience, you risk data loss if something goes wrong.  Unload events [often
-don't fire on mobile
+experience, unload is unreliable on modern browsers and risks data loss if
+something goes wrong. Specifically, unload events [often don't fire on mobile
 browsers](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/)
 because there are [many ways to
-close](https://developers.google.com/web/updates/2018/07/page-lifecycle-api) a
-tab or browser on mobile operating systems without the `unload` event firing. With
-`XMLHttpRequest()`, using small payloads was a choice. Now it's a requirement. Both of
-its alternatives have an upload limit of 64&nbsp;KB per context, as required
-by the specification.
+close](https://developer.chrome.com/blog/page-lifecycle-api/) a
+tab or browser on mobile operating systems without the `unload` event firing.
+With `XMLHttpRequest()`, using small payloads was a choice. Now it's a
+requirement. Both of its alternatives have an upload limit of 64&nbsp;KB per
+context, as required by the specification.
 
 ### Fetch keepalive
 
-The [Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API)
+The [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)
 provides a robust means of dealing with server interactions and [a consistent
 interface](https://fetch.spec.whatwg.org/#preface) for use across different
 platform APIs. Among its options is `keepalive`, which ensures that a request
@@ -84,7 +85,7 @@ way of the page's unloading, I chose not to do anything with it.
 
 ### SendBeacon()
 
-[`SendBeacon()`](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon)
+[`SendBeacon()`](https://developer.mozilla.org/docs/Web/API/Navigator/sendBeacon)
 actually uses the Fetch API under the hood, which is why it has the same
 64&nbsp;KB payload limitation and why it also ensures that a request continues
 after a page unload. Its primary advantage is its simplicity. It lets you
@@ -99,7 +100,7 @@ window.addEventListener('unload', {
 ## Conclusion
 
 With the [increased availability of
-`fetch()`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Browser_compatibility)
+`fetch()`](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Browser_compatibility)
 across browsers, `XMLHttpRequest()` will hopefully be removed
 from the web platform at some point. Browser vendors agree it should be removed, but it will
 take time. Deprecating one of its worst use cases is a first step that improves

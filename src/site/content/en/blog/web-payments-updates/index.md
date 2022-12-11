@@ -6,8 +6,8 @@ authors:
   - danyao
   - agektmr
 date: 2019-06-13
-hero: hero.jpg
-alt: Transfering money from a phone
+hero: image/admin/BBvuUcrVtDPtSK0R1x3v.jpg
+alt: Transferring money from a phone
 description: |
   Since the launch of the Payment Request API in Chrome 53 and the Payment
   Handler API in Chrome 68, there have been quite a few changes made to their
@@ -15,7 +15,9 @@ description: |
   continue accumulating those API changes.
 tags:
   - blog # blog is a required tag for the article to show up in the blog.
-  - payment
+  # - payment
+feedback:
+  - api
 ---
 
 Web Payments have been publicly available in browsers since 2016. The core
@@ -33,7 +35,7 @@ those updates and will continue accumulating those API changes.
 
 {% Aside 'note' %}
 If you want to subscribe to further upcoming changes to
-Chrome's Web Payments implementation, please join the [Public Payment Request
+Chrome's Web Payments implementation, join the [Public Payment Request
 Announcements
 group](https://groups.google.com/a/chromium.org/forum/#!forum/paymentrequest).
 
@@ -42,7 +44,7 @@ Alternatively, join the
 updates. You may ask questions there as well.
 
 If you want to check older updates to Chrome, head over to
-["Changes in the Payment Request API" article at Web Fundamentals](https://developers.google.com/web/updates/2017/01/payment-request-updates).
+["Changes in the Payment Request API" article at Web Fundamentals](https://developer.chrome.com/blog/payment-request-updates/).
 {% endAside %}
 
 ## New method: `hasEnrolledInstrument()`

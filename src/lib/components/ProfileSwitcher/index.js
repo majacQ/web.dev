@@ -1,5 +1,5 @@
-import {html} from 'lit-element';
-import {until} from 'lit-html/directives/until';
+import {html} from 'lit';
+import {until} from 'lit/directives/until.js';
 import {BaseElement} from '../BaseElement';
 import {signIn, signOut} from '../../fb';
 import './_styles.scss';
@@ -14,6 +14,11 @@ class ProfileSwitcher extends BaseElement {
       user: {type: Object},
       photoPromise: {type: Promise},
     };
+  }
+
+  constructor() {
+    super();
+    this.user = null;
   }
 
   render() {
@@ -40,11 +45,17 @@ class ProfileSwitcher extends BaseElement {
     });
 
     // Close the profile switcher if it's open and the user clicks outside.
-    document.addEventListener('click', (e) => {
-      if (this.expanded && !this.contains(e.target)) {
-        this.expanded = false;
-      }
-    });
+    document.addEventListener(
+      'click',
+      /**
+       * @param {WMouseEvent} e
+       */
+      (e) => {
+        if (this.expanded && !this.contains(e.target)) {
+          this.expanded = false;
+        }
+      },
+    );
   }
 
   shouldUpdate(changedProperties) {
@@ -85,15 +96,15 @@ class ProfileSwitcher extends BaseElement {
       <div class="w-profile-dialog">
         <div class="w-profile-dialog__user">
           <div class="w-profile-dialog__photo-container">
-            <img class="w-profile-dialog__photo" src="${this.user.photoURL}" />
+            <img
+              class="w-profile-dialog__photo"
+              alt=""
+              src="${this.user.photoURL}"
+            />
           </div>
           <div class="w-profile-dialog__details">
-            <div class="w-profile-dialog__name">
-              ${this.user.displayName}
-            </div>
-            <div class="w-profile-dialog__email">
-              ${this.user.email}
-            </div>
+            <div class="w-profile-dialog__name">${this.user.displayName}</div>
+            <div class="w-profile-dialog__email">${this.user.email}</div>
             <a
               class="w-profile-dialog__privacy"
               href="https://myaccount.google.com/privacypolicy"

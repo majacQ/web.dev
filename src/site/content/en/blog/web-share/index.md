@@ -1,58 +1,55 @@
 ---
-title: Share like a native app with the Web Share API
-subhead: Web apps can use the same system-provided share capabilities as native apps.
+title: Integrate with the OS sharing UI with the Web Share API
+subhead: Web apps can use the same system-provided share capabilities as platform-specific apps.
 authors:
   - joemedley
 date: 2019-11-08
-updated: 2020-05-12
-hero: hero.png
+updated: 2022-03-30
+hero: image/admin/ruvEms3AeSZvlEI01DKo.png
 alt: An illustration demonstrating that web apps can use the system-provided sharing UI.
 description: |
   With the Web Share API, web apps are able to use the same system-provided
-  share capabilities as native apps. The Web Share API makes it possible for web
+  share capabilities as platform-specific apps. The Web Share API makes it possible for web
   apps to share links, text, and files to other apps installed on the device in
-  the same way as native apps.
+  the same way as platform-specific apps.
 tags:
   - blog
   - capabilities
+feedback:
+  - api
+stack_overflow_tag: web-share
 ---
 
 With the Web Share API, web apps are able to use the same system-provided share
-capabilities as native apps. The Web Share API makes it possible for web apps to
+capabilities as platform-specific apps. The Web Share API makes it possible for web apps to
 share links, text, and files to other apps installed on the device in the same
-way as native apps.
+way as platform-specific apps.
 
 {% Aside %}
   Sharing is only half of the magic. Web apps can also be share
   targets, meaning they can receive data, links, text, and files from
-  native or web apps. See the [Receive shared data](/web-share-target/)
-  post for details on how to register your app as a share target.
+  platform-specific or web apps. Read [Receive shared data](/web-share-target/)
+  to learn how to register your app as a share target.
 {% endAside %}
 
-## Concepts and usage
-
-<figure class="w-figure w-figure--inline-right">
-  <img src="./wst-send.png" style="max-width: 370px" alt="System-level share target picker with an installed PWA as an option."/>
-  <figcaption class="w-figcaption w-figcaption--fullbleed">
+<figure data-float="right">
+  {% Img src="image/admin/cCXNoHbXAfkAQzTTuS0Z.png", alt="System-level share target picker with an installed PWA as an option.", width="370", height="349" %}
+  <figcaption>
     System-level share target picker with an installed PWA as an option.
   </figcaption>
 </figure>
 
-### Capabilities and limitations
+## Capabilities and limitations
 
 Web share has the following capabilities and limitations:
-* It can only be used on a site that supports HTTPS.
+* It can only be used on a site that is [accessed via HTTPS](https://www.chromium.org/Home/chromium-security/prefer-secure-origins-for-powerful-new-features).
 * It must be invoked in response to a user action such as a click. Invoking it
   through the `onload` handler is impossible.
 * It can share, URLs, text, or files.
-* As of mid 2020, it is only available on Safari and on Android in Chromium
-  forks. See
-  [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#Browser_compatibility)
-  for details.
 
-<div class="w-clearfix"></div>
+{% BrowserCompat 'api.Navigator.share' %}
 
-### Sharing links and text
+## Sharing links and text
 
 To share links and text, use the `share()` method, which is a promise-based
 method with a required properties object.
@@ -92,15 +89,15 @@ const canonicalElement = document.querySelector('link[rel=canonical]');
 if (canonicalElement !== null) {
     url = canonicalElement.href;
 }
-navigator.share({url: url});
+navigator.share({url});
 ```
 
-### Sharing files
+## Sharing files
 
 To share files, first test for and call `navigator.canShare()`. Then include an
 array of files in the call to `navigator.share()`:
 
-```js/0-4
+```js/0-5
 if (navigator.canShare && navigator.canShare({ files: filesArray })) {
   navigator.share({
     files: filesArray,
@@ -115,17 +112,17 @@ if (navigator.canShare && navigator.canShare({ files: filesArray })) {
 ```
 
 Notice that the sample handles feature detection by testing for
-`naviagator.canShare()` rather than for `navigator.share()`.
+`navigator.canShare()` rather than for `navigator.share()`.
 The data object passed to `canShare()` only supports the `files` property.
-Image, video, audio, and text files can be shared. (See
-[Permitted File Extensions in Chromium](https://docs.google.com/document/d/1tKPkHA5nnJtmh2TgqWmGSREUzXgMUFDL6yMdVZHqUsg/edit?usp=sharing).)
-More file types may be added in the future.
+Certain times of audio, image, pdf, video, and text files can be shared.
+See [Permitted File Extensions in Chromium](https://docs.google.com/document/d/1tKPkHA5nnJtmh2TgqWmGSREUzXgMUFDL6yMdVZHqUsg/edit?usp=sharing).)
+for a complete list. More file types may be added in the future.
 
 ## Santa Tracker case study
 
-<figure class="w-figure w-figure--inline-right">
-  <img src="./santa-phone.png" style="max-width: 400px;" alt="The Santa Tracker app showing a share button."/>
-  <figcaption class="w-figcaption w-figcaption--fullbleed">
+<figure data-float="right">
+  {% Img src="image/admin/2I5iOXaOpzEJlEbM694n.png", alt="The Santa Tracker app showing a share button.", width="343", height="600" %}
+  <figcaption>
     Santa Tracker share button.
   </figcaption>
 </figure>
@@ -136,17 +133,42 @@ with games and educational experiences.
 
 In 2016, the Santa Tracker team used the Web Share API on Android.
 This API was a perfect fit for mobile.
-In previous years, the team disabled share buttons on mobile because space is
+In previous years, the team removed share buttons on mobile because space is
 at a premium, and they couldn't justify having several share targets.
 
-But with the Web Share API, they were able to present just one button,
+But with the Web Share API, they were able to present one button,
 saving precious pixels.
 They also found that users shared with Web Share around 20% more than
 users without the API enabled. Head to
 [Santa Tracker](https://santatracker.google.com/) to see Web Share in action.
 
-<div class="w-clearfix"></div>
+## Browser support
+
+Browser support for the Web Share API is nuanced, and it's recommended that you use feature
+detection (as described in the earlier code samples) instead of assuming that a particular method is
+supported.
+
+Here's a rough outline of support for this feature. For detailed information, follow either of the support links.
+
+<dl>
+  <dt><code>navigator.canShare()</code></dt>
+  <dd>{% BrowserCompat 'api.Navigator.canShare' %}</dd>
+  <dt><code>navigator.share()</code></dt>
+  <dd>{% BrowserCompat 'api.Navigator.share' %}</dd>
+</dl>
+
+## Show support for the API
+
+Are you planning to use the Web Share API? Your public support helps the Chromium team
+prioritize features and shows other browser vendors how critical it is to support them.
+
+Send a tweet to [@ChromiumDev][cr-dev-twitter] using the hashtag
+[`#WebShare`](https://twitter.com/search?q=%23WebShare&src=recent_search_click&f=live)
+and let us know where and how you're using it.
 
 ## Helpful Links
 
-[Web Share Demos](https://w3c.github.io/web-share/demos/share-files.html)
+- [Web Share Demos](https://w3c.github.io/web-share/demos/share-files.html)
+- [Scrapbook PWA](https://github.com/GoogleChrome/samples/blob/gh-pages/web-share/README.md#web-share-demo)
+
+[cr-dev-twitter]: https://twitter.com/ChromiumDev

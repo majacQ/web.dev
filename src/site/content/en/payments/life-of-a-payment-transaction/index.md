@@ -6,7 +6,9 @@ subhead: |
   with the Payment Request API.
 authors:
   - agektmr
+  - mihajlija
 date: 2020-05-25
+updated: 2020-07-17
 description: |
   Learn how merchants integrate payment apps, how payment transactions work with
   the Payment Request API, and what's possible in Web Payments.
@@ -14,7 +16,15 @@ tags:
   - payments
 ---
 
-Web Payments APIs are dedicated payment features built into the browser natively
+{% Aside 'warning' %}
+
+Shipping and address support in [the Payment Request API is removed from the
+specification](https://github.com/w3c/payment-request/pull/955) and is no longer
+functional.
+
+{% endAside %}
+
+Web Payments APIs are dedicated payment features built into the browser
 for the first time. With Web Payments, merchant integration with payment apps
 becomes simpler while the customer experience gets streamlined and more secure.
 
@@ -30,27 +40,19 @@ The process involves 6 steps:
 2. The merchant shows a payment button.
 3. The customer presses the payment button.
 
-    ![A diagram of a cheese shop website with a BobPay (payment app)
-    button.](123.svg)
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/NQIh5tt5wsQFC5yKLCaU.svg", alt="A diagram of a cheese shop website with a BobPay (payment app) button.", width="786", height="298" %}
 
 4. The browser launches the payment app.
 
-    ![A diagram of the cheese shop website with BobPay app launched in a modal.
-    The modal shows shipping options and total cost.](4.svg)
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/IHztIcfJKeWDUIkugTkb.svg", alt="A diagram of the cheese shop website with BobPay app launched in a modal. The modal shows shipping options and total cost.", width="671", height="366" %}
 
-5. If the customer changes any details (such as shipping options or their
-   address), the merchant updates the transaction details reflecting the change.
-
-    ![A diagram showing the customer choosing a different shipping option in
-    BobPay app modal. A second diagram showing the merchant updating the total
-    cost displayed in BobPay.](5.svg)
+5. If the customer changes payment method, the merchant updates the transaction
+   details reflecting the change.
 
 6. After the customer confirms the purchase, the merchant validates the payment
    and completes the transaction.
 
-    ![A diagram showing the customer pressing the "Pay" button in BobPay,
-    followed by a diagram of the cheese shop page showing "Payment
-    accepted".](6.svg)
+    {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/9Q6VqimbOxJ3ZXHvB8ry.svg", alt="A diagram showing the customer pressing the \"Pay\" button in BobPay, followed by a diagram of the cheese shop page showing \"Payment accepted\".", width="778", height="708" %}
 
 ## Step 1: The merchant initiates a payment transaction
 
@@ -61,12 +63,6 @@ object. This object includes important information about the transaction:
 
 * Acceptable payment methods and their data to process the transaction.
 * Details, such as the total price (required) and information about the items.
-* Options in which merchants can define any additional information required from
-  the customer including the payer's name, email, and phone number.
-* Merchants can also include optional [shipping
-  type](https://developers.google.com/web/fundamentals/payments/merchant-guide/deep-dive-into-payment-request#changing_the_shipping_type)
-  (`shipping`, `delivery`, or `pickup`) in the `PaymentRequest`. The payment app
-  can use that as a hint to display the correct labels in its UI.
 
 ```js
 const request = new PaymentRequest([{
@@ -83,13 +79,6 @@ const request = new PaymentRequest([{
     label: 'Total due',
     amount: { currency: 'USD', value : '22.15' }
   }
-}, {
-  requestShipping: true,
-  requestBillingAddress: true,
-  requestPayerEmail: true,
-  requestPayerPhone: true,
-  requestPayerName: true,
-  shippingType: 'delivery'
 });
 ```
 
@@ -124,23 +113,20 @@ method](/setting-up-a-payment-method#how-a-browser-discovers-a-payment-app).
 
 Merchants can support many payment methods, but should only present the payment
 buttons for those that a customer can actually use. Showing a payment button
-that is eventually unusable is poor user experience. If a merchant can
-predict that a payment method specified in the `PaymentRequest` object won't
-work for the customer, they can provide a fallback solution or not show that
-button at all.
+that is unusable is poor user experience. If a merchant can predict that a
+payment method specified in the `PaymentRequest` object won't work for the
+customer, they can provide a fallback solution or not show that button at all.
 
-Using a `PaymentRequest` instance, a merchant can query whether a customer is
-eligible for making the payment in two ways:
-
-* Does the customer have the payment app available?
-* Is the customer ready to pay using the payment app?
+Using a `PaymentRequest` instance, a merchant can query whether a customer has
+the payment app available.
 
 ### Does the customer have the payment app available?
 
-The [`canMakePayment()`](https://developer.mozilla.org/docs/Web/API/PaymentRequest/canMakePayment)
+The
+[`canMakePayment()`](https://developer.mozilla.org/docs/Web/API/PaymentRequest/canMakePayment)
 method of `PaymentRequest` returns `true` if a payment app is available on the
-customer's device. "Available" means only that a payment app that supports the
-payment method is discovered, and that the native payment app is installed, or
+customer's device. "Available" means that a payment app that supports the
+payment method is discovered, and that the platform-specific payment app is installed, or
 the web-based payment app is [ready to be
 registered](/setting-up-a-payment-method#jit-register).
 
@@ -150,26 +136,6 @@ if (!canMakePayment) {
   // Fallback to other means of payment or hide the button.
 }
 ```
-
-### Is the customer ready to pay using the payment app? {: #ready-to-pay}
-
-[`hasEnrolledInstrument()`](https://web.dev/web-payments-updates/#new-method:-hasenrolledinstrument())
-serves as a signal from the payment app to the merchant that the user is able to
-complete the payment with low friction. It returns `true` if the customer has a
-payment app available and is ready to pay with it (for example, the customer has
-added a valid credit card to the payment app).
-
-```js
-const hasEnrolledInstrument = await request.hasEnrolledInstrument();
-if (!hasEnrolledInstrument) {
-  // Fallback to other means of payment or hide the button.
-}
-```
-
-The criteria to return `true` for `hasEnrolledInstrument()` depends on the
-payment app's implementation. In general, the response is positive when at least
-one payment instrument is available and all requested information such as a
-shipping address is ready to be provided by the payment app.
 
 ## Step 3: The customer presses the payment button {: #show }
 
@@ -212,9 +178,9 @@ If the payment handler is designed to return a transaction ID upon setting the
 total price, the ID can be passed as part of the promise result.
 {% endAside %}
 
-## Step 4: The browser launches the payment app
+## Step 4: The browser launches the payment app {: #launch }
 
-The browser can launch a native or a web-based payment app. (You can learn more
+The browser can launch a platform-specific or a web-based payment app. (You can learn more
 about [how Chrome determines which payment app to
 launch](/setting-up-a-payment-method#how-chrome-determines-which-payment-app-to-launch).)
 
@@ -228,68 +194,18 @@ passed to the `PaymentRequest` object in Step 1, which includes the following:
 
 * Payment method data
 * Total price
-* Payment options
 
 The payment app uses the transaction information to label its UI.
-
-Under certain conditions, before launching the payment app, the browser will
-launch the Payment Request UI—a browser native dialog in which the customer can
-input and edit their details.
-
-### When does the browser launch the Payment Request UI?
-
-<figure class="w-figure ">
-  <img class="w-screenshot" src="./payment-request-UI.png"
-       alt="The Payment Request UI modal showing the order summary, pre-populated shipping address and contact information, the chosen payment app, and options to cancel or continue the payment."
-       width="600">
-  <figcaption class="w-figcaption">
-    The Payment Request UI modal.
-  </figcaption>
-</figure>
-
-The Payment Request UI can intervene before the payment app is launched if one
-of the following conditions is met:
-
-* `show()` is invoked without a user gesture (for example, without a click).
-* Multiple payment apps match the given payment method identifier on the device.
-* The payment app can't provide the shipping address, shipping option, or
-  contact information.
-
-<figure class="w-figure w-figure--inline-right">
-  <img class="w-screenshot" src="./payment-request-UI-mobile.png"
-       alt="The Payment Request UI modal on mobile screen, showing the order summary, pre-populated shipping address and contact information, the chosen payment app, and options to cancel or continue the payment."
-       width="300">
-  <figcaption class="w-figcaption">
-    The Payment Request UI on mobile screen.
-  </figcaption>
-</figure>
-
-In the Payment Request UI, the customer can do any of the following:
-
-* Select a payment method.
-* Select a shipping option.
-* Select or edit a shipping address.
-* Select or edit contact information.
-
-Each customer update to the UI causes an event to be emitted to the merchant who
-can then update the transaction information. The exact process is described in
-the next step.
-
-After the customer sets all the required information for making the payment,
-they can proceed to launch the payment app with the *Continue* button.
 
 ## Step 5: How a merchant can update the transaction details depending on customer's actions
 
 Customers have an option to change the transaction details such as payment
-method and shipping option in the Payment Request UI or the payment app. While
-the customer makes changes, the merchant receives the change events and updates
-the transaction details.
+method in the payment app. While the customer makes changes, the merchant
+receives the change events and updates the transaction details.
 
 There are four types of events a merchant can receive:
 
 * Payment method change event
-* Shipping address change event
-* Shipping option change event
 * Merchant validation event
 
 ### Payment method change event
@@ -307,61 +223,6 @@ request.addEventListener('paymentmethodchange', e => {
   });
 });
 ```
-
-### Shipping address change event
-
-A payment app can optionally provide the customer's shipping address. This is
-convenient for customers because they don't have to manually enter any details
-into a form and they can store their shipping address in their prefered payment
-apps, rather than on multiple different merchant websites.
-
-If a customer updates their shipping address in a payment app after the
-transaction has been initiated, a shipping address change event will be emitted
-to the merchant. This helps the merchant determine the shipping cost based on
-the new address, update the total price, and return it back to the payment app.
-
-```js
-request.addEventListener('shippingaddresschange', e => {
-  e.updateWith({
-    // Update the details
-  });
-});
-```
-
-If the merchant can't ship to the updated address, they can provide an error
-message by adding an error parameter to the transaction details returned to the
-payment app.
-
-{% Aside %}
-Merchants don't receive customers' full shipping address until they've
-authorized the payment.
-{% endAside %}
-
-### Shipping option change event
-
-A merchant can offer multiple shipping options to the customer and can delegate
-that choice to the payment app. The shipping options are displayed as a list of
-prices and service names the customer can select from. For example:
-
-* Standard shipping - Free
-* Express shipping - $5
-
-When a customer updates the shipping option in a payment app, a shipping option
-change event will be emitted to the merchant. The merchant can then determine
-the shipping cost, update the total price, and return it back to the payment
-app.
-
-```js
-request.addEventListener('shippingoptionchange', e => {
-  e.updateWith({
-    // Update the details
-  });
-});
-```
-
-The merchant can modify the shipping options dynamically based on the customer's
-shipping address as well. This is useful when a merchant wants to offer
-different sets of shipping options for domestic and international customers.
 
 ### Merchant validation event
 
@@ -391,9 +252,6 @@ returns a promise that resolves to a
 The `PaymentResponse` object includes the following information:
 
 * Payment result details
-* Shipping address
-* Shipping option
-* Contact information
 
 At this point, the browser UI may still show a loading indicator meaning that
 the transaction is not completed yet.
@@ -420,7 +278,7 @@ they can either:
 ```js
 async function doPaymentRequest() {
   try {
-    const request = new PaymentRequest(methodData, details, options);
+    const request = new PaymentRequest(methodData, details);
     const response = await request.show();
     await validateResponse(response);
   } catch (err) {
@@ -451,7 +309,7 @@ doPaymentRequest();
 
 * Learn how to declare a payment method identifier in detail in [Setting up a
   payment method](/setting-up-a-payment-method).
-* Learn how to build a native payment app in
-  [Android payment apps developer's guide](/android-payment-apps-overview).
-* Learn how to build a web-based payment app in *Web-based payment apps developer's
-  guide* (coming soon).
+* Learn how to build a platform-specific payment app in
+  [Android payment apps developer's guide](/android-payment-apps-developers-guide).
+* Learn how to build a web-based payment app in [Web-based payment apps developer's
+  guide](/web-based-payment-apps-overview).

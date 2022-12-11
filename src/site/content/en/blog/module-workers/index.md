@@ -3,7 +3,7 @@ title: Threading the web with module workers
 subhead: |
   Moving heavy lifting into background threads is now easier with JavaScript modules in web workers.
 date: 2019-12-17
-hero: hero.jpg
+hero: image/admin/I7oZWRPOJABk1YBGGisK.jpg
 alt: Computer processor graphic
 authors:
   - developit
@@ -12,9 +12,11 @@ description: |
   thread while keeping the ergonomic and performance benefits of standard JavaScript modules.
 tags:
   - blog
-  - web-workers
-  - javascript-modules
+  # - web-workers
+  # - javascript-modules
   - modules
+feedback:
+  - api
 ---
 
 JavaScript is single-threaded, which means it can only perform one operation at a time. This is
@@ -24,7 +26,7 @@ complex applications are delivered on the web, there's an increased need for mul
 processing.
 
 On the web platform, the main primitive for threading and parallelism is the [Web
-Workers API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers).
+Workers API](https://developer.mozilla.org/docs/Web/API/Web_Workers_API/Using_web_workers).
 Workers are a lightweight abstraction on top of [operating system
 threads](https://en.wikipedia.org/wiki/Thread_%28computing%29) that expose a message passing API
 for inter-thread communication. This can be immensely useful when performing costly computations or
@@ -38,7 +40,7 @@ thread and responds by sending back messages of its own:
 
 ```js
 const worker = new Worker('worker.js');
-worker.addEventListener(e => {
+worker.addEventListener('message', e => {
   console.log(e.data);
 });
 worker.postMessage('hello');
@@ -53,7 +55,6 @@ addEventListener('message', e => {
   }
 });
 ```
-
 
 The Web Worker API has been available in most browsers for over ten years. While that
 means workers have excellent browser support and are well-optimized, it also means they long
@@ -99,7 +100,7 @@ function sayHello() {
 
 For this reason, web workers have historically imposed an outsized effect on the architecture of an
 application. Developers have had to create clever tooling and workarounds to make it possible to
-use web workers without giving up modern development practises. As an example, bundlers like
+use web workers without giving up modern development practices. As an example, bundlers like
 webpack embed a small module loader implementation into generated code that uses `importScripts()`
 for code loading, but wraps modules in functions to avoid variable collisions and simulate
 dependency imports and exports.
@@ -151,7 +152,7 @@ export function sayHello() {
 
 To ensure great performance, the old `importScripts()` method is not available within module
 workers. Switching workers to use JavaScript modules means all code is loaded in [strict
-mode](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode). Another
+mode](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Strict_mode). Another
 notable change is that the value of `this` in the top-level scope of a JavaScript module is
 `undefined`, whereas in classic workers the value is the worker's global scope. Fortunately, there
 has always been a `self` global that provides a reference to the global scope. It's available in
@@ -192,13 +193,10 @@ on the HTTP cache. When used in combination with the correct caching headers, th
 to avoid worker instantiation having to wait to download the worker script. However, unlike
 `modulepreload` this technique did not support preloading dependencies or pre-parsing.
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/worker-preloading?previewSize=100&attributionHidden=true"
-    alt="worker-preloading on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'worker-preloading',
+  height: 480
+} %}
 
 ## What about shared workers?
 

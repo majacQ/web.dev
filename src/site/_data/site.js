@@ -14,28 +14,30 @@
  * limitations under the License.
  */
 
+const path = require('path');
 const locale = require('../../../shared/locale');
+const {PAGINATION_COUNT} = require('../_utils/constants');
 
 module.exports = {
   env: process.env.ELEVENTY_ENV || 'dev',
   percy: process.env.PERCY || false,
+  contentDir: path.join('src/site/content/', process.env.ELEVENTY_LANG || ''),
   title: 'web.dev',
   titleVariation: 'Home',
   defaultLocale: locale.defaultLocale,
   url: 'https://web.dev',
+  buildDate: new Date(),
   repo: 'https://github.com/GoogleChrome/web.dev',
   subscribe: 'https://web.dev/newsletter',
   subscribeForm:
     'https://services.google.com/fb/submissions/591768a1-61a6-4f16-8e3c-adf1661539da/',
-  thumbnail: '/images/social.png',
-  isBannerEnabled: true,
-  banner:
-    'web.dev LIVE is now over! Head to [web.dev/live](/live/) to watch all the sessions, top Q&A and more.',
-  // Note that the imageCdn value is only used when we do a production build
-  // of the site. Otherwise all image paths are local. This means you can
-  // develop locally without having to mess with the CDN at all.
-  imageCdn: 'https://webdev.imgix.net',
-  gitlocalize: 'https://gitlocalize.com/repo/3847/',
+  thumbnail: 'image/FNkVSAX8UDTTQWQkKftSgGe9clO2/uZ3hQS2EPrA9csOgkoXI.png',
+  isBannerEnabled: false,
+  banner: '',
+  paginationCount: PAGINATION_COUNT,
+  imgixDomain: 'web-dev.imgix.net',
+  bucket: 'web-dev-uploads',
+  gitlocalize: 'https://gitlocalize.com/repo/6062/',
   analytics: {
     ids: {
       prod: 'UA-126406676-2',
@@ -48,8 +50,11 @@ module.exports = {
     dimensions: {
       SIGNED_IN: 'dimension1',
       TRACKING_VERSION: 'dimension5',
+      NAVIGATION_TYPE: 'dimension6',
+      COLOR_SCHEME_PREFERENCE: 'dimension7',
+      WEB_VITALS_DEBUG: 'dimension8',
     },
-    version: 3,
+    version: 14,
   },
   firebase: {
     prod: {
@@ -75,4 +80,5 @@ module.exports = {
   maps: {
     apiKey: 'AIzaSyCc27LkiT_ZvmEszthj__edZEzB7B7976s',
   },
+  recaptchaSiteKey: '6Lfqf9YdAAAAAKUVvj6y53E_tMMlnj8dt1fpo-FV',
 };

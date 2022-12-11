@@ -14,7 +14,7 @@ description: |
   dramatically increase user engagement and keep file size low.
 tags:
   - blog # blog is a required tag for the article to show up in the blog.
-  - twa
+  # - twa
   - case-study
 ---
 
@@ -26,27 +26,27 @@ as fast and easy as possible.
 
 Until recently, the OYO team was offering both a
 [Progressive Web App (PWA)](https://developers.google.com/web/progressive-web-apps)
-and a native Android app to achieve that goal.
+and an Android app to achieve that goal.
 The Android app had significantly higher engagement:
 users converted three times as often as those using the PWA.
 But users also tended to uninstall the Android app over time
 because of concerns about storage space.
 
 To reduce the Android app's footprint on users' devices
-while keeping the benefits of the native experience,
+while keeping the benefits of the Android experience,
 the team decided to turn to
-[Trusted Web Activities (TWAs)](https://developers.google.com/web/updates/2019/02/using-twa).
+[Trusted Web Activities (TWAs)](https://developer.chrome.com/docs/android/trusted-web-activity/).
 
 ## What's a TWA?
 Before Chrome 72, Android developers who wanted to display web content in
-their native apps had to use
+their platform-specific apps had to use
 [WebView](https://developer.android.com/reference/android/webkit/WebView),
 which came with some meaningful limitations:
 it's not as fast as Chrome and doesn't include all of Chrome's APIs and features.
 So, if you wanted behavior that WebView's rendering engine didn't support,
 you had to build your own browser around it—which isn't exactly trivial!
 
-[Trusted Web Activities (TWAs)](https://developers.google.com/web/updates/2019/02/using-twa)
+[Trusted Web Activities (TWAs)](https://developer.chrome.com/docs/android/trusted-web-activity/)
 address those limitations by showing web content directly in Chrome.
 Breaking down the TWA name helps explain its features:
 - An _activity_ is one screen or view in an Android app's user interface.
@@ -58,29 +58,29 @@ Breaking down the TWA name helps explain its features:
 
 {% Aside %}
 It's easy to confuse PWAs and TWAs.
-_PWAs_ use web technologies to create experiences comparable to native apps.
+_PWAs_ use web technologies to create experiences comparable to Android/iOS/desktop apps.
 _TWAs_ allow you to display a PWA in an Android app wrapper
 that can be downloaded from the Google Play Store.
 {% endAside %}
 
-## Why create a TWA rather than a native app?
+## Why create a TWA rather than a platform-specific app?
 
 More and more Android apps are delivering content from developers' own websites.
 TWAs acknowledge that reality by offering the best
-of the native and web app worlds:
-- They have all the expected functionality of native Android apps,
+of the platform-specific and web app worlds:
+- They have all the expected functionality of Android apps,
   including a launcher icon, push notifications, and fullscreen display.
 - They offer the performance and features of Chrome.
 - They use the version of Chrome installed on the device,
   so they always have the latest APIs and features.
-- They use significantly less storage than a fully native app,
+- They use significantly less storage than a platform-specific app,
   which is a concern for many users,
   especially those with lower-end devices.
 
 Running in Chrome also has a number of handy perks.
 For example, TWAs share Chrome's storage,
 including cookies, passwords, and anything stored using the
-[Web Storage API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Storage_API).
+[Web Storage API](https://developer.mozilla.org/docs/Web/API/Web_Storage_API).
 One benefit of this setup is that users stay logged in
 across the browser and the TWA app.
 
@@ -93,21 +93,21 @@ though it's best to select the user's default browser.
 
 ## Building OYO Lite
 
-The OYO team wanted to give their users a native app experience
+The OYO team wanted to give their users a full-featured app experience
 without having to compromise on device storage,
 so they decided to create
 [OYO Lite](https://play.google.com/store/apps/details?id=com.oyo.consumerlite),
 a TWA built on their existing PWA.
 
 Starting with a PWA is essential.
-Users expect a native-like experience in an app they run from the Android launcher,
+Users expect a full-featured experience in an app they run from the Android launcher,
 so web content served in a TWA must provide that experience, including:
 - Fast load and response times
 - Reliability when the user has limited or no connectivity
 - A unified look and feel (by providing, for example, a splash screen and app color)
 
 {% Aside %}
-Meeting the [Lighthouse requirements for a PWA](/lighthouse-pwa)
+Meeting the [Lighthouse requirements for a PWA](https://developer.chrome.com/docs/lighthouse/pwa/)
 is actually a prerequisite for TWAs.
 To learn more about building a PWA,
 see the [Installable collection](/installable).
@@ -129,12 +129,12 @@ Here's what the OYO team did:
 * Created a custom splash screen.
 
 And here's the result:
-<figure class="w-figure">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure>
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/oyo-case-study/oyo-lite.webm" type="video/webm; codecs=vp8">
     <source src="https://storage.googleapis.com/web-dev-assets/oyo-case-study/oyo-lite.mp4" type="video/mp4; codecs=h264">
   </video>
- <figcaption class="w-figcaption">
+ <figcaption>
     OYO Lite in action.
   </figcaption>
 </figure>
@@ -153,9 +153,9 @@ that's accessible to all Android users—take a look at Ankit Jain's
 By storing most of their app assets in Chrome's cache,
 the OYO team was able to get the initial download size
 for OYO Lite down to a svelte 850&nbsp;KB.
-That's just 7% the size of their native Android app!
+That's just 7% the size of their Android app!
 
-That small footprint combined with the amenities of a native app
+That small footprint combined with the amenities of an Android app
 downloadable from the Google Play Store led to significant gains
 in user engagement:
 - A conversion rate three times higher than the PWA's rate
@@ -169,10 +169,10 @@ for users to download the latest version of the app.
 
 ## Build your own TWA
 OYO's online reservation platform is only one use case for TWAs.
-They can be a great fit for many projects currently built as native apps or web pages,
+They can be a great fit for many projects currently built as platform-specific apps or web pages,
 from shopping carts and checkout flows to FAQs and contact forms.
 
 Check out these links to get started with TWAs:
-- [Using Trusted Web Activities](https://developers.google.com/web/updates/2019/02/using-twa)
+- [Using Trusted Web Activities](https://developer.chrome.com/docs/android/trusted-web-activity/)
 - [Taking Chrome Full Screen with Trusted Web Activities (YouTube)](https://youtu.be/6lHBw3F4cWs)
 - [A complete guide to Trusted Web Activity (TWA): OYO case study](https://medium.com/@ankitjainaj/3dd327d7afc5)

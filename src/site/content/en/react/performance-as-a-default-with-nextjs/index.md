@@ -31,7 +31,7 @@ aim to explain them in more detail and show you how you can use them to build a 
 performant experience.
 
 {% Aside %}
-  This collection assumes that you have a basic knowledge of React. If not, check out 
+  This collection assumes that you have a basic knowledge of React. If not, check out
   [React's Getting Started page](https://reactjs.org/docs/getting-started.html).
 {% endAside %}
 
@@ -98,11 +98,11 @@ The following embed shows the directory structure of a new Next.js app.
 {% Instruction 'remix' %}
 {% Instruction 'preview' %}
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe src="https://glitch.com/embed/#!/embed/new-next-app?path=index.html&attributionHidden=true"
-          alt="A basic Next.js app on Glitch"
-          style="height: 100%; width: 100%; border: 0;"></iframe>
-</div>
+{% Glitch {
+  id: 'new-next-app',
+  path: 'index.html',
+  height: 480
+} %}
 
 Notice that a `pages/` directory is created with a single file: `index.jsx`. Next.js follows
 a file-system routing approach, where every page within this directory is served as a separate
@@ -118,19 +118,17 @@ Moreover, every initial page load in Next.js is **server-side rendered**. If you
 the Network panel in DevTools, you can see the initial request for the document returns
 a fully server-rendered page.
 
-<figure class="w-figure">
-  <img src="devtools.png" 
-       alt="The Preview tab of the Network panel shows that Next.js returns
-            visually complete HTML when a page is requested.">
-  <figcaption class="w-figcaption">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/bq2tjbZwvpwqQhFsHp0Q.png", alt="The Preview tab of the Network panel shows that Next.js returns visually complete HTML when a page is requested.", width="800", height="529" %}
+  <figcaption>
     The Preview tab of the Network panel shows that Next.js returns visually complete
     HTML when a page is requested.
   </figcaption>
 </figure>
 
 {% Aside %}
-  Check out [Server Rendering](https://developers.google.com/web/updates/2019/02/rendering-on-the-web#server-rendering) 
-  to learn how server-side rendering often results in a better experience for users. 
+  Check out [Server Rendering](/rendering-on-the-web/#server-rendering)
+  to learn how server-side rendering often results in a better experience for users.
 {% endAside %}
 
 These are only a few of the many features provided by Next.js automatically. Many
@@ -149,5 +147,5 @@ Every other guide in this collection will explore a specific Next.js feature in 
 
 [collection]: /react
 [cra]: https://create-react-app.dev/
-[ssr]: https://developers.google.com/web/updates/2019/02/rendering-on-the-web#server-rendering
+[ssr]: /rendering-on-the-web/#server-rendering
 [amp]: /how-amp-can-guarantee-fastness-in-your-nextjs-app

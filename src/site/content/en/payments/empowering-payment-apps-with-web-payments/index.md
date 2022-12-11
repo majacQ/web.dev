@@ -7,8 +7,12 @@ authors:
 description: |
   Web Payments aims to provide frictionless payment experience on the web. Learn how it works, its benefits, and get ready to integrate your payment app with Web Payments.
 date: 2020-05-25
+updated: 2020-07-16
 tags:
+  - blog
   - payments
+feedback:
+  - api
 ---
 
 One of the key ecosystem drivers for the web are payments. With secure,
@@ -39,12 +43,12 @@ of billing data for every purchase. See a demo below of how Google Pay leverages
 Web Payments to build a seamless flow. The same can be achieved by any other
 payment app:
 
-<figure class="w-figure" style="width:300px; margin:auto;">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure style="width:300px; margin:auto;">
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/payments/native-payment-app.webm" type="video/webm">
     <source src="https://storage.googleapis.com/web-dev-assets/payments/native-payment-app.mp4" type="video/mp4">
   </video>
-  <figcaption class="w-figcaption">Checkout flow with Google Pay and Web Payments.</a>.
+  <figcaption>Checkout flow with Google Pay and Web Payments.
   </figcaption>
 </figure>
 
@@ -56,6 +60,8 @@ payment app:
    details.
 
 4. The merchant verifies the payment and the purchase is approved.
+
+{% include 'content/payments/browser-compatibility.njk' %}
 
 ## The benefits of integrating Web Payments in a payment app
 
@@ -77,7 +83,7 @@ security.
 
 ### Better developer experience
 
-* **Easy integration:** Web Payments can be extended from an existing native
+* **Easy integration:** Web Payments can be extended from an existing platform-specific
   payment app or a web-based payment app.
 
 * **Low integration cost:** Merchants can integrate Web Payments with JavaScript
@@ -86,14 +92,10 @@ security.
 * **Standards:** The protocol and data format for exchanging information with
   merchants is standardized and doesn't require deep integration.
 
-* **Dynamic price updates:** Merchants can dynamically change the shipping cost
-  based on the shipping address selected in the payment app, without deep
-  integration.
-
 ###  Stricter security
 
 * [Sideloading](https://en.wikipedia.org/wiki/Sideloading) prevention when
-  invoking native payment apps.
+  invoking platform-specific payment apps.
 
 * Designed with upcoming security and privacy paradigms in mind.
 
@@ -123,7 +125,7 @@ Consider the existing approaches to integrating payments on the web:
 
 Here's how they compare to Web Payments:
 
-<div class="w-table-wrapper">
+<div class="table-wrapper">
   <table>
     <tr>
       <td></td>
@@ -158,7 +160,7 @@ Here's how they compare to Web Payments:
       <td>✔</td>
     </tr>
     <tr>
-      <td>Native app integration</td>
+      <td>Platform-specific app integration</td>
       <td>✔</td>
       <td></td>
       <td></td>
@@ -184,18 +186,18 @@ Here's how they compare to Web Payments:
   </table>
 </div>
 
-{% Aside %} *Redirecting to a native payment app can be done in-context with the
+{% Aside %} *Redirecting to a platform-specific payment app can be done in-context with the
 merchant website though redirecting to another website completely loses the
 context. {% endAside %}
 
 ##  Integrating Web Payments in existing apps
 
-You can integrate Web Payments in both native and web-based payment apps: if the
-native payment app is not installed, the web-based payment app can be used as a
+You can integrate Web Payments in both platform-specific and web-based payment apps: if the
+platform-specific payment app is not installed, the web-based payment app can be used as a
 fallback. Customers and merchants can seamlessly send and receive payments
 through a payment method of their choice, depending on the environment.
 
-###  Native payment apps
+###  Platform-specific payment apps
 
 * Ideal for payment apps that already have a large install base and want to give
   existing users a consistent experience on the web.
@@ -205,7 +207,7 @@ through a payment method of their choice, depending on the environment.
   Payments performs signature verification before running the payment app which
   makes malicious payment apps impossible to be sideloaded.
 
-In the video above, Google Pay is a native payment app.
+In the video above, Google Pay is a platform-specific payment app.
 
 ###  Web based payment apps
 
@@ -218,12 +220,12 @@ In the video above, Google Pay is a native payment app.
 * The web-based route is ideal for web services that have a large number of
   customers with their card on file.
 
-<figure class="w-figure" style="width:300px; margin:auto;">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure style="width:300px; margin:auto;">
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/payments/web-based-payment-app.webm" type="video/webm">
     <source src="https://storage.googleapis.com/web-dev-assets/payments/web-based-payment-app.mp4" type="video/mp4">
   </video>
-  <figcaption class="w-figcaption">
+  <figcaption>
     Checkout flow with a web-based payment app.
   </figcaption>
 </figure>
@@ -248,66 +250,3 @@ outreach as well.
 Web Payments is all about standard technology in the browser. Payment apps
 adopting it nor activating it on the browser won't charge them any fees by
 itself.
-
-##  Browser support
-
-Web Payments consists of a few different pieces of technologies and the support
-status depends on the browser.
-
-<div class="w-table-wrapper">
-  <table>
-    <tr>
-      <td></td>
-      <td>Chrome (Chromium)</td>
-      <td></td>
-      <td></td>
-      <td>Safari</td>
-      <td></td>
-      <td>Firefox</td>
-    </tr>
-    <tr>
-      <td></td>
-      <td>Desktop</td>
-      <td>Android</td>
-      <td>iOS</td>
-      <td>Desktop</td>
-      <td>Mobile</td>
-      <td></td>
-    </tr>
-    <tr>
-      <td>Payment Request API</td>
-      <td>✔</td>
-      <td>✔</td>
-      <td></td>
-      <td>✔</td>
-      <td>✔</td>
-      <td>Under active development</td>
-    </tr>
-    <tr>
-      <td>Payment Handler API</td>
-      <td>✔</td>
-      <td>✔</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td>Under active development</td>
-    </tr>
-    <tr>
-      <td>Native payment app</td>
-      <td>✔</td>
-      <td>✔</td>
-      <td>*</td>
-      <td>✔**</td>
-      <td>✔**</td>
-      <td></td>
-    </tr>
-  </table>
-</div>
-
-{% Aside %}
-*Chrome team is considering making native payment apps available on
-iOS.
-
-**Safari supports Apple Pay but no third party payment apps.
-
-{% endAside %}

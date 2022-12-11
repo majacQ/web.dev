@@ -1,19 +1,22 @@
-{% for slug in section.pathItems %}
-  {% set url = ['', lang, slug, ''] | join('/') %}
+{% for pathItem in section.pathItems %}
+  {% set url = ['', 'i18n', lang, pathItem, ''] | join('/') %}
   {% set item = url | findByUrl %}
-
-  {% if item %}
-
-    {% if item.data.draft %}
-      {# noop #}
-    {% else %}
-
-      <li class="w-path-listitem">
-        <a
-          class="w-path-link"
-          href="{{ item.url | stripLanguage}}"
-        >
-          {{ item.data.title | md | safe }}
+  {# Add a default language fallback in case the article is not translated. #}
+  {% if not item %}
+    {% set url = ['', 'en', pathItem, ''] | join('/') %}
+    {% set item = url | findByUrl %}
+  {% endif %}
+  {% if pathItem.url %}
+    <li>
+      <a href="{{ pathItem.url }}">
+        {{ pathItem.title | trim }}
+      </a>
+    </li>
+  {% elif item %}
+    {% if not item.data.draft %}
+      <li>
+        <a href="{{ item.url | getDefaultUrl }}">
+          {{ item.data.title | trim | md({linkify: false}) | safe }}
         </a>
       </li>
     {% endif %}

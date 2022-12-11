@@ -5,21 +5,20 @@ name: Percy
 on:
   push:
     branches:
-      - master
+      - main
     paths:
-      - '**.js'
-      - '!src/site/_data/contributors.js'
+      - 'src/**.js'
+      - 'shared/**.js'
       - '!src/site/_data/countries.js'
-      - '!src/site/_data/postTags.js'
       - 'package.json'
       - '**.njk'
       - '**.scss'
   pull_request:
     paths:
-      - '**.js'
-      - '!src/site/_data/contributors.js'
+      - '.github/workflows/percy-workflow.yml'
+      - 'src/**.js'
+      - 'shared/**.js'
       - '!src/site/_data/countries.js'
-      - '!src/site/_data/postTags.js'
       - 'package.json'
       - '**.njk'
       - '**.scss'
@@ -29,21 +28,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1.0.0
-      - name: Setup node
-        uses: actions/setup-node@v1
+        uses: actions/checkout@v2
         with:
-          node-version: '12.x'
-      - name: Cache node_modules
-        uses: actions/cache@v1
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          fetch-depth: 1
+
       - name: Install
         run: npm ci
+
       - name: Percy
         env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
         run: npm run percy

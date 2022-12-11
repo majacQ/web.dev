@@ -5,14 +5,14 @@ subhead: Understand why performance matters when it comes to conversion.
 authors:
   - martinschierle
 date: 2019-05-05
-hero: hero.jpg
+hero: image/admin/1bX6ydHTmi5UrEFx3PDc.jpg
 alt: Image of laptop with mouse pointing to checkout button on a web page
 description: |
   Learn what impact website performance has on different parts of the e-commerce funnel
 wf_blink_components: Blink>Performance
 tags:
   - blog
-  - e-commerce
+  # - e-commerce
   - performance
 ---
 
@@ -38,7 +38,7 @@ misleading. There are several ways to deal with this:
 -   Gather multiple metrics and try to narrow and filter afterwards on
     what might be relevant for the task at hand.
 -   Abstract metrics into an overall score, as for example
-    [Lighthouse does](https://developers.google.com/web/tools/lighthouse/v3/scoring#perf).
+    [Lighthouse does](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring).
     This can be especially useful for non-technical staff and other
     stakeholders, but is probably insufficient for deeper technical analysis.
 -   Try to find the one metric which is most relevant as a predictor for
@@ -52,9 +52,9 @@ Finding this metric can be done by using your analytics tool of choice
 to map performance metrics to user engagement, conversions and transaction values.
 For example, a custom report to do so looks like this in Google Analytics:
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="./speed_report.png" alt="A Google Analytics dashboard shows a number of fields being added to a custom report.">
-  <figcaption class="w-figcaption w-figcaption--center">
+<figure>
+  {% Img src="image/admin/YI31t9fE82uEhrrYKTVg.png", alt="A Google Analytics dashboard shows a number of fields being added to a custom report.", width="800", height="430" %}
+  <figcaption>
     Fig 1: Custom report in Google Analytics to analyze the impact of speed on conversions and engagement.
   </figcaption>
 </figure>
@@ -62,7 +62,7 @@ For example, a custom report to do so looks like this in Google Analytics:
 {% Aside 'caution' %}
   **Metrics can be deceiving.**
   Unfortunately metrics can sometimes be misleading with respect to performance.
-  Keep reading for specifics.   
+  Keep reading for specifics.
 {% endAside %}
 
 ## Increasing bounce rate
@@ -73,12 +73,12 @@ Often it is assumed that bounce rate will drop when page load speed
 increases. While this normally does hold true, measurements sometimes show the
 opposite. This is because analytics can only measure a bounce after the
 analytics library is loaded. A faster page load means analytics code also loads
-faster, so analytics may see more bounces even if there aren't more happening.  
+faster, so analytics may see more bounces even if there aren't more happening.
 
 ### Solution
 
 This can be eased by measuring
-[real page abandonment](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics#load_abandonment) instead.
+[real page abandonment](/user-centric-performance-metrics/) instead.
 
 ## Decreasing relative conversions
 
@@ -88,7 +88,7 @@ Relative conversions may sometimes seem to drop for faster sites.
 This is because faster pages reach a bigger audience who might be less engaged
 or committed. While incremental traffic and conversions increase with faster
 pages, relative conversions (the ratio of conversions to page views or visitors)
-might still drop.  
+might still drop.
 
 ### Solution
 
@@ -99,7 +99,7 @@ even calculate Cost Per Sales (conversions divided with investment level) or ROI
 
 ### Problem
 
-Page engagement may seem to drop for a faster page.  
+Page engagement may seem to drop for a faster page.
 
 ### Solution
 
@@ -117,7 +117,7 @@ _[Everything You Know About Latency Is Wrong](https://bravenewgeek.com/everythin
 Similar to a chain being just as strong as the weakest link, the performance of
 a funnel is only as good as its slowest load. A single slow load may be enough
 to lose the user. Therefore averages and medians are more likely to hide the
-real performance issues, than to reveal them.  
+real performance issues, than to reveal them.
 
 ### Solution
 
@@ -130,20 +130,20 @@ While performance measurement is highly important, make sure to keep an open
 mind and question unexpected results—and make sure to not report misleading
 numbers to stakeholders and management. If unsure on what to pick and report,
 we'd advise as a minimum for 90th percentile
-[First Contentful Paint](/first-contentful-paint), which is also what we use
+[First Contentful Paint](/fcp/), which is also what we use
 across our public tooling.
 
 ## Third party content
 
 Website performance is especially prone to being dragged down
 by third party content
-(see [Eliminate render-blocking resources](/render-blocking-resources)).
+(see [Eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/)).
 This is a particular problem for e-commerce, often due to trackers and widgets.
 
 Some ways to handle third party content with respect to performance:
 
 -   Always keep third party content out of the
-    [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/).
+    [critical rendering path](/critical-rendering-path/).
     If the third party has server problems and times out, it will impact your
     website heavily. You can test and simulate this via
     [WebPageTest Single-Point-of-Failure](https://css-tricks.com/use-webpagetest-api/#single-point-of-failure)
@@ -159,28 +159,28 @@ Some ways to handle third party content with respect to performance:
 -   Try to stay on one stack from one vendor if possible. For example, if
     you have a tag manager and analytics on one stack, you may only need a
     single script, and may be able to
-    [take advantage of HTTP2 synergies](https://developers.google.com/web/fundamentals/performance/http2/)
+    [take advantage of HTTP2 synergies](/performance-http2/)
      as there is only one host involved.
 -   Make sure not to use the same functionality from two different vendors.
     You shouldn't need two tag managers or two analytics platforms.
 -   Routinely audit and clean out redundant third party scripts, trackers
     and widgets. This can easily be done via [Ghostery Extension](https://chrome.google.com/webstore/detail/ghostery-%E2%80%93-privacy-ad-blo/mlomiejdfkolichcflejclcbmpeaniij?hl=en) or tools like [WhatRuns](https://chrome.google.com/webstore/detail/whatruns/cmkdbmfndkfgebldhnkbfhlneefdaaip?hl=en):
 
-<figure class="w-figure">
-  <img class="w-screenshot" src="./ghostery.png" alt="A Ghostery report showing all loaded trackers.">
-  <figcaption class="w-figcaption w-figcaption--center">
+<figure>
+  {% Img src="image/admin/w2xb4mUJ7kDpt254fq0k.png", alt="A Ghostery report showing all loaded trackers.", width="800", height="710" %}
+  <figcaption>
     A Ghostery report showing all loaded trackers
   </figcaption>
 </figure>
 
 Learn more in
-[Loading Third-Party JavaScript](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/).
+[Loading Third-Party JavaScript](/optimizing-content-efficiency-loading-third-party-javascript/).
 
 ## Performance Culture
 
 Unfortunately performance is often seen as a one-off optimization task, and then
 regresses over time as stakeholders raise new feature requests or insist on
-adding new trackers and widgets.  
+adding new trackers and widgets.
 
 Performance must be a continuous goal to improve acquisition, discovery, and
 conversion rates as well as safeguarding the reputation of your brand. This can
@@ -199,7 +199,7 @@ to do this:
 -   [Facebook](https://www.theverge.com/2015/10/28/9625062/facebook-2g-tuesdays-slow-internet-developing-world)
     and Google do this by providing slow networks across the company for testing.
 -   Make average, low-spec devices with low
-    [bandwidth or high latencies](https://developers.google.com/web/fundamentals/performance/poor-connectivity/) available
+    [bandwidth or high latencies](/performance-poor-connectivity/) available
     to management and other stakeholders.
 -   Consider adding overlays showing performance metrics on your development
     or staging servers. Connections to these servers from mobile can

@@ -3,7 +3,7 @@ title: Get started with Web Bundles
 subhead: |
   Share websites as a single file over Bluetooth and run them offline in your origin's context
 date: 2019-11-11
-hero: hero.png
+hero: image/admin/Z9ZE5FjAFT4R6eOaCWPl.png
 alt: The Web Bundle logo
 authors:
   - uskay
@@ -14,6 +14,8 @@ description: |
 tags:
   - blog
   - web-bundles
+feedback:
+  - api
 ---
 
 Bundling a full website as a single file and making it shareable
@@ -42,11 +44,9 @@ images, or stylesheets.
  are part of the [Web Packaging](https://github.com/WICG/webpackage)
  proposal.
 
-<figure class="w-figure">
-  <img src="webbundle.png"
-       alt="A figure demonstrating that a Web Bundle is a collection of web resources."
-       style="max-width: 75%">
-  <figcaption class="w-figcaption">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/nIq4lyKZAV6XgbgDgNSk.png", alt="A figure demonstrating that a Web Bundle is a collection of web resources.", width="800", height="466", style="max-width: 75%" %}
+  <figcaption>
     How Web Bundles work
   </figcaption>
 </figure>
@@ -80,7 +80,7 @@ These features open multiple scenarios. One common scenario is the ability to
 build a self-contained web app that's easy to share and usable without an
 internet connection. For example, say you're on an airplane from Tokyo to San Francisco with
 your friend. You don't like the in-flight entertainment. Your friend is playing an interesting
-web game called [PROXX](https://proxx.app/), and tells you that she downloaded the game as a Web
+web game called [PROXX](https://proxx.app/), and tells you that they downloaded the game as a Web
 Bundle before boarding the plane. It works flawlessly offline. Before Web
 Bundles, the story would end there and you would either have to take turns
 playing the game on your friend's device, or find something else to pass the
@@ -151,17 +151,17 @@ development.
 
 To try out a Web Bundle:
 
-1. Go to `chrome://version` to see what version of Chrome you're running. If you're running version
+1. Go to `about://version` to see what version of Chrome you're running. If you're running version
    80 or later, skip the next step.
 1. Download [Chrome Canary](https://www.google.com/chrome/canary/) if you're not running Chrome 80
    or later.
-1. Open `chrome://flags/#web-bundles`.
+1. Open `about://flags/#web-bundles`.
 1. Set the **Web Bundles** flag to **Enabled**.
 
-   <figure class="w-figure">
-     <img src="chromeflag.png" alt="A screenshot of chrome://flags" style="max-width: 75%">
-     <figcaption class="w-figcaption">
-       Enabling Web Bundles in <code>chrome://flags</code>
+   <figure>
+     {% Img src="image/admin/tt32OXyh9PdrKK9KnMto.png", alt="A screenshot of about://flags", width="800", height="315" %}
+     <figcaption>
+       Enabling Web Bundles in <code>about://flags</code>
      </figcaption>
    </figure>
 
@@ -171,12 +171,12 @@ To try out a Web Bundle:
 
 Everything magically works.
 
-<figure class="w-figure">
-  <video controls autoplay loop muted class="w-screenshot">
+<figure>
+  <video controls autoplay loop muted>
     <source src="https://storage.googleapis.com/web-dev-assets/web-bundles/preact-todomvc.mp4"
             type="video/mp4">
   </video>
-  <figcaption class="w-figcaption">
+  <figcaption>
     The Preact implementation of TodoMVC working offline as a web bundle
   </figcaption>
 </figure>
@@ -230,5 +230,5 @@ great resource on what publishers actually need. We also want to thank [Jason
 Miller](https://twitter.com/_developit) for the amazing preact-todomvc and his
 restless effort on making the framework better.
 
-[exchanges]: https://developers.google.com/web/updates/2018/11/signed-exchanges
+[exchanges]: https://developer.chrome.com/blog/signed-exchanges/
 [go/bundle]: https://github.com/WICG/webpackage/tree/master/go/bundle

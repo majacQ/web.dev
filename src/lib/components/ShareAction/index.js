@@ -4,11 +4,13 @@
 
 import {isWebShareSupported} from '../../utils/web-share';
 
+import './_styles.scss';
+
 /**
  * Renders share element. This simply adds behavaior to share, and does not
  * render any HTML.
  *
- * @extends {BaseElement}
+ * @extends {HTMLElement}
  * @final
  */
 class ShareAction extends HTMLElement {
@@ -41,7 +43,7 @@ class ShareAction extends HTMLElement {
     url.searchParams.set('url', this.shareUrl);
     url.searchParams.set('text', this.shareText);
     e.preventDefault();
-    window.open(url, 'share-twitter', 'width=550,height=235');
+    window.open(url.toString(), 'share-twitter', 'width=550,height=235');
   }
 
   get shareUrl() {

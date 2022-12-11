@@ -155,7 +155,7 @@ const days = [
         blurb:
           "Let's take a look at the latest and greatest features in Chrome's DevTools!",
         abstract: [
-          "Let's take a look at the latest and greatest features in Chrome's DevTools. We'll cover how you can use the Performance Panel to assess your page load metrics, how you can locate issues with your pages, debug your Web Assembly, and even emulate color vision deficiencies.",
+          "Let's take a look at the latest and greatest features in Chrome's DevTools. We'll cover how you can use the Performance Panel to assess your page load metrics, how you can locate issues with your pages, debug your WebAssembly, and even emulate color vision deficiencies.",
         ],
         videoId: '6yrJZHqJe2k',
       },
@@ -183,9 +183,9 @@ const days = [
         speaker: 'andreban',
         title: 'Shipping a PWA as an Android app',
         blurb:
-          'In this session you will learn about Bubblewrap, a new tool that developers can use to transform their PWAs into an Android application, without having to write native code or learn native tooling.',
+          'In this session you will learn about Bubblewrap, a new tool that developers can use to transform their PWAs into an Android application, without having to learn Android code or tooling.',
         abstract: [
-          'Increase the reach of your Progressive Web App by using it as an Android app. In this session you will learn about Bubblewrap, a new tool that developers can use to transform their PWAs into an Android application, without having to write native code or learn native tooling. You’ll watch us to transform an existing PWA into a native app from start to finish, in just a few minutes.',
+          'Increase the reach of your Progressive Web App by using it as an Android app. In this session you will learn about Bubblewrap, a new tool that developers can use to transform their PWAs into an Android application, without having to learn Android code or tooling. You’ll watch us to transform an existing PWA into an Android app from start to finish, in just a few minutes.',
         ],
         videoId: 'QJlbMfW3jPc',
       },
@@ -203,10 +203,10 @@ const days = [
         speaker: 'thomassteiner',
         title: "Progressively Enhancing Like It's 2003",
         blurb:
-          'In this talk, we will show how new and upcoming browser capabilities can progressively enhance an application so that it remains useful on all modern browsers, but delivers an advanced experience on browsers that support capabilities like native file system access, system clipboard access, contacts retrieval, periodic background sync, screen wake lock, sharing features, and many more.',
+          'In this talk, we will show how new and upcoming browser capabilities can progressively enhance an application so that it remains useful on all modern browsers, but delivers an advanced experience on browsers that support capabilities like file system access, system clipboard access, contacts retrieval, periodic background sync, screen wake lock, sharing features, and many more.',
         abstract: [
           'Back in March 2003, Nick Finck and Steve Champeon stunned the web design world with the concept of progressive enhancement, a strategy for web design that emphasizes core webpage content first, and that then progressively adds more nuanced and technically rigorous layers of presentation and features on top of the content. While in 2003, progressive enhancement was about using at the time modern CSS features, unobtrusive JavaScript, and even Scalable Vector Graphics, progressive enhancement in 2020 is about using modern browser capabilities.',
-          'In this talk, we will show at the example of a greeting card web application how new and upcoming browser capabilities can progressively enhance this application so that it remains useful on all modern browsers, but delivers an advanced experience on browsers that support capabilities like native file system access, system clipboard access, contacts retrieval, periodic background sync, screen wake lock, sharing features, and many more.',
+          'In this talk, we will show at the example of a greeting card web application how new and upcoming browser capabilities can progressively enhance this application so that it remains useful on all modern browsers, but delivers an advanced experience on browsers that support capabilities like file system access, system clipboard access, contacts retrieval, periodic background sync, screen wake lock, sharing features, and many more.',
           'After the talk, developers will have a solid understanding of how to progressively enhance their web applications with new browser features, all while not putting a download burden on the subset of their users that happen to be on incompatible browsers, and, most importantly, while not excluding them from using the web application in the first place.',
         ],
         videoId: 'NXCT3htg9nk',
@@ -227,7 +227,7 @@ const days = [
         blurb:
           'In this session we’ll introduce new features for installed PWAs, teach approaches for building better PWAs, and answer frequent developer questions about the design and future of PWAs.',
         abstract: [
-          'In this session we’ll introduce new features for installed PWAs, including capabilities previously reserved for native apps. You’ll learn approaches for building better PWAs, including Play apps that use PWAs. Finally, we’ll answer frequently asked developer questions about the design and future of PWAs.',
+          'In this session we’ll introduce new features for installed PWAs, including capabilities previously reserved for iOS/Android apps. You’ll learn approaches for building better PWAs, including Play apps that use PWAs. Finally, we’ll answer frequently asked developer questions about the design and future of PWAs.',
         ],
         videoId: 'M0wPM8B6z5c',
       },
@@ -418,7 +418,7 @@ for (const day of days) {
   day.date = new Date(day.when);
 }
 
-// TODO: Dummy data for testing, replace with real data once available.
+// TODO: Placeholder data for testing, replace with real data once available.
 // prettier-ignore
 const communityEvents = {
   'North America': [
@@ -561,7 +561,7 @@ const qAndAs = [
   {
     category: 'Web Vitals',
     question: '#webdevLIVE how do you get field values and how do you get lab values for core web vitals?',
-    answer: 'For field data you can look at <a href="https://developers.google.com/web/tools/chrome-user-experience-report">Chrome UX Report</a> data, available in tools like <a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a>, <a href="https://web.dev/chrome-ux-report-data-studio-dashboard/">DataStudio</a>  and the <a href="https://developers.google.com/web/tools/chrome-user-experience-report/api/reference">CrUX API</a>. For lab data, you can use Lighthouse (either in the <a href="https://developers.google.com/web/tools/lighthouse#devtools">Lighthouse panel in DevTools</a>, via the <a href="https://developers.google.com/web/tools/lighthouse#cli">CLI</a>, or in <a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a>).',
+    answer: 'For field data you can look at <a href="https://developer.chrome.com/docs/crux/">Chrome UX Report</a> data, available in tools like <a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a>, <a href="https://web.dev/chrome-ux-report-data-studio-dashboard/">DataStudio</a>  and the <a href="https://developer.chrome.com/docs/crux/api/">CrUX API</a>. For lab data, you can use Lighthouse (either in the <a href="https://developers.google.com/web/tools/lighthouse#devtools">Lighthouse panel in DevTools</a>, via the <a href="https://developers.google.com/web/tools/lighthouse#cli">CLI</a>, or in <a href="https://developers.google.com/speed/pagespeed/insights/">PageSpeed Insights</a>).',
   },
   {
     category: 'Web Vitals',
@@ -627,6 +627,141 @@ const qAndAs = [
     category: 'Performance',
     question: 'Can a worker handle input events?',
     answer: 'You can handle input events on the main thread and then marshall the data to your worker for processing. Workers can\'t receive input directly.',
+  },
+  {
+    category: 'Tools',
+    question: 'Is there anything on HTTP Status code w.r.t DevTools that can help us easily to identify  in an eye catching way...',
+    answer: 'The Network tab highlights responses with an HTTP status code that indicates an error. The text of affected rows is red. However, you\'re right: this is not very accessible -- we shouldn\'t just rely on color to communicate the failure. I\'ve filed <a href="https://bugs.chromium.org/p/chromium/issues/detail?id=1101323">https://bugs.chromium.org/p/chromium/issues/detail?id=1101323</a> to improve the situation.',
+  },
+  {
+    category: 'PWA',
+    question: 'Can we call OS functionality from PWAs?',
+    answer: 'No, developers only have access to the capabilities of the browser, but we’re working to add new capabilities with our  capabilities project.',
+  },
+  {
+    category: 'PWA',
+    question: 'What was the philosophy behind the Fugu name?',
+    answer: 'Fugu reminds us to respect and protect the user. The fugu fish is a wonderful delicacy, it tastes wonderful. But, if it’s handled improperly it can be deadly. We feel the same way with Fugu features, they open up new scenarios on the web. But if implemented poorly, they could potentially be dangerous.',
+  },
+  {
+    category: 'PWA',
+    question: 'Is it okay to make the pathname `.well-known/assetlinks.json.` be accsessible publicly?',
+    answer: 'Yes, it needs to be publicly accessible so an Android app can verify it as necessary.',
+  },
+  {
+    category: 'PWA',
+    question: 'When will we get multi window support?',
+    answer: 'Multi-window support is something we\'re working on, mostly being led by the team at Microsoft.',
+  },
+  {
+    category: 'PWA',
+    question: 'Can you give me an API that makes it easier to sync storage.',
+    answer: 'Take a look at <a href="https://firebase.google.com/products/firestore">Cloud Firestore</a>, it’s an API that provides a sync datastore in the cloud.',
+  },
+  {
+    category: 'Performance',
+    question: 'How do we drill down long tasks to understand exactly what JS function generated it?',
+    answer: 'You should see JS stacks if you record performance profiles, those should help you drill down.',
+  },
+  {
+    category: 'Tools',
+    question: 'Can you share an info link for the color vision deficiency emulation in Chrome DevTools?',
+    answer: 'You can find more details at <a href="https://developers.google.com/web/updates/2020/03/devtools">https://developers.google.com/web/updates/2020/03/devtools</a>.',
+  },
+  {
+    category: 'PWA',
+    question: 'Do we have top level await support on the web yet?',
+    answer: 'Sadly not yet, keep an eye on <a href="https://chromestatus.com/features/5767881411264512">https://chromestatus.com/features/5767881411264512</a> for details as it progresses.',
+  },
+  {
+    category: 'PWA',
+    question: 'What are the best features of service workers?',
+    answer: 'Service Workers let developers intercept their web app\'s outgoing requests. You can generate responses from caches or other sources, which can be more reliable & faster than going against the network. Read <a href="https://web.dev/service-workers-cache-storage/">this</a> and many other articles on web.dev to understand their use cases.',
+  },
+  {
+    category: 'UX',
+    question: 'How do you add dark mode on your website?',
+    answer: 'Refer <a href="https://web.dev/prefers-color-scheme/">https://web.dev/prefers-color-scheme/</a>.',
+  },
+  {
+    category: 'UX',
+    question: 'My website sign in page has lots of fields. What is the best way to present them all?',
+    answer: 'Check out <a href="https://web.dev/sign-in-form-best-practices/">https://web.dev/sign-in-form-best-practices/</a>.',
+  },
+  {
+    category: 'Tools',
+    question: 'Can you make selected context only persist in Chrome Devtools?',
+    answer: 'This behavior has recently been fixed in Chrome DevTools and will be available for developers to use in <a href="https://developers.google.com/web/updates/2020/06/devtools#selected-context">Chrome M85</a> (July’20).',
+  },
+  {
+    category: 'Tools',
+    question: 'Can you export HAR through Puppeteer?',
+    answer: 'No, but there\'s a userland puppeteer-har implementation that handles this.',
+  },
+  {
+    category: 'PWA',
+    question: 'Will permission request be improved (customisation and specifying the source of the request)?',
+    answer: 'We don\'t allow customization of the prompt at the moment. We do recommend, though, to prompt contextually, so the user knows why the prompt shows up.',
+  },
+  {
+    category: 'PWA',
+    question: 'Any updates on the A2HS button? (Google promised to change it to Install button)',
+    answer: 'On desktop it says install, but on mobile, it is still Add to Home Screen. We want to get this right, and are still investigating what works best for users.',
+  },
+  {
+    category: 'Tools',
+    question: 'Do you recommend using Workbox instead of coding the SW directly?',
+    answer: 'When first getting started, absolutely. Service Workers are really powerful, and as a result can be very complex. Once you’ve got a handle on some of the complexities, it’s OK to start down your own path.',
+  },
+  {
+    category: 'PWA',
+    question: 'Are installed PWA\'s still crawl-able by Googlebot?',
+    answer: 'As long as they are reachable with a public URL, they should be indexable. See Martin Splitt\'s talks from web.dev LIVE day 1 (<a href="https://www.youtube.com/watch?v=himvKu12YCY&list=PLNYkxOF6rcIDC0-BiwSL52yQ0n9rNozaF">Debugging JS SEO issues</a> & <a href="https://www.youtube.com/watch?v=hBKZnaIMm4M&list=PLNYkxOF6rcIDC0-BiwSL52yQ0n9rNozaF">Implementing Structured Data with JS</a>) to learn more.',
+  },
+  {
+    category: 'PWA',
+    question: 'Does AppCache still exist?',
+    answer: 'Yes, but it’s going away very soon! See <a href="https://web.dev/appcache-removal/">https://web.dev/appcache-removal/</a>.',
+  },
+  {
+    category: 'UX',
+    question: 'Is the Portal tag available now?',
+    answer: 'It\'s going to origin trial very soon! Check out <a href="https://web.dev/hands-on-portals/">https://web.dev/hands-on-portals/</a> for the latest.',
+  },
+  {
+    category: 'PWA',
+    question: 'Can you please mention what can be used in place of localstorage and Appcache?',
+    answer: 'We recommend <a href="https://web.dev/storage-for-the-web/#recommendation">Service Workers and IndexedDB</a>.',
+  },
+  {
+    category: 'PWA',
+    question: 'Do Opaque Responses still have the 7MB padding applied? The Storage Quota becomes really tricky to manage on a large site with lots of third-party requests.',
+    answer: 'Yes, the padding still applies to opaque responses (context: <a href="https://stackoverflow.com/questions/39109789/what-limitations-apply-to-opaque-responses/39109790#39109790">https://stackoverflow.com/questions/39109789/what-limitations-apply-to-opaque-responses/39109790#39109790</a>).',
+  },
+  {
+    category: 'PWA',
+    question: 'What about storage from PWAs? If say someone wrote important information in a note writing app for long term storage and didn\'t visit for a long time, does this mean that chrome could evict that?',
+    answer: 'Yes, for that you should request <a href="https://web.dev/persistent-storage/">persistent storage</a>.',
+  },
+  {
+    category: 'PWA',
+    question: 'Do you need service workers to use the Cache API?',
+    answer: 'Typically yes, but you can also use the cache API from a page.',
+  },
+  {
+    category: 'Tools',
+    question: 'Wouldn\'t it be more handy if we could emulate a disk limit via DevTools?',
+    answer: 'Yes, absolutely, and it’s coming. Just hasn’t landed yet.',
+  },
+  {
+    category: 'PWA',
+    question: 'How does Indexed DB work and what are its features?',
+    answer: 'See documentation for <a href="https://developer.mozilla.org/en-US/docs/Web/API/IndexedDB_API">IndexedDB on MDN</a> for more.',
+  },
+  {
+    category: 'PWA',
+    question: '\'Cookies have some uses\' - so when should you use cookies, and when indexedDB?',
+    answer: 'We\'ve got specific details at <a href="https://web.dev/storage-for-the-web/">https://web.dev/storage-for-the-web/</a>.',
   },
 ];
 

@@ -3,7 +3,7 @@ layout: post
 title: Code splitting with React.lazy and Suspense
 subhead: |
   You never need to ship more code than necessary to your users, so split your bundles to make sure this never happens!
-hero: hero-code-splitting-suspense.jpg
+hero: image/admin/Lk8KvDZcWntc7rtQzvv9.jpg
 date: 2019-04-29
 description: |
   The React.lazy method makes it easy to code-split a React application on a
@@ -12,6 +12,8 @@ description: |
 authors:
   - houssein
   - jeffposnick
+feedback:
+  - api
 ---
 
 {% Aside %}
@@ -80,13 +82,11 @@ The avatar is only rendered when the button is clicked, where a request is
 then made to retrieve the code necessary for the suspended `AvatarComponent`.
 In the meantime, the fallback loading component is shown.
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/react-lazy-suspense?path=src/index.css&previewSize=100&attributionHidden=true"
-    alt="react-lazy-suspense on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'react-lazy-suspense',
+  path: 'src/index.css',
+  height: 480
+} %}
 
 In here, the code that makes up `AvatarComponent` is small which is
 why the loading spinner only shows for a short amount of time. Larger
@@ -103,8 +103,8 @@ To better demonstrate how this works:
 The loading indicator will show for longer now. Notice how all the code that
 makes up the `AvatarComponent` is fetched as a separate chunk.
 
-<figure class="w-figure">
-  <img class="w-screenshot w-screenshot--filled" src="./split-component-chunk.png" alt="DevTools network panel showing one chunk.js file being downloaded">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/ga9IsnuJoJdnUfE6sGee.png", alt="DevTools network panel showing one chunk.js file being downloaded", width="800", height="478" %}
 </figure>
 
 {% Aside %}
@@ -146,13 +146,11 @@ fetching, the user gets to see them all displayed at the same time.
 
 You can see this with the following embed:
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/react-lazy-suspense-multiple?path=src/index.css&previewSize=100&attributionHidden=true"
-    alt="react-lazy-suspense-multiple on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'react-lazy-suspense-multiple',
+  path: 'src/index.css',
+  height: 480
+} %}
 
 {% Aside %}
   Loading indicator showing a little too quickly?

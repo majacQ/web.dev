@@ -14,14 +14,31 @@
  * limitations under the License.
  */
 
-const {html} = require('common-tags');
+const {i18n, getLocaleFromPath} = require('../../_filters/i18n');
 
-/* eslint-disable require-jsdoc */
+const isDesignSystemContext = require('../../../lib/utils/is-design-system-context');
 
-module.exports = (content, type, labelOverride) => {
+/* NOTE: This component is in a transition period to support both new design system contexts
+and the existing system. Once the new design system has been *fully* rolled out, this component
+can be cleaned up with the following:
+
+1. The isDesignSystemContext conditional can be removed and code in that block should run as normal
+2. Everything from the '/// DELETE THIS WHEN ROLLOUT COMPLETE' comment *downwards* can be removed
+*/
+
+/**
+ * @this {EleventyPage}
+ * @param {string} content Markdown with the content for the compare element.
+ * @param {string} type Compare element type: 'worse' or 'better'.
+ * @param {string} labelOverride Custom label for the compare element.
+ */
+function Compare(content, type, labelOverride) {
+  const locale = getLocaleFromPath(this.page && this.page.filePathStem);
+
   if (!type) {
     throw new Error(
-      "Can't create Compare component without a type. Did you forget to pass the type as a string?",
+      `Can't create Compare component without a type in ${this.page.inputPath}.
+      Did you forget to pass the type as a string?`,
     );
   }
 
@@ -29,11 +46,11 @@ module.exports = (content, type, labelOverride) => {
   if (!label) {
     switch (type) {
       case 'worse':
-        label = "Don't";
+        label = i18n(`i18n.common.dont`, locale);
         break;
 
       case 'better':
-        label = 'Do';
+        label = i18n(`i18n.common.do`, locale);
         break;
 
       default:
@@ -41,12 +58,16 @@ module.exports = (content, type, labelOverride) => {
     }
   }
 
-  return html`
-    <figure class="w-compare">
-      <p class="w-compare__label w-compare__label--${type}">
-        ${label}
-      </p>
-      ${content}
-    </figure>
-  `;
-};
+  if (isDesignSystemContext(this.page.filePathStem)) {
+    // prettier-ignore
+    return `<figure class="compare flow" data-type="${type}" data-size="full"><p class="compare__label">${label}</p>
+${content}</figure>`;
+  }
+
+  // prettier-ignore
+  return `<figure class="w-compare"><p class="w-compare__label w-compare__label--${type}">${label}</p>
+
+${content}</figure>`;
+}
+
+module.exports = Compare;

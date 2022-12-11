@@ -1,12 +1,10 @@
-import {html} from 'lit-element';
+import {html} from 'lit';
 import {BaseElement} from '../BaseElement';
 import './_styles.scss';
 
 /**
  * @fileoverview Displays the primary URL chooser for Lighthouse.
  */
-
-/* eslint-disable require-jsdoc */
 class UrlChooser extends BaseElement {
   static get properties() {
     return {
@@ -24,14 +22,27 @@ class UrlChooser extends BaseElement {
     this.disabled = false; // disables buttons (because Lighthouse is active)
 
     // non-properties (stolen DOM nodes)
-    this._urlInput = null;
-    this._runLighthouseButton = null;
+    /** @type HTMLInputElement | null */
+    this._urlInput;
+    /** @type HTMLButtonElement | null */
+    this._runLighthouseButton;
+    this.hasError = false;
   }
 
   render() {
+    const currentURL = new URL(location.href);
+    const urlSearchParam = currentURL.searchParams.get('url');
+
     return html`
-      <div class="lh-report-header-enterurl">
-        <div class="lh-enterurl lh-enterurl--selected">${this.url}</div>
+      <div
+        class="lh-report-header-enterurl ${this.disabled ? 'lh-running' : ''}"
+      >
+        <div class="lh-enterurl lh-enterurl--selected">
+          <div class="lh-enterurl__url">
+            <p>${this.url}</p>
+          </div>
+          <web-progress-bar></web-progress-bar>
+        </div>
         <div class="lh-enterurl lh-enterurl--switch">
           <input
             ?disabled=${this.disabled}
@@ -39,9 +50,10 @@ class UrlChooser extends BaseElement {
             class="lh-input"
             name="url"
             placeholder="Enter a web page URL"
-            pattern="https?://.*"
+            pattern="https?://.+"
             minlength="7"
             @keyup="${this.onUrlKeyup}"
+            value="${urlSearchParam}"
           />
           <button
             ?disabled=${this.disabled}
@@ -51,7 +63,14 @@ class UrlChooser extends BaseElement {
             data-action="click"
             aria-label="Remove URL"
             @click=${this.onClearInput}
-          ></button>
+          >
+            <svg width="24" height="24" viewBox="0 0 24 24">
+              <path
+                fill="currentColor"
+                d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"
+              />
+            </svg>
+          </button>
         </div>
         <div class="lh-controls">
           <button
@@ -67,6 +86,7 @@ class UrlChooser extends BaseElement {
           <button
             ?disabled=${this.disabled}
             class="w-button w-button--primary gc-analytics-event"
+            data-type="primary"
             data-category="web.dev"
             data-label="measure, run audit"
             data-action="click"
@@ -102,18 +122,20 @@ class UrlChooser extends BaseElement {
       // Note: This behavior can't be performed in a setter as the <input /> might not have been
       // rendered yet.
       const url = this.url;
-      if (this.switching && url && !input.value) {
-        // if the user has just signed in, the element was in an initial state,
-        // AND the user hasn't typed anything, reset element with URL
-        input.value = url;
-        this.switching = false;
-      } else if (url === null && !this.switching) {
-        // if the user has signed out, clear the href and enter switching mode
-        input.value = null;
-        this.switching = true;
-      } else if (!this.switching) {
-        // in all other cases, only update the URL if ther user isn't switching
-        input.value = url;
+      if (input) {
+        if (this.switching && url && !input.value) {
+          // if the user has just signed in, the element was in an initial state,
+          // AND the user hasn't typed anything, reset element with URL
+          input.value = url;
+          this.switching = false;
+        } else if (url === null && !this.switching) {
+          // if the user has signed out, clear the href and enter switching mode
+          input.value = '';
+          this.switching = true;
+        } else if (!this.switching) {
+          // in all other cases, only update the URL if ther user isn't switching
+          input.value = url;
+        }
       }
     }
   }
@@ -122,9 +144,8 @@ class UrlChooser extends BaseElement {
     // Even if the user isn't switching URLs, fix and verify the saved URL which is inserted into
     // the <input /> inside this element.
     this.fixUpUrl();
-    if (!this._urlInput.validity.valid) {
-      const detail =
-        'Invalid URL. Please enter a full URL starting with https://.';
+    if (!this._urlInput.value || !this._urlInput.validity.valid) {
+      const detail = 'Invalid URL.';
       const event = new CustomEvent('web-error', {bubbles: true, detail});
       this.dispatchEvent(event);
       return;
@@ -135,6 +156,10 @@ class UrlChooser extends BaseElement {
 
     const event = new CustomEvent('audit', {detail: this._urlInput.value});
     this.dispatchEvent(event);
+
+    const currentURL = new URL(location.href);
+    currentURL.searchParams.set('url', this._urlInput.value);
+    history.replaceState({}, '', currentURL.href);
   }
 
   onSwitchUrl() {
@@ -153,20 +178,25 @@ class UrlChooser extends BaseElement {
   }
 
   /**
-   * Performs basic sanity fixes on the URL in the <input />.
+   * Performs basic fixes on the URL in the <input />.
    */
   fixUpUrl() {
     let url = this._urlInput.value.trim();
-    if (!url.startsWith('https://') && !url.startsWith('http://')) {
-      url = `http://${url}`;
+    if (!url) {
+      return;
     }
-    if (url !== this._urlInput.value) {
+    if (!url.startsWith('https://') && !url.startsWith('http://')) {
+      url = `https://${url}`;
+    }
+    if (url !== this._urlInput.value && this._urlInput) {
       this._urlInput.value = url;
     }
   }
 
   onClearInput() {
-    this._urlInput.value = null;
+    if (this._urlInput) {
+      this._urlInput.value = '';
+    }
   }
 }
 

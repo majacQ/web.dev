@@ -15,7 +15,7 @@
 // =============================================================================
 
 .w-aside {
-  font-family: $ASIDE_FONT;
+  font-family: $PRIMARY_FONT;
   font-size: #{map-get($ARTICLE, FONT_SIZE)}px;
   line-height: #{map-get($ARTICLE, LINE_HEIGHT)}px;
   margin: 48px 0 32px;
@@ -134,6 +134,18 @@
 
 .w-aside--codelab::before {
   content: 'code';
+}
+
+.w-aside--update {
+  color: $UPDATE_ASIDE_COLOR;
+}
+
+.w-aside--update::after {
+  background-color: $UPDATE_ASIDE_COLOR;
+}
+
+.w-aside--update::before {
+  content: 'update';
 }
 
 // We use descendant selectors here (instead of BEM) because the content inside

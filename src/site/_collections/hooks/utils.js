@@ -18,22 +18,27 @@
  * Reusable hooks for authors and tags
  */
 
+const {PAGINATION_COUNT} = require('../../_utils/constants');
 const addPagination = require('../../_utils/add-pagination');
+const filterByLang = require('../../_filters/filter-by-lang');
 
 /**
- * @param {any[]} items
- * @return {any[]}
+ * @param {VirtualCollectionItem[]} items
+ * @return {VirtualCollectionItem[]}
  */
 const feed = (items) => {
   const filteredFeed = [];
 
-  if (process.env.ELEVENTY_ENV !== 'prod') {
+  if (!['prod', 'staging'].includes(process.env.ELEVENTY_ENV)) {
     return filteredFeed;
   }
 
   for (const item of items) {
     if (item.elements.length > 0) {
-      filteredFeed.push(item);
+      filteredFeed.push({
+        ...item,
+        elements: item.elements.slice(0, PAGINATION_COUNT),
+      });
     }
   }
 
@@ -41,11 +46,10 @@ const feed = (items) => {
 };
 
 /**
- *
- * @param {any[]} items
+ * @param {VirtualCollectionItem[]} items
  * @param {string} href
  * @param {string[]} testItems
- * @return {any[]}
+ * @return {Paginated[]}
  */
 const index = (items, href, testItems) => {
   let itemsWithPosts = [];
@@ -56,19 +60,24 @@ const index = (items, href, testItems) => {
     itemsWithPosts = items.filter((item) => item.elements.length > 0);
   }
 
+  itemsWithPosts.sort((a, b) => a.title.localeCompare(b.title));
+
   return addPagination(itemsWithPosts, {href});
 };
 
 /**
- * @param {any[]} items
+ * @param {VirtualCollectionItem[]} items
+ * @param {string} lang
  * @return {Paginated[]}
  */
-const individual = (items) => {
+const individual = (items, lang) => {
   let paginated = [];
 
   for (const item of items) {
     if (item.elements.length > 0) {
-      paginated = paginated.concat(addPagination(item.elements, item));
+      paginated = paginated.concat(
+        addPagination(filterByLang(item.elements, lang), item),
+      );
     }
   }
 

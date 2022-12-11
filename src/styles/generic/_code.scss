@@ -17,8 +17,8 @@ $CODE_COLORS: (
   bright-blue: #007aa2,
   black: $PRIMARY_TEXT_COLOR,
   purple: #a71d5d,
-  maroon: #a71d5d,
-  green: #63a35c,
+  maroon:#9f1c59,
+  green:#385d34,
   light-gray: #f7f7f7,
   dimgrey: #696969
 );
@@ -49,10 +49,20 @@ pre {
 pre,
 pre[class*='language-'] {
   @include scrollbars();
-  margin: 32px 0;
+  margin: 32px -24px;
+  border-width: 1px 0;
   overflow: auto;
   padding: 16px;
   white-space: pre;
+
+  @include bp(sm) {
+    margin: 32px -32px;
+  }
+
+  @include bp(md) {
+    margin: 32px 0;
+    border-width: 1px;
+  }
 }
 
 pre code,
@@ -70,16 +80,21 @@ pre code {
 
 // It's not uncommon to have code in markdown headings.
 // In these cases we should remove the border.
+// There is also a utility class, .unstyled-code, that can be used
+// if we're using <code> blocks in new contexts.
+// For example: <span class="unstyled-code">{{ description | md | safe }}</span>
 h1 code,
 h2 code,
 h3 code,
 h4 code,
 h5 code,
-h6 code {
+h6 code,
+.unstyled-code code {
   background: transparent;
   border: 0;
   color: inherit;
   font-size: inherit;
+  font-style: inherit;
   margin: 0;
   padding: 0;
   white-space: normal;
@@ -92,7 +107,7 @@ cite code {
   font-size: .9em;
 }
 
-// Github-like theme for Prism.js
+// GitHub-like theme for Prism.js
 // @author Luke Askew http://github.com/lukeaskew
 
 // Token colors

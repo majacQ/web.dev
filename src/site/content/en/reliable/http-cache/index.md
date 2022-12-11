@@ -14,13 +14,15 @@ description: >
   work.
 codelabs:
   - codelab-http-cache
+feedback:
+  - api
 ---
 
-Fetching resources over the network is both slow and expensive: 
+Fetching resources over the network is both slow and expensive:
 
 * Large responses require many roundtrips between the browser and the server.
 * Your page won't load until all of its [critical resources][crp] have downloaded completely.
-* If a person is accessing your site with a limited mobile data plan, every unnecessary 
+* If a person is accessing your site with a limited mobile data plan, every unnecessary
   network request is a waste of their money.
 
 How can you avoid unnecessary network requests? The browser's HTTP Cache is your
@@ -48,8 +50,8 @@ the request. If there's a match, the response is read from the cache, which
 eliminates both the network latency and the data costs that the transfer incurs.
 
 The HTTP Cache's behavior is controlled by a combination of
-[request headers](https://developer.mozilla.org/en-US/docs/Glossary/Request_header) and
-[response headers](https://developer.mozilla.org/en-US/docs/Glossary/Response_header).
+[request headers](https://developer.mozilla.org/docs/Glossary/Request_header) and
+[response headers](https://developer.mozilla.org/docs/Glossary/Response_header).
 In an ideal scenario, you'll have control over both the code for your
 web application (which will determine the request headers) and your web server's
 configuration (which will determine the response headers).
@@ -73,10 +75,10 @@ HTTP caching for you, without extra effort.
 {% Aside %}
 Developers who do need more control over the HTTP Cache in their web application
 have an alternative—you can "drop down" a level, and manually use the [Fetch
-API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API), passing it
-[`Request`](https://developer.mozilla.org/en-US/docs/Web/API/Request) objects
+API](https://developer.mozilla.org/docs/Web/API/Fetch_API), passing it
+[`Request`](https://developer.mozilla.org/docs/Web/API/Request) objects
 with specific
-[`cache`](https://developer.mozilla.org/en-US/docs/Web/API/Request/cache)
+[`cache`](https://developer.mozilla.org/docs/Web/API/Request/cache)
 overrides set. That's beyond the scope of this guide, though!
 {% endAside %}
 
@@ -91,7 +93,7 @@ into effective caching behavior:
   long, the browser and other intermediate caches should cache the individual
   response.
 * [`ETag`][etag]. When
-  the browser finds an expired cached response, it can send a small token 
+  the browser finds an expired cached response, it can send a small token
   (usually a hash of the file's contents) to the server to check if the file has
   changed. If the server returns the same token, then the file is the same, and there's
   no need to re-download it.
@@ -133,7 +135,7 @@ web server's response headers.
   {% DetailsSummary 'h4' %}
     How versioned URLs can help your caching strategy
     Versioned URLs are a good practice because they make it easier to invalidate
-    cached responses. 
+    cached responses.
   {% endDetailsSummary %}
   Suppose your server instructs browsers to cache a CSS file
   for 1 year (<code>Cache-Control: max-age=31536000</code>) but your designer just made an
@@ -171,7 +173,7 @@ of assigning hash fingerprints to your asset URLs.
 
 {% Aside %}
 You can also add the [`immutable`
-property](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Revalidation_and_reloading)
+property](https://developer.mozilla.org/docs/Web/HTTP/Headers/Cache-Control#Revalidation_and_reloading)
 to your `Cache-Control` header as a further optimization, though it [will be
 ignored](https://www.keycdn.com/blog/cache-control-immutable#browser-support) in
 some browsers.
@@ -231,7 +233,7 @@ that has expired. `ETag` is the recommended approach because it's more accurate.
   the file. The browser doesn't need to know how the fingerprint is generated; it
   only needs to send it to the server on the next request. If the fingerprint is
   still the same, then the resource hasn't changed and the browser can skip the
-  download. 
+  download.
 {% endDetails %}
 
 By setting `ETag` or `Last-Modified`, you'll end up making the
@@ -248,13 +250,13 @@ very little data to transfer when sending this type of response, so it's usually
 much faster than having to actually send back a copy of the actual resource
 being requested.
 
-<figure class="w-figure">
-  <img src="./http-cache.png" alt="A diagram of a client requesting a resource and the server responding with a 304 header.">
-  <figcaption class="w-figcaption w-text--left">
+<figure>
+  {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/e2bN6glWoVbWIcwUF1uh.png", alt="A diagram of a client requesting a resource and the server responding with a 304 header.", width="474", height="215" %}
+  <figcaption>
     The browser requests <code>/file</code> from the server and includes the <code>If-None-Match</code>
     header to instruct the server to only return the full file if the <code>ETag</code> of
     the file on the server doesn't match the browser's <code>If-None-Match</code> value. In this
-    case, the 2 values did match, so the browser returns a <code>304 Not Modified</code> response
+    case, the 2 values did match, so the server returns a <code>304 Not Modified</code> response
     with instructions on how much longer the file should be cached (<code>Cache-Control: max-age=120</code>).
   </figcaption>
 </figure>
@@ -284,6 +286,9 @@ If you're looking to go beyond the basics of using the `Cache-Control` header,
 check out Jake Archibald's [Caching best practices & max-age
 gotchas](https://jakearchibald.com/2016/caching-best-practices/) guide.
 
+See [Love your cache](/love-your-cache) for guidance on how to optimize
+your cache usage for return visitors.
+
 ## Appendix: More tips {: #tips }
 
 If you have more time, here are further ways that you can optimize your usage of the HTTP Cache:
@@ -299,11 +304,11 @@ If you have more time, here are further ways that you can optimize your usage of
 
 ## Appendix: `Cache-Control` flowchart {: #flowchart }
 
-![Flowchart](flowchart.png)
+{% Img src="image/admin/htXr84PI8YR0lhgLPiqZ.png", alt="Flowchart", width="595", height="600" %}
 
 ## Appendix: `Cache-Control` examples {: #examples }
 
-<div class="w-table-wrapper">
+<div class="table-wrapper">
   <table>
     <thead>
       <tr>
@@ -315,14 +320,14 @@ If you have more time, here are further ways that you can optimize your usage of
       <tr>
         <td><code>max-age=86400</code></td>
         <td>
-          The response can be cached by browsers and intermediary caches for 
+          The response can be cached by browsers and intermediary caches for
           up to 1 day (60 seconds x 60 minutes x 24 hours).
         </td>
       </tr>
       <tr>
         <td><code>private, max-age=600</code></td>
         <td>
-          The response can be cached by the browser (but not intermediary caches) for up to 10 
+          The response can be cached by the browser (but not intermediary caches) for up to 10
           minutes (60 seconds x 10 minutes).
         </td>
       </tr>
@@ -342,7 +347,7 @@ If you have more time, here are further ways that you can optimize your usage of
   </table>
 </div>
 
-[crp]: https://developers.google.com/web/fundamentals/performance/critical-rendering-path
+[crp]: /critical-rendering-path/
 [304]: https://developer.mozilla.org/docs/Web/HTTP/Status/304
 [if-modified-since]: https://developer.mozilla.org/docs/Web/HTTP/Headers/If-Modified-Since
 [if-none-match]: https://developer.mozilla.org/docs/Web/HTTP/Headers/If-None-Match

@@ -1,81 +1,95 @@
-const PercyScript = require('@percy/script');
+const percySnapshot = require('@percy/puppeteer');
+const puppeteer = require('puppeteer');
 const scrollToBottom = require('scroll-to-bottomjs');
+
 const pagesToTest = [
   {
     url: '/',
-    title: 'Home page',
+    name: 'Home page',
   },
   {
     url: '/learn/',
-    title: 'Learn page',
+    name: 'Learn page',
+    navPage: true,
   },
   {
     url: '/accessible/',
-    title: 'Collection page',
+    name: 'Collection page',
   },
   {
     url: '/measure/',
-    title: 'Measure page',
+    name: 'Measure page',
+    navPage: true,
   },
   {
     url: '/blog/',
-    title: 'Blog page',
+    name: 'Blog page',
+    navPage: true,
   },
   {
     url: '/test-post/',
-    title: 'Post page',
+    name: 'Post page',
   },
   {
     url: '/about/',
-    title: 'About page',
+    name: 'About page',
+    navPage: true,
   },
   {
     url: '/codelab-avoid-invisible-text/',
-    title: 'Codelab page',
+    name: 'Codelab page',
   },
   {
     url: '/handbook/web-dev-components/',
-    title: 'Components page',
+    name: 'Components page',
   },
   {
     url: '/authors/',
-    title: 'Authors page',
+    name: 'Authors page',
   },
   {
     url: '/authors/mgechev/',
-    title: 'Author page',
+    name: 'Author page',
   },
   {
     url: '/tags/',
-    title: 'Tags page',
+    name: 'Tags page',
+  },
+  {
+    url: '/shows/',
+    name: 'Shows page',
   },
   {
     url: '/podcasts/',
-    title: 'Podcasts page',
+    name: 'Podcasts page',
   },
   {
     url: '/newsletter/',
-    title: 'Newsletter page',
+    name: 'Newsletter page',
   },
   {
     url: '/live/',
-    title: 'Live page',
+    name: 'Live page',
+    navPage: true,
   },
 ];
 
 // A script to navigate our app and take snapshots with Percy.
-PercyScript.run(
-  async (browser, percySnapshot) => {
-    for (const page of pagesToTest) {
-      const url = new URL(page.url, 'http://localhost:8080').href;
-      await browser.goto(url, {waitUntil: 'networkidle0'});
-      await browser.evaluate(scrollToBottom);
-      // Wait for the SPA to update the active link in the top nav.
-      await browser.waitFor(5000);
-      await percySnapshot(`${page.title}`);
-    }
-  },
-  // These flags remove Percy's single-process flag. Without these, any page
-  // with an iframe will crash puppeteer (and percy).
-  {args: ['--no-sandbox', '--disable-setuid-sandbox']},
-);
+(async () => {
+  const browser = await puppeteer.launch({
+    args: ['--no-sandbox', '--disable-setuid-sandbox'],
+  });
+
+  for (const pageToTest of pagesToTest) {
+    const page = await browser.newPage();
+    await page.setViewport({height: 1024, width: 1280});
+
+    const url = new URL(pageToTest.url, 'http://localhost:8080').href;
+    await page.goto(url, {waitUntil: 'networkidle0'});
+    await page.evaluate(scrollToBottom);
+    await percySnapshot(page, `${pageToTest.name}`);
+    await page.close();
+  }
+
+  await browser.close();
+})();
