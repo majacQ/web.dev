@@ -14,33 +14,36 @@
  * limitations under the License.
  */
 
+const path = require('path');
 const {html} = require('common-tags');
-const prettyDate = require('../../_filters/pretty-date');
-const stripLanguage = require('../../_filters/strip-language');
 const md = require('../../_filters/md');
 const constants = require('../../_utils/constants');
-const getImagePath = require('../../_utils/get-image-path');
 const getSrcsetRange = require('../../_utils/get-srcset-range');
-const postTags = require('../../_data/postTags');
+const tagsCollection = require('../../_collections/tags')();
+
+const AuthorsDate = require('./AuthorsDate');
 
 /* eslint-disable require-jsdoc,indent,max-len */
 
 /**
- * BaseCard used to preview posts.
- * @param {Object} post An eleventy collection item with post data.
+ * BaseCard used to preview collection items.
+ * @param {Object} collectionItem An eleventy collection item with additional data.
+ * @param {string} className CSS class to apply to `div.w-card`
+ * @param {boolean} featured If card is a featured card.
  * @return {string}
  */
 class BaseCard {
-  constructor({post, featured = false, className = ''}) {
-    this.post = post;
+  constructor(collectionItem, className = '', featured = false) {
+    this.collectionItem = collectionItem;
+    this.collectionItem.data = this.collectionItem.data || {};
     this.featured = featured;
     this.className = className;
-    this.url = stripLanguage(this.post.url);
-    this.data = this.post.data;
+    this.url = this.collectionItem.data.canonicalUrl;
+    this.data = this.collectionItem.data;
     this.displayedTags = [];
 
     for (const tag of this.data.tags || []) {
-      const foundTag = postTags[tag.toLowerCase()];
+      const foundTag = tagsCollection[tag.toLowerCase()];
       if (foundTag) {
         this.displayedTags.push(foundTag);
       }
@@ -55,20 +58,26 @@ class BaseCard {
     this.alt = this.data.alt || '';
   }
 
+  isDraft() {
+    return this.data.draft ? 'w-card--draft' : '';
+  }
+
   renderThumbnail(url, img, alt) {
-    const imagePath = getImagePath(img, url);
+    const imagePath = path.isAbsolute(img) ? img : path.join(url, img);
+
     const srcsetRange = getSrcsetRange(240, 768);
 
     return html`
       <figure class="w-card-base__figure">
         <img
           class="w-card-base__image"
-          sizes="365px"
-          srcset="${srcsetRange.map(
-            (width) => html`
-              ${imagePath}?auto=format&fit=max&w=${width} ${width}w,
-            `,
-          )}"
+          srcset="
+            ${srcsetRange.map(
+              (width) => html`
+                ${imagePath}?auto=format&fit=max&w=${width} ${width}w,
+              `,
+            )}
+          "
           src="${imagePath}"
           alt="${alt}"
           width="100%"
@@ -79,60 +88,17 @@ class BaseCard {
     `;
   }
 
-  renderAuthorImages(authors) {
-    if (!Array.isArray(authors) || authors.length > 2) return;
+  renderSubhead(subhead) {
+    if (!subhead) {
+      return;
+    }
 
     return html`
-      <div class="w-author__image--row">
-        ${authors
-          .map((authorId) => {
-            const author = this.data.contributors[authorId];
-            return html`
-              <div class="w-author__image--row-item">
-                <a href="${author.href}">
-                  <img
-                    class="w-author__image w-author__image--small"
-                    src="/images/authors/${authorId}.jpg"
-                    alt="${author.title}"
-                  />
-                </a>
-              </div>
-            `;
-          })
-          .reverse()}
-      </div>
-    `;
-  }
-
-  renderAuthorNames(authors) {
-    if (!Array.isArray(authors)) return;
-
-    return html`
-      <span class="w-author__name">
-        ${authors
-          .map((authorId) => {
-            const author = this.data.contributors[authorId];
-            return html`
-              <a class="w-author__name-link" href="/authors/${authorId}"
-                >${author.title}</a
-              >
-            `;
-          })
-          .join(', ')}
-      </span>
-    `;
-  }
-
-  renderAuthorsAndDate(post) {
-    const authors = post.data.authors;
-
-    return html`
-      <div class="w-authors__card">
-        ${this.renderAuthorImages(authors)}
-        <div>
-          ${this.renderAuthorNames(authors)} ${this.renderDate(post.date)}
-        </div>
-      </div>
+      <a class="w-card-base__link" tabindex="-1" href="${this.url}">
+        <p class="w-card-base__subhead">
+          ${md(subhead)}
+        </p>
+      </a>
     `;
   }
 
@@ -153,25 +119,18 @@ class BaseCard {
     `;
   }
 
-  renderDate(date) {
-    return date
-      ? html`
-          <div class="w-author__published">
-            <time>${prettyDate(date)}</time>
-          </div>
-        `
-      : '';
-  }
-
   render() {
+    const authors = this.collectionItem.data.authors || [];
+
+    // prettier-ignore
     return html`
-      <div class="w-card ${this.className}" role="listitem">
+      <div class="w-card ${this.className} ${this.isDraft()}" role="listitem">
         <article
           class="w-card-base ${this.featured ? 'w-card-base--featured' : ''}"
         >
           <div
             class="w-card-base__cover ${this.thumbnail &&
-              `w-card-base__cover--with-image`}"
+              'w-card-base__cover--with-image'}"
           >
             <a
               class="w-card-base__link"
@@ -187,22 +146,18 @@ class BaseCard {
             <a class="w-card-base__link" href="${this.url}">
               <h2
                 class="${this.thumbnail
-                  ? `w-card-base__headline--with-image`
-                  : `w-card-base__headline`}"
+                  ? 'w-card-base__headline--with-image'
+                  : 'w-card-base__headline'}"
               >
                 ${md(this.data.title)}
               </h2>
             </a>
-            ${this.renderAuthorsAndDate(this.post)}
+            ${AuthorsDate({authors, date: this.collectionItem.date})}
             <div
               class="w-card-base__desc ${this.className &&
                 `${this.className}__desc`}"
             >
-              <a class="w-card-base__link" tabindex="-1" href="${this.url}">
-                <p class="w-card-base__subhead">
-                  ${md(this.data.subhead)}
-                </p>
-              </a>
+              ${this.renderSubhead(this.data.subhead)}
               ${this.renderChips()}
             </div>
           </div>

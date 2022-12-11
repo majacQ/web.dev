@@ -1,23 +1,27 @@
 ---
 layout: post
-title: How to set up Signed HTTP Exchanges (SXG)
+title: How to set up Signed HTTP Exchanges (SXG) using nginx
 subhead: How to generate a TLS certificate with SXG extensions, install tools for generating SXG files, and configure nginx to serve SXG files.
 authors:
   - kumagi
 description: How to generate a TLS certificate with SXG extensions, install tools for generating SXG files, and configure nginx to serve SXG files.
 date: 2020-03-11
 tags:
-  - post
+  - blog
   - SXG
   - nginx
+feedback:
+  - api
 ---
 
 [Signed HTTP Exchanges (SXG)](https://developers.google.com/web/updates/2018/11/signed-exchanges) is a new web technology that makes it easier for users to tell content creators apart from content distributors. This guide shows you how to set up SXG.
 
 ## Cross-browser support
 
-Chrome is currently the only browser that supports SXG.
-See the Consensus & Standardization section of [Origin-Signed HTTP Exchanges](https://www.chromestatus.com/feature/5745285984681984) for more up-to-date information.
+Several Chromium-based browsers support SXG, including Google Chrome, Samsung
+Internet, and Microsoft Edge. See the Consensus and Standardization section of
+[Origin-Signed HTTP Exchanges](https://www.chromestatus.com/feature/5745285984681984)
+for more up-to-date information.
 
 ## Prerequisites
 

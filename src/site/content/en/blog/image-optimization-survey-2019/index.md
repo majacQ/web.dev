@@ -6,7 +6,7 @@ authors:
 date: 2019-11-22
 description: Comments from survey respondents about various image optimization techniques.
 tags:
-  - post
+  - blog
   - images
   - performance
 codelabs:
@@ -16,7 +16,7 @@ codelabs:
   - codelab-specifying-multiple-slot-widths
 ---
 
-{# 
+{#
    Editorial note from @kaycebasques: It's debatable whether this post is appropriate for web.dev.
    On one hand, it provides a lot of actionable insight. The Audience section of this post also
    points out how this content can be useful to various actors in the web developer ecosystem. It
@@ -28,10 +28,10 @@ codelabs:
 #}
 
 This post lists the freeform feedback that Google Web DevRel received in its Summer 2019
-image optimization techniques survey. 
-Responses were solicited through [Web Fundamentals](https://developers.google.com/web) and 
-[@ChromiumDev](https://twitter.com/chromiumdev). The motivation for the survey was to find out why 
-most sites don't follow image optimization best practices even though they seem like a relatively 
+image optimization techniques survey.
+Responses were solicited through [Web Fundamentals](https://developers.google.com/web) and
+[@ChromiumDev](https://twitter.com/chromiumdev). The motivation for the survey was to find out why
+most sites don't follow image optimization best practices even though they seem like a relatively
 easy way to improve performance. The response data isn't listed here because there were flaws
 in the survey methodology.
 
@@ -80,13 +80,12 @@ There are several techniques for using modern formats with fallback for older br
 
 {% Aside %}
 Why's this important?
-[Requesting image files just in time](/use-lazysizes-to-lazyload-images), rather than getting all 
+[Requesting image files just in time](/use-lazysizes-to-lazyload-images), rather than getting all
 the images for a page as soon as it loads, can improve performance and reduce data cost.
 {% endAside %}
 
 + "Please keep the user in mind when considering features such as lazy load, because for many it's annoying."
 + "Make the lazy load attribute work with background-image please."
-+ "We love that lazy loading of images is finally becoming a native feature."
 + "Frameworks should do better asset processing out of the box."
 + "We have converted from lazy loading a long time ago.  User reports of millions of images and sites "NOT LOADING".  That was understanding our team summarized it as.  It's hard for a non-technical users to describe issues."
 + "I'm keen to get a better understanding of using Intersection Observer API for lazy loading rather than using traditional techniques."
@@ -131,7 +130,7 @@ The [`srcset`](/use-srcset-to-automatically-choose-the-right-image) attribute pr
 
 ### Browser capability
 
-+ "Auto responsive src crop from browser as native feature would be very useful as it is time consuming to crop all images to 4 sizes and writing all the markup. If we can upload one large photo and writing a simple picture tag that browsers will automatically create the multiple src attributes that would be a winning feature."
++ "Auto responsive src crop from browser as [built-in] feature would be very useful as it is time consuming to crop all images to 4 sizes and writing all the markup. If we can upload one large photo and writing a simple picture tag that browsers will automatically create the multiple src attributes that would be a winning feature."
 + "Personally I'm having a hard time avoiding page reflows when image with is set by CSS for responsive images (max-width: 100%; height auto or height: width: 100%; height auto), especially in combination with art direction from adaptive images/picture tag. Best way to avoid seems to use the "negative padding hack" for a fixed image ratio and then position the image inside this ratio box. Better browser support/responsive image handling would be a really great help!"
 + "Please disable GIF "autoplay" by fetching just the first frame."
 

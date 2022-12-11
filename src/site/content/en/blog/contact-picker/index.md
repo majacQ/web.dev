@@ -3,17 +3,17 @@ title: A contact picker for the web
 subhead: The Contact Picker API provides an easy way for users to share contacts from their contact list.
 authors:
   - petelepage
-description: Access to the user's contacts has been a feature of native apps since (almost) the dawn of time. The Contact Picker API is an on-demand API  that allows users to select an entry or entries from their contact list and share limited details of the selected contact(s) with a website. It allows users to share only what they want, when they want, and makes it easier for users to reach and connect with their friends and family.
+description: Access to the user's contacts has been a feature of iOS/Android apps since (almost) the dawn of time. The Contact Picker API is an on-demand API  that allows users to select an entry or entries from their contact list and share limited details of the selected contact(s) with a website. It allows users to share only what they want, when they want, and makes it easier for users to reach and connect with their friends and family.
 date: 2019-08-07
-updated: 2020-01-10
+updated: 2020-07-30
 tags:
-  - post
+  - blog
   - capabilities
-  - fugu
   - contacts
-  - chrome80
 hero: hero.jpg
 alt: Telephone on yellow background.
+feedback:
+  - api
 ---
 
 ## What is the Contact Picker API? {: #what }
@@ -35,12 +35,12 @@ alt: Telephone on yellow background.
   </a>
 </figure>
 
-Access to the user's contacts has been a feature of native apps since
+Access to the user's contacts on a mobile device has been a feature of iOS/Android apps since
 (almost) the dawn of time. It's one of the most common feature requests
-I hear from web developers, and is often the key reason they build a native
+I hear from web developers, and is often the key reason they build an iOS/Android
 app.
 
-Available by default in Chrome 80, the [Contact Picker API][spec] is an
+Available in Chrome 80 on Android, the [Contact Picker API][spec] is an
 on-demand API that allows users to select entries from their contact list and
 share limited details of the selected entries with a website. It allows users to
 share only what they want, when they want, and makes it easier for users to
@@ -68,14 +68,15 @@ which friends have already joined.
 | 2. Create initial draft of specification   | [Complete][spec]             |
 | 3. Gather feedback & iterate on design     | [Complete][spec]             |
 | 4. Origin trial                            | Complete                     |
-| **5. Launch**                              | **Chrome 80**                |
+| **5. Launch**                              | **Chrome 80**<br>Available on Android only.        |
 
 </div>
 
 ## Using the Contact Picker API {: #how-to-use }
 
-The Contact Picker API requires a single API call with an options parameter
-that specifies the types of contact information you want.
+The Contact Picker API requires a method call with an options parameter that
+specifies the types of contact information you want. A second method tells you
+what information the underlying system will provide.
 
 {% Aside %}
   Check out the [Contact Picker API demo](https://contact-picker.glitch.me)
@@ -103,15 +104,9 @@ array of contacts selected by the user.
 
 When calling `select()` you must provide an array of properties you'd like
 returned as the first parameter (with the allowed values being any of
-`'name'`, `'email'`, `'tel'`, `'address'`, `'icon'`),
+`'name'`, `'email'`, `'tel'`, `'address'`, or `'icon'`),
 and optionally whether multiple contacts can be
 selected as a second parameter.
-
-{% Aside 'caution' %}
-  While the Contacts Picker API was launched in Chrome 80,
-  the newly added properties `'address'` and `'icon'` require registering for an
-  [origin trial](https://developers.chrome.com/origintrials/#/view_trial/-6951306024846360575).
-{% endAside %}
 
 ```js
 const props = ['name', 'email', 'tel', 'address', 'icon'];
@@ -125,9 +120,24 @@ try {
 }
 ```
 
+{% Aside 'caution' %}
+  Support for `'address'` and `'icon'` requires Chrome 84 or later.
+{% endAside %}
+
 The Contacts Picker API can only be called from a [secure][secure-contexts],
 top-level browsing context, and like other powerful APIs, it requires a
 user gesture.
+
+### Detecting available properties
+
+To detect which properties are available, call `navigator.contacts.getProperties()`.
+It returns a promise that resolves with an array of strings indicating which
+properties are available. For example: `['name', 'email', 'tel', 'address']`.
+You can pass these values to `select()`.
+
+Remember, properties are not always available, and new properties may be
+added. In the future, other platforms and contact sources may restrict 
+which properties are be shared.
 
 ### Handling the results
 
@@ -284,7 +294,7 @@ PS: The names in my contact picker are characters from Alice in Wonderland.
 [demo]: https://contact-picker.glitch.me
 [demo-source]: https://glitch.com/edit/#!/contact-picker?path=demo.js:20:0
 [cr-bug]: https://bugs.chromium.org/p/chromium/issues/detail?id=860467
-[cr-status]: https://www.chromestatus.com/features/6511327140904960
+[cr-status]: https://www.chromestatus.com/feature/6511327140904960
 [explainer]: https://github.com/WICG/contact-api/
 [wicg-discourse]: https://discourse.wicg.io/t/proposal-contact-picker-api/3507
 [new-bug]: https://bugs.chromium.org/p/chromium/issues/entry?components=Blink%3EContacts

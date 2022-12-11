@@ -4,7 +4,7 @@ subhead: A few basics to prepare you for a spectrum of immersive experiences&#58
 authors:
   - joemedley
 date: 2019-10-31
-update: 2020-03-02
+updated: 2020-03-02
 hero: hero.jpg
 alt: A person using a virtual reality headset.
 description:
@@ -15,10 +15,12 @@ description:
   Device API, including Firefox Reality, Oculus Browser, Edge and Magic Leap's
   Helio browser, among others.
 tags:
-  - post
+  - blog
   - augmented-reality
   - virtual-reality
   - webxr
+feedback:
+  - api
 ---
 
 Immersive experiences came to the web in Chrome 79. The WebXR Device API brings

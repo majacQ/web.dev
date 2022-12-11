@@ -4,7 +4,7 @@ title: Eliminate render-blocking resources
 description: |
   Learn about the render-blocking-resources audit.
 date: 2019-05-02
-updated: 2019-10-04
+updated: 2020-08-11
 web_lighthouse:
   - render-blocking-resources
 ---
@@ -23,8 +23,7 @@ and removing anything unused.
 ## Which URLs get flagged as render-blocking resources?
 
 [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
-flags three types of render-blocking URLs: scripts, stylesheets, and HTML
-imports:
+flags two types of render-blocking URLs: scripts and stylesheets.
 
 A `<script>` tag that:
 
@@ -38,10 +37,6 @@ A `<link rel="stylesheet">` tag that:
   the browser does not download the stylesheet.
 * Does not have a `media` attribute that matches the user's device.
 
-A `<link rel="import">` tag that:
-
-* Does not have an `async` attribute.
-
 ## How to identify critical resources
 
 The first step to reducing the impact of render-blocking resources,
@@ -52,7 +47,7 @@ When you load or run a page, the tab tells you how much code was used,
 versus how much was loaded:
 
 <figure class="w-figure">
-  <img class="w-screenshot w-screenshot--filled" src="/images/includes/coverage.png" alt="Chrome DevTools: Coverage tab">
+  <img class="w-screenshot w-screenshot--filled" src="coverage.png" alt="Chrome DevTools: Coverage tab">
   <figcaption class="w-figcaption">
     Chrome DevTools: Coverage tab.
   </figcaption>
@@ -99,15 +94,6 @@ the browser only blocks the first paint to retrieve the stylesheets that match t
 Finally, you'll want to minify your CSS to remove any extra whitespace or
 characters (see [Minify CSS](/minify-css)).
 This ensures that you're sending the smallest possible bundle to your users.
-
-## How to eliminate render-blocking imports
-
-For non-critical HTML imports, mark them with the `async` attribute. As a
-general rule, `async` should be used with HTML imports as much as possible.
-
-```html
-<link rel="import" href="myfile.html" async>
-```
 
 ## Resources
 

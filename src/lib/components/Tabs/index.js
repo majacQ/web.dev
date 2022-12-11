@@ -2,6 +2,7 @@ import {html} from 'lit-element';
 import {BaseElement} from '../BaseElement';
 import {checkOverflow} from '../../utils/check-overflow';
 import {generateIdSalt} from '../../utils/generate-salt';
+import 'focus-visible';
 import './_styles.scss';
 
 /**
@@ -9,7 +10,7 @@ import './_styles.scss';
  * and renders a tab for each panel.
  * @extends {BaseElement}
  */
-class Tabs extends BaseElement {
+export class Tabs extends BaseElement {
   static get properties() {
     return {
       label: {type: String},
@@ -20,6 +21,7 @@ class Tabs extends BaseElement {
 
   constructor() {
     super();
+    this.label = '';
     this.activeTab = 0;
     this.overflow = false;
     this.prerenderedChildren = null;
@@ -53,7 +55,11 @@ class Tabs extends BaseElement {
     }
 
     return html`
-      <div class="web-tabs__tablist" role="tablist" aria-label="${this.label}">
+      <div
+        class="web-tabs__tablist"
+        role="tablist"
+        aria-label="${this.label || 'tabs'}"
+      >
         ${this.tabs}
       </div>
       ${this.prerenderedChildren}
@@ -98,8 +104,10 @@ class Tabs extends BaseElement {
   }
 
   panelTemplate(i, child) {
+    const index = i - 1; // i is 1-indexed
     return html`
       <div
+        data-index=${index}
         id="web-tab-${this.idSalt}-${i}-panel"
         class="web-tabs__panel"
         role="tabpanel"
@@ -111,9 +119,10 @@ class Tabs extends BaseElement {
     `;
   }
 
-  firstUpdated() {
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
+
     this.activeTab = 0;
-    this.classList.remove('unresolved');
     this.onResize();
 
     // If Tabs component contains AssessmentQuestion components,
@@ -147,7 +156,9 @@ class Tabs extends BaseElement {
 
   // Update state of tabs and associated panels.
   _changeTab() {
+    /** @type NodeListOf<HTMLButtonElement> */
     const tabs = this.querySelectorAll('.web-tabs__tab');
+    /** @type NodeListOf<HTMLDivElement> */
     const panels = this.querySelectorAll('.web-tabs__panel');
     const activeTab = tabs[this.activeTab];
     const activePanel = panels[this.activeTab];
@@ -193,6 +204,7 @@ class Tabs extends BaseElement {
   }
 
   onKeydown(e) {
+    /** @type NodeListOf<HTMLButtonElement> */
     const tabs = this.querySelectorAll('.web-tabs__tab');
     const KEYCODE = {
       END: 35,
@@ -224,12 +236,12 @@ class Tabs extends BaseElement {
 
   // Helper method to allow other components to focus an arbitrary tab.
   focusTab(index) {
+    /** @type NodeListOf<HTMLButtonElement> */
     const tabs = this.querySelectorAll('.web-tabs__tab');
 
-    if (!tabs[index]) {
-      throw new RangeError('There is no tab at the specified index.');
+    if (tabs[index]) {
+      tabs[index].focus();
     }
-    tabs[index].focus();
   }
 
   // If previous tab exists, make it active. If not, make last tab active.
@@ -260,6 +272,20 @@ class Tabs extends BaseElement {
     const tabs = this.querySelectorAll('.web-tabs__tab');
 
     this.activeTab = tabs.length - 1;
+  }
+
+  /**
+   * @param {HTMLElement} node to check
+   * @return {number} the index of the tab containing this node, or -1 for none
+   */
+  indexOfTabByChild(node) {
+    /** @type HTMLElement */
+    const panel = node.closest('[class="web-tabs__panel"]');
+    if (!this.contains(panel)) {
+      return -1;
+    }
+    const index = parseInt(panel.getAttribute('data-index'));
+    return isNaN(index) ? -1 : index;
   }
 }
 

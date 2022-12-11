@@ -1,9 +1,15 @@
 ---
 layout: layout
 permalink: "/{{lang}}/{{page.fileSlug}}/index.html"
+show_banner: false
 ---
 
 <div class="codelab-landing-page">
+  {% if path === undefined  %}
+    {% set postPaths = page | getPaths %}
+    {# Use first found path as a default path. #}
+    {% set path = paths[postPaths[0]] %}
+  {% endif %}
   <web-codelab glitch="{{ glitch }}" {% if glitch_path %}path="{{ glitch_path }}"{% endif %} {% if site.env === 'test' %}testmode{% endif %}>
     <div class="web-codelab__instructions">
       <h1 class="w-headline w-headline--two web-codelab__headline">{{ title }}</h1>
@@ -18,10 +24,10 @@ permalink: "/{{lang}}/{{page.fileSlug}}/index.html"
         <div class="w-authors w-mt--xl w-pt--sm">
           {% for author in authors %}
             {% Author {
-              post: page,
-              author: contributors[author],
               id: author,
-              showSocialMedia: true}
+              author: collections.authors[author],
+              showSocialMedia: true
+              }
             %}
           {% endfor %}
         </div>
@@ -37,14 +43,13 @@ permalink: "/{{lang}}/{{page.fileSlug}}/index.html"
       {% if related_post %}
         {% ArticleNavigation {
           back: '/' + related_post,
-          backLabel: 'Return to article',
-          lang: lang
+          backLabel: 'Return to article'
         } %}
-      {% else %}
+      {% elif path %}
         {% ArticleNavigation {
           back: '/' + path.slug,
           backLabel: 'Return to all articles',
-          lang: lang
+          path: page
         } %}
       {% endif %}
     </div>

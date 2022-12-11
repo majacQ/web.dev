@@ -1,12 +1,6 @@
 const livePaths = require('../../_filters/live-paths');
-const fast = require('../en/fast/fast.11tydata.js').path;
-const accessible = require('../en/accessible/accessible.11tydata.js').path;
-const reliable = require('../en/reliable/reliable.11tydata.js').path;
-const discoverable = require('../en/discoverable/discoverable.11tydata.js')
-  .path;
-const secure = require('../en/secure/secure.11tydata.js').path;
-const pwa = require('../en/progressive-web-apps/progressive-web-apps.11tydata.js')
-  .path;
+const allPaths = require('../../_data/paths');
+const lang = require('./lang');
 
 // =============================================================================
 // HOME OVERVIEW
@@ -16,15 +10,19 @@ const pwa = require('../en/progressive-web-apps/progressive-web-apps.11tydata.js
 //
 // =============================================================================
 
-module.exports = function() {
-  const paths = [fast, accessible, reliable, secure, discoverable, pwa].filter(
-    livePaths,
-  );
-
-  const lang = 'en';
+module.exports = function () {
+  const paths = [
+    allPaths['learn-web-vitals'],
+    allPaths['progressive-web-apps'],
+    allPaths['accessible'],
+    allPaths['fast'],
+    allPaths['reliable'],
+    allPaths['secure'],
+  ].filter(livePaths);
 
   return {
-    lang,
+    lang: lang.lang,
+    locale: lang.locale,
     home: {
       paths,
     },

@@ -1,31 +1,33 @@
 ---
-title: Share like a native app with the Web Share API
-subhead: Web apps can use the same system-provided share capabilities as native apps.
+title: Integrate with the OS sharing UI with the Web Share API
+subhead: Web apps can use the same system-provided share capabilities as platform-specific apps.
 authors:
   - joemedley
 date: 2019-11-08
+updated: 2020-05-12
 hero: hero.png
 alt: An illustration demonstrating that web apps can use the system-provided sharing UI.
 description: |
   With the Web Share API, web apps are able to use the same system-provided
-  share capabilities as native apps. The Web Share API makes it possible for web
+  share capabilities as platform-specific apps. The Web Share API makes it possible for web
   apps to share links, text, and files to other apps installed on the device in
-  the same way as native apps.
+  the same way as platform-specific apps.
 tags:
-  - post
+  - blog
   - capabilities
-  - fugu
+feedback:
+  - api
 ---
 
 With the Web Share API, web apps are able to use the same system-provided share
-capabilities as native apps. The Web Share API makes it possible for web apps to
+capabilities as platform-specific apps. The Web Share API makes it possible for web apps to
 share links, text, and files to other apps installed on the device in the same
-way as native apps.
+way as platform-specific apps.
 
 {% Aside %}
   Sharing is only half of the magic. Web apps can also be share
   targets, meaning they can receive data, links, text, and files from
-  native or web apps. See the [Receive shared data](/web-share-target/)
+  platform-specific or web apps. See the [Receive shared data](/web-share-target/)
   post for details on how to register your app as a share target.
 {% endAside %}
 
@@ -45,6 +47,10 @@ Web share has the following capabilities and limitations:
 * It must be invoked in response to a user action such as a click. Invoking it
   through the `onload` handler is impossible.
 * It can share, URLs, text, or files.
+* As of mid 2020, it is only available on Safari and on Android in Chromium
+  forks. See
+  [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/share#Browser_compatibility)
+  for details.
 
 <div class="w-clearfix"></div>
 

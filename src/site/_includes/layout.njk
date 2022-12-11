@@ -1,32 +1,39 @@
+---
+show_banner: true
+tags: []
+eleventyComputed:
+  canonicalUrl: "/{{page.fileSlug}}/"
+---
+
 <!DOCTYPE html>
-{% set lang = "en" %}
-{% set locale="en_US" %}
 <html lang="{{lang}}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#fff"/>
+
     {% if noindex or draft -%}
-      <meta name="robots" content="noindex">
+      <meta name="robots" content="noindex" />
     {%- endif %}
     {% if offline %}
       <meta name="offline" content="true" />
     {%- endif %}
 
-    {% if not nometa %}
-      {% Meta locale, page, collections, renderData %}
-    {%- endif %}
+    {% Meta locale, page, collections, renderData %}
 
-    <link rel="alternate" href="/feed.xml" type="application/atom+xml" data-title="web.dev feed">
     <link rel="preconnect" href="//www.gstatic.com" crossorigin="" />
-    <link rel="preconnect" href="//fonts.gstatic.com" crossorigin="" />
-    <link rel="preconnect" href="//fonts.googleapis.com" crossorigin="" />
     <link rel="preconnect" href="//www.google-analytics.com" crossorigin="" />
-    <link
-      rel="stylesheet"
-      href="//fonts.googleapis.com/css?family=Google+Sans:400,500|Roboto:400,400italic,500,500italic|Roboto+Condensed:400,700|Roboto+Mono:400,500|Material+Icons"
-    />
-    <link rel="stylesheet" href="/app.css" />
+    <link rel="preconnect" href="//firebaseremoteconfig.googleapis.com" crossorigin="" />
+    <link rel="preconnect" href="//firebaseinstallations.googleapis.com" crossorigin="" />
+    <link rel="preconnect" href="//webdev.imgix.net" crossorigin="" />
+
+    <link rel="preload" as="style" href="{{ resourceCSS.path | stripQueryParamsDev }}" />
+    {# We only preload Material Icons because the site can't render properly without them. #}
+    {# For Google Sans we use font-display: swap because preloading too many fonts can hurt performance. #}
+    {# https://www.zachleat.com/web/preload/ #}
+    <link rel="preload" as="font" crossorigin href="/fonts/material-icons/regular.woff2">
+
+    <link rel="stylesheet" href="{{ resourceCSS.path | stripQueryParamsDev }}" />
     <link rel="manifest" href="/manifest.webmanifest" />
     {# Include default icon even though we have a manifest #}
     <link rel="shortcut icon" href="/images/favicon.ico">
@@ -34,22 +41,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
     <link rel="mask-icon" color="#0054ff" href="/images/safari-pinned-tab.svg">
-    <script defer src="//www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
-    <script defer src="//www.gstatic.com/firebasejs/6.6.1/firebase-auth.js"></script>
-    <script defer src="//www.gstatic.com/firebasejs/6.6.1/firebase-performance.js"></script>
-    {# This is used by src/lib/firestore-loader.js to dynamically load Firestore #}
-    <meta id="firebase-firestore" value="//www.gstatic.com/firebasejs/6.6.1/firebase-firestore.js" />
-    <script>
-      window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-      ga('create', '{{ site.analytics.ids.prod }}');
-      ga('set', 'transport', 'beacon');
-      ga('set', '{{ site.analytics.dimensions.TRACKING_VERSION }}', '{{ site.analytics.version }}');
-      ga('send', 'pageview');
-    </script>
     <script async src="//www.google-analytics.com/analytics.js"></script>
-    <script type="module" src="/bootstrap.js"></script>
+    <script defer src="{{ resourceJS.path | stripQueryParamsDev }}"></script>
   </head>
-  <body class="unresolved">
+  <body class="unresolved" data-version="{{ resource.version }}">
     {#
       Make the snackbar the first item in the DOM so we don't have to steal the
       user's focus on initial visit to show them a cookie banner. Instead, the
@@ -115,7 +110,7 @@
       <web-profile-switcher-container></web-profile-switcher-container>
     </web-header>
 
-    <web-side-nav class="unresolved">
+    <web-side-nav class="unresolved" logo="/images/lockup.svg">
       <a
         href="/learn/"
         class="web-side-nav__link gc-analytics-event"
@@ -141,6 +136,14 @@
         Blog
       </a>
       <a
+        href="/live/"
+        class="web-side-nav__link gc-analytics-event"
+        data-category="Site-Wide Custom Events"
+        data-label="SideNav: Live"
+      >
+        Live
+      </a>
+      <a
         href="/about/"
         class="web-side-nav__link gc-analytics-event"
         data-category="Site-Wide Custom Events"
@@ -150,9 +153,12 @@
       </a>
     </web-side-nav>
     <main>
-      {% include 'partials/banner.njk' %}
       <div id="content">
-        {% Partial page, path, lang, title, offline %}{{ content | safe }}{% endPartial %}
+        {% if show_banner %}
+          {% include 'partials/banner.njk' %}
+        {% endif %}
+        {% include 'partials/translation-disclaimer.njk' %}
+        {{ content | safe }}
       </div>
     </main>
     {% include 'partials/footer.njk' %}

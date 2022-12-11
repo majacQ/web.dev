@@ -16,9 +16,11 @@ description: |
   Introducing Trusted Types: a browser API to prevent DOM-based cross-site
   scripting in modern web applications.
 tags:
-  - post # post is a required tag for the article to show up in the blog.
+  - blog # blog is a required tag for the article to show up in the blog.
   - security
   - trusted-types
+feedback:
+  - api
 ---
 
 ## Why should you care?
@@ -206,7 +208,7 @@ sanitize an HTML snippet, removing XSS payloads.
 
 ```javascript
 import DOMPurify from 'dompurify';
-el.innerHTML = DOMPurify.sanitize(html, {RETURN_TRUSTED_TYPE: true);
+el.innerHTML = DOMPurify.sanitize(html, {RETURN_TRUSTED_TYPE: true});
 ```
 
 DOMPurify [supports Trusted Types](https://github.com/cure53/DOMPurify#what-about-dompurify-and-trusted-types) and will return sanitized

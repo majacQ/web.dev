@@ -9,8 +9,10 @@ alt: A series of screens shows a phone camera scanning an image and generating a
 description: |
   Wouldn't it be great if users could search your site using their camera?
 tags:
-  - post
+  - blog
   - visual-search
+feedback:
+  - api
 ---
 Wouldn't it be great if users could search your site using their camera? Imagine
 this. Your site is Razor McShaveyface. Your customers tell you they have trouble

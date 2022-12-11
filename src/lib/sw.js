@@ -1,37 +1,73 @@
+/**
+ * @fileoverview Service Worker entrypoint for web.dev.
+ */
+
 import * as idb from 'idb-keyval';
-import manifest from 'cache-manifest';
-import layoutTemplate from 'layout-template';
 import {initialize as initializeGoogleAnalytics} from 'workbox-google-analytics';
 import * as workboxRouting from 'workbox-routing';
 import * as workboxStrategies from 'workbox-strategies';
-import {CacheableResponsePlugin} from 'workbox-cacheable-response';
 import {ExpirationPlugin} from 'workbox-expiration';
 import {matchPrecache, precacheAndRoute} from 'workbox-precaching';
-import {cacheNames} from 'workbox-core';
+import {cacheNames as workboxCacheNames} from 'workbox-core';
 import {matchSameOriginRegExp} from './utils/sw-match.js';
 
+const cacheNames = {
+  webDevFonts: 'webdev-fonts-cache-v1',
+  webDevHtml: 'webdev-html-cache-v1',
+  webDevAssets: 'webdev-assets-cache-v1',
+  ...workboxCacheNames,
+};
+
 /**
- * Configure default cache for standard web.dev files: the offline page, various images, etc.
+ * Configure default cache for some common web.dev assets: images, CSS, JS, offline page.
  *
  * This must occur first, as we cache images that are also matched by runtime handlers below. See
  * this workbox issue for updates: https://github.com/GoogleChrome/workbox/issues/2402
  */
-precacheAndRoute(manifest);
+precacheAndRoute(self.__WB_MANIFEST, {
+  cleanURLs: false, // don't allow "foo" for "foo.html"
+});
 
-// Architecture revision of the Service Worker. If the previously saved revision doesn't match,
-// then this will cause clients to be aggressively claimed and reloaded on install/activate.
-// Used when the design of the SW changes dramatically.
-const serviceWorkerArchitecture = 'v3';
-
-let replacingPreviousServiceWorker = false;
+/**
+ * Architecture revision of the Service Worker. If the previously saved revision doesn't match,
+ * then this will cause clients to be aggressively claimed and reloaded on install/activate.
+ * Used when the design of the SW changes dramatically.
+ */
+const serviceWorkerArchitecture = 'v4';
 
 self.addEventListener('install', (event) => {
-  // This is non-null if there was a previous Service Worker registered. Record for "activate", so
-  // that a lack of current architecture can be seen as a reason to reload our clients.
-  if (self.registration.active) {
-    replacingPreviousServiceWorker = true;
-  }
-  event.waitUntil(self.skipWaiting());
+  const p = Promise.resolve().then(async () => {
+    const previousArchitecture = await idb.get('arch');
+    if (previousArchitecture === serviceWorkerArchitecture) {
+      return; // no arch change, don't force reload, upgrade will happen over time
+    }
+    await idb.set('arch', serviceWorkerArchitecture);
+    if (previousArchitecture) {
+      console.warn(
+        'previous SW arch was',
+        previousArchitecture,
+        'new',
+        serviceWorkerArchitecture,
+      );
+    }
+    await self.skipWaiting();
+  });
+  event.waitUntil(p);
+});
+
+self.addEventListener('activate', (event) => {
+  // Define a list of allowed caches.
+  // If a cache does not appear in the list then it will be deleted.
+  const p = Promise.resolve().then(async () => {
+    const allowedCaches = new Set(Object.values(cacheNames));
+    const cacheKeys = await caches.keys();
+    for (const cacheKey of cacheKeys) {
+      if (!allowedCaches.has(cacheKey)) {
+        await caches.delete(cacheKey);
+      }
+    }
+  });
+  event.waitUntil(p);
 });
 
 self.addEventListener('activate', (event) => {
@@ -41,33 +77,13 @@ self.addEventListener('activate', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  const p = Promise.resolve().then(async () => {
-    const previousArchitecture = await idb.get('arch');
-    if (previousArchitecture === serviceWorkerArchitecture) {
-      return; // no arch change, don't force reload, upgrade will happen over time
-    }
-    await idb.set('arch', serviceWorkerArchitecture);
-
-    // If the architecture changed (including due to an initial install), claim our clients so they
-    // get the 'controllerchange' event and take over their network requests.
-    await self.clients.claim();
-
-    // If this is not a new install, and the architecture has changed, force an immediate reload.
-    // Installs from March 2020 will do this in the client scope (but we need this for safety).
-    if (replacingPreviousServiceWorker) {
-      const windowClients = await self.clients.matchAll({
-        includeUncontrolled: true,
-        type: 'window',
-      });
-      windowClients.map((client) => client.navigate(client.url));
-    }
-  });
-  event.waitUntil(p);
+  // Claim unclaimed clients (only relevant for new installs).
+  event.waitUntil(self.clients.claim());
 });
 
 initializeGoogleAnalytics();
 
-const externalExpirationPlugin = new ExpirationPlugin({
+const fontExpirationPlugin = new ExpirationPlugin({
   maxAgeSeconds: 60 * 60 * 24 * 365, // 1 yr
 });
 
@@ -80,166 +96,83 @@ const assetExpirationPlugin = new ExpirationPlugin({
   maxEntries: 100, // allow a large number of images, but expire quickly
 });
 
-// Cache the Google Fonts stylesheets with a stale-while-revalidate strategy.
-workboxRouting.registerRoute(
-  /^https:\/\/fonts\.googleapis\.com/,
-  new workboxStrategies.StaleWhileRevalidate({
-    cacheName: 'google-fonts-stylesheets',
-    plugins: [externalExpirationPlugin],
-  }),
-);
-
 // Cache the underlying font files with a cache-first strategy for 1 year.
 workboxRouting.registerRoute(
-  /^https:\/\/fonts\.gstatic\.com/,
+  ({request}) => request.destination === 'font',
   new workboxStrategies.CacheFirst({
-    cacheName: 'google-fonts-webfonts',
-    plugins: [
-      new CacheableResponsePlugin({
-        statuses: [0, 200],
-      }),
-      externalExpirationPlugin,
-    ],
+    cacheName: cacheNames.webDevFonts,
+    plugins: [fontExpirationPlugin],
   }),
 );
 
 /**
- * This is a special handler for requests without a trailing "/". These requests _should_ go to
- * the network (so that we can match web.dev's redirects.yaml file) but fallback to the normalized
- * version of the request (e.g., "/foo" => "/foo/").
+ * Matches normal web.dev routes. This will match pages like:
+ *   - /
+ *   - /foo-bar               # without trailing slash
+ *   - /foo-bar/
+ *   - /zing/hello/
+ *   - /test/page/index.html
+ *   - /hello/other.html      # allows any html page, not just index.html
+ *   - ///////////.html       # valid but wrong
+ *
+ * This won't match any URL that contains a "." except for a trailing ".html".
  */
-const untrailedContentPathRe = new RegExp('^(/[\\w-]+)+$');
+const pagePathRe = new RegExp('^/[\\w-/]*(?:|\\.html)$');
 
-workboxRouting.registerRoute(
-  matchSameOriginRegExp(untrailedContentPathRe),
-  async ({url, event}) => {
-    const {pathname} = url;
-
-    // First, check if there's actually a partial node in the cache already. If so, there's no need
-    // to do a real network fetch, as we know the modified request will be satisfied.
-    const cachedResponse = await caches.match(
-      new Request(pathname + '/index.json'),
-    );
-    if (!cachedResponse) {
-      // If there's not, then try the network.
-      try {
-        return await fetch(event.request);
-      } catch (e) {
-        // If fetch fails, just redirect below.
-      }
+/**
+ * Provides a plugin that ensures requests for "/index.html" are cached with the naked folder
+ * instead. We need consistent keys as the Content Indexing API integration looks up pages by
+ * key.
+ */
+const indexHtmlCacheKeyPlugin = {
+  cacheKeyWillBeUsed: async ({request}) => {
+    const u = new URL(request.url);
+    if (u.pathname.endsWith('/index.html')) {
+      // strip "index.html"
+      const normalized = u.pathname.substr(
+        0,
+        u.pathname.length - 'index.html'.length,
+      );
+      return normalized + u.search;
     }
+    return request;
+  },
+};
 
-    // Either way, redirect to the updated Location.
-    const headers = new Headers();
-    headers.append('Location', `${pathname}/${url.search}`);
-    const redirectResponse = new Response('', {
-      status: 301,
+const pageStrategy = new workboxStrategies.NetworkFirst({
+  cacheName: cacheNames.webDevHtml,
+  plugins: [indexHtmlCacheKeyPlugin, contentExpirationPlugin],
+});
+const pageMatch = matchSameOriginRegExp(pagePathRe);
+workboxRouting.registerRoute(pageMatch, pageStrategy);
+
+/**
+ * Cache images at runtime that aren't included in the original manifest, such as author profiles.
+ */
+const assetStrategy = new workboxStrategies.StaleWhileRevalidate({
+  cacheName: cacheNames.webDevAssets,
+  plugins: [assetExpirationPlugin],
+});
+workboxRouting.registerRoute(new RegExp('/images/.*'), assetStrategy);
+workboxRouting.registerRoute(
+  ({request}) => request.destination === 'image',
+  assetStrategy,
+);
+
+workboxRouting.setCatchHandler(async ({url}) => {
+  // If we see an internal error in pageMatch above, assume we're offline and serve the page from
+  // the cache.
+  if (pageMatch({url})) {
+    // TODO(ewag): for now, just match English
+    const response = await matchPrecache('/en/offline/index.html');
+
+    // Build a new Response so we can set the X-Offline header. Can't modify a previously cached
+    // response.
+    const headers = new Headers(response.headers);
+    headers.set('X-Offline', '1');
+    const clone = new Response(await response.text(), {
       headers,
     });
-    return redirectResponse;
-  },
-);
-
-/**
- * Match fetches for patials, for SPA requests. Matches "/foo-bar/index.json" and
- * "/foo-bar/many/parts/index.json", for partial SPA requests.
- */
-const partialPathRe = new RegExp('^/([\\w-]+/)*index\\.json$');
-const partialStrategy = new workboxStrategies.NetworkFirst({
-  cacheName: 'webdev-html-cache-v1', // nb. We used to cache HTML here, so we name it the same
-  plugins: [contentExpirationPlugin],
-});
-
-workboxRouting.registerRoute(
-  matchSameOriginRegExp(partialPathRe),
-  partialStrategy,
-);
-
-/**
- * Cache images that aren't included in the original manifest, such as author profiles.
- */
-workboxRouting.registerRoute(
-  new RegExp('/images/.*'),
-  new workboxStrategies.StaleWhileRevalidate({
-    cacheName: 'webdev-assets-cache-v1',
-    plugins: [assetExpirationPlugin],
-  }),
-);
-
-/**
- * Match "/foo-bar/ "and "/foo-bar/as/many/of-these-as-you-like/" (with optional trailing
- * "index.html"), normal page nodes for web.dev. This only matches on pathname.
- *
- * This fetch handler internally fetches the required partial using `partialStrategy`, and
- * generates the page's real HTML based on the layout template.
- */
-const contentPathRe = new RegExp('^(/(?:[\\w-]+/)*)(?:|index\\.html)$');
-
-workboxRouting.registerRoute(
-  matchSameOriginRegExp(contentPathRe),
-  async ({params}) => {
-    const pathname = params[1]; // 1st group from contentPathRe regexp
-
-    let response;
-    try {
-      // Use the same strategy for partials when hydrating a full request.
-      // Note that this doesn't implicitly invoke the global catch handler (as we're just using
-      // the strategy itself), so failures here flow to the catch block below.
-      response = await partialStrategy.handle({
-        request: new Request(pathname + 'index.json'),
-      });
-    } catch (e) {
-      // Offline pages are served with the default 200 status.
-      response = await offlinePartial();
-    }
-
-    // Ignore anything but a 200 or 404.
-    if (!response.ok && response.status !== 404) {
-      throw response.status;
-    }
-
-    let partial;
-    try {
-      partial = await response.json();
-    } catch (e) {
-      if (response.status !== 404) {
-        throw e;
-      }
-      // This happens in our Netlify staging environment: we don't serve the 404 JSON correctly, so
-      // fetch it manually. If this fetch or JSON fails, throw normally.
-      response = await fetch('/404/index.json');
-      partial = await response.json();
-    }
-
-    // Our target browsers all don't mind if we just place <title> in the middle of the document.
-    // This is far simpler than trying to find the right place in <head>.
-    const meta = partial.offline ? `<meta name="offline" value="true" />` : '';
-    const output = layoutTemplate.replace(
-      '%_CONTENT_REPLACE_%',
-      meta + `<title>${partial.title || ''}</title>` + partial.raw,
-    );
-    const headers = new Headers();
-    headers.append('Content-Type', 'text/html');
-    return new Response(output, {headers, status: response.status});
-  },
-);
-
-workboxRouting.setCatchHandler(async ({event, url}) => {
-  // This check is the same as the partialPathRe handler above. It only handles partial JSON
-  // failures (as the handler above is a simple NetworkFirst strategy). Regular HTML failures are
-  // handled by the in-depth contentPathRe path above.
-  if (url.host === self.location.host && partialPathRe.test(url.pathname)) {
-    return offlinePartial();
+    return clone;
   }
 });
-
-async function offlinePartial() {
-  const cachedResponse = await matchPrecache('/offline/index.json');
-  if (!cachedResponse) {
-    // This occurs in development when the offline partial isn't precached.
-    return new Response(
-      JSON.stringify({offline: true, raw: '<h1>Dev offline</h1>', title: ''}),
-    );
-  }
-  return cachedResponse;
-}

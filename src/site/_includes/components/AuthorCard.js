@@ -18,15 +18,15 @@ const BaseCard = require('./BaseCard');
 
 /**
  * AuthorCard used to preview authors.
- * @param {Object} post An eleventy collection item with post data.
+ * @param {Object} collectionItem An eleventy collection item with post data.
  * @return {string}
  */
 class AuthorCard extends BaseCard {
-  constructor(arg) {
-    super({...arg, className: 'w-card-author'});
+  constructor(collectionItem) {
+    super(collectionItem, 'w-card-author');
   }
 
-  renderThumbnail(url, img, alt) {
+  renderThumbnail(_, img, alt) {
     return html`
       <figure class="w-card-base__figure w-card-author__figure">
         <img

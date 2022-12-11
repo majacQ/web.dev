@@ -2,6 +2,7 @@
 layout: handbook
 title: web.dev components
 date: 2019-06-26
+updated: 2020-07-17
 description: |
   Learn how to use web.dev's UI and content components.
 ---
@@ -20,6 +21,7 @@ guidance about how to use them effectively.
 1. [Block quotes](#blockquotes)
 1. [Buttons](#buttons)
 1. [Callouts](#callouts)
+1. [Checkbox](#checkbox)
 1. [Columns](#columns)
 1. [Code](#code)
 1. [Compare](#compare)
@@ -295,6 +297,26 @@ which will automatically append a codelab callout to the end of the post.
 ### Self-assessment callouts
 
 See the [Self-assessments](/handbook/self-assessment-components) post.
+
+## Checkbox
+
+The [Newsletter](/newsletter) page uses a new material styled checkbox.
+You can use it simply and easily by just adding the class `w-chechbox`
+to an `input[type=checkbox]` element. However to align a label to to the
+checkbox you'll want to wrap the label and checkbox in a `div.w-display--inline-flex`
+element, and add the `w-ml--l` class to the label. See below:
+
+<div class="w-display--inline-flex">
+  <input id="sub-newsletter" name="WebDevNewsletter" required value="Unconfirmed" class="w-checkbox" type="checkbox" />
+  <label for="sub-newsletter" class="w-ml--l">Add me to the web.dev mailing list.</label>
+</div>
+
+```html
+<div class="w-display--inline-flex">
+  <input id="sub-newsletter" name="WebDevNewsletter" required value="Unconfirmed" class="w-checkbox" type="checkbox" />
+  <label for="sub-newsletter" class="w-ml--l">Add me to the web.dev mailing list.</label>
+</div>
+```
 
 ## Columns
 
@@ -626,6 +648,8 @@ at.
 
 ## Glitches {: #glitches }
 
+### Create a Glitch
+
 * Remix the [web-dev-hello-webpage](https://glitch.com/~web-dev-hello-webpage) or
   [web-dev-hello-express](https://glitch.com/~web-dev-hello-express) template.
 * Click **Project options** and update the description of the Glitch.
@@ -634,15 +658,38 @@ at.
 * Add the project to [the web.dev team on Glitch](https://glitch.com/@webdev).
 * Set the avatar of the project to the [web.dev logo](https://cdn.glitch.com/9b775a52-d700-4208-84e9-18578ee75266%2Ficon.jpeg?v=1585082912878).
 
+### Embed a Glitch
+
+{% raw %}
+
 ```html
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/tabindex-zero?path=index.html&attributionHidden=true"
-    alt="tabindex-zero on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'tabindex-zero',
+  path: 'index.html',
+  previewSize: 0,
+  allow: []
+} %}
+
+<!-- Or just the Glitch ID -->
+
+{% Glitch 'tabindex-zero' %}
 ```
+
+{% endraw %}
+
+It's OK to adjust the `height` of the Glitch wrapper element
+if you need more or less space.
+
+Shortcode object fields allow for modifying how the embed is presented:
+
+* {`string | string[]`} `allow?` List of feature policies of an IFrame either as an array of strings, or as a `;` separated list. By default the following policies are enabled:
+  * `'camera', 'clipboard-read', 'clipboard-write', 'encrypted-media', 'geolocation', 'microphone', 'midi'`
+* {`string`} `id` ID of Glitch project.
+* {`string`} `path?` Lets you specify which source code file to show.
+* {`number`} `previewSize?` Defines what percentage of the embed should be dedicated to the preview, default is 100.
+* {`number`} `height?` Height, in pixels, of the Glitch wrapper element.
+
+<!-- https://support.glitch.com/t/more-flexible-embeds/2925 -->
 
 <!-- Don't attempt to load Glitch if we're screenshot testing. -->
 {% if site.percy %}
@@ -650,13 +697,10 @@ at.
   Glitch iframe placeholder
 </div>
 {% else %}
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/tabindex-zero?path=index.html&attributionHidden=true"
-    alt="tabindex-zero on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'tabindex-zero',
+  path: 'index.html'
+} %}
 {% endif %}
 
 ## Images
@@ -821,7 +865,7 @@ to avoid layout issues.
     <p class="w-stat__desc">Higher CTR</p>
   </div>
   <div class="w-stat">
-    <p class="w-stat__figure">4<sub class="w-stat__sub">x</sub></p>
+    <p class="w-stat__figure">4<sub class="w-stat__sub">×</sub></p>
     <p class="w-stat__desc">Faster load times</p>
   </div>
 </div>
@@ -837,7 +881,7 @@ to avoid layout issues.
     <p class="w-stat__desc">Higher CTR</p>
   </div>
   <div class="w-stat">
-    <p class="w-stat__figure">4<sub class="w-stat__sub">x</sub></p>
+    <p class="w-stat__figure">4<sub class="w-stat__sub">×</sub></p>
     <p class="w-stat__desc">Faster load times</p>
   </div>
 </div>
@@ -1218,5 +1262,5 @@ by adding a `left` or `right` argument to the shortcode:
   {% Tooltip 'Collapse', 'right' %}
 </button>
 
-## Video
+## Video / YouTube {: #video }
 See the [Images and video](/handbook/markup-media#video) post.
