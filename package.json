@@ -85,7 +85,7 @@
     "c8": "^7.3.0",
     "chalk": "^2.4.2",
     "cheerio": "^1.0.0-rc.3",
-    "chokidar-cli": "^1.2.3",
+    "chokidar-cli": "^3.0.0",
     "common-tags": "^1.8.0",
     "dotenv": "^8.2.0",
     "eleventy-plugin-toc": "^1.1.0",
