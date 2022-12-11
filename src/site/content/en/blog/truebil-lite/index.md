@@ -16,10 +16,12 @@ description: |
   This case study explains how the Truebil team increased conversions and
   engagement by optimizing their web app for speed and reliability.
 tags:
-  - post # post is a required tag for the article to show up in the blog.
-  - fast
+  - blog # blog is a required tag for the article to show up in the blog.
   - reliable
   - e-commerce
+  - case-study
+  - performance
+  - progressive-web-apps
 ---
 
 ## About
@@ -30,7 +32,7 @@ Founded in 2015, Truebil is an Indian online marketplace that sells 100% certifi
 
 Truebil is a lean startup with low-frequency, high-value transactions, so it was critical to choose the right platform to prioritize and invest in.
 
-Truebil identified mobile as their target platform, and they chose the web for their first app, [Truebil Lite](https://m.truebil.com), because of the web's easy discovery and low friction. Web technology provides lower development costs, less data and memory usage, and significantly lower customer acquisition costs than building a native app. And by building a progressive web app (PWA), Truebil could get all the perks of the web _and_ the benefits of native.
+Truebil identified mobile as their target platform, and they chose the web for their first app, [Truebil Lite](https://m.truebil.com), because of the web's easy discovery and low friction. Web technology provides lower development costs, less data and memory usage, and significantly lower customer acquisition costs than building an Android/iOS app. And by building a progressive web app (PWA), Truebil could get all the perks of the web _and_ the benefits of iOS/Android.
 
 ## Solution
 
@@ -57,7 +59,7 @@ The team started with the basics by using the [PRPL pattern](/apply-instant-load
 
 To lazy-load non-critical resources, they used their framework-level lazy-loading components to load below-the-fold fragments.
 
-To remove any JavaScript bundle bottlenecks, the team [reduced payloads by code-splitting](/reduce-javascript-payloads-with-code-splitting). They used component- and route-based chunking to to reduce main bundle size and **improve their loading time by 44%,** with TTI falling from 6 seconds to about 5 seconds and [First Meaningful Paint (FMP)](/first-meaningful-paint) from 4.1 seconds to 3.6 seconds.
+To remove any JavaScript bundle bottlenecks, the team [reduced payloads via code splitting](/reduce-javascript-payloads-with-code-splitting). They used component- and route-based chunking to to reduce main bundle size and **improve their loading time by 44%,** with TTI falling from 6 seconds to about 5 seconds and [First Meaningful Paint (FMP)](/first-meaningful-paint) from 4.1 seconds to 3.6 seconds.
 
 <figure class="w-figure">
   <img class="w-screenshot" src="chunking.png" alt="Screenshots of Chrome DevTools showing Truebil Lite's build size before and after code splitting.">
@@ -90,7 +92,7 @@ To mitigate overhead from DNS and TLS, Truebil used [`<link rel="preconnect">`](
 
 #### Dynamically prefetch the next page
 
-By analyzing their data, the team identified the most common user journeys that they could optimize for. In these cases, the app dynamically downloads the next page resource by using `<link rel=prefetch>` to ensure smooth navigation for users. While the team manually identifies the links to prefetch, they use webpack to bundle the JS for those links.  
+By analyzing their data, the team identified the most common user journeys that they could optimize for. In these cases, the app dynamically downloads the next page resource by using `<link rel=prefetch>` to ensure smooth navigation for users. While the team manually identifies the links to prefetch, they use webpack to bundle the JS for those links.
 
 <figure class="w-figure">
   <img class="w-screenshot" src="prefetch.png" alt="Screenshots of the Truebil Lit app and Chrome DevTools showing that network requests aren't needed on common navigations because the assets have already been prefetched.">
@@ -172,15 +174,15 @@ For users who had interacted with the app for a while, the team used highly cont
 
 Finally, the team built in a non-intrusive banner with a notification-like design that's triggered at specific events, such as opening a listing page or after the user has spent a set amount of time spent in the app:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="notification.png" alt="A screenshot of Truebil Lite's time-based installation prompt banner.">
 </figure>
 
 Because of these improvements, Truebil's conversion and engagement rates have grown significantly with **26% longer user sessions** and **61% more conversions**, which is significant for their business given the high transaction value of each conversion.
 
-<blockquote class="w-blockquote">
+<blockquote>
   <p>For a startup with limited resources, choosing the right platform can be critical to the success of the business. Moving to a PWA focused on speed, resilience, and engagement, enabled us to increase our revenue-to-marketing spend by <strong>80%</strong> thanks to increased conversions and the frictionless reach of the web.</p>
-  <p>—Rakesh Raman, Co-Founder and Chief of Product & Data Science at Truebil</p>
+  <cite>Rakesh Raman, Co-Founder and Chief of Product & Data Science at Truebil</cite>
 </blockquote>
 
 <div class="w-stats">

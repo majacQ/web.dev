@@ -8,18 +8,28 @@
 // Note that the banner is not absolutely or fixed positioned.
 // It is intended to scroll away as the user scrolls down the page.
 //
+// The banner can also be displayed inline with body content using the
+// w-banner--body modifier.
+//
 // =============================================================================
 
 .w-banner {
+  // Hide the top banner on small devices as it takes up too much space.
+  // We also hide hero images at this size for the same reason.
+  display: none;
   font-size: .889rem;
-  padding: 24px;
 
   @include bp(sm) {
+    display: block;
     padding: 24px 32px;
   }
 
   @include bp(md) {
     padding: 24px 64px;
+  }
+
+  a {
+    text-decoration: underline;
   }
 }
 
@@ -35,6 +45,16 @@
   background: $RED_100;
 }
 
-.w-banner__link {
-  text-decoration: underline;
+.w-banner--neutral {
+  background: transparent;
+  border-color: $GREY_300;
+  border-style: solid;
+  border-width: 1px 0;
+}
+
+// This modifier is for banners that are inline with page content.
+.w-banner--body {
+  display: block;
+  font: inherit;
+  padding: 24px;
 }

@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-/* eslint-disable max-len */
-
 const {html} = require('common-tags');
 const capitalize = require('../../_filters/capitalize');
 
@@ -46,7 +44,9 @@ module.exports = (type, listStyle = 'ul') => {
       break;
 
     default:
-      throw new Error(`Could not create Instruction with listStyle: ${listStyle}`);
+      throw new Error(
+        `Could not create Instruction with listStyle: ${listStyle}`,
+      );
   }
 
   // Common phrases shared across multiple instructions.
@@ -59,6 +59,7 @@ module.exports = (type, listStyle = 'ul') => {
       instruction = `${bullet}Click **Remix to Edit** to make the project editable.`;
       break;
 
+    // prettier-ignore
     case 'console':
       instruction = html`
         ${bullet}Click **Tools**.
@@ -67,10 +68,11 @@ module.exports = (type, listStyle = 'ul') => {
       `;
       break;
 
+    // prettier-ignore
     case 'create':
       instruction = html`
-      ${bullet}Click **New File** and give it a name.
-      ${bullet}Click **Add This File**.
+        ${bullet}Click **New File** and give it a name.
+        ${bullet}Click **Add This File**.
       `;
       break;
 
@@ -80,8 +82,13 @@ module.exports = (type, listStyle = 'ul') => {
       // used by this component so it's a bit easier to keep everything
       // contained in this one file.
       instruction = html`
-        ${bullet}To preview the site, press **View&nbsp;App**. Then press **Fullscreen** <img src="/images/glitch/fullscreen.svg"
-          alt="fullscreen" style="padding: 4px 8px; opacity: .5; border: 1px solid #c3c3c3; border-radius: 5px;">.
+        ${bullet}To preview the site, press **View&nbsp;App**. Then press
+        **Fullscreen**
+        <img
+          src="/images/glitch/fullscreen.svg"
+          alt="fullscreen"
+          style="padding: 4px 8px; opacity: .5; border: 1px solid #c3c3c3; border-radius: 5px;"
+        />.
       `;
       break;
 
@@ -105,14 +112,19 @@ module.exports = (type, listStyle = 'ul') => {
 
     case 'start-profiling':
       instruction = html`
-        ${bullet}Click **Start profiling and reload page** <img src="/images/icons/reload.svg"
-        alt="reload" style="width: 1.2em; padding: 0px 0px 2px 2px; opacity: .5">.
+        ${bullet}Click **Start profiling and reload page**
+        <img
+          src="/images/icons/reload.svg"
+          alt="reload"
+          style="width: 1.2em; padding: 0px 0px 2px 2px; opacity: .5"
+        />.
       `;
       break;
 
     case 'devtools-command':
       instruction = html`
-      ${bullet}Press \`Control+Shift+P\` (or \`Command+Shift+P\` on Mac) to open the **Command** menu.
+        ${bullet}Press \`Control+Shift+P\` (or \`Command+Shift+P\` on Mac) to
+        open the **Command** menu.
       `;
       break;
 
@@ -125,10 +137,11 @@ module.exports = (type, listStyle = 'ul') => {
     case 'devtools-memory':
     case 'devtools-application':
     case 'devtools-security':
-    case 'devtools-audits':
+    case 'devtools-lighthouse':
       instruction = html`${shared.devtools}`;
       substitution = type.substring('devtools-'.length);
       if (substitution) {
+        // prettier-ignore
         instruction = html`
           ${instruction}
           ${bullet}Click the **${capitalize(substitution)}** tab.
@@ -151,6 +164,7 @@ module.exports = (type, listStyle = 'ul') => {
         // only capitalizes "Best practices"
         substitution = capitalize(substitution);
       }
+      // prettier-ignore
       instruction = html`
         ${shared.devtools}
         ${bullet}Click the **Audits** tab.

@@ -12,11 +12,13 @@ description: |
 authors:
   - houssein
   - jeffposnick
+feedback:
+  - api
 ---
 
 {% Aside %}
   If you don't yet understand the basic idea behind code splitting, refer to
-  [Reduce JavaScript payloads with code-splitting](/reduce-javascript-payloads-with-code-splitting)
+  [Reduce JavaScript payloads with code splitting](/reduce-javascript-payloads-with-code-splitting)
   guide first.
 {% endAside %}
 
@@ -38,7 +40,7 @@ const DetailsComponent = () => (
 ## Why is this useful?
 
 A large React application will usually consist of many components, utility
-methods and third-party libraries. If an effort isn't made to try to load
+methods, and third-party libraries. If an effort isn't made to try to load
 different parts of an application only when they're needed, a single, large
 bundle of JavaScript will be shipped to your users as soon as they load the
 first page. This can affect page performance significantly.
@@ -52,7 +54,7 @@ component.
 
 The problem with shipping a large JavaScript payload to users is the length of
 time it would take for the page to finish loading, especially on weaker devices
-and network connections. This is why code-splitting and lazy loading is
+and network connections. This is why code splitting and lazy loading is
 extremely useful.
 
 However, there will always be a slight delay that users have to experience when
@@ -80,13 +82,11 @@ The avatar is only rendered when the button is clicked, where a request is
 then made to retrieve the code necessary for the suspended `AvatarComponent`.
 In the meantime, the fallback loading component is shown.
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/react-lazy-suspense?path=src/index.css&previewSize=100&attributionHidden=true"
-    alt="react-lazy-suspense on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'react-lazy-suspense',
+  path: 'src/index.css',
+  height: 480
+} %}
 
 In here, the code that makes up `AvatarComponent` is small which is
 why the loading spinner only shows for a short amount of time. Larger
@@ -95,11 +95,10 @@ weak network connections.
 
 To better demonstrate how this works:
 
-+  Mouse over the editor and press the **Show** button to preview the app.
-+  Open the DevTools by pressing `CMD + OPTION + i` / `CTRL + SHIFT + i`.
-+  Click on the **Network** tab.
-+  Click the [**Throttling**](https://developers.google.com/web/tools/chrome-devtools/network/#throttle) dropdown and select `Slow 3G`.
-+  Click the button on the application.
+{% Instruction 'preview' %}
+{% Instruction 'devtools-network' %}
+-  Click the **Throttling** dropdown, which is set to **No throttling** by default. Select **Fast 3G**.
+-  Click the **Click Me** button in the app.
 
 The loading indicator will show for longer now. Notice how all the code that
 makes up the `AvatarComponent` is fetched as a separate chunk.
@@ -147,13 +146,11 @@ fetching, the user gets to see them all displayed at the same time.
 
 You can see this with the following embed:
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/react-lazy-suspense-multiple?path=src/index.css&previewSize=100&attributionHidden=true"
-    alt="react-lazy-suspense-multiple on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'react-lazy-suspense-multiple',
+  path: 'src/index.css',
+  height: 480
+} %}
 
 {% Aside %}
   Loading indicator showing a little too quickly?
@@ -232,7 +229,7 @@ const DetailsComponent = () => (
 
 ## Conclusion
 
-If you are unsure where to begin applying code-splitting to your React
+If you are unsure where to begin applying code splitting to your React
 application, follow these steps:
 
 1. Begin at the route level. Routes are the simplest way to identify points of

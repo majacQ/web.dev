@@ -59,7 +59,8 @@ class Traveler {
       if (value === '.') {
         this.file.message(
           `Should not repeat "${value}". Use ellipsis "…" character instead.`,
-          node);
+          node,
+        );
       } else {
         this.file.message(`Should not repeat "${value}"`, node);
       }
@@ -67,7 +68,7 @@ class Traveler {
     this.prev = value;
   }
 
-  end() { } // eslint-disable-line class-methods-use-this
+  end() {} // eslint-disable-line class-methods-use-this
 }
 
 function processor(tree, file, config = punctuations) {
@@ -91,7 +92,4 @@ function processor(tree, file, config = punctuations) {
   toList(inlineCodeReplaced, 'heading', callback);
 }
 
-module.exports = rule(
-  'remark-lint:no-repeat-punctuation',
-  processor,
-);
+module.exports = rule('remark-lint:no-repeat-punctuation', processor);

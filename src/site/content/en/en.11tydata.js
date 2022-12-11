@@ -1,9 +1,6 @@
-const fast = require('./fast/fast.11tydata.js').path;
-const accessible = require('./accessible/accessible.11tydata.js').path;
-const reliable = require('./reliable/reliable.11tydata.js').path;
-const discoverable = require('./discoverable/discoverable.11tydata.js').path;
-const secure = require('./secure/secure.11tydata.js').path;
-const installable = require('./installable/installable.11tydata.js').path;
+const livePaths = require('../../_filters/live-paths');
+const allPaths = require('../../_data/paths');
+const lang = require('./lang');
 
 // =============================================================================
 // HOME OVERVIEW
@@ -13,15 +10,21 @@ const installable = require('./installable/installable.11tydata.js').path;
 //
 // =============================================================================
 
-module.exports = {
-  home: {
-    paths: [
-      fast,
-      accessible,
-      reliable,
-      discoverable,
-      secure,
-      installable,
-    ],
-  },
+module.exports = function () {
+  const paths = [
+    allPaths['learn-web-vitals'],
+    allPaths['progressive-web-apps'],
+    allPaths['accessible'],
+    allPaths['fast'],
+    allPaths['reliable'],
+    allPaths['secure'],
+  ].filter(livePaths);
+
+  return {
+    lang: lang.lang,
+    locale: lang.locale,
+    home: {
+      paths,
+    },
+  };
 };

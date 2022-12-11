@@ -12,7 +12,7 @@ description: |
 codelabs:
   - codelab-build-a-custom-performance-analysis-tool
 tags:
-  - post
+  - blog
   - performance
   - ecommerce
 ---
@@ -20,7 +20,7 @@ tags:
 The different steps of a purchase funnel are prone to performance issues in
 different ways, and therefore need different measurement and optimizations:
 
-<figure class="w-figure  w-figure--center">
+<figure class="w-figure">
   <img src="./funnel.png" alt="A conversion funnel going from discover to engage to convert to re-engage." style="max-width: 600px; width: 100%;">
   <figcaption class="w-figcaption">
     A conversion funnel.
@@ -31,7 +31,7 @@ In this guide we'll address how the different steps can be measured. For this we
 recommend you to look at lab as well as field data.
 
 **Lab data** is gathered by running tests locally, for example by using
-[Lighthouse](https://web.dev/fast/discover-performance-opportunities-with-lighthouse)
+[Lighthouse](/fast/discover-performance-opportunities-with-lighthouse)
 and other tools.  This can make it possible  to compare website performance over
 time and with competitors through a controlled, stable environment, but it might
 not be representative of the performance users experience in real life.
@@ -52,27 +52,27 @@ Optimizing for discovery means optimizing for the first load, which is what new
 users  will get, but also search and social
 [crawlers](https://developers.google.com/search/docs/guides/rendering).
 Lab data for a first load can be easily acquired through
-[Lighthouse](https://web.dev/fast/discover-performance-opportunities-with-lighthouse),
+[Lighthouse](/fast/discover-performance-opportunities-with-lighthouse),
 while field data (at least for Chrome) is readily available through [Chrome UX
-reports](https://web.dev/fast/chrome-ux-report). A convenient combination of
-both can be found in [PageSpeed
-Insights](https://developers.google.com/speed/pagespeed/insights/). You should
-also track relevant metrics from the field yourself:
+reports](/fast/chrome-ux-report). A convenient combination of
+both can be found in
+[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/).
+You should also track relevant metrics from the field yourself:
 [Measuring these metrics on real users' devices](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics#measuring_these_metrics_on_real_users_devices)
 provides a good overview.
 
 From a user perspective the most important metrics are:
 
-+   **[First Contentful Paint](https://web.dev/first-contentful-paint/)
-    (FCP)**: The time the user stares at a blank screen. This is
++   **[First Contentful Paint (FCP)](/first-contentful-paint):**
+    The time the user stares at a blank screen. This is
     when most users bounce, as they don't see progress.
-+   **[First Meaningful Paint](https://web.dev/first-meaningful-paint/)
-    (FMP):** When the user begins to see the main content they came for. This
++   **[First Meaningful Paint (FMP)](/first-meaningful-paint):**
+    When the user begins to see the main content they came for. This
     is often the hero image, but for a landing page it may even be a call to
     action such as a **Buy** button, since the user may have arrived with a clear
     intent (for example, through a targeted ad campaign).
-+   **[First Input Delay](https://developers.google.com/web/updates/2018/05/first-input-delay)
-    (FID):** The time the website needs to react to the user's first input.
++   **[First Input Delay (FID)](https://developers.google.com/web/updates/2018/05/first-input-delay):**
+    The time the website needs to react to the user's first input.
     Excessive JavaScript and other asset loading problems can block this,
     leading to failed taps or clicks, erroneous inputs and page abandonment.
 
@@ -97,21 +97,21 @@ There are two convenient ways of doing this:
 ### WebPageTest
 
 [WebPageTest](https://www.webpagetest.org/) offers a very flexible [scripting
-solution](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting).
+solution](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md).
 The basic idea is to:
 
 +   Tell WebPageTest to navigate through the pages of the flow with the
-    [`navigate`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-navigate)
+    [`navigate`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#navigate)
     command.
 +   If needed script the clicking of buttons via
-    [`clickAndWait`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-clickAndWait)
+    [`clickAndWait`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#clickandwait)
     commands and fill text fields via
-    [`setValue`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-setValue).
+    [`setValue`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#selectvalue).
     For testing of Single Page Applications use `clickAndWait` rather than
     `navigate` commands for all steps after the first, as `navigate` will do a
     full load instead of the lightweight virtual page load.
 +   Make sure to combine the different steps of the flow in the analysis via
-    [`combineSteps`](https://sites.google.com/a/webpagetest.org/docs/using-webpagetest/scripting#TOC-combineSteps)
+    [`combineSteps`](https://github.com/WPO-Foundation/webpagetest-docs/blob/master/user/Scripting.md#combinesteps)
     to produce a single overall result report for the complete flow.
 
 Such a script could look like this:
@@ -127,7 +127,7 @@ navigate	https://www.store.google.com/checkout
 
 With a script like this in place you can easily measure and compare performance
 over time. This can even be automated through the
-[WebPageTest API](https://sites.google.com/a/webpagetest.org/docs/advanced-features/webpagetest-restful-apis).
+[WebPageTest API](https://github.com/WPO-Foundation/webpagetest-docs/blob/5337749ae99d0529fc0ae690d402fd4f88766be9/dev/api.md).
 
 ### Puppeteer
 
@@ -183,7 +183,7 @@ an eye on this though, and a great lab test tool for repeat visits is
 [WebPageTest](https://www.webpagetest.org/), which has a dedicated option for a
 direct repeat visit:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot" src="./webpagetest_repeat.png" alt="The WebPageTest homepage form for auditing a site. The repeat view option is highlighted.">
   <figcaption class="w-figcaption w-figcaption--center">
     Webpagetest offers options to test first load and repeat load as well
@@ -194,7 +194,7 @@ To get a better feeling for repeat visit performance in the field use your
 analytics package of choice to segment your performance metrics by user type.
 Here is an example of such a report in Google Analytics:
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot" src="./ga_speed_repeat.png" alt="A Google Analytics dashboard shows a number of fields being added to a custom report.">
   <figcaption class="w-figcaption w-figcaption--center">
     A Google Analytics custom report can be used to report speed metrics for new and returning users.

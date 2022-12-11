@@ -1,8 +1,11 @@
 ---
 layout: post
-title: Manually check all custom interactive controls are keyboard focusable
+title: Custom controls have associated labels
 description: |
-  Learn about custom-controls-labels audit.
+  Learn how to improve your web page's accessibility by making sure that
+  all custom controls have labels that assistive technology users can access.
+date: 2019-05-02
+updated: 2019-09-19
 web_lighthouse:
   - custom-controls-labels
 ---
@@ -18,13 +21,11 @@ See also [Keyboard access fundamentals](/keyboard-access).
 To test that the custom control is focusable,
 press the `TAB` key to navigate through the site:
 
-<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/tabindex-zero?path=index.html&previewSize=100&attributionHidden=true"
-    alt="tabindex-zero on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'tabindex-zero',
+  path: 'index.html',
+  height: 346
+} %}
 
 Are you able to reach all of the interactive controls on the page?
 If not, you may need to use `tabindex` to improve the focusability of those controls.
@@ -49,7 +50,7 @@ If a keyboard user can't see what's focused, they have no way of interacting wit
 
 Learn more in [How to do an Accessibility Review](https://developers.google.com/web/fundamentals/accessibility/how-to-review#try_it_with_a_screen_reader).
 
-## More information
+## Resources
 
-- [Check all custom controls are keyboard focusable audit source](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/accessibility/manual/custom-controls-labels.js)
-- [Ensure `tabindex` attribute values are not greater than 0](/tabindex)
+- [Source code for **Custom controls have associated labels** audit](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/accessibility/manual/custom-controls-labels.js)
+- [Some elements have a `[tabindex]` value greater than `0`](/tabindex)

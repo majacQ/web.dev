@@ -15,10 +15,12 @@ description: |
   Learn how the OpenSooq team used best practices to create a reliable,
   compelling marketplace progressive web app.
 tags:
-  - post # post is a required tag for the article to show up in the blog.
+  - blog # blog is a required tag for the article to show up in the blog.
   - e-commerce
-  - fast
   - reliable
+  - case-study
+  - performance
+  - progressive-web-apps
 ---
 
 Based in Amman, Jordan, [OpenSooq](http://jo.opensooq.com/en) is a mobile-first classifieds marketplace offering a wide range of products and services in 19 countries across the Middle East and North Africa.
@@ -45,11 +47,11 @@ By adopting these best practices, the team was able to cut the average page load
   </figcaption>
 </figure>
 
-<blockquote class="w-blockquote">
-  <p class="w-blockquote__text">
+<blockquote>
+  <p>
     Over a quarter of our users access the OpenSooq PWA from low-mid networks, so reliability was essential for keeping those users engaged. Service workers and caching strategies helped us build the reliable user experience we needed, seamlessly.
   </p>
-  <cite class="w-blockquote__cite">
+  <cite>
     Amin Shoman, PWA Technical Manager, OpenSooq
   </cite>
 </blockquote>
@@ -71,13 +73,13 @@ These improvements increased the monthly active users of OpenSooq's web experien
 
 After just a few weeks of effort, OpenSooq created a 23 KB, full-featured PWA that delivers a consistent experience to users across all platforms and browsers. And because it's easy to update features on the web, the team has gone PWA-first by launching and testing new features and user flows on their PWA before rolling them out to other platforms.
 
-OpenSooq is now working on adding a [native install prompt](https://developers.google.com/web/fundamentals/app-install-banners/native) and integrating the PWA with [accelerated mobile pages (AMP)](https://amp.dev/). These enhancements will further speed up page loads and make the transition to the native app as seamless as possible. By building on the foundation of their initial development effort, the OpenSooq team will continue giving their users the best possible experience.
+OpenSooq is now working on adding a [platform-specific install prompt](https://developers.google.com/web/fundamentals/app-install-banners/native) and integrating the PWA with [accelerated mobile pages (AMP)](https://amp.dev/). These enhancements will further speed up page loads and make the transition to the platform-specific app as seamless as possible. By building on the foundation of their initial development effort, the OpenSooq team will continue giving their users the best possible experience.
 
-<blockquote class="w-blockquote">
-  <p class="w-blockquote__text">
+<blockquote>
+  <p>
     The importance of developing our PWA was clear to both the leadership and technical teams. After building a modern web app and making it performant, we're excited to see the business impact on our 2.5 month investment.
   </p>
-  <cite class="w-blockquote__cite">
+  <cite>
     Ramzi Alqrainy, Chief Technology Officer, OpenSooq
   </cite>
 </blockquote>

@@ -1,8 +1,11 @@
 ---
 layout: post
-title: Manually check the tab order follows the DOM order
+title: The page has a logical tab order
 description: |
-  Learn about logical-tab-order audit.
+  Learn how to make it easier for keyboard users to navigate your web page
+  by placing tab stops in a logical order.
+date: 2019-05-02
+updated: 2019-09-19
 web_lighthouse:
   - logical-tab-order
 ---
@@ -36,13 +39,13 @@ If the focus order seems wrong,
 you should rearrange the elements in the DOM to make the tab order more natural.
 
 If you aren't able to reach all of the interactive controls on the page,
-the first go-to fix is to replace custom controls with native HTML alternatives.
+the first go-to fix is to replace custom controls with standardized HTML alternatives.
 For example,
-replace a `<div>` acting like a buton with `<button>`.
+replace a `<div>` acting like a button with `<button>`.
 Using built-in HTML elements can greatly improve the accessibility of your site,
 and significantly cut down on your workload.
 
-If you're building custom interactive components with no native HTML equivalent,
+If you're building custom interactive components with no standardized HTML equivalent,
 use the `tabindex` attribute to ensure that they're keyboard accessible.
 For example:
 
@@ -52,6 +55,6 @@ For example:
 
 Learn more in [Control focus with tabindex](/control-focus-with-tabindex).
 
-## More information
+## Resources
 
-- [Check tab order follows the DOM order audit source](https://github.com/GoogleChrome/lighthouse/blob/ecd10efc8230f6f772e672cd4b05e8fbc8a3112d/lighthouse-core/audits/accessibility/manual/logical-tab-order.js)
+[Source code for **The page has a logical tab order** audit](https://github.com/GoogleChrome/lighthouse/blob/ecd10efc8230f6f772e672cd4b05e8fbc8a3112d/lighthouse-core/audits/accessibility/manual/logical-tab-order.js)

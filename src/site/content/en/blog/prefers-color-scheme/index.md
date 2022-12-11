@@ -1,10 +1,10 @@
 ---
-title: Hello darkness, my old friend
+title: "prefers-color-scheme: Hello darkness, my old friend"
 subhead: Overhyped or necessity? Learn everything about dark mode and how to support it to the benefit of your users!
 authors:
   - thomassteiner
 date: 2019-06-27
-updated: 2019-06-28
+updated: 2020-06-09
 hero: hero.jpg
 hero_position: bottom
 alt: |
@@ -15,11 +15,14 @@ description: |
   and introduces a custom element named dark-mode-toggle that allows web developers
   to offer users a way to override their operating system level preference on specific web pages.
 tags:
-  - post
+  - blog
   - dark-mode
   - dark-theme
   - prefers-color-scheme
   - color-scheme
+  - css
+feedback:
+  - api
 ---
 
 ## Introduction
@@ -33,7 +36,7 @@ tags:
 ### Dark mode before *Dark Mode*
 
 <figure class="w-figure w-figure--inline-right">
-  <img style="height: 175px; width: auto;" src="green-screen.jpg" alt="Green screen computer monitor" intrinsicsize="640x480">
+  <img style="height: 175px; width: auto;" src="green-screen.jpg" alt="Green screen computer monitor" height="480" width="640">
   <figcaption class="w-figcaption">Green screen (<a href="https://commons.wikimedia.org/wiki/File:Compaq_Portable_and_Wordperfect.JPG">Source</a>)</figcaption>
 </figure>
 
@@ -46,7 +49,7 @@ Because text was displayed in green and the rest of the screen was black, these 
 [green screens](https://commons.wikimedia.org/wiki/File:Schneider_CPC6128_with_green_monitor_GT65,_start_screen.jpg).
 
 <figure class="w-figure w-figure--inline-left">
-  <img style="height: 175px; width: auto;" src="word-processing.jpg" alt="Dark-on-white word processing" intrinsicsize="698x551">
+  <img style="height: 175px; width: auto;" src="word-processing.jpg" alt="Dark-on-white word processing" height="551" width="698">
   <figcaption class="w-figcaption">Dark-on-white (<a href="https://www.youtube.com/watch?v=qKkABzt0Zqg">Source</a>)</figcaption>
 </figure>
 
@@ -58,7 +61,7 @@ With the advent of more sophisticated <abbr title="What You See Is What You Get"
 the idea of making the virtual document resemble a physical sheet of paper became popular.
 
 <figure class="w-figure w-figure--inline-right">
-  <img style="height: 175px; width: auto;" src="worldwideweb.png" alt="Dark-on-white webpage in the WorldWideWeb browser" intrinsicsize="1024x768">
+  <img style="height: 175px; width: auto;" src="worldwideweb.png" alt="Dark-on-white webpage in the WorldWideWeb browser" height="600" width="800">
   <figcaption class="w-figcaption">The WorldWideWeb browser (<a href="https://commons.wikimedia.org/wiki/File:WorldWideWeb_FSF_GNU.png">Source</a>)</figcaption>
 </figure>
 
@@ -78,8 +81,8 @@ on a light background, a baseline assumption that is also hard-coded in user age
 [Chrome's](https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css).
 
 <figure class="w-figure w-figure--inline-left">
-  <img style="height: 175px; width: auto;" src="smartphone-in-bed.jpg" alt="Smartphone used while lying in bed" intrinsicsize="500x334">
-  <figcaption class="w-figcaption">Smartphone used in bed (<a href="https://unsplash.com/photos/W39xsPWZgA4">Source</a>)</figcaption>
+  <img style="height: 175px; width: auto;" src="smartphone-in-bed.jpg" alt="Smartphone used while lying in bed" height="334" width="500">
+  <figcaption class="w-figcaption">Smartphone used in bed (Source: Unsplash)</figcaption>
 </figure>
 
 The days of CRTs are long over.
@@ -112,7 +115,7 @@ is an aesthetic one for most users, and might not relate to ambient lighting con
 {% endAside %}
 
 <figure class="w-figure w-figure--inline-right">
-  <img style="height: 225px; width: auto;" src="closeview.png" alt="CloseView in Mac OS System 7 with \"White on Black\" mode" intrinsicsize="531x618">
+  <img style="height: 225px; width: auto;" src="closeview.png" alt="CloseView in Mac OS System 7 with \"White on Black\" mode" height="618" width="531">
   <figcaption class="w-figcaption">System&nbsp;7 CloseView (<a href="https://archive.org/details/mac_Macintosh_System_7_at_your_Fingertips_1992">Source</a>)</figcaption>
 </figure>
 
@@ -175,7 +178,7 @@ Now that I have covered the background of why dark mode is such a big deal for m
 let's review how you can support it.
 
 <figure class="w-figure w-figure--inline-left">
-  <img style="height: 250px; width: auto;" src="android.png" alt="Android Q dark mode settings" intrinsicsize="610x700">
+  <img style="height: 250px; width: auto;" src="android.png" alt="Android Q dark mode settings" height="700" width="610">
   <figcaption class="w-figcaption">Android&nbsp;Q dark theme settings</figcaption>
 </figure>
 
@@ -187,7 +190,9 @@ For Android&nbsp;Q, you can find it under *Display* as a *Dark Theme* toggle swi
 and on iOS&nbsp;13, you can change the *Appearance* in the *Display &amp; Brightness*
 section of the settings ([screenshot](ios.jpg)).
 
-<h2 id="the-prefers-color-scheme-media-query" class="w-clearfix">The <code>prefers-color-scheme</code> media query</h2>
+<div class="w-clearfix"></div>
+
+## The `prefers-color-scheme` media query
 
 One last bit of theory before I get going.
 [Media queries](https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries/Using_media_queries)
@@ -212,16 +217,20 @@ media feature is used to detect
 if the user has requested the page to use a light or dark color theme.
 It works with the following values:
 
-- `no-preference`:
-  Indicates that the user has made no preference known to the system.
-  This keyword value evaluates as `false` in the
-  [boolean context](https://drafts.csswg.org/mediaqueries-5/#boolean-context).
 - `light`:
   Indicates that the user has notified the system that they prefer a page that has a light theme
   (dark text on light background).
 - `dark`:
   Indicates that the user has notified the system that they prefer a page that has a dark theme
   (light text on dark background).
+
+{% Aside 'note' %}
+  An earlier version of the spec included a third value, `no-preference`.
+  It was meant to indicate that the user has made no preference known to the system.
+  Since no browser ever implemented it, the value was
+  [removed](https://github.com/w3c/csswg-drafts/issues/3857#issuecomment-634779976)
+  from the spec.
+{% endAside%}
 
 ## Supporting dark mode
 
@@ -281,11 +290,11 @@ I hide the content of the page until `light.css` has loaded.
 <script>
   // If `prefers-color-scheme` is not supported, fall back to light mode.
   // In this case, light.css will be downloaded with `highest` priority.
-  if (window.matchMedia('(prefers-color-scheme)').media === 'not all') {
+  if (window.matchMedia('(prefers-color-scheme: dark)').media === 'not all') {
     document.documentElement.style.display = 'none';
     document.head.insertAdjacentHTML(
         'beforeend',
-        '<link rel="stylesheet" href="/light.css" onload="document.documentElement.style.display = ``">'
+        '<link rel="stylesheet" href="/light.css" onload="document.documentElement.style.display = \'\'">'
     );
   }
 </script>
@@ -297,7 +306,7 @@ I hide the content of the page until `light.css` has loaded.
   above I already force `highest` priority for my default light experience).
 -->
 <link rel="stylesheet" href="/dark.css" media="(prefers-color-scheme: dark)">
-<link rel="stylesheet" href="/light.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)">
+<link rel="stylesheet" href="/light.css" media="(prefers-color-scheme: light)">
 <!-- The main stylesheet -->
 <link rel="stylesheet" href="/style.css">
 ```
@@ -350,22 +359,17 @@ In the code sample above, you will probably have noticed a property
 [`color-scheme`](https://drafts.csswg.org/css-color-adjust-1/#propdef-color-scheme)
 with the space-separated value `light dark`.
 
-{% Aside 'warning' %}
-  The `color-scheme` property is still [in development](https://crbug.com/925935)
-  and it might not work as advertised, full support in Chrome will come later this year.
-{% endAside %}
-
 This tells the browser which color themes my app supports
 and allows it to activate special variants of the user agent stylesheet,
 which is useful to, for example, let the browser render form fields
-with a dark background and light text, adjust the scrollbars,
+with a dark background and light text, adjust the scroll bars,
 or to enable a theme-aware highlight color.
 The exact details of `color-scheme` are specified in
 [CSS Color Adjustment Module Level&nbsp;1](https://drafts.csswg.org/css-color-adjust-1/).
 
 {% Aside 'note' %}
   🌒 Read up more on
-  [what `color-scheme` actually does](https://medium.com/dev-channel/what-does-dark-modes-supported-color-schemes-actually-do-69c2eacdfa1d).
+  [what `color-scheme` actually does](/color-scheme/).
 {% endAside %}
 
 Everything else is then just a matter of defining CSS variables
@@ -407,11 +411,10 @@ Try toggling dark mode in your particular [operating system's settings](#activat
 and see how the page reacts.
 
 <div style="height: 900px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/dark-mode-baseline?path=style.css&previewSize=100&attributionHidden=true"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
+  {% IFrame {
+    allow: 'geolocation; microphone; camera; midi; vr; encrypted-media',
+    src: 'https://glitch.com/embed/#!/embed/dark-mode-baseline?path=style.css&previewSize=100&attributionHidden=true'
+  } %}
 </div>
 
 ### Loading impact
@@ -428,17 +431,17 @@ so that they never compete with resources that are needed by the site right now.
 {% endAside %}
 
 <figure class="w-figure">
-  <img src="light.png" alt="Network loading diagram showing how in light mode the dark mode CSS gets loaded with lowest priority" intrinsicsize="1633x851">
+  <img src="light.png" alt="Network loading diagram showing how in light mode the dark mode CSS gets loaded with lowest priority" height="851" width="1633">
   <figcaption class="w-figcaption">Site in light mode loads the dark mode CSS with lowest priority.</figcaption>
 </figure>
 
 <figure class="w-figure">
-  <img src="dark.png" alt="Network loading diagram showing how in dark mode the light mode CSS gets loaded with lowest priority" intrinsicsize="1633x851">
+  <img src="dark.png" alt="Network loading diagram showing how in dark mode the light mode CSS gets loaded with lowest priority" height="851" width="1633">
   <figcaption class="w-figcaption">Site in dark mode loads the light mode CSS with lowest priority.</figcaption>
 </figure>
 
 <figure class="w-figure">
-  <img src="unsupported.png" alt="Network loading diagram showing how in default light mode the dark mode CSS gets loaded with lowest priority" intrinsicsize="1633x851">
+  <img src="unsupported.png" alt="Network loading diagram showing how in default light mode the dark mode CSS gets loaded with lowest priority" height="851" width="1633">
   <figcaption class="w-figcaption">Site in default light mode on a browser that doesn't support <code>prefers-color-scheme</code> loads the dark mode CSS with lowest priority.</figcaption>
 </figure>
 
@@ -460,6 +463,33 @@ in order to see the theme color and favicon changes, open the
     const darkModeOn = e.matches;
     console.log(`Dark mode is ${darkModeOn ? '🌒 on' : '☀️ off'}.`);
   });
+```
+
+## Debugging and testing dark mode
+
+### Emulating `prefers-color-scheme` in DevTools
+
+Switching the entire operating system's color scheme can get annoying real quick,
+so Chrome DevTools now allows you to emulate the user's preferred color scheme
+in a way that only affects the currently visible tab.
+Open the [Command Menu](https://developers.google.com/web/tools/chrome-devtools/command-menu), start typing `Rendering`, run the `Show Rendering` command, and then change the **Emulate CSS media feature prefers-color-scheme** option.
+
+<figure class="w-figure">
+  <img src="devtools-emulate.png" alt="A screenshot of the 'Emulate CSS media feature prefers-color-scheme' option that is located in the Rendering tab of Chrome DevTools" width="945" height="652">
+</figure>
+
+### Screenshotting `prefers-color-scheme` with Puppeteer
+
+[Puppeteer](https://github.com/GoogleChrome/puppeteer/) is a Node.js library
+that provides a high-level API to control Chrome or Chromium over the
+[DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/).
+With [`dark-mode-screenshot`](https://www.npmjs.com/package/dark-mode-screenshot), we provide
+a Puppeteer script that lets you create screenshots of your pages in both dark and light mode.
+You can run this script as a one-off, or alternatively make it part of your
+Continuous Integration (CI) test suite.
+
+```bash
+npx dark-mode-screenshot --url https://googlechromelabs.github.io/dark-mode-toggle/demo/ --output screenshot --fullPage --pause 750
 ```
 
 ## Dark mode best practices
@@ -586,7 +616,7 @@ img[src*=".svg"]:hover {
 }
 ```
 
-<h3 id="use-currentcolor-for-inline-svgs">Use <code style="color: currentColor;">currentColor</code> for inline SVGs</h3>
+### Use `currentColor` for inline SVGs
 
 For *inline* SVG images, instead of [using inversion filters](#invert-vector-graphics-and-icons),
 you can leverage the [`currentColor`](https://developer.mozilla.org/en-US/docs/Web/CSS/color_value#currentColor_keyword)
@@ -613,12 +643,11 @@ You can see this applied in the demo below.
 ```
 
 <div style="height: 950px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/dark-mode-currentcolor?path=light.css&previewSize=100"
-    alt="dark-mode-currentcolor on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
+  {% IFrame {
+    allow: 'geolocation; microphone; camera; midi; vr; encrypted-media',
+    src: 'https://glitch.com/embed/#!/embed/dark-mode-currentcolor?path=light.css&previewSize=100',
+    title: 'dark-mode-currentcolor on Glitch'
+  } %}
 </div>
 
 ### Smooth transitions between modes
@@ -664,18 +693,17 @@ Toggle dark mode on your device to see the difference.
 ```html
 <picture>
   <source srcset="western.webp" media="(prefers-color-scheme: dark)">
-  <source srcset="eastern.webp" media="(prefers-color-scheme: light), (prefers-color-scheme: no-preference)">
+  <source srcset="eastern.webp" media="(prefers-color-scheme: light)">
   <img src="eastern.webp">
 </picture>
 ```
 
 <div style="height: 600px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://glitch.com/embed/#!/embed/dark-mode-picture?path=index.html&previewSize=100"
-    alt="dark-mode-picture on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
+  {% IFrame {
+    allow: 'geolocation; microphone; camera; midi; vr; encrypted-media',
+    src: 'https://glitch.com/embed/#!/embed/dark-mode-picture?path=index.html&previewSize=100',
+    title: 'dark-mode-picture on Glitch'
+  } %}
 </div>
 
 ### Dark mode, but add an opt-out
@@ -687,7 +715,7 @@ in dark, but still prefer to see their webpages the way they are used to seeing 
 A great pattern is to initially adhere to the signal the browser sends through
 `prefers-color-scheme`, but to then optionally allow users to override their system-level setting.
 
-<h4>The <code style="color: currentColor;">&lt;dark-mode-toggle&gt;</code> custom element</h4>
+#### The `<dark-mode-toggle>` custom element
 
 You can of course create the code for this yourself, but you can also just use
 a ready-made custom element (web component) that I have created right for this purpose.
@@ -732,11 +760,10 @@ This allows your visitors to keep their operating system in dark mode,
 but enjoy your site in light mode or vice versa.
 
 <div class="w-screenshot" style="height: 800px; width: 100%;">
-  <iframe
-    allow="geolocation; microphone; camera; midi; vr; encrypted-media"
-    src="https://googlechromelabs.github.io/dark-mode-toggle/demo/index.html"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
+  {% IFrame {
+    allow: 'geolocation; microphone; camera; midi; vr; encrypted-media',
+    src: 'https://googlechromelabs.github.io/dark-mode-toggle/demo/index.html'
+  } %}
 </div>
 
 ## Conclusions
@@ -761,6 +788,7 @@ Resources for the `prefers-color-scheme` media query:
   - [Media Queries Level&nbsp;5 spec](https://drafts.csswg.org/mediaqueries-5/#prefers-color-scheme)
 
 Resources for the `color-scheme` meta tag and CSS property:
+  - [The `color-scheme` CSS property and meta tag](/color-scheme/)
   - [Chrome Platform Status page](https://chromestatus.com/feature/5330651267989504)
   - [Chromium bug](http://crbug.com/925935)
   - [CSS Color Adjustment Module Level&nbsp;1 spec](https://drafts.csswg.org/css-color-adjust-1/)

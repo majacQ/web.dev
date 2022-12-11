@@ -10,6 +10,8 @@ description: |
   precaches all static assets in your application with every build.
 authors:
   - houssein
+feedback:
+  - api
 ---
 
 {% Aside %}
@@ -31,7 +33,7 @@ static assets in your application with every build.
 Service workers enable you to store important resources in its cache
 (_precaching_) so that when a user loads the web page for a second time, the
 browser can retrieve them from the service worker instead of making requests to
-the network. This results in faster page loads on repeat visits as well as the
+the network. This results in faster page loads on repeat visits as well as in the
 ability to surface content when the user is offline.
 
 ## Workbox in CRA
@@ -57,20 +59,17 @@ serviceWorker.register();
 
 Here is an example of a React app built with CRA that has a service worker enabled through this file:
 
-<div class="glitch-embed-wrap" style="height: 480px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/react-sw-example?path=src/index.css&previewSize=100&attributionHidden=true"
-    alt="react-sw-example on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'react-sw-example',
+  path: 'src/index.css',
+  height: 480
+} %}
 
-In order to see which assets are being cached:
+To see which assets are being cached:
 
-+  Mouse over the editor and press the **Show** button to preview the app.
-+  Open the DevTools by pressing `CMD + OPTION + i` / `CTRL + SHIFT + i`.
-+  Click on the **Network** tab.
-+  Reload the application.
+{% Instruction 'preview' %}
+{% Instruction 'devtools-network' %}
+{% Instruction 'reload-app' %}
 
 You'll notice that instead of showing the payload size, the `Size` column shows
 a `(from ServiceWorker)` message to indicate that these resources were retrieved
@@ -81,9 +80,9 @@ from the service worker.
 Since the service worker caches all static assets, try to use the application
 while offline:
 
-+  In the **Network** tab in DevTools, enable the **Offline** checkbox to
+1.  In the **Network** tab in DevTools, enable the **Offline** checkbox to
    simulate an offline experience.
-+  Reload the application.
+{% Instruction 'reload-app' %}
 
 The application works in exactly the same way, even without a network
 connection!
@@ -117,7 +116,7 @@ is an excellent way to build sites that load faster on subsequent visits and
 work offline to some extent. However, there are a few things that need to
 be taken into consideration:
 
-+  How can caching behaviours by a service worker be tested?
++  How can caching behaviors by a service worker be tested?
 +  Should there be a message for users to let them know they are looking at
    cached content?
 

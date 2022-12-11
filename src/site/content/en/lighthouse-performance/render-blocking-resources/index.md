@@ -3,6 +3,8 @@ layout: post
 title: Eliminate render-blocking resources
 description: |
   Learn about the render-blocking-resources audit.
+date: 2019-05-02
+updated: 2020-08-11
 web_lighthouse:
   - render-blocking-resources
 ---
@@ -14,17 +16,14 @@ by inlining critical resources, deferring non-critical resources,
 and removing anything unused.
 
 <figure class="w-figure">
-  <img class="w-screenshot w-screenshot--filled" src="blocking-resources.png" alt="Eliminate render-blocking resources">
-  <figcaption class="w-figcaption">
-    Eliminate render-blocking resources.
-  </figcaption>
+  <img class="w-screenshot" src="blocking-resources.png" alt="A screenshot of the Lighthouse Eliminate render-blocking resources audit">
 </figure>
 
 
 ## Which URLs get flagged as render-blocking resources?
 
-Lighthouse flags three types of render-blocking URLs: scripts, stylesheets, and HTML
-imports:
+[Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+flags two types of render-blocking URLs: scripts and stylesheets.
 
 A `<script>` tag that:
 
@@ -38,14 +37,10 @@ A `<link rel="stylesheet">` tag that:
   the browser does not download the stylesheet.
 * Does not have a `media` attribute that matches the user's device.
 
-A `<link rel="import">` tag that:
-
-* Does not have an `async` attribute.
-
 ## How to identify critical resources
 
 The first step to reducing the impact of render-blocking resources,
-is to identify what's critical, and what's not.
+is to identify what's critical and what's not.
 Use the [Coverage tab](https://developers.google.com/web/updates/2017/04/devtools-release-notes#coverage)
 in Chrome DevTools to identify non-critical CSS and JS.
 When you load or run a page, the tab tells you how much code was used,
@@ -100,18 +95,9 @@ Finally, you'll want to minify your CSS to remove any extra whitespace or
 characters (see [Minify CSS](/minify-css)).
 This ensures that you're sending the smallest possible bundle to your users.
 
-## How to eliminate render-blocking imports
+## Resources
 
-For non-critical HTML imports, mark them with the `async` attribute. As a
-general rule, `async` should be used with HTML imports as much as possible.
-
-```html
-<link rel="import" href="myfile.html" async>
-```
-
-## More information
-
-- [Render-blocking resources audit source](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/byte-efficiency/render-blocking-resources.js)
-- [Reduce JavaScript payloads with codesplitting](/reduce-javascript-payloads-with-code-splitting)
+- [Source code for **Eliminate render-blocking resources** audit](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/byte-efficiency/render-blocking-resources.js)
+- [Reduce JavaScript payloads with code splitting](/reduce-javascript-payloads-with-code-splitting)
 - [Remove unused code codelab](/codelab-remove-unused-code)
 - [JavaScript Start-up Optimization](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/javascript-startup-optimization/)

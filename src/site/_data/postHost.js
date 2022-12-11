@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-const data = require('../content/en/learn/learn.11tydata.js');
+const data = require('../content/en/learn/learn.11tydata.js')();
 
 // =============================================================================
 // POST HOST
@@ -25,7 +25,7 @@ const data = require('../content/en/learn/learn.11tydata.js');
 //
 // =============================================================================
 
-module.exports = function() {
+module.exports = function () {
   const out = {};
 
   const paths = data.learn.paths;

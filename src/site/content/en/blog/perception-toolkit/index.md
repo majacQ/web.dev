@@ -9,8 +9,10 @@ alt: A series of screens shows a phone camera scanning an image and generating a
 description: |
   Wouldn't it be great if users could search your site using their camera?
 tags:
-  - post
+  - blog
   - visual-search
+feedback:
+  - api
 ---
 Wouldn't it be great if users could search your site using their camera? Imagine
 this. Your site is Razor McShaveyface. Your customers tell you they have trouble
@@ -42,7 +44,7 @@ UI.
 I'll show you enough of this to give you a taste of how it works. For a complete
 explanation, check out the [Getting
 Started](https://perceptiontoolkit.dev/getting-started/) guide, the [toolkit
-reference](https://perceptiontoolkit.dev/documentation/), the [I/O Sandbox demo](https://io.perceptiontoolkit.dev/) and the [sample demos](https://github.com/GoogleChromeLabs/perception-toolkit/tree/restructure_demo/demo).
+reference](https://perceptiontoolkit.dev/documentation/), the [I/O Sandbox demo](https://io.perceptiontoolkit.dev/) and the [sample demos](https://github.com/GoogleChromeLabs/perception-toolkit/tree/master/demo).
 
 ## Structured data
 
@@ -56,7 +58,7 @@ then show and hide cards based on the information provided in the data. Try this
 for yourself using our [artifact-map
 demo](https://github.com/GoogleChromeLabs/perception-toolkit/tree/master/demo/artifact-map).
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot" src="found-target.png"
        alt="The default interface is available by using just the linked data." class="screenshot"
        width="300">
@@ -102,12 +104,12 @@ around those events, and an easy way to style the cards. I'm going to show a
 little of this with code based losely on our [Getting
 Started](https://perceptiontoolkit.dev/getting-started/) guide.
 
-The most important lifecycle event is `PerceivedResults`, which is firedß every
+The most important lifecycle event is `PerceivedResults`, which is fired every
 time a target is found. A target can be a real-world object or a marker such as
 a bar code or QR code.
 
 The process for responding to this event is the same as for any other event with
-an exception alrady alluded to. If you don't implement the event, a user
+an exception already alluded to. If you don't implement the event, a user
 interface is automatically created using structured data. To override this
 behavior start your event handler by calling`event.preventDefault()`.
 
@@ -227,7 +229,7 @@ Toolkit](https://github.com/GoogleChromeLabs/perception-toolkit). Hopefully it g
 you a sense of how easy it is to add visual searching to a website. Learn more
 with the [Getting Started](https://perceptiontoolkit.dev/getting-started/) guide
 and the [sample
-demos](https://github.com/GoogleChromeLabs/perception-toolkit/tree/restructure_demo/demo).
+demos](https://github.com/GoogleChromeLabs/perception-toolkit/tree/master/demo).
 Dig in to the [toolkit
 documentation](https://perceptiontoolkit.dev/documentation/) to learn what it
 can do.

@@ -13,7 +13,7 @@ description: |
   majority of the downloaded bytes on a website. Use the new feature
   policies to identify oversized images.
 tags:
-  - post
+  - blog
   - images
   - origin-trials
 ---
@@ -56,16 +56,15 @@ in either dimension will be replaced with a placeholder image.
 Serving images larger than what the viewing device can render&mdash;for example,
 serving desktop images to mobile contexts, or serving high-pixel-density images
 to a low-pixel-density device&mdash;is wasting network traffic and device
-memory. Read [Serve images with correct
-dimensions](https://web.dev/serve-images-with-correct-dimensions/) and [Serve
-responsive images](https://web.dev/serve-responsive-images/) for information on
-optimizing your images.
+memory. Read [Serve images with correct dimensions](/serve-images-with-correct-dimensions/)
+and [Serve responsive images](/serve-responsive-images/)
+for information on optimizing your images.
 
 #### Examples
 
 A few examples illustrate this. The following shows the default behavior when cutting an image's display size in half.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./default-100x100.png" alt="The default resizing behavior" style="max-width: 326px;">
   <figcaption class="w-figcaption">
     The default resizing behavior.
@@ -76,7 +75,7 @@ If I apply the following feature policy, I get a placeholder image instead.
 
 `Feature-Policy: oversized-images *(2);`
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./resize-both-dimensions.png" alt="When the image is too large for the container" style="max-width: 326px;">
   <figcaption class="w-figcaption">
     When the image is too large for the container.
@@ -85,7 +84,7 @@ If I apply the following feature policy, I get a placeholder image instead.
 
 I get similar results if I lower only the width or the height.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./resize-width.png" alt="Resized width" style="max-width: 326px;">
   <img src="./resize-height.png" alt="Resized height" style="max-width: 326px;">
   <figcaption class="w-figcaption">
@@ -107,8 +106,8 @@ To declare the `oversized-images` policy, you need to provide:
 * The threshold values (i.e., the downscaling ratio X) for the origins, specified in
   parenthesis (Optional)
 
-We recommend a downscaling ratio of 2.0 or lower. Consider using [responsive
-images](https://web.dev/serve-responsive-images/) with different resolutions to
+We recommend a downscaling ratio of 2.0 or lower. Consider using
+[responsive images](/serve-responsive-images/) with different resolutions to
 best serve images on various screen sizes, resolutions, and so on.
 
 #### More examples
@@ -148,16 +147,15 @@ the constraint will be replaced with a placeholder image.
 The larger the download size is, the longer it takes for an image to load. The
 file size should be kept as small as possible when optimizing an image:
 stripping metadata, picking a good image format, using image compression, and so on.
-Read [Use Imagemin to compress
-images](https://web.dev/use-imagemin-to-compress-images/) and [Use WebP
-images](https://web.dev/serve-images-webp/) for information on optimizing your
-images.
+Read [Use Imagemin to compress images](/use-imagemin-to-compress-images/) and
+[Use WebP images](/serve-images-webp/) for information on
+optimizing your images.
 
 #### Example
 
 The following shows the default browser behavior. Without the feature policy an unoptimized lossy image can be displayed just the same as an optimized image.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./unoptimized-lossy.png" alt="Comparing an optimized image with an unoptimized image" style="max-width: 326px;">
   <figcaption class="w-figcaption">
     Comparing an optimized image with an unoptimized image.
@@ -168,7 +166,7 @@ If I apply the following feature policy, I get a placeholder image instead.
 
 `Feature-Policy: unoptimized-lossy-images *(0.5);`
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img src="./lossy-image-excluded.png" alt="When the image is not optimized" style="max-width: 326px;">
   <figcaption class="w-figcaption">
     When the image is not optimized.
@@ -255,8 +253,8 @@ would like to have policies supported on broader contents, please let us know.
 
 I've talked quite a bit about optimizing your images, but haven't said how to do it. That topic is out of scope for this article, but you can learn more from the links below and from the codelabs listed at the end of the article.
 
-* [Optimizing images](https://web.dev/fast#optimize-your-images)
-* [Serve images with correct dimentions](https://web.dev/serve-images-with-correct-dimensions/)
+* [Optimizing images](/fast#optimize-your-images)
+* [Serve images with correct dimensions](/serve-images-with-correct-dimensions/)
 
 ## Experiment with the policies in origin trials
 

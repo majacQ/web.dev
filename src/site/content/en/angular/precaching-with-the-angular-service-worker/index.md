@@ -14,13 +14,15 @@ tags:
   - angular
   - performance
   - reliability
+feedback:
+  - api
 ---
 
 ## Dealing with limited connectivity
 
 When users have limited network access—or none at all—web app functionality can significantly degrade and often fails. Using a [service worker](https://developers.google.com/web/fundamentals/primers/service-workers/) to provide precaching lets you intercept network requests and deliver responses directly from a local cache instead of retrieving them from the network. Once your app's assets have been cached, this approach can really speed up an app and make it work when the user is offline.
 
-This post walks through how to set up precaching in an Angular app. It assumes you're already familiar with precaching and service workers in general. If you need a refresher, check out the [Service workers and the Cache Storage API](https://web.dev/service-workers-cache-storage/) post.
+This post walks through how to set up precaching in an Angular app. It assumes you're already familiar with precaching and service workers in general. If you need a refresher, check out the [Service workers and the Cache Storage API](/service-workers-cache-storage/) post.
 
 {% Aside %}
 
@@ -97,4 +99,4 @@ Specifying other assets to be precached is just as straightforward: update the p
 Using a service worker for precaching can improve the performance of your apps by saving assets to a local cache, which makes them more reliable on poor networks. To use precaching with Angular and the Angular CLI:
 
 1. Add the `@angular/pwa` package to your project.
-2. Control what the service worker caches by editing `ngsw-config.js`.
+2. Control what the service worker caches by editing `ngsw-config.json`.

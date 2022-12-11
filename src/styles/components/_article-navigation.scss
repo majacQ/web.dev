@@ -20,6 +20,10 @@
   @include bp(sm) {
     flex-direction: row;
   }
+
+  @media print {
+    display: none;
+  }
 }
 
 .w-article-navigation__link {
@@ -105,4 +109,11 @@
 
 .w-article-navigation__heading {
   margin: 0 0 4px;
+}
+
+.w-article-navigation code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0;
 }

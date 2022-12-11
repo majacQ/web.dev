@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Incorporate performance budgets into your build process
-author:
+authors:
   - mihajlija
 description: |
   The best way to keep an eye on your performance budget is to automate it. Find
@@ -9,6 +9,8 @@ description: |
 date: 2019-02-01
 codelabs:
   - codelab-setting-performance-budgets-with-webpack
+tags:
+  - performance
 ---
 
 Once you've defined a performance budget, it's time to set up the build process
@@ -26,8 +28,8 @@ The [command line version](https://developers.google.com/web/tools/lighthouse/#c
 - resource size
 - resource count
 
-You can set budgets for any of the following resource types: 
-- `document` 
+You can set budgets for any of the following resource types:
+- `document`
 - `font`
 - `image`
 - `media`
@@ -54,7 +56,7 @@ Turn on [performance hints](https://webpack.js.org/configuration/performance/) i
 
 After the build step, webpack outputs a color-coded list of assets and their sizes. Anything over budget is highlighted in yellow.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot w-screenshot--filled" src="./webpack-output.png" alt="Webpack output highlighting bundle.js">
   <figcaption class="w-figcaption">
     The highlighted bundle.js is bigger than your budget
@@ -63,20 +65,20 @@ After the build step, webpack outputs a color-coded list of assets and their siz
 
 The default limit for both assets and entry-points is **250 KB**. You can set your own targets in the configuration file.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot w-screenshot--filled" src="./webpack-warning.jpg" alt="Webpack bundle size warning">
   <figcaption class="w-figcaption">
     Webpack bundle size warning ⚠️
   </figcaption>
 </figure>
 
-The budgets are compared against **uncompressed asset sizes**. Uncompressed [JavaScript size is related to the execution time](https://v8.dev/blog/cost-of-javascript-2019) and big files can take a long time to execute, especially on mobile devices. 
+The budgets are compared against **uncompressed asset sizes**. Uncompressed [JavaScript size is related to the execution time](https://v8.dev/blog/cost-of-javascript-2019) and big files can take a long time to execute, especially on mobile devices.
 
 {% Aside %}
 Compressed asset sizes affect the transfer time, which is very important on slow networks.
 {% endAside %}
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot w-screenshot--filled" src="./webpack-recommendation.jpg" alt="Webpack performance optimization recommendation">
   <figcaption class="w-figcaption">
     Bonus feature: webpack won’t only warn you, it will give you a recommendation on how to downsize your bundles. 💁
@@ -97,14 +99,14 @@ bundlesize -f "dist/bundle.js" -s 170kB
 
 Bundlesize outputs color-coded test results in one line.
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot w-screenshot--filled" src="./bundlesize-fail.png" alt="Failing bundlesize CLI test">
   <figcaption class="w-figcaption">
     Failing bundlesize CLI test ❌
   </figcaption>
 </figure>
 
-<figure class="w-figure w-figure--center">
+<figure class="w-figure">
   <img class="w-screenshot w-screenshot--filled" src="./bundlesize-pass.png" alt="Passing bundlesize CLI test">
   <figcaption class="w-figcaption">
     Passing bundlesize CLI test ✔️
@@ -124,7 +126,7 @@ You'll get the most value out of bundlesize if you integrate it with a CI to aut
 
 You may have a fast app today, but adding new code can often change this. Checking pull requests with bundlesize will help you avoid performance regressions. Bootstrap, Tinder, Trivago and many others use it to keep their budgets in check.
 
-With bundlesize, it's possible to set thresholds for each file separately. This is especially useful if you are code-splitting a bundle in your application.
+With bundlesize, it's possible to set thresholds for each file separately. This is especially useful if you are splitting a bundle in your application.
 
 By default, **it tests gzipped asset sizes**. You can use the compression option to switch to [brotli compression](https://css-tricks.com/brotli-static-compression/) or turn it off completely.
 
@@ -158,7 +160,7 @@ If the scores for a pull request on GitHub fall below the threshold you've set, 
 <figure class="w-figure">
   <img class="screenshot" src="./lighthouse-check.png" alt="Lighthouse Bot check status on Github">
   <figcaption class="w-figcaption">
-    Lighthouse Bot check status on Github  
+    Lighthouse Bot check status on Github
   </figcaption>
 </figure>
 
@@ -185,8 +187,8 @@ If you find your pull request blocked by a poor Lighthouse score, run an audit w
     </tr>
     <tr>
       <td>Lighthouse</td>
-      <td>✅</td>
-      <td>✘</td>
+      <td>✔️</td>
+      <td>❌</td>
       <td>
         <ul>
           <li>Budgets for different types of resources based on their size or count.</li>
@@ -195,8 +197,8 @@ If you find your pull request blocked by a poor Lighthouse score, run an audit w
     </tr>
     <tr>
       <td>webpack</td>
-      <td>✅</td>
-      <td>✘</td>
+      <td>✔️</td>
+      <td>❌</td>
       <td>
         <ul>
           <li>Budgets based on sizes of assets generated by webpack.</li>
@@ -206,8 +208,8 @@ If you find your pull request blocked by a poor Lighthouse score, run an audit w
     </tr>
     <tr>
       <td>bundlesize</td>
-      <td>✅</td>
-      <td>✅</td>
+      <td>✔️</td>
+      <td>✔️</td>
       <td>
         <ul>
           <li>Budgets based on sizes of specific resources.</li>
@@ -217,8 +219,8 @@ If you find your pull request blocked by a poor Lighthouse score, run an audit w
     </tr>
     <tr>
       <td>Lighthouse Bot</td>
-      <td>✘</td>
-      <td>✅</td>
+      <td>❌</td>
+      <td>✔️</td>
       <td>
         <ul>
           <li>Budgets based on Lighthouse scores.</li>

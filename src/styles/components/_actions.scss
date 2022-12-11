@@ -19,7 +19,15 @@ $W_FAB_LARGE_RADIUS: 28px;
   flex-direction: column;
   position: fixed;
   right: 24px;
-  z-index: 1000;
+  z-index: 100;
+
+  @media print {
+    display: none;
+  }
+}
+
+.w-actions > * {
+  margin-top: 20px;
 }
 
 .w-actions__fab {
@@ -102,10 +110,6 @@ $W_FAB_LARGE_RADIUS: 28px;
 
 .w-actions__fab:active::after {
   background-color: rgba($WHITE, .32);
-}
-
-.w-actions__fab + .w-actions__fab {
-  margin-top: 20px;
 }
 
 // FAB variations

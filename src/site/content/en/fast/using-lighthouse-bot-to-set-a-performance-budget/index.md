@@ -7,6 +7,8 @@ description: |
   You've done hard work to get fast, now make sure you stay fast by automating
   performance testing in Travis CI with Lighthouse Bot.
 date: 2019-01-28
+tags:
+  - performance
 ---
 
 You've done hard work to get fast, now make sure you stay fast by automating
@@ -128,7 +130,7 @@ install:
 before_script:
   - npm install -g firebase-tools
 script:
-  - webpack</td>
+  - webpack
 ```
 
 The YAML file tells Travis to install all the dependencies and build your app.
@@ -183,7 +185,7 @@ Now whenever you make changes to your app, they will be automatically deployed t
 
 ## 5. Setting up Lighthouse Bot
 
-Friendly Lighthouse Bot updates you on your app's Lighthouse scores. 
+Friendly Lighthouse Bot updates you on your app's Lighthouse scores.
 It just needs an invitation to your repo.
 
 On GitHub, go to your project's settings and **add "lighthousebot" as a collaborator** (Settings>Collaborators):
@@ -281,7 +283,7 @@ any of those with Lighthouse Bot flags:
 Example:
 
 ```bash
-npm run lh --perf=93 --seo=100 https://staging.example.com
+npm run lh -- --perf=93 --seo=100 https://staging.example.com
 ```
 
 This will fail the PR if the performance score drops below 93 **or** the SEO

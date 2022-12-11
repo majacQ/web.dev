@@ -11,7 +11,7 @@ description: |
   of devices and progressively enhances the visual appearance the more capable
   the device is.
 tags:
-  - post
+  - blog
   - PROXX
   - games
 ---
@@ -43,7 +43,7 @@ application:
 - **Accessible**: mouse, keyboard, touch, d-pad, screen readers
 - **Performant**:
   - Less than 25kb of initial payload
-  - Less than 5 seconds TTI ([time to interactive](https://web.dev/interactive))
+  - Less than 5 seconds TTI ([time to interactive](/interactive))
     on slow 3G
   - Consistent 60fps animation
 
@@ -84,7 +84,7 @@ interacting with the invisible DOM table, giving us the ability to attach event
 listeners and rely on the browser's focus management.
 
 By keeping the DOM element in the canvas, we are able to tap into browsers
-native accessibility features. For example: by setting `role="grid"` on our game
+built-in accessibility features. For example: by setting `role="grid"` on our game
 table, screen readers can announce the row and column of the focused cell
 without us having to implement that.
 
@@ -122,9 +122,7 @@ in-depth documentation on each of these areas of the game.
 
 Until then, please check the talk Mariko gave at I/O on this project.
 
-<div style="width:100%; padding-top: 56.25%; position: relative;">
-  <iframe style="width:100%; height: 100%;position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);" src="https://www.youtube.com/embed/w8P5HLxcIO4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-</div>
+{% YouTube 'w8P5HLxcIO4' %}
 
 You can browse the code at [the proxx github repo](https://github.com/GoogleChromeLabs/proxx).
 

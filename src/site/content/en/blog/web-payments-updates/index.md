@@ -14,8 +14,10 @@ description: |
   respective specifications. This post summarizes those updates and will
   continue accumulating those API changes.
 tags:
-  - post # post is a required tag for the article to show up in the blog.
+  - blog # blog is a required tag for the article to show up in the blog.
   - payment
+feedback:
+  - api
 ---
 
 Web Payments have been publicly available in browsers since 2016. The core
@@ -108,7 +110,7 @@ if (request.hasEnrolledInstrument) {
 billing addresses for `basic-card`. The billing addresses of other payment
 methods (such as Google Pay) are not affected.
 
-This change has been implemented [in Chrome 74, Firefox, and Safari](https://chromestatus.com/features/4992562146312192).
+This change has been implemented [in Chrome 74, Firefox, and Safari](https://chromestatus.com/feature/4992562146312192).
 
 ## `PaymentRequest.show()` now takes an optional `detailsPromise`
 

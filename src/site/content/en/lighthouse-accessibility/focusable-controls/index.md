@@ -1,8 +1,11 @@
 ---
 layout: post
-title: Manually check custom interactive controls are keyboard focusable and display a focus indicator
+title: Interactive controls are keyboard focusable
 description: |
-  Learn about focusable-controls audit.
+  Learn how to make custom controls on your web page focusable so keyboard users
+  can access them.
+date: 2019-05-02
+updated: 2019-09-19
 web_lighthouse:
   - focusable-controls
 ---
@@ -23,13 +26,11 @@ TAB`) to move between controls, and use the arrow keys and
 `ENTER` and `SPACE` to manipulate their values
 (see also [Keyboard access fundamentals](/keyboard-access)):
 
-<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/interactive-elements?path=index.html&previewSize=100&attributionHidden=true"
-    alt="interactive-elements on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'interactive-elements',
+  path: 'index.html',
+  height: 346
+} %}
 
 Are you able to reach all of the interactive controls on the page?
 Is there a focus indicator on each interactive control?
@@ -49,7 +50,7 @@ For example:
 ```
 
 You may also need to add the appropriate ARIA roles to the custom control elements.
-See [Manually check all custom controls have appropriate ARIA roles](/custom-control-roles).
+See [Custom controls have ARIA roles](/custom-control-roles).
 
 If you're not seeing a focus indicator,
 consider using `:focus` to always show a focus indicator.
@@ -57,13 +58,11 @@ Regardless of whether you use a mouse or a keyboard to tab to it,
 the button's focus indicator always looks the same
 (see also [Style focus](/style-focus)).
 
-<div class="glitch-embed-wrap" style="height: 346px; width: 100%;">
-  <iframe
-    src="https://glitch.com/embed/#!/embed/focus-style?path=index.html&previewSize=100&attributionHidden=true"
-    alt="focus-visible on Glitch"
-    style="height: 100%; width: 100%; border: 0;">
-  </iframe>
-</div>
+{% Glitch {
+  id: 'focus-style',
+  path: 'index.html',
+  height: 346
+} %}
 
 ## Why this matters
 
@@ -74,8 +73,8 @@ If a keyboard user can't see what's focused, they have no way of interacting wit
 
 Learn more in [How to do an Accessibility Review](https://developers.google.com/web/fundamentals/accessibility/how-to-review#try_it_with_a_screen_reader).
 
-## More information
+## Resources
 
-- [Check all custom controls are keyboard focusable audit source](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/accessibility/manual/focusable-controls.js)
-- [Ensure `tabindex` attribute values are not greater than 0](/tabindex)
+- [Source code for **Interactive controls are keyboard focusable** audit](https://github.com/GoogleChrome/lighthouse/blob/master/lighthouse-core/audits/accessibility/manual/focusable-controls.js)
+- [Some elements have a `[tabindex]` value greater than `0`](/tabindex)
 - [Use semantic HTML for easy keyboard wins](/use-semantic-html)
