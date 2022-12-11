@@ -10,7 +10,13 @@ description: |
   tabindex to ensure that they're keyboard accessible.
 ---
 
+  <<<<<<< dependabot/npm_and_yarn/socket.io-parser-and-browser-sync-and-karma-4.2.1
 Standard HTML elements such as `<button>` or `<input>` have keyboard accessibility
+  =======
+easy
+
+Native HTML elements such as `<button>` or `<input>` have keyboard accessibility
+  >>>>>>> chore/test-path-filter
 built in for free. If you're building _custom_ interactive components, however,
 use the `tabindex` attribute to ensure that they're keyboard accessible.
 
