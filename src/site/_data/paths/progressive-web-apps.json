@@ -15,12 +15,9 @@
       ]
     },
     {
-      "title": "Reliable",
-      "pathItems": []
-    },
-    {
       "title": "Installable",
       "pathItems": [
+        "offline-fallback-page",
         "define-install-strategy",
         "install-criteria"
       ],
@@ -62,6 +59,7 @@
     {
       "title": "Advanced topics",
       "pathItems": [
+        "manifest-updates",
         "multi-origin-pwas"
       ]
     }

@@ -10,6 +10,8 @@ description: |
   Learn how to modify your Android payment app to provide the user's selected shipping address as well as contact information when the merchant has requested them via the Payment Request API.
 tags:
   - payments
+feedback:
+  - api
 ---
 
 Entering shipping address and contact information through a web form can be a
@@ -48,11 +50,11 @@ option.
 </figure>
 
 {% Aside %}
-Learn how to implement an [Android native payment
+Learn how to implement an [Android payment
 app](https://web.dev/android-payment-apps-developers-guide/) in advance.
 {% endAside %}
 
-To add delegation support to an already existing Android native payment app,
+To add delegation support to an already existing Android payment app,
 implement the following steps:
 
 1.  Declare supported delegations.

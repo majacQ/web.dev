@@ -47,7 +47,7 @@
         "lazy-loading",
         "lazy-loading-images",
         "lazy-loading-video",
-        "native-lazy-loading",
+        "browser-level-image-lazy-loading",
         "use-lazysizes-to-lazyload-images",
         "lazy-loading-problems"
       ]
@@ -64,8 +64,9 @@
       ]
     },
     {
-      "title": "Prioritize resources",
+      "title": "Optimize your resource delivery",
       "pathItems": [
+        "content-delivery-networks",
         "prioritize-resources",
         "preload-critical-assets",
         "preconnect-and-dns-prefetch",

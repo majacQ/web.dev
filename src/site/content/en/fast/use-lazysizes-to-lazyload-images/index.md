@@ -14,10 +14,12 @@ codelabs:
 tags:
   - performance
   - images
+feedback:
+  - api
 ---
 
 {% Aside 'note' %}
-  Browser-level native lazy-loading is now available! Refer to the [Native lazy-loading for the
+  Browser-level lazy-loading is now available! Refer to the [Built-in lazy-loading for the
   web](/native-lazy-loading) article to learn how to use the `loading` attribute and leverage
   lazysizes as a fallback for browsers that do not yet support it.
 {% endAside %}

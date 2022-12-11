@@ -11,8 +11,41 @@
     "country": "UK",
     "homepage": "https://jakearchibald.com/",
     "twitter": "jaffathecake",
-    "description": {
+    "descriptions": {
       "en": "Human boy working on web standards at Google"
+    }
+  },
+  "aaronkrajeski": {
+    "name": {
+      "given": "Aaron",
+      "family": "Krajeski"
+    },
+    "org": {
+      "name": "Google",
+      "unit": "Chrome"
+    },
+    "country": "Canada",
+    "homepage": "http://aaronk.is//",
+    "twitter": "_mysteryDate",
+    "github": "mysteryDate",
+    "descriptions": {
+      "en": "Overly concerned with glowing rectangles"
+    }
+  },
+  "felixarntz": {
+    "name": {
+      "given": "Felix",
+      "family": "Arntz"
+    },
+    "org": {
+      "name": "Google",
+      "unit": "Developer Relations"
+    },
+    "country": "US",
+    "homepage": "https://felix-arntz.me",
+    "twitter": "felixarntz",
+    "description": {
+      "en": "Developer Programs Engineer at Google, contributing to the CMS ecosystem"
     }
   },
   "kaycebasques": {
@@ -28,9 +61,16 @@
     "twitter": "kaycebasques",
     "github": "kaycebasques",
     "glitch": "kaycebasques",
-    "description": {
+    "descriptions": {
       "en": "Technical Writer, Chrome DevTools & Lighthouse"
     }
+  },
+  "johyphenel": {
+    "name": {
+      "given": "Jo-el van",
+      "family": "Bergen"
+    },
+    "twitter": "johyphenel"
   },
   "sgomes": {
     "name": {
@@ -50,7 +90,7 @@
     },
     "country": "FR",
     "github": "beaufortfrancois",
-    "description": {
+    "descriptions": {
       "en": "Dives into Chromium source code"
     }
   },
@@ -67,7 +107,7 @@
     "homepage": "https://mathiasbynens.be/",
     "twitter": "mathias",
     "github": "mathiasbynens",
-    "description": {
+    "descriptions": {
       "en": "V8 JavaScript whisperer"
     }
   },
@@ -83,7 +123,7 @@
     "twitter": "hochsays",
     "github": "hoch",
     "homepage": "https://hoch.io/",
-    "description": {
+    "descriptions": {
       "en": "Software Engineer working on Chromium"
     }
   },
@@ -114,7 +154,7 @@
     "country": "UK",
     "twitter": "sw12",
     "github": "samdutton",
-    "description": {
+    "descriptions": {
       "en": "Sam is a Developer Advocate"
     }
   },
@@ -125,7 +165,7 @@
     },
     "twitter": "devdocdude",
     "github": "arthurevans",
-    "description": {
+    "descriptions": {
       "en": "Arthur is a Tech Writer"
     }
   },
@@ -141,7 +181,7 @@
     "country": "US",
     "twitter": "shane_exterkamp",
     "github": "exterkamp",
-    "description": {
+    "descriptions": {
       "en": "Shane is a SWE on Lighthouse"
     }
   },
@@ -171,7 +211,7 @@
     "country": "AU",
     "github": "tcmg",
     "twitter": "tcmg",
-    "description": {
+    "descriptions": {
       "en": "Tom is the Games Lead for the Chrome & Web Developer Relations team at Google"
     }
   },
@@ -194,7 +234,7 @@
     },
     "twitter": "yigsgu",
     "github": "yi-gu",
-    "description": {
+    "descriptions": {
       "en": "Software Engineer working on Chromium"
     },
     "org": {
@@ -208,7 +248,7 @@
       "given": "Kaan",
       "family": "Alsan"
     },
-    "description": {
+    "descriptions": {
       "en": "Former Software Engineer Intern working on Chromium"
     },
     "org": {
@@ -261,7 +301,7 @@
     "homepage": "https://blog.agektmr.com",
     "twitter": "agektmr",
     "github": "agektmr",
-    "description": {
+    "descriptions": {
       "en": "Developer Advocate in Tokyo"
     }
   },
@@ -279,7 +319,7 @@
     "twitter": "kosamari",
     "github": "kosamari",
     "glitch": "kosamari",
-    "description": {
+    "descriptions": {
       "en": "Mariko is a drawsplainer"
     }
   },
@@ -297,7 +337,7 @@
     "twitter": "petele",
     "github": "petele",
     "glitch": "petele",
-    "description": {
+    "descriptions": {
       "en": "Developer Advocate on the web team at Google, taking the sharp edges off new stuff & helping make the web better for developers! (he/him)"
     }
   },
@@ -312,7 +352,7 @@
     },
     "country": "CA",
     "twitter": "b1tr0t",
-    "description": {
+    "descriptions": {
       "en": "PJ is a Product Manager on the Chrome Web Platform team responsible for Chrome permissions, notifications, and progressive web apps."
     }
   },
@@ -329,7 +369,7 @@
     "homepage": "https://jasonformat.com",
     "twitter": "_developit",
     "github": "developit",
-    "description": {
+    "descriptions": {
       "en": "Jason is a Web DevRel focused on speed and the JS ecosystem."
     }
   },
@@ -345,7 +385,7 @@
     "country": "USA",
     "twitter": "addyosmani",
     "github": "addyosmani",
-    "description": {
+    "descriptions": {
       "en": "Eng Manager working on Chrome and Web Platform"
     }
   },
@@ -363,7 +403,7 @@
     "twitter": "jeffposnick",
     "github": "jeffposnick",
     "glitch": "jeffposnick",
-    "description": {
+    "descriptions": {
       "en": "Web DevRel @ Google"
     }
   },
@@ -397,7 +437,7 @@
     "twitter": "tomayac",
     "github": "tomayac",
     "glitch": "tomayac",
-    "description": {
+    "descriptions": {
       "en": "Tom is a Developer Advocate"
     },
     "org": {
@@ -432,7 +472,7 @@
     "twitter": "samthor",
     "github": "samthor",
     "glitch": "samthor",
-    "description": {
+    "descriptions": {
       "en": "¯‍\\‍_‍(‍ツ‍)‍_‍/‍¯"
     }
   },
@@ -474,7 +514,7 @@
     "homepage": "https://philipwalton.com",
     "twitter": "philwalton",
     "github": "philipwalton",
-    "description": {
+    "descriptions": {
       "en": "Engineer at Google working on the Web Platform"
     }
   },
@@ -490,7 +530,7 @@
     "twitter": "HarveyLizzi",
     "github": "ekharvey",
     "glitch": "ekharvey",
-    "description": {
+    "descriptions": {
       "en": "Lizzi is a Tech Writer at Google"
     }
   },
@@ -510,7 +550,7 @@
       "family": "Kearney"
     },
     "twitter": "megginkearney",
-    "description": {
+    "descriptions": {
       "en": "Meggin is a Tech Writer"
     }
   },
@@ -519,7 +559,7 @@
       "given": "Dave",
       "family": "Gash"
     },
-    "description": {
+    "descriptions": {
       "en": "Dave is a Tech Writer"
     }
   },
@@ -568,7 +608,7 @@
     "country": "JP",
     "homepage": "https://blog.uskay.io/",
     "twitter": "uskay",
-    "description": {
+    "descriptions": {
       "en": "Tech consultant for Web, Chrome & AMP"
     }
   },
@@ -583,7 +623,7 @@
     },
     "country": "USA",
     "homepage": "https://www.finefrog.com/",
-    "description": {
+    "descriptions": {
       "en": "Jordon is a Tech Lead Manager working on Google Earth."
     }
   },
@@ -612,7 +652,7 @@
     "country": "US",
     "github": "jpmedley",
     "twitter": "medleyjp",
-    "description": {
+    "descriptions": {
       "en": "If an API's not documented it doesn't exist"
     }
   },
@@ -628,7 +668,7 @@
     "country": "US",
     "github": "egsweeny",
     "twitter": "egsweeny",
-    "description": {
+    "descriptions": {
       "en": "Product manager for developer tools on the web platform in Chrome."
     }
   },
@@ -641,7 +681,7 @@
       "name": "Google",
       "unit": "Developer Relations"
     },
-    "description": {
+    "descriptions": {
       "en": "Developer Advocate for Chrome and web"
     },
     "country": "UK",
@@ -654,7 +694,7 @@
       "given": "Adam",
       "family": "Argyle"
     },
-    "description": {
+    "descriptions": {
       "en": "Developer Advocate for Chrome"
     },
     "homepage": "https://nerdy.dev",
@@ -673,7 +713,7 @@
     },
     "country": "Canada",
     "github": "loonybear",
-    "description": {
+    "descriptions": {
       "en": "Build and enforce guardrails for the web."
     }
   },
@@ -682,7 +722,7 @@
       "given": "Dave",
       "family": "Geddes"
     },
-    "description": {
+    "descriptions": {
       "en": "Founder at Mastery Games"
     },
     "homepage": "https://gedd.ski/",
@@ -695,7 +735,7 @@
       "given": "Danyao",
       "family": "Wang"
     },
-    "description": {
+    "descriptions": {
       "en": ""
     },
     "country": "US",
@@ -713,7 +753,7 @@
     "country": "Sweden",
     "homepage": "https://digies.se",
     "twitter": "LinaCHansson",
-    "description": {
+    "descriptions": {
       "en": "Lina is a Conversion Specialist at Google, focused on mobile CRO and site speed."
     }
   },
@@ -737,7 +777,7 @@
     },
     "country": "US",
     "github": "mfriesenhahn",
-    "description": {
+    "descriptions": {
       "en": "Michael is a Tech Writer"
     }
   },
@@ -752,7 +792,7 @@
     },
     "country": "US",
     "twitter": "harleenkbatra",
-    "description": {
+    "descriptions": {
       "en": "Harleen is a Developer Marketing Manager"
     }
   },
@@ -840,7 +880,7 @@
       "unit": "Web Developer Relations"
     },
     "country": "US",
-    "description": {
+    "descriptions": {
       "en": "Technical Writer at Google"
     }
   },
@@ -891,7 +931,7 @@
       "unit": "AdSpeed"
     },
     "country": "US",
-    "description": {
+    "descriptions": {
       "en": "AdSpeed tech lead at Google"
     }
   },
@@ -949,7 +989,7 @@
       "given": "Una",
       "family": "Kravets"
     },
-    "description": {
+    "descriptions": {
       "en": "Developer Advocate for Material Design"
     },
     "homepage": "https://una.im/",
@@ -963,7 +1003,7 @@
     },
     "homepage": "https://www.philkrie.me/",
     "github": "philkrie",
-    "description": {
+    "descriptions": {
       "en": "Phillip is a Specialist Engineer"
     },
     "org": {
@@ -985,7 +1025,7 @@
     "homepage": "https://tigeroakes.com/",
     "twitter": "Not_Woods",
     "github": "NotWoods",
-    "description": {
+    "descriptions": {
       "en": "Developer working on Firefox Preview"
     }
   },
@@ -1015,7 +1055,7 @@
     "homepage": "https://bandarra.me/",
     "twitter": "andreban",
     "github": "andreban",
-    "description": {
+    "descriptions": {
       "en": "Andre is a Developer Advocate"
     }
   },
@@ -1195,7 +1235,7 @@
     "country": "US",
     "twitter": "jungkees",
     "github": "jungkees",
-    "description": {
+    "descriptions": {
       "en": "PM on the Microsoft Edge team"
     }
   },
@@ -1274,7 +1314,7 @@
     "twitter": "yuichi_araki",
     "github": "yaraki",
     "country": "JP",
-    "description": {
+    "descriptions": {
       "en": "Developer Programs Engineer at Google"
     }
   },
@@ -1283,7 +1323,7 @@
       "given": "Kevin",
       "family": "Ellis"
     },
-    "description": {
+    "descriptions": {
       "en": "Software Engineer on the web platform."
     }
   },
@@ -1299,7 +1339,7 @@
     "github": "robnyman",
     "country": "SE",
     "homepage": "https://robertnyman.com/",
-    "description": {
+    "descriptions": {
       "en": "Developer advocate on the web team at Google."
     }
   },
@@ -1312,7 +1352,7 @@
       "name": "Google",
       "unit": "Ads Marketing EMEA"
     },
-    "description": {
+    "descriptions": {
       "en": "Product Marketing Manager"
     },
     "country": "UK"
@@ -1362,7 +1402,7 @@
     "org": {
       "name": "Google"
     },
-    "description": {
+    "descriptions": {
       "en": "Web Ecosystem Consultant"
     }
   },
@@ -1378,7 +1418,7 @@
     "twitter": "diklla",
     "github": "diklla"
   },
-   "bpj": {
+  "bpj": {
     "name": {
       "given": "Bart",
       "family": "Jarochowski"
@@ -1399,7 +1439,7 @@
       "name": "Google"
     },
     "country": "US",
-    "description": {
+    "descriptions": {
       "en": "Matt is a software developer"
     }
   },
@@ -1413,6 +1453,13 @@
     "org": {
       "name": "Google"
     }
+  },
+  "loirooriol": {
+    "name": {
+      "given": "Oriol",
+      "family": "Brufau"
+    },
+    "github": "Loirooriol"
   },
   "joelriley": {
     "name": {
@@ -1447,5 +1494,149 @@
     "org": {
       "name": "Google"
     }
+  },
+  "rreverser": {
+    "name": {
+      "given": "Ingvar",
+      "family": "Stepanyan"
+    },
+    "country": "UK",
+    "org": {
+      "name": "Google",
+      "unit": "Developer Relations"
+    },
+    "twitter": "RReverser",
+    "github": "RReverser",
+    "homepage": "https://rreverser.com/",
+    "description": {
+      "en": "WebAssembly Advocadoer"
+    }
+  },
+  "masonfreed": {
+    "name": {
+      "given": "Mason",
+      "family": "Freed"
+    },
+    "twitter": "Mfreed777",
+    "github": "mfreed7",
+    "description": {
+      "en": "Developer on the Chrome team"
+    }
+  },
+  "roeln": {
+    "name": {
+      "given": "Roel",
+      "family": "Nieskens"
+    },
+    "twitter": "pixelambacht",
+    "github": "roeln",
+    "homepage": "https://pixelambacht.nl/"
+  },
+  "dcrossland": {
+    "name": {
+      "given": "Dave",
+      "family": "Crossland"
+    },
+    "twitter": "davelab6",
+    "github": "davelab6"
+  },
+  "aaronleventhal": {
+    "name": {
+      "given": "Aaron",
+      "family": "Leventhal"
+    },
+    "org": {
+      "name": "Google",
+      "unit": "Chrome Browser Accessibility"
+    },
+    "country": "US",
+    "description": {
+      "en": "Software Engineer"
+    },
+    "twitter": "aaronlev"
+  },
+  "joanbaca": {
+    "name": {
+      "given": "Joan",
+      "family": "Baca"
+    },
+    "twitter": "joan_baka"
+  },
+  "aranhacarlos": {
+    "name": {
+      "given": "Carlos",
+      "family": "Aranha"
+    },
+    "github": "aranhacarlos"
+  },
+  "scottfriesen": {
+    "name": {
+      "given": "Scott",
+      "family": "Friesen"
+    },
+    "github": "scott-friesen"
+  },
+  "bartekn": {
+    "name": {
+      "given": "Bartek",
+      "family": "Nowierski"
+    },
+    "org": {
+      "name": "Google",
+      "unit": "Chrome Browser"
+    },
+    "description": {
+      "en": "Chrome Software Engineer"
+    }
+  },
+  "djuffin": {
+    "name": {
+      "given": "Eugene",
+      "family": "Zemtsov"
+    },
+    "github": "djuffin"
+  },
+  "giesau": {
+    "name": {
+      "given": "Stephan",
+      "family": "Giesau"
+    }
+  },
+  "mattgaunt": {
+    "name": {
+      "given": "Matt",
+      "family": "Gaunt"
+    }
+  },
+  "nateschloss": {
+    "name": {
+      "given": "Nate",
+      "family": "Schloss"
+    },
+    "github": "n8schloss",
+    "twitter": "n8schloss"
+  },
+  "andrewcomminos": {
+    "name": {
+      "given": "Andrew",
+      "family": "Comminos"
+    },
+    "github": "acomminos",
+    "twitter": "acomminos"
+  },
+  "bingler": {
+    "name": {
+      "given": "Steven",
+      "family": "Bingler"
+    },
+    "org": {
+      "name": "Google",
+      "unit": "Chrome"
+    },
+    "descriptions": {
+      "en": "Software engineer on Chrome's Privacy Sandbox."
+    },
+    "country": "US",
+    "github": "sbingler"
   }
 }

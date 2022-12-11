@@ -34,21 +34,21 @@ function expandAllowSource(s) {
 
 /**
  *
- * @param {string | { allow?: string | string[]; height?: string; id: string; path?: string; previewSize?: number; }} param
+ * @param {string | GlitchParam } param
  * @return string
  */
 module.exports = (param) => {
   const defaultAllow = [
     'camera',
-    'clipboard',
     'clipboard-read',
     'clipboard-write',
     'encrypted-media',
     'geolocation',
     'microphone',
     'midi',
-    'vr',
   ];
+
+  /** @type GlitchParam */
   let glitchProps = {
     allow: [],
     height: 420,

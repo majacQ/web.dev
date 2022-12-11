@@ -10,7 +10,7 @@ import './_styles.scss';
  * and renders a tab for each panel.
  * @extends {BaseElement}
  */
-class Tabs extends BaseElement {
+export class Tabs extends BaseElement {
   static get properties() {
     return {
       label: {type: String},
@@ -21,6 +21,7 @@ class Tabs extends BaseElement {
 
   constructor() {
     super();
+    this.label = '';
     this.activeTab = 0;
     this.overflow = false;
     this.prerenderedChildren = null;
@@ -118,8 +119,8 @@ class Tabs extends BaseElement {
     `;
   }
 
-  firstUpdated() {
-    super.firstUpdated();
+  firstUpdated(changedProperties) {
+    super.firstUpdated(changedProperties);
 
     this.activeTab = 0;
     this.onResize();
@@ -155,7 +156,9 @@ class Tabs extends BaseElement {
 
   // Update state of tabs and associated panels.
   _changeTab() {
+    /** @type NodeListOf<HTMLButtonElement> */
     const tabs = this.querySelectorAll('.web-tabs__tab');
+    /** @type NodeListOf<HTMLDivElement> */
     const panels = this.querySelectorAll('.web-tabs__panel');
     const activeTab = tabs[this.activeTab];
     const activePanel = panels[this.activeTab];
@@ -201,6 +204,7 @@ class Tabs extends BaseElement {
   }
 
   onKeydown(e) {
+    /** @type NodeListOf<HTMLButtonElement> */
     const tabs = this.querySelectorAll('.web-tabs__tab');
     const KEYCODE = {
       END: 35,
@@ -232,6 +236,7 @@ class Tabs extends BaseElement {
 
   // Helper method to allow other components to focus an arbitrary tab.
   focusTab(index) {
+    /** @type NodeListOf<HTMLButtonElement> */
     const tabs = this.querySelectorAll('.web-tabs__tab');
 
     if (tabs[index]) {
@@ -270,10 +275,11 @@ class Tabs extends BaseElement {
   }
 
   /**
-   * @param {!Node} node to check
+   * @param {HTMLElement} node to check
    * @return {number} the index of the tab containing this node, or -1 for none
    */
   indexOfTabByChild(node) {
+    /** @type HTMLElement */
     const panel = node.closest('[class="web-tabs__panel"]');
     if (!this.contains(panel)) {
       return -1;

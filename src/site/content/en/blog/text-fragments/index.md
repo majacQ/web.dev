@@ -8,7 +8,7 @@ subhead: |
 authors:
   - thomassteiner
 date: 2020-06-17
-updated: 2020-08-07
+updated: 2020-11-03
 hero: hero.jpg
 alt:
 description: |
@@ -19,6 +19,8 @@ tags:
   - blog
   - text-fragments
   - capabilities
+feedback:
+  - api
 ---
 ## Fragment Identifiers
 
@@ -114,12 +116,14 @@ The Text Fragments feature is supported in version 80 and beyond of Chromium-bas
 At the time of writing, Safari and Firefox have not publicly signaled an intent to implement
 the feature. See [Related links](#related-links) for pointers to the Safari and Firefox discussions.
 
-Note that these links currently do not work when served across
-[client-side redirects](https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections#Alternative_way_of_specifying_redirections)
-that some common services like Twitter use.
-You can follow [crbug.com/1055455](https://crbug.com/1055455) for progress on this issue.
-Regular [HTTP redirects](https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections#Principle)
-work fine.
+{% Aside 'success' %}
+  These links used to not work when served across
+  [client-side redirects](https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections#Alternative_way_of_specifying_redirections)
+  that some common services like Twitter use.
+  This issue was tracked as [crbug.com/1055455](https://crbug.com/1055455) and is now fixed.
+  Regular [HTTP redirects](https://developer.mozilla.org/en-US/docs/Web/HTTP/Redirections#Principle)
+  always worked fine.
+{% endAside %}
 
 For [security](#security) reasons, the feature requires links to be opened in a
 [`noopener`](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types/noopener)
@@ -285,15 +289,21 @@ Creating Text Fragments URLs by hand is tedious,
 especially when it comes to making sure they are unique.
 If you really want to, the specification has some tips and lists the exact
 [steps for generating Text Fragment URLs](https://wicg.github.io/ScrollToTextFragment/#generating-text-fragment-directives).
-We provide a browser extension called
-[Link to Text Fragment](https://chrome.google.com/webstore/detail/link-to-text-fragment/pbcodcjpfjdpcineamnnmbkkmkdpajjg)
+We provide an open-source browser extension called
+[Link to Text Fragment](https://github.com/GoogleChromeLabs/link-to-text-fragment)
 that lets you link to any text by selecting it, and then clicking "Copy Link to Selected Text"
 in the context menu.
+This extension is available for the following browsers:
+
+- [Link to Text Fragment for Google Chrome](https://chrome.google.com/webstore/detail/link-to-text-fragment/pbcodcjpfjdpcineamnnmbkkmkdpajjg)
+- [Link to Text Fragment for Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/link-to-text-fragment/pmdldpbcbobaamgkpkghjigngamlolag)
+- [Link to Text Fragment for Mozilla Firefox](https://addons.mozilla.org/firefox/addon/link-to-text-fragment/)
+- [Link to Text Fragment for Apple Safari](https://apps.apple.com/app/link-to-text-fragment/id1532224396)
 
 <figure class="w-figure">
   <img src="extension.png" alt="" class="w-screenshot" width="100%">
   <figcaption class="w-figcaption">
-    <a href="https://chrome.google.com/webstore/detail/link-to-text-fragment/pbcodcjpfjdpcineamnnmbkkmkdpajjg">
+    <a href="https://github.com/GoogleChromeLabs/link-to-text-fragment">
       Link to Text Fragment
     </a>
     browser extension.
@@ -360,7 +370,7 @@ if ('fragmentDirective' in document) {
 ```
 
 {% Aside %}
-  In the initial version, the `fragmentDirective` property was defined on
+  From Chrome&nbsp;80 to Chrome&nbsp;85, the `fragmentDirective` property was defined on
   `Location.prototype`. For details on this change, see
   [WICG/scroll-to-text-fragment#130](https://github.com/WICG/scroll-to-text-fragment/issues/130).
 {% endAside %}
@@ -372,8 +382,9 @@ to browsers that do not support them.
 ### Polyfillability
 
 The Text Fragments feature can be polyfilled to some extent.
-There is early [work in progress](https://github.com/GoogleChromeLabs/text-fragments-polyfill)
-to create an extension for browsers that do not support Text Fragments natively
+We provide a [polyfill](https://github.com/GoogleChromeLabs/text-fragments-polyfill),
+which is used internally by the [extension](https://github.com/GoogleChromeLabs/link-to-text-fragment),
+for browsers that do not provide built-in support for Text Fragments
 where the functionality is implemented in JavaScript.
 
 ### Security
@@ -441,9 +452,18 @@ Document-Policy: force-load-at-top
 
 ## Disabling text fragments
 
-If you really dislike the feature, you can opt out using the enterprise setting
+The easiest way for disabling the feature is by using an extension
+that can inject HTTP response headers, for example,
+[ModHeader](https://chrome.google.com/webstore/detail/modheader/idgpnmonknjnojddfkpgkljpfnnfcklj)
+(not a Google product), to insert a response (*not* request) header as follows:
+
+```bash
+Document-Policy: force-load-at-top
+```
+
+Another, more involved, way to opt out is by using the enterprise setting
 [`ScrollToTextFragmentEnabled`](https://cloud.google.com/docs/chrome-enterprise/policies/?policy=ScrollToTextFragmentEnabled).
-To use it on macOS, paste the command below in the terminal.
+To do this on macOS, paste the command below in the terminal.
 
 ```bash
 defaults write com.google.Chrome ScrollToTextFragmentEnabled -bool false
@@ -485,13 +505,13 @@ I hope you start
 [using Text Fragment URLs](https://blog.chromium.org/2019/12/chrome-80-content-indexing-es-modules.html#:~:text=Text%20URL%20Fragments&text=text,-parameter&text=:~:text=On%20islands,%20birds%20can%20contribute%20as%20much%20as%2060%%20of%20a%20cat's%20diet)
 and find them as useful as I do.
 Be sure to install the
-[Link to Text Fragment](https://chrome.google.com/webstore/detail/link-to-text-fragment/pbcodcjpfjdpcineamnnmbkkmkdpajjg)
+[Link to Text Fragment](https://github.com/GoogleChromeLabs/link-to-text-fragment)
 browser extension.
 
 ## Related links
 
 - [TAG Review](https://github.com/w3ctag/design-reviews/issues/392)
-- [Chrome Platform Status entry](https://chromestatus.com/features/4733392803332096)
+- [Chrome Platform Status entry](https://chromestatus.com/feature/4733392803332096)
 - [Chrome tracking bug](https://crbug.com/919204)
 - [Intent to Ship thread](https://groups.google.com/a/chromium.org/d/topic/blink-dev/zlLSxQ9BA8Y/discussion)
 - [WebKit-Dev thread](https://lists.webkit.org/pipermail/webkit-dev/2019-December/030978.html)
