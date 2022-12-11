@@ -17,7 +17,7 @@ tags:
 
 TTI 指标测量页面从开始加载到主要子资源完成渲染，并能够快速、可靠地响应用户输入所需的时间。
 
-如需根据网页的[性能跟踪](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)计算 TTI，请执行以下步骤：
+如需根据网页的[性能跟踪](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/)计算 TTI，请执行以下步骤：
 
 1. 先进行[First Contentful Paint 首次内容绘制 (FCP)](/fcp/)。
 2. 沿时间轴正向搜索时长至少为 5 秒的安静窗口，其中，*安静窗口*的定义为：没有[长任务](/custom-metrics/#long-tasks-api)且不超过两个正在处理的网络 GET 请求。
@@ -45,7 +45,7 @@ TTI 指标最好[在实验室中](/user-centric-performance-metrics/#in-the-lab)
 
 ### 实验室工具
 
-- [灯塔](https://developers.google.com/web/tools/lighthouse/)
+- [灯塔](https://developer.chrome.com/docs/lighthouse/overview/)
 - [WebPageTest 网页性能测试工具](https://www.webpagetest.org/)
 
 {% Aside %}虽然 TTI 可以在实际情况下进行测量，但我们不建议这样做，因为用户交互会影响您网页的 TTI，从而导致您的报告中出现大量差异。如需了解页面在实际情况中的交互性，您应该测量[First Input Delay 首次输入延迟 (FID)](/fid/) 。{% endAside %}
@@ -54,19 +54,19 @@ TTI 指标最好[在实验室中](/user-centric-performance-metrics/#in-the-lab)
 
 为了提供良好的用户体验，网站在**普通移动硬件**上进行测试时，应该努力将可交互时间控制在**5 秒**以内。
 
-有关页面 TTI 对灯塔性能分数影响的详细信息，请参阅[灯塔如何确定您的 TTI 分数](/interactive/#how-lighthouse-determines-your-tti-score)。
+有关页面 TTI 对灯塔性能分数影响的详细信息，请参阅[灯塔如何确定您的 TTI 分数](https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score)。
 
 ## 如何改进 TTI
 
-如需了解如何改进某个特定网站的 TTI，您可以运行一次灯塔性能审计，并留心查看审计建议的各种具体[机会](/lighthouse-performance/#opportunities)。
+如需了解如何改进某个特定网站的 TTI，您可以运行一次灯塔性能审计，并留心查看审计建议的各种具体[机会](https://developer.chrome.com/docs/lighthouse/performance/#opportunities)。
 
 如需了解改进 TTI 的常见方式（针对任何网站），请参阅以下性能指南：
 
-- [缩小 JavaScript](/unminified-javascript/)
-- [预连接到所需的来源](/uses-rel-preconnect/)
-- [预加载关键请求](/uses-rel-preload/)
-- [减少第三方代码的影响](/third-party-summary/)
-- [最小化关键请求深度](/critical-request-chains/)
-- [减少 JavaScript 执行时间](/bootup-time/)
-- [最小化主线程工作](/mainthread-work-breakdown/)
-- [保持较低的请求数和较小的传输大小](/resource-summary/)
+- [缩小 JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/)
+- [预连接到所需的来源](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/)
+- [预加载关键请求](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preload/)
+- [减少第三方代码的影响](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [最小化关键请求深度](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)
+- [减少 JavaScript 执行时间](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [最小化主线程工作](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [保持较低的请求数和较小的传输大小](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

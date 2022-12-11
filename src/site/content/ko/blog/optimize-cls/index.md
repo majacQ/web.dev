@@ -20,7 +20,7 @@ tags:
 
 레이아웃 변경은 사용자의 주의를 산만하게 할 수 있습니다. 글을 읽기 시작했는데, 갑자기 요소가 페이지 아래로 이동해서 읽었던 곳을 다시 찾아야 한다고 생각해보세요. 이런 상황은 뉴스를 읽거나 '검색' 또는 '장바구니에 추가' 버튼을 클릭하려고 할 때 등 웹에서 자주 경험할 수 있는 일입니다. 이러한 경험은 시각적으로 거슬리는 데다가 짜증스럽죠. 다른 요소가 갑자기 페이지에 추가되거나 크기 조정으로 인해 시각적 요소가 강제로 이동할 때 자주 발생하는 현상입니다.
 
-[Cumulative Layout Shift(누적 레이아웃 이동, CLS)](/cls)는 [)CoreWeb Vitals](/vitals) 메트릭으로, 사용자 입력 500ms 이내에 발생하지 않는 레이아웃 이동에 대한 점수를 합산하여 콘텐츠의 불안정성을 측정합니다. 뷰포트에서 가시적인 콘텐츠가 얼마나 이동했는지와 영향을 받은 요소가 이동한 거리를 확인합니다.
+[Cumulative Layout Shift(누적 레이아웃 이동, CLS)](/cls)는 [CoreWeb Vitals](/vitals) 메트릭으로, 사용자 입력 500ms 이내에 발생하지 않는 레이아웃 이동에 대한 점수를 합산하여 콘텐츠의 불안정성을 측정합니다. 뷰포트에서 가시적인 콘텐츠가 얼마나 이동했는지와 영향을 받은 요소가 이동한 거리를 확인합니다.
 
 이 가이드에서는 레이아웃 이동의 일반적인 원인을 최적화하는 방법을 다룹니다.
 
@@ -152,7 +152,7 @@ img {
 - 광고 태그 라이브러리가 로드되고 광고 컨테이너의 크기가 조정되는 경우
 - 광고가 컨테이너를 채우며 최종 광고의 크기가 달라 크기를 조정하는 경우
 
-다행히도 사이트에서는 광고 이동을 줄이기 위한 모범 사례를 따를 수 있습니다. 사이트는 다음을 통해 이러한 레이아웃 이동을 경감시킬 수 있습닏.
+다행히도 사이트에서는 광고 이동을 줄이기 위한 모범 사례를 따를 수 있습니다. 사이트는 다음을 통해 이러한 레이아웃 이동을 경감시킬 수 있습니다.
 
 - 광고 슬롯을 위한 고정 공간을 확보합니다.
     - 즉, 광고 태그 라이브러리가 로드되기 전에 요소의 스타일을 지정합니다.
@@ -242,7 +242,7 @@ img {
 
 다음 도구를 사용하면 이를 최소화할 수 있습니다.
 
-- <code>[font-display](/font-display/)</code>를 사용하면 <code>auto</code>, <code>swap</code>, <code>block</code>, <code>fallback</code> 및 <code>optional</code>과 같은 값으로 커스텀 글꼴의 렌더링 동작을 수정할 수 있습니다. 하지만 [optional](http://crrev.com/749080)을 제외한 이 모든 값이 위와 같은 방식 중 하나로 레이아웃 재구성을 발생시킬 수 있습니다.
+- <code>[font-display](https://developer.chrome.com/docs/lighthouse/performance/font-display/)</code>를 사용하면 <code>auto</code>, <code>swap</code>, <code>block</code>, <code>fallback</code> 및 <code>optional</code>과 같은 값으로 커스텀 글꼴의 렌더링 동작을 수정할 수 있습니다. 하지만 [optional](http://crrev.com/749080)을 제외한 이 모든 값이 위와 같은 방식 중 하나로 레이아웃 재구성을 발생시킬 수 있습니다.
 - [Font Loading API](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/webfont-optimization#the_font_loading_api)를 사용하면 필요한 글꼴을 가져오는 데 걸리는 시간을 줄일 수 있습니다.
 
 Chrome 83부터 다음과 같은 방식을 추천합니다.
@@ -264,11 +264,11 @@ CSS 속성 값을 변경하면 브라우저가 이러한 변경 사항에 반응
 
 다행히도 누적 레이아웃 이동(CLS)을 측정하고 디버그하는 데 사용할 수 있는 다양한 도구가 있습니다.
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse) [6.0](https://github.com/GoogleChrome/lighthouse/releases) 이상에서는 실험실 환경에서 CLS 측정할 수 있도록 지원합니다. 이 버전에서는 가장 많은 레이아웃 이동을 일으키는 노드도 강조 표시해줍니다.
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) [6.0](https://github.com/GoogleChrome/lighthouse/releases) 이상에서는 실험실 환경에서 CLS 측정할 수 있도록 지원합니다. 이 버전에서는 가장 많은 레이아웃 이동을 일으키는 노드도 강조 표시해줍니다.
 
 {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/J11KOGFVAOjRMdihwX5t.jpg", alt="Lighthouse 6.0은 메트릭 섹션에서 CLS 측정을 위한 지원도 포함합니다.", width="800", height="309" %}
 
-DevTools의 [Performance 패널](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance)은 Chrome 84부터 **Experience** 섹션에 레이아웃 이동을 강조 표시해줍니다. `Layout Shift` 기록의 **Summary** 보기에는 영향을 받는 부분을 보여주는 직사각형 오버레이와 함께 누적 레이아웃 이동 점수를 표시합니다.
+DevTools의 [Performance 패널](https://developer.chrome.com/docs/devtools/evaluate-performance/)은 Chrome 84부터 **Experience** 섹션에 레이아웃 이동을 강조 표시해줍니다. `Layout Shift` 기록의 **Summary** 보기에는 영향을 받는 부분을 보여주는 직사각형 오버레이와 함께 누적 레이아웃 이동 점수를 표시합니다.
 
 <figure>{% Img src="image/admin/ApDKifKCRNGWI2SXSR1g.jpg", alt="Experience 섹션 확장 시 Chrome DevTools Performance 패널에 표시되는 Layout Shift 기록", width="800", height="438" %} <figcaption>Performance 패널에 새로운 흔적이 기록되면 결과의 <b>Experience</b> 섹션에 <code>Layout Shift</code> 기록이 붉은색 막대와 함께 표시됩니다. 해당 기록을 클릭하면 영향을 받는 요소(예: Moved from/to 항목 참조)가 드릴다운됩니다.</figcaption></figure>
 

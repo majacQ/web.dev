@@ -113,7 +113,7 @@ and "Zoom (Relative)" UVC controls are not supported in Chromium-based browsers.
 <figure>
   {% Img
     src="image/vvhSqZboQoZZN9wBvoXq72wzGAf1/4EDS8fYYifXAUY6SBaiV.png",
-    alt="Screenshot of the internal page in Chrome OS to debug PTZ camera support.",
+    alt="Screenshot of the internal page in ChromeOS to debug PTZ camera support.",
     width="800",
     height="481" %}
   <figcaption>Internal page to debug PTZ camera support.</figcaption>
@@ -207,6 +207,40 @@ including user control, transparency, and ergonomics. The ability to use this
 API is primarily gated by the same permission model as the [Media Capture and
 Streams API]. In response to a user prompt, the website is allowed to control
 camera PTZ only when the page is visible to the user.
+
+## Browser compatibility
+
+### MediaStream API
+
+{% BrowserCompat 'api.MediaStream' %}
+
+### Permissions API
+
+{% BrowserCompat 'api.Permissions' %}
+
+### Page Visibility API
+
+{% BrowserCompat 'api.Document.visibilityState' %}
+
+### `MediaDevices.getUserMedia()`
+
+{% BrowserCompat 'api.MediaDevices.getUserMedia' %}
+
+### `MediaDevices.getSupportedConstraints()`
+
+{% BrowserCompat 'api.MediaDevices.getSupportedConstraints' %}
+
+### `MediaStreamTrack.applyConstraints()`
+
+{% BrowserCompat 'api.MediaStreamTrack.applyConstraints' %}
+
+### `MediaStreamTrack.getCapabilities()`
+
+{% BrowserCompat 'api.MediaStreamTrack.getCapabilities' %}
+
+### `MediaStreamTrack.getSettings()`
+
+{% BrowserCompat 'api.MediaStreamTrack.getSettings' %}
 
 ## Helpful links {: #helpful }
 

@@ -71,11 +71,11 @@ Procure maneiras de armazenar conteúdo de forma mais agressiva. Se um recurso p
 
 Cabeçalhos HTTP como [`Cache-Control`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Cache-Control), [`Expires`](https://developer.mozilla.org/docs/Web/HTTP/Headers/Expires) e [`ETag`](https://developer.mozilla.org/docs/Web/HTTP/Headers/ETag) indicam como um recurso deve ser armazenado em cache por um cache HTTP. Auditar e corrigir esses cabeçalhos melhorará o armazenamento em cache.
 
-Embora os [service workers](https://developers.google.com/web/fundamentals/primers/service-workers) também possam ser usados para armazenamento em cache, eles utilizam um [cache](https://developer.mozilla.org/docs/Web/API/Cache) separado e são um suplemento, e não uma substituição, para o armazenamento em cache HTTP adequado. Por esse motivo, ao lidar com um servidor sobrecarregado, os esforços devem se concentrar na otimização do cache HTTP.
+Embora os [service workers](https://developer.chrome.com/docs/workbox/service-worker-overview/) também possam ser usados para armazenamento em cache, eles utilizam um [cache](https://developer.mozilla.org/docs/Web/API/Cache) separado e são um suplemento, e não uma substituição, para o armazenamento em cache HTTP adequado. Por esse motivo, ao lidar com um servidor sobrecarregado, os esforços devem se concentrar na otimização do cache HTTP.
 
 #### Diagnosticar
 
-Execute o [Lighthouse](https://developers.google.com/web/tools/lighthouse) e observe [Servir ativos estáticos com uma eficiente](https://developers.google.com/web/tools/lighthouse/audits/cache-policy) auditoria de política de cache para visualizar uma lista de recursos com um [tempo de vida](https://en.wikipedia.org/wiki/Time_to_live) curto a médio (TTL). Para cada recurso listado, considere se o TTL deve ser aumentado. Como uma diretriz aproximada:
+Execute o [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) e observe [Servir ativos estáticos com uma eficiente](https://developers.google.com/web/tools/lighthouse/audits/cache-policy) auditoria de política de cache para visualizar uma lista de recursos com um [tempo de vida](https://en.wikipedia.org/wiki/Time_to_live) curto a médio (TTL). Para cada recurso listado, considere se o TTL deve ser aumentado. Como uma diretriz aproximada:
 
 - Os recursos estáticos devem ser armazenados em cache com um TTL longo (1 ano).
 - Os recursos dinâmicos devem ser armazenados em cache com um curto TTL (3 horas).
@@ -168,14 +168,14 @@ Auditorias Farol relevantes:
 
 - [Tamanho adequado das imagens](https://developers.google.com/web/tools/lighthouse/audits/oversized-images)
 - [Adiar imagens fora da tela](https://developers.google.com/web/tools/lighthouse/audits/offscreen-images)
-- [Codifique imagens de forma eficiente](/uses-optimized-images/)
+- [Codifique imagens de forma eficiente](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/)
 - [Veicule imagens em formatos de última geração](https://developers.google.com/web/tools/lighthouse/audits/webp)
-- [Use formatos de vídeo para conteúdo animado](/efficient-animated-content/)
+- [Use formatos de vídeo para conteúdo animado](https://developer.chrome.com/docs/lighthouse/performance/efficient-animated-content/)
 
 Fluxo de trabalho do Chrome DevTools:
 
-- [Registrar atividade de rede](https://developers.google.com/web/tools/chrome-devtools/network#load)
-- Clique em **Img** para [filtrar recursos que não sejam de imagem](https://developers.google.com/web/tools/chrome-devtools/network/reference#filter-by-type)
+- [Registrar atividade de rede](https://developer.chrome.com/docs/devtools/network/#load)
+- Clique em **Img** para [filtrar recursos que não sejam de imagem](https://developer.chrome.com/docs/devtools/network/reference/#filter-by-type)
 - Clique na **coluna Tamanho** para classificar os arquivos de imagem por tamanho
 
 #### Consertar
@@ -205,7 +205,7 @@ A minimização remove caracteres desnecessários de JavaScript e CSS.
 
 #### Diagnosticar
 
-Use as [auditorias Minify CSS](https://developers.google.com/web/tools/lighthouse/audits/minify-css) e [Minify JavaScript](/unminified-javascript/) Lighthouse para identificar recursos que precisam de minimização.
+Use as [auditorias Minify CSS](https://developers.google.com/web/tools/lighthouse/audits/minify-css) e [Minify JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/) Lighthouse para identificar recursos que precisam de minimização.
 
 #### Consertar
 

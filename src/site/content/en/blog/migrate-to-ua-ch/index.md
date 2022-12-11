@@ -153,7 +153,7 @@ Consider this strategy if you are transforming or customizing the responses
 served based on the user-agent data.
 
 {% Aside %} You can also consider migrating to the [On-demand client-side
-JavaScript API](#strategy:-on-demand-client-side-javascript-api) strategy
+JavaScript API](#strategy-on-demand-client-side-javascript-api) strategy
 instead of sending additional headers. {% endAside %}
 
 Browsers or other clients may choose to supply different default hints, so it's
@@ -194,7 +194,7 @@ If you are requesting cross-origin or cross-site subresources that require
 User-Agent Client Hints to be sent on their requests then you will need to
 explicitly specify the desired hints using a Permissions Policy.
 
-{% Aside %} [Permissions Policy](https://www.w3.org/TR/permissions-policy-1/) is
+{% Aside %} [Permissions Policy](https://developer.chrome.com/docs/privacy-sandbox/permissions-policy/) is
 the new form of Feature Policy {%  endAside %}
 
 For example, let's say that `https://blog.site` hosts resources on
@@ -300,7 +300,7 @@ name with major version, the platform, and the mobile indicator. So the question
 to ask here is, do you require extended data on the initial page load?
 
 {% Aside %} Also consider making use of the [On-demand client-side JavaScript
-API strategy](#strategy:-on-demand-client-side-javascript-api) to alter content
+API strategy](#strategy-on-demand-client-side-javascript-api) to alter content
 within the page as opposed to server-side. {% endAside %}
 
 For additional hints on the first request there are two options. First, you can

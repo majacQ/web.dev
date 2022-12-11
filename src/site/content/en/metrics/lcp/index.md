@@ -4,7 +4,7 @@ title: Largest Contentful Paint (LCP)
 authors:
   - philipwalton
 date: 2019-08-08
-updated: 2020-06-17
+updated: 2022-10-19
 description: |
   This post introduces the Largest Contentful Paint (LCP) metric and explains
   how to measure it
@@ -35,7 +35,7 @@ If a page shows a splash screen or displays a loading indicator, this moment is
 not very relevant to the user.
 
 In the past we've recommended performance metrics like [First Meaningful Paint
-(FMP)](/first-meaningful-paint/) and [Speed Index (SI)](/speed-index/) (both
+(FMP)](https://developer.chrome.com/docs/lighthouse/performance/first-meaningful-paint/) and [Speed Index (SI)](https://developer.chrome.com/docs/lighthouse/performance/speed-index/) (both
 available in Lighthouse) to help capture more of the loading experience after
 the initial paint, but these metrics are complex, hard to explain, and often
 wrong&mdash;meaning they still do not identify when the main content of the page
@@ -53,17 +53,29 @@ The Largest Contentful Paint (LCP) metric reports the render time of the largest
 viewport, relative to when the page [first started
 loading](https://w3c.github.io/hr-time/#timeorigin-attribute).
 
-<picture>
-  <source srcset="{{ "image/tcFciHGuF3MxnTr1y5ue01OGLBn2/elqsdYqQEefWJbUM2qMO.svg" | imgix }}" media="(min-width: 640px)" width="400", height="100">
-  {% Img src="image/eqprBhZUGfb8WYnumQ9ljAxRrA72/8ZW8LQsagLih1ZZoOmMR.svg", alt="Good LCP values are 2.5 seconds, poor values are greater than 4.0 seconds and anything in between needs improvement", width="400", height="300" %}
-</picture>
-
 ### What is a good LCP score?
 
 To provide a good user experience, sites should strive to have Largest
 Contentful Paint of **2.5 seconds** or less. To ensure you're hitting this
 target for most of your users, a good threshold to measure is the **75th
 percentile** of page loads, segmented across mobile and desktop devices.
+
+<figure>
+  <picture>
+    <source
+      srcset="{{ "image/tcFciHGuF3MxnTr1y5ue01OGLBn2/elqsdYqQEefWJbUM2qMO.svg" | imgix }}"
+      media="(min-width: 640px)"
+      width="800"
+      height="200">
+    {%
+      Img
+        src="image/eqprBhZUGfb8WYnumQ9ljAxRrA72/8ZW8LQsagLih1ZZoOmMR.svg",
+        alt="Good LCP values are 2.5 seconds or less, poor values are greater than 4.0 seconds, and anything in between needs improvement",
+        width="640",
+        height="480"
+    %}
+  </picture>
+</figure>
 
 {% Aside %}
   To learn more about the research and methodology behind this recommendation,
@@ -87,8 +99,12 @@ considered for Largest Contentful Paint are:
 * [Block-level](https://developer.mozilla.org/docs/Web/HTML/Block-level_elements)
   elements containing text nodes or other inline-level text elements children.
 
+{% Aside 'important' %}
+Images that occupy the entire viewport are not considered LCP candidates.
+{% endAside %}
+
 Note, restricting the elements to this limited set was intentional in order to
-keep things simple in the beginning. Additional elements (e.g. `<svg>`,
+keep things simple in the beginning. Additional elements (like `<svg>` or
 `<video>`) may be added in the future as more research is conducted.
 
 ### How is an element's size determined?
@@ -168,7 +184,7 @@ contentful element unless a larger element is rendered.
   `largest-contentful-paint` entry to be dispatched. However, due to popular UI
   patterns such as image carousels that often removed DOM elements, the metric
   was updated to more accurately reflect what users experience. See the
-  [CHANGELOG](https://chromium.googlesource.com/chromium/src/+/master/docs/speed/metrics_changelog/2020_11_lcp.md)
+  [CHANGELOG](https://chromium.googlesource.com/chromium/src/+/main/docs/speed/metrics_changelog/2020_11_lcp.md)
   for more details.
 {% endAside %}
 
@@ -180,10 +196,14 @@ For analysis purposes, you should only report the most recently dispatched
 `PerformanceEntry` to your analytics service.
 
 {% Aside 'caution' %}
-  Since users can open pages in a background tab, it's possible that the largest
-  contentful paint will not happen until the user focuses the tab, which can be
-  much later than when they first loaded it.
+  Since users can open pages in a background tab, it's possible that
+  `largest-contentful-paint` entries will not be dispatched until the user
+  focuses the tab, which can be much later than when they first loaded it.
+
+  Google tools that measure LCP do not report this metric if the page was
+  loaded in the background, as it does not reflect the user-perceived load time.
 {% endAside %}
+
 
 #### Load time vs. render time
 
@@ -256,19 +276,22 @@ available in the following tools:
 ### Field tools
 
 - [Chrome User Experience
-  Report](https://developers.google.com/web/tools/chrome-user-experience-report)
-- [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)
+  Report](https://developer.chrome.com/docs/crux/)
+- [PageSpeed Insights](https://pagespeed.web.dev/)
 - [Search Console (Core Web Vitals
   report)](https://support.google.com/webmasters/answer/9205520)
 - [`web-vitals` JavaScript library](https://github.com/GoogleChrome/web-vitals)
 
 ### Lab tools
 
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
+- [PageSpeed Insights](https://pagespeed.web.dev/)
 - [WebPageTest](https://webpagetest.org/)
 
 ### Measure LCP in JavaScript
+
+{% BrowserCompat 'api.LargestContentfulPaint' %}
 
 To measure LCP in JavaScript, you can use the [Largest Contentful Paint
 API](https://wicg.github.io/largest-contentful-paint/). The following example
@@ -312,23 +335,27 @@ the metric is calculated.
   restored from the [back/forward cache](/bfcache/#impact-on-core-web-vitals),
   but LCP should be measured in these cases since users experience them as
   distinct page visits.
-- The API does not consider elements within iframes, but to properly measure LCP
-  you should consider them. Sub-frames can use the API to report their
-  `largest-contentful-paint` entries to the parent frame for aggregation.
+- The API does not consider elements within iframes but the metric does as they
+  are part of the user experience of the page. In pages with an LCP within an
+  iframe—for example a poster image on an embedded video—this will
+  [show as a difference between CrUX and RUM](/crux-and-rum-differences/#iframes).
+  To properly measure LCP you should consider them. Sub-frames can use the API
+  to report their `largest-contentful-paint` entries to the parent frame for
+  aggregation.
 
 Rather than memorizing all these subtle differences, developers can use the
 [`web-vitals` JavaScript library](https://github.com/GoogleChrome/web-vitals) to
 measure LCP, which handles these differences for you (where possible):
 
 ```js
-import {getLCP} from 'web-vitals';
+import {onLCP} from 'web-vitals';
 
 // Measure and log LCP as soon as it's available.
-getLCP(console.log);
+onLCP(console.log);
 ```
 
 You can refer to [the source code for
-`getLCP()`](https://github.com/GoogleChrome/web-vitals/blob/master/src/getLCP.ts)
+`onLCP()`](https://github.com/GoogleChrome/web-vitals/blob/main/src/onLCP.ts)
 for a complete example of how to measure LCP in JavaScript.
 
 {% Aside %}
@@ -362,7 +389,7 @@ performance techniques that can also improve LCP, see:
 * [Apply instant loading with the PRPL
   pattern](/apply-instant-loading-with-prpl)
 * [Optimizing the Critical Rendering
-  Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/)
+  Path](/critical-rendering-path/)
 * [Optimize your CSS](/fast#optimize-your-css)
 * [Optimize your Images](/fast#optimize-your-images)
 * [Optimize web Fonts](/fast#optimize-web-fonts)

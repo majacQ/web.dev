@@ -59,7 +59,7 @@ tags:
 
 {% Aside 'caution' %} 이전 브라우저에서 속성을 제대로 구문 분석할 수 있도록 쉼표를 사용하여 속성을 구분하세요. {% endAside %}
 
-[`width` 또는 `initial-scale`가 있는 `<meta name="viewport">` 태그가 없습니까](/viewport/) Lighthouse 감사는 HTML 문서가 뷰포트 메타 태그를 올바르게 사용하고 있는지 확인하는 프로세스를 자동화하는 데 도움을 줄 수 있습니다.
+[`width` 또는 `initial-scale`가 있는 `<meta name="viewport">` 태그가 없습니까](https://developer.chrome.com/docs/lighthouse/pwa/viewport/) Lighthouse 감사는 HTML 문서가 뷰포트 메타 태그를 올바르게 사용하고 있는지 확인하는 프로세스를 자동화하는 데 도움을 줄 수 있습니다.
 
 ### 액세스 가능한 뷰포트 확인 {: #accessible-viewport }
 
@@ -77,7 +77,7 @@ tags:
 
 메타 뷰포트 태그가 있는 모바일 사이트를 개발할 때 실제로 지정된 뷰포트에 맞지 않는 페이지 콘텐츠를 제작하는 실수를 하기가 쉽습니다. 예를 들어, 뷰포트보다 넓은 너비로 표시되는 이미지가 있으면 뷰포트를 가로로 스크롤해야 할 수 있습니다. 사용자가 가로로 스크롤할 필요가 없도록 이 콘텐츠를 뷰포트 너비에 맞게 조정해야 합니다.
 
-[뷰포트에 맞게 콘텐츠 크기가 올바르게 지정되지 않았습니다.](/content-width/) Lighthouse 감사를 통해 범위를 넘어가는 콘텐츠를 감지하는 프로세스를 자동화할 수 있습니다.
+[뷰포트에 맞게 콘텐츠 크기가 올바르게 지정되지 않았습니다.](https://developer.chrome.com/docs/lighthouse/pwa/content-width/) Lighthouse 감사를 통해 범위를 넘어가는 콘텐츠를 감지하는 프로세스를 자동화할 수 있습니다.
 
 ### 이미지 {: #images }
 
@@ -326,8 +326,8 @@ CSS 그리드 레이아웃을 사용하면 유연한 그리드를 간단하게 �
 
 다른 중단점에서 페이지를 보려면 다음 단계를 따르세요.
 
-[DevTools](https://developers.google.com/web/tools/chrome-devtools#open)를 연 다음 [Device Mode](https://developers.google.com/web/tools/chrome-devtools/device-mode#toggle)를 켭니다. 기본적으로 [반응형 모드](https://developers.google.com/web/tools/chrome-devtools/device-mode#responsive)에서 열립니다.
+[DevTools](https://developer.chrome.com/docs/devtools/open/)를 연 다음 [Device Mode](https://developer.chrome.com/docs/devtools/device-mode/#toggle)를 켭니다. 기본적으로 [반응형 모드](https://developer.chrome.com/docs/devtools/device-mode/#responsive)에서 열립니다.
 
-미디어 쿼리를 보려면 장치 모드 메뉴를 열고 [미디어 쿼리 표시](https://developers.google.com/web/tools/chrome-devtools/device-mode#queries)를 선택하여 중단점을 페이지 위에 컬러 막대로 표시합니다.
+미디어 쿼리를 보려면 장치 모드 메뉴를 열고 [미디어 쿼리 표시](https://developer.chrome.com/docs/devtools/device-mode/#queries)를 선택하여 중단점을 페이지 위에 컬러 막대로 표시합니다.
 
 해당 미디어 쿼리가 활성화되어 있는 동안 막대 중 하나를 클릭하여 페이지를 봅니다. 막대를 마우스 오른쪽 버튼으로 클릭하면 미디어 쿼리의 정의를 볼 수 있습니다.

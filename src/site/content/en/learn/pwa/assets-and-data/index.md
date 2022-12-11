@@ -5,6 +5,7 @@ description: >
 authors:
   - firt
 date: 2021-11-18
+updated: 2022-02-23
 
 ---
 
@@ -24,7 +25,7 @@ A Progressive Web App is a website, so all its assets are the same as on the web
 - Data in JSON or other formats.
 
 By default, websites download assets over the network,
-[starting with HTML](https://developers.google.com/web/fundamentals/performance/critical-rendering-path)
+[starting with HTML](/critical-rendering-path/)
 and continuing to the rest of the resources.
 
 Managing those resources to load fast and be available offline has been a challenge for the web.
@@ -94,7 +95,7 @@ In your PWA, you are in charge of all the decisions. You can choose the best app
 Some decisions to make are:
 
 * Precaching: pick the assets you'd like to install on the first load; those should include the HTML and the minimal assets to render the app. When using precache keep in mind you are using the device's space and network. Be conscious and responsible when downloading assets and caching them.
-* Cache as needed: used to add assets to the cache when they are requested. Typically these are assets that can change independently of your app version, like images or content. See the [caching](learn/pwa/caching) section for different strategies on how to cache as needed.
+* Cache as needed: used to add assets to the cache when they are requested. Typically these are assets that can change independently of your app version, like images or content. See the [caching](/learn/pwa/caching) section for different strategies on how to cache as needed.
 * APIs and web services: API calls can be cached; or, instead of caching the API responses, you can store their data in IndexedDB.
 
 {% Aside 'gotchas' %}
@@ -129,7 +130,7 @@ It's not as flexible as for platform-specific apps, but it's typically good enou
 Browsers can evict assets based on storage pressure, or after some weeks of inactivity, if the user is using your PWA in the browser. On some platforms, if the user installs your PWA, eviction won't happen. Where available, code can request persistent storage through an API to avoid that eviction.
 
 {% Aside %}
-If storage eviction happens for any reason and the user installed your PWA, the PWA will still work if you have a network connection. When you open that app again, the browser will start the Service Worker lifecycle again, loading your app from the network.
+If storage eviction happens for any reason and the user installed your PWA, the PWA will still work if you have a network connection. When you open that app again, the browser will start the service worker lifecycle again, loading your app from the network.
 {% endAside %}
 
 ##  Resources

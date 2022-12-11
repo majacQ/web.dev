@@ -4,7 +4,7 @@ title: Total Blocking Time (TBT)
 authors:
   - philipwalton
 date: 2019-11-07
-updated: 2020-06-15
+updated: 2022-05-11
 description: |
   This post introduces the Total Blocking Time (TBT) metric and explains
   how to measure it
@@ -38,7 +38,7 @@ because the browser cannot interrupt a task that's in progress. So in the event
 that a user _does_ interact with the page in the middle of a long task, the
 browser must wait for the task to finish before it can respond.
 
-If the task is long enough (e.g. anything above 50 ms), it's likely that the
+If the task is long enough (anything above 50 ms), it's likely that the
 user will notice the delay and perceive the page as sluggish or janky.
 
 The _blocking time_ of a given long task is its duration in excess of 50 ms. And
@@ -116,19 +116,19 @@ value in the second case quantifies the worse experience.
 TBT is a metric that should be measured [in the
 lab](/user-centric-performance-metrics/#in-the-lab). The best way to measure TBT is to run a
 Lighthouse performance audit on your site. See the [Lighthouse documentation on
-TBT](/lighthouse-total-blocking-time) for usage details.
+TBT](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/) for usage details.
 
 ### Lab tools
 
-* [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
-* [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+* [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+* [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 * [WebPageTest](https://www.webpagetest.org/)
 
 {% Aside %}
   While it is possible to measure TBT in the field, it's not recommended as user
   interaction can affect your page's TBT in ways that lead to lots of variance
   in your reports. To understand a page's interactivity in the field, you should
-  measure [First Input Delay (FID)](/fid/).
+  measure [First Input Delay (FID)](/fid/) and [Interaction to Next Paint (INP)](/inp/).
 {% endAside %}
 
 ## What is a good TBT score?
@@ -139,18 +139,18 @@ hardware**.
 
 For details on how your page's TBT affects your Lighthouse performance score,
 see [How Lighthouse determines your TBT
-score](/lighthouse-total-blocking-time/#how-lighthouse-determines-your-tbt-score)
+score](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/#how-lighthouse-determines-your-tbt-score)
 
 ## How to improve TBT
 
 To learn how to improve TBT for a specific site, you can run a Lighthouse
 performance audit and pay attention to any specific
-[opportunities](/lighthouse-performance/#opportunities) the audit suggests.
+[opportunities](https://developer.chrome.com/docs/lighthouse/performance/#opportunities) the audit suggests.
 
 To learn how to improve TBT in general (for any site), refer to the following
 performance guides:
 
-- [Reduce the impact of third-party code](/third-party-summary/)
-- [Reduce JavaScript execution time](/bootup-time/)
-- [Minimize main thread work](/mainthread-work-breakdown/)
-- [Keep request counts low and transfer sizes small](/resource-summary/)
+- [Reduce the impact of third-party code](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [Reduce JavaScript execution time](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [Minimize main thread work](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [Keep request counts low and transfer sizes small](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

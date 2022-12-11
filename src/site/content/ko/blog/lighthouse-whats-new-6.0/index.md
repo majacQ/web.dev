@@ -15,7 +15,7 @@ tags:
 
 오늘 Lighthouse 6.0을 출시합니다!
 
-[Lighthouse](https://github.com/GoogleChrome/lighthouse/)는 개발자가 사이트의 사용자 경험을 개선할 수 있는 기회와 진단을 제공하는 자동화된 웹사이트 감사 도구입니다. Chrome DevTools, npm(Node 모듈 및 CLI) 또는 브라우저 확장([Chrome](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) 및 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/google-lighthouse/))에서 사용할 수 있습니다. [web.dev/measure](/measure/) 및 [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/)를 비롯한 많은 Google 서비스를 지원합니다.
+[Lighthouse](https://github.com/GoogleChrome/lighthouse/)는 개발자가 사이트의 사용자 경험을 개선할 수 있는 기회와 진단을 제공하는 자동화된 웹사이트 감사 도구입니다. Chrome DevTools, npm(Node 모듈 및 CLI) 또는 브라우저 확장([Chrome](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) 및 [Firefox](https://addons.mozilla.org/en-US/firefox/addon/google-lighthouse/))에서 사용할 수 있습니다. [web.dev/measure](/measure/) 및 [PageSpeed Insights](https://pagespeed.web.dev/)를 비롯한 많은 Google 서비스를 지원합니다.
 
 Lighthouse 6.0은 npm과 [Chrome Canary](https://www.google.com/chrome/canary/)에서 즉시 사용할 수 있습니다. Lighthouse를 활용하는 다른 Google 서비스는 이달 말까지 업데이트됩니다. Chrome 84(7월 중순)의 Chrome Stable에 상륙합니다.
 
@@ -68,7 +68,7 @@ Lighthouse 6.0은 보고서에 세 가지 새로운 메트릭을 도입합니다
 
 ## 실적 점수 업데이트 {: #score }
 
-Lighthouse의 [성능 점수](/performance-scoring/)는 페이지 속도를 요약하기 위해 여러 메트릭의 가중치 혼합에서 계산됩니다. 6.0 성능 점수 공식은 다음과 같습니다.
+Lighthouse의 [성능 점수](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/)는 페이지 속도를 요약하기 위해 여러 메트릭의 가중치 혼합에서 계산됩니다. 6.0 성능 점수 공식은 다음과 같습니다.
 
 &lt;style&gt; .lh-table { min-width: unset; } .lh-table td { min-width: unset; } &lt;/style&gt;
 
@@ -193,7 +193,7 @@ Lighthouse 버전 5와 6 사이의 점수 변경 사항에 대한 몇 가지 주
 
 ### 미사용 자바스크립트 {: #unused-javascript }
 
-새로운 감사: [**Unused JavaScript**](/remove-unused-code/)에서 [DevTools 코드 적용 범위](https://developers.google.com/web/tools/chrome-devtools/coverage)를 활용하고 있습니다.
+새로운 감사: [**Unused JavaScript**](/remove-unused-code/)에서 [DevTools 코드 적용 범위](https://developer.chrome.com/docs/devtools/coverage/)를 활용하고 있습니다.
 
 이 감사는 *완전히* 새로운 것은 아닙니다. [2017년 중기](https://github.com/GoogleChrome/lighthouse/issues/1852#issuecomment-306900595)에 추가되었지만 성능 오버헤드 때문에 Lighthouse를 최대한 빠르게 유지하기 위해 기본적으로 비활성화되어 있습니다. 이 범위 데이터를 수집하는 것이 이제 훨씬 더 효율적이므로 기본적으로 활성화하는 것이 좋습니다.
 
@@ -216,7 +216,7 @@ Lighthouse는 접근성 카테고리를 강화하기 위해 멋진 [axe-core](ht
 
 ### 문자 집합 선언 {: #charset }
 
-[meta charset 요소](/charset/)는 HTML 문서를 해석하는 데 사용해야 하는 문자 인코딩을 선언합니다. 이 요소가 없거나 문서에서 늦게 선언된 경우 브라우저는 여러 경험적 방법을 사용하여 어떤 인코딩을 사용해야 하는지 추측합니다. 브라우저가 잘못 추측하고 늦은 메타 문자 집합 요소가 발견되면 일반적으로 파서는 지금까지 수행한 모든 작업을 버리고 다시 시작하여 사용자에게 좋지 않은 경험을 선사합니다. 이 새로운 감사는 페이지에 유효한 문자 인코딩이 있고 초기에 미리 정의되어 있는지 확인합니다.
+[meta charset 요소](https://developer.chrome.com/docs/lighthouse/best-practices/charset/)는 HTML 문서를 해석하는 데 사용해야 하는 문자 인코딩을 선언합니다. 이 요소가 없거나 문서에서 늦게 선언된 경우 브라우저는 여러 경험적 방법을 사용하여 어떤 인코딩을 사용해야 하는지 추측합니다. 브라우저가 잘못 추측하고 늦은 메타 문자 집합 요소가 발견되면 일반적으로 파서는 지금까지 수행한 모든 작업을 버리고 다시 시작하여 사용자에게 좋지 않은 경험을 선사합니다. 이 새로운 감사는 페이지에 유효한 문자 인코딩이 있고 초기에 미리 정의되어 있는지 확인합니다.
 
 ## Lighthouse CI {: #ci }
 
@@ -236,7 +236,7 @@ Lighthouse는 접근성 카테고리를 강화하기 위해 멋진 [axe-core](ht
 
 DevTools 창 크기에 따라 패널이 `»` 버튼 뒤에 있을 수 있습니다. 탭을 끌어 순서를 변경할 수 있습니다.
 
-[명령 메뉴](https://developers.google.com/web/tools/chrome-devtools/command-menu)를 사용 하여 패널을 빠르게 표시하려면 다음을 수행하십시오.
+[명령 메뉴](https://developer.chrome.com/docs/devtools/command-menu/)를 사용 하여 패널을 빠르게 표시하려면 다음을 수행하십시오.
 
 1. {% Instruction 'devtools', 'none' %}
 2. {% Instruction 'devtools-command', 'none' %}

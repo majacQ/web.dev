@@ -5,7 +5,7 @@ authors:
   - jeffposnick
 description: WebTransport is an API offering low-latency, bidirectional, client-server messaging. Learn more about its use cases, and how to give feedback about the future of the implementation.
 date: 2020-06-08
-updated: 2022-01-21
+updated: 2022-07-18
 hero: image/admin/Wh6q6ughWxUYcu4iOutU.jpg
 hero_position: center
 alt: |
@@ -43,6 +43,19 @@ Many of the concepts in this proposal were previously experimented with as part 
 
 WebTransport helps with similar use cases as QuicTransport, with the primary difference being that [HTTP/3](https://quicwg.org/base-drafts/draft-ietf-quic-http.html) instead of [QUIC](https://www.chromium.org/quic) is the underlying transport protocol.
 {% endAside %}
+
+## Browser support
+
+The WebTransport features described in this article are shipping in Chrome, Edge, and other Chromium-based browsers, starting with
+[version 97](https://chromestatus.com/feature/4854144902889472).
+
+Firefox does not currently have support for WebTransport. Updates on their
+position can be found in this
+[Mozilla bugs ticket](https://bugzilla.mozilla.org/show_bug.cgi?id=1709355).
+
+Safari does not currently have support for WebTransport.
+
+As with all features that do not have universal browser support, coding defensively via [feature detection](https://developer.mozilla.org/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection) is a best practice.
 
 ## Current status {: #status }
 
@@ -90,7 +103,10 @@ However, if you already have a working WebRTC client/server setup that you're ha
 
 ## Try it out
 
-The best way to experiment with WebTransport is to start up a compatible HTTP/3 server locally. (Unfortunately, a public reference server compatible with the latest specification is not currently available.) You can then use this page with a [basic JavaScript client](https://googlechrome.github.io/samples/webtransport/client.html) to try out client/server communications.
+The best way to experiment with WebTransport is to start up a compatible HTTP/3 server.
+You can then use this page with a [basic JavaScript client](https://googlechrome.github.io/samples/webtransport/client.html) to try out client/server communications.
+
+Additionally, a community-maintained echo server is available at [webtransport.day](https://webtransport.day/).
 
 ## Using the API
 
@@ -117,7 +133,7 @@ const transport = new WebTransport(url);
 transport.closed.then(() => {
   console.log(`The HTTP/3 connection to ${url} closed gracefully.`);
 }).catch((error) => {
-  console.error('The HTTP/3 connection to ${url} closed due to ${error}.');
+  console.error(`The HTTP/3 connection to ${url} closed due to ${error}.`);
 });
 
 // Once .ready fulfills, the connection can be used.
@@ -197,7 +213,7 @@ await writer.abort();
 
 #### ReceiveStream
 
-A <code>[ReceiveStream](https://wicg.github.io/web-transport/#receivestream)</code> is initiated by the server. Obtaining a <code>ReceiveStream</code> is a two-step process for a web client. First, it calls the <code>receiveStreams()</code> method of a `WebTransport` instance, which returns a <code>ReadableStream</code>. Each chunk of that <code>ReadableStream</code>, is, in turn, a <code>ReceiveStream</code> that can be used to read <code>Uint8Array</code> instances sent by the server.
+A <code>[ReceiveStream](https://wicg.github.io/web-transport/#receivestream)</code> is initiated by the server. Obtaining a <code>ReceiveStream</code> is a two-step process for a web client. First, it calls the <code>incomingUnidirectionalStreams</code> attribute of a `WebTransport` instance, which returns a <code>ReadableStream</code>. Each chunk of that <code>ReadableStream</code>, is, in turn, a <code>ReceiveStream</code> that can be used to read <code>Uint8Array</code> instances sent by the server.
 
 ```js
 async function readFrom(receiveStream) {
@@ -212,7 +228,7 @@ async function readFrom(receiveStream) {
   }
 }
 
-const rs = transport.receiveStreams();
+const rs = transport.incomingUnidirectionalStreams;
 const reader = rs.getReader();
 while (true) {
   const {done, value} = await reader.read();
@@ -249,10 +265,10 @@ const stream = await transport.createBidirectionalStream();
 // stream.writable is a WritableStream
 ```
 
-You can listen for a `BidirectionalStream` created by the server with the `receiveBidirectionalStreams()` method of a `WebTransport` instance, which returns a `ReadableStream`. Each chunk of that `ReadableStream`, is, in turn, a `BidirectionalStream`.
+You can listen for a `BidirectionalStream` created by the server with the `incomingBidirectionalStreams` attribute of a `WebTransport` instance, which returns a `ReadableStream`. Each chunk of that `ReadableStream`, is, in turn, a `BidirectionalStream`.
 
 ```js
-const rs = transport.receiveBidrectionalStreams();
+const rs = transport.incomingBidirectionalStreams;
 const reader = rs.getReader();
 while (true) {
   const {done, value} = await reader.read();
@@ -273,20 +289,14 @@ The [WebTransport draft specification](https://wicg.github.io/web-transport/) in
 
 ### WebTransport in Chrome's DevTools
 
-Unfortunately, [Chrome's DevTools](https://developers.google.com/web/tools/chrome-devtools) do not currently support WebTransport. You can "star" [this Chrome issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1152290) to be notified about updates on the DevTools interface.
+Unfortunately, [Chrome's DevTools](https://developer.chrome.com/docs/devtools/) do not currently support WebTransport. You can "star" [this Chrome issue](https://bugs.chromium.org/p/chromium/issues/detail?id=1152290) to be notified about updates on the DevTools interface.
 
-## Browser support
+## Polyfill
 
-The WebTransport features described in this article are shipping in Chrome, Edge, and other Chromium-based browsers, starting with
-[version 97](https://chromestatus.com/feature/4854144902889472).
-
-Firefox does not currently have support for WebTransport. Updates on their
-position can be found in this
-[GitHub issue](https://github.com/mozilla/standards-positions/issues/167).
-
-Safari does not currently have support for WebTransport.
-
-As with all features that do not have universal browser support, coding defensively via [feature detection](https://developer.mozilla.org/docs/Learn/Tools_and_testing/Cross_browser_testing/Feature_detection) is a best practice.
+A polyfill (or rather ponyfill that provides functionality as a standalone module you can use) called
+[`webtransport-ponyfill-websocket`](https://github.com/fails-components/webtransport-ponyfill-websocket)
+that implements some of the features of WebTransport is available. Carefully read the constraints in
+the project's `README` to determine if this solution can work for your use case.
 
 ## Privacy and security considerations
 

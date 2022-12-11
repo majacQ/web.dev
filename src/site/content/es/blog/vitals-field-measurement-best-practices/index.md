@@ -71,7 +71,7 @@ Si su herramienta de análisis no le ofrece un nivel de detalle para realizar re
 
 Algunas métricas de rendimiento se pueden calcular una vez que la página haya terminado de cargarse, mientras que otras (como CLS) tienen en cuenta toda la vida útil de la página y solo son definitivas una vez que la página haya comenzado a descargarse.
 
-Sin embargo, esto puede ser problemático ya que los eventos `beforeunload` y `unload` no son confiables (especialmente en móviles) y su uso [no es recomendado](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid) (ya que pueden evitar que una página sea elegible para la función [Back-Forward Cache](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#page-navigation-cache)).
+Sin embargo, esto puede ser problemático ya que los eventos `beforeunload` y `unload` no son confiables (especialmente en móviles) y su uso [no es recomendado](https://developer.chrome.com/blog/page-lifecycle-api/#legacy-lifecycle-apis-to-avoid) (ya que pueden evitar que una página sea elegible para la función [Back-Forward Cache](https://developer.chrome.com/blog/page-lifecycle-api/#what-is-the-back-forward-cache)).
 
 Para las métricas que rastrean toda la vida útil de una página, es mejor enviar el valor actual de la métrica durante el evento `visibilitychange`, siempre que el estado de visibilidad de la página cambie a `hidden`. Esto se debe a que, una vez que el estado de visibilidad de la página cambia a `hidden`, no hay garantía de que cualquier script de esa página pueda volver a ejecutarse. Esto es especialmente cierto en los sistemas operativos móviles, donde la aplicación del navegador en sí se puede cerrar sin que se active ninguna devolución de llamada de páginas.
 
@@ -111,7 +111,7 @@ El código de análisis siempre debe cargarse de forma asincrónica y sin bloque
 
 Todas las API utilizadas para medir las métricas de Core Web Vitals fueron diseñadas específicamente para soportar la carga asíncrona y diferida de scripts (a través de la marca [`buffered`](https://www.chromestatus.com/feature/5118272741572608)), por lo que no es necesario apresurarse para que sus scripts se carguen antes de tiempo.
 
-En el caso de que esté midiendo una métrica que no se puede calcular más adelante en la línea de tiempo de carga de la página, debe incluir *solo* el código que debe ejecutarse antes en el `<head>` de su documento (para que no sea una [solicitud de bloqueo de renderización](/render-blocking-resources/)) y diferir el resto. No cargue todos sus análisis de forma anticipada solo porque una sola métrica lo requiera.
+En el caso de que esté midiendo una métrica que no se puede calcular más adelante en la línea de tiempo de carga de la página, debe incluir *solo* el código que debe ejecutarse antes en el `<head>` de su documento (para que no sea una [solicitud de bloqueo de renderización](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/)) y diferir el resto. No cargue todos sus análisis de forma anticipada solo porque una sola métrica lo requiera.
 
 ### No cree tareas largas
 

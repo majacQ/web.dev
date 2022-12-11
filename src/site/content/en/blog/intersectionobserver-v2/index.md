@@ -24,10 +24,10 @@ I recommend watching [Surma](/authors/surma/)'s
 [Supercharged Microtip](https://www.youtube.com/watch?v=kW_atFXMG98) on Intersection
 Observer&nbsp;v1 that is embedded below.
 You can also read Surma's in-depth
-[article](https://developers.google.com/web/updates/2016/04/intersectionobserver).
+[article](https://developer.chrome.com/blog/intersectionobserver/).
 People have used Intersection Observer&nbsp;v1 for a wide range of use cases like
 [lazy loading of images and videos](/fast/#lazy-load-images-and-video),
-[being notified when elements reach `position: sticky`](https://developers.google.com/web/updates/2017/09/sticky-headers),
+[being notified when elements reach `position: sticky`](https://developer.chrome.com/blog/sticky-headers),
 [firing analytics events](https://github.com/ampproject/amphtml/blob/master/extensions/amp-analytics/0.1/visibility-manager.js),
 and many more.
 

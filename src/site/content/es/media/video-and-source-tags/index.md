@@ -6,7 +6,7 @@ authors:
   - joemedley
   - derekherman
 description: Usted preparó correctamente un archivo de video para la web. Le dio las dimensiones y la resolución correctas. Incluso creó archivos WebM y MP4 separados para diferentes navegadores. Para que cualquiera lo vea, aún deberá agregarlo a una página web.
-date: 2014-14-15
+date: 2014-02-15
 updated: 2021-07-05
 tags:
   - media
@@ -57,7 +57,7 @@ Este enfoque tiene varias ventajas si se compara con publicar diferentes HTML o 
 
 Estos problemas son especialmente importantes en contextos móviles, donde el ancho de banda y la latencia son muy importantes, y la paciencia del usuario es probablemente limitada. Omitir el atributo `type` puede afectar al rendimiento cuando hay varias fuentes con tipos no admitidos.
 
-Hay algunas formas de profundizar en los detalles. Consulte [Un manual de medios digitales para geeks](https://www.xiph.org/video/vid1.shtml) para conocer más sobre cómo funcionan el video y el audio en la web. También puede utilizar [la depuración remota](https://developers.google.com/web/tools/chrome-devtools/remote-debugging) en DevTools para comparar la actividad de la red [con atributos de tipo](https://googlesamples.github.io/web-fundamentals/fundamentals/media/video-main.html) y [sin atributos de tipo](https://googlesamples.github.io/web-fundamentals/fundamentals/design-and-ux/responsive/notype.html).
+Hay algunas formas de profundizar en los detalles. Consulte [Un manual de medios digitales para geeks](https://www.xiph.org/video/vid1.shtml) para conocer más sobre cómo funcionan el video y el audio en la web. También puede utilizar [la depuración remota](https://developer.chrome.com/docs/devtools/remote-debugging/) en DevTools para comparar la actividad de la red [con atributos de tipo](https://googlesamples.github.io/web-fundamentals/fundamentals/media/video-main.html) y [sin atributos de tipo](https://googlesamples.github.io/web-fundamentals/fundamentals/design-and-ux/responsive/notype.html).
 
 {% Aside 'caution' %} Asegúrese de verificar los encabezados de respuesta en las herramientas de desarrollo de su navegador para [asegurarse de que su servidor informa del tipo MIME correcto](https://developer.mozilla.org/en/docs/Properly_Configuring_Server_MIME_Types), de lo contrario las verificaciones de tipo de fuente de video no funcionarán. {% endAside %}
 
@@ -84,7 +84,7 @@ Puede utilizar esta función para ofrecer varias vistas en el mismo video, como 
 
 Para que esta función funcione, su servidor debe admitir solicitudes de rango y esa capacidad se debe habilitar. La mayoría de los servidores habilitan las solicitudes de rango de forma predeterminada. Dado que algunos servicios de alojamiento las desactivan, debe confirmar que las solicitudes de rango están disponibles para utilizar fragmentos en su sitio.
 
-Afortunadamente, puede hacer esto desde las herramientas de desarrollo de su navegador. En Chrome, por ejemplo, se encuentra en el [panel de la red](https://developers.google.com/web/tools/chrome-devtools/?utm_source=devtools#network). Busque el encabezado `Accept-Ranges` y verifique que dice `bytes`. En la imagen, dibujé un cuadro rojo alrededor de este encabezado. Si no observa `bytes` como valor, tendrá que ponerse en contacto con su proveedor de alojamiento.
+Afortunadamente, puede hacer esto desde las herramientas de desarrollo de su navegador. En Chrome, por ejemplo, se encuentra en el [panel de la red](https://developer.chrome.com/docs/devtools/#network). Busque el encabezado `Accept-Ranges` y verifique que dice `bytes`. En la imagen, dibujé un cuadro rojo alrededor de este encabezado. Si no observa `bytes` como valor, tendrá que ponerse en contacto con su proveedor de alojamiento.
 
 <figure>{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/20DlLyicG5PAo6TXBKh3.png", alt="Captura de pantalla de Chrome DevTools: Accept-Ranges: bytes.", width="800", height="480" %} <figcaption>Captura de pantalla de Chrome DevTools: Accept-Ranges: bytes.</figcaption></figure>
 
@@ -98,7 +98,7 @@ Agregue un atributo de cartel al elemento `video` para que los espectadores se h
 </video>
 ```
 
-Un cartel también puede ser una alternativa si el video `src` está dañado o si ninguno de los formatos de video proporcionados es compatible. La única desventaja de las imágenes de un cartel es el hecho de solicitar un archivo adicional, que consuma algo de ancho de banda y que requiera renderización. Para obtener más información, consulte [Codificación eficiente de las imágenes](/uses-optimized-images/).
+Un cartel también puede ser una alternativa si el video `src` está dañado o si ninguno de los formatos de video proporcionados es compatible. La única desventaja de las imágenes de un cartel es el hecho de solicitar un archivo adicional, que consuma algo de ancho de banda y que requiera renderización. Para obtener más información, consulte [Codificación eficiente de las imágenes](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).
 
 <div class="w-columns">{% Compare 'worse' %} <figure> {% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/R8VNeplKwajJhOuVkPDT.png", alt="Sin un cartel de reserva, el video parece estropeado.", width="360", height="600" %} </figure>
 </div>
@@ -119,7 +119,7 @@ Cuando los elementos de video son demasiado grandes para la ventana de visualiza
   <figure>{% Img src="image/tcFciHGuF3MxnTr1y5ue01OGLBn2/bCiZsNkZNsAhWbOBsLCs.png", alt="Captura de pantalla de Android Chrome, paisaje: el elemento de video sin estilo desborda la ventana de visualización.", width="800", height="450" %} <figcaption>Captura de pantalla de Android Chrome, paisaje: el elemento de video sin estilo desborda la ventana de visualización.</figcaption></figure>
 </div>
 
-Puede controlar las dimensiones del video usando CSS. Si el CSS no satisface todas sus necesidades, las bibliotecas de JavaScript y los complementos como [FitVids](http://fitvidsjs.com/) (que están fuera del alcance de este artículo) pueden ayudar, incluso para los videos de YouTube y otras fuentes. Lamentablemente, estos recursos pueden aumentar el [tamaño de la carga útil de su red](/total-byte-weight/), con consecuencias negativas para sus ingresos y la cartera de sus usuarios.
+Puede controlar las dimensiones del video usando CSS. Si el CSS no satisface todas sus necesidades, las bibliotecas de JavaScript y los complementos como [FitVids](http://fitvidsjs.com/) (que están fuera del alcance de este artículo) pueden ayudar, incluso para los videos de YouTube y otras fuentes. Lamentablemente, estos recursos pueden aumentar el [tamaño de la carga útil de su red](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/), con consecuencias negativas para sus ingresos y la cartera de sus usuarios.
 
 Para usos sencillos como los que describo aquí, utilice las [consultas de medios de CSS](https://developers.google.com/web/fundamentals/design-and-ux/responsive/#css-media-queries) para especificar el tamaño de los elementos según las dimensiones de la ventana de visualización; `max-width: 100%` será su aliado.
 

@@ -60,7 +60,7 @@ El uso del valor de la meta etiqueta de ventana gráfica  `width=device-width` i
 
 {% Aside 'caution' %} Para asegurarse de que los navegadores más antiguos puedan analizar correctamente los atributos, use una coma para separarlos. {% endAside %}
 
-La auditoría Lighthouse de [No tiene una etiqueta `<meta name="viewport">` con `width` o `initial-scale`](/viewport/) puede ayudarle a automatizar el proceso de asegurarse de que sus documentos HTML estén usando la meta etiqueta de ventana gráfica correctamente.
+La auditoría Lighthouse de [No tiene una etiqueta `<meta name="viewport">` con `width` o `initial-scale`](https://developer.chrome.com/docs/lighthouse/pwa/viewport/) puede ayudarle a automatizar el proceso de asegurarse de que sus documentos HTML estén usando la meta etiqueta de ventana gráfica correctamente.
 
 ### Asegurar una ventana gráfica accesible {: #access-viewport }
 
@@ -78,7 +78,7 @@ Tanto en el escritorio como en los dispositivos móviles, los usuarios están ac
 
 Al desarrollar un sitio móvil con una meta etiqueta de ventana gráfica, es fácil crear accidentalmente contenido de página que no encaja del todo dentro de la ventana gráfica especificada. Por ejemplo, una imagen que se muestra con un ancho más grande que la ventana gráfica puede hacer que esta se desplace horizontalmente. Debe ajustar este contenido para que se ajuste al ancho de la ventana gráfica, de modo que el usuario no necesite desplazarse horizontalmente.
 
-La auditoría de Lighthouse del [Contenido no tiene el tamaño adecuado para la ventana gráfica](/content-width/) puede ayudarle a automatizar el proceso de detección del contenido desbordado.
+La auditoría de Lighthouse del [Contenido no tiene el tamaño adecuado para la ventana gráfica](https://developer.chrome.com/docs/lighthouse/pwa/content-width/) puede ayudarle a automatizar el proceso de detección del contenido desbordado.
 
 ### Imágenes {: #images }
 
@@ -327,8 +327,8 @@ Una vez que haya configurado sus consultas de medios de breakpoints, querrá ver
 
 Para ver su página en diferentes breakpoints:
 
-[Abra DevTools](https://developers.google.com/web/tools/chrome-devtools#open) y luego active el [modo de dispositivo](https://developers.google.com/web/tools/chrome-devtools/device-mode#toggle). Esto se abre en [modo responsivo](https://developers.google.com/web/tools/chrome-devtools/device-mode#responsive) de forma predeterminada.
+[Abra DevTools](https://developer.chrome.com/docs/devtools/open/) y luego active el [modo de dispositivo](https://developer.chrome.com/docs/devtools/device-mode/#toggle). Esto se abre en [modo responsivo](https://developer.chrome.com/docs/devtools/device-mode/#responsive) de forma predeterminada.
 
-Para ver sus consultas de medios, abra el menú de modo de dispositivo y seleccione [Mostrar consultas de medios](https://developers.google.com/web/tools/chrome-devtools/device-mode#queries) para mostrar sus breakpoints como barras de colores sobre su página.
+Para ver sus consultas de medios, abra el menú de modo de dispositivo y seleccione [Mostrar consultas de medios](https://developer.chrome.com/docs/devtools/device-mode/#queries) para mostrar sus breakpoints como barras de colores sobre su página.
 
 Haga clic en una de las barras para ver su página mientras esa consulta de medios está activa. Haga clic con el botón derecho en una barra para saltar a la definición de la consulta de medios.

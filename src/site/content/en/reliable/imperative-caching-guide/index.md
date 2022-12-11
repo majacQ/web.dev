@@ -72,8 +72,8 @@ without the need of going to the network, making the navigation faster.
 
 ## Using Workbox {: #using-workbox }
 
-[Workbox](https://developers.google.com/web/tools/workbox) provides an easy way to send messages to
-a service worker, via the [`workbox-window`](https://developers.google.com/web/tools/workbox/modules/workbox-window) package, a set of modules
+[Workbox](https://developer.chrome.com/docs/workbox/) provides an easy way to send messages to
+a service worker, via the [`workbox-window`](https://developer.chrome.com/docs/workbox/modules/workbox-window/) package, a set of modules
 that are intended to run in the window context. They're a complement to the other Workbox packages
 that run in the service worker.
 
@@ -134,8 +134,8 @@ self.addEventListener('message', (event) => {
 ```
 
 The `{type : 'MSG_ID'}` attribute is not absolutely required, but it is one way to allow the page to
-send different types of instructions to the service worker (i.e. 'to prefetch' vs. 'to clear
-storage').  The service worker can branch into different execution paths based on this flag.
+send different types of instructions to the service worker (that is, 'to prefetch' vs. 'to clear
+storage'). The service worker can branch into different execution paths based on this flag.
 
 If the operation was successful, the user will be able to get the benefits from it but, if not, it won't alter the main user flow. For example, when 1-800-Flowers.com attempts to precache, the page doesn't need to know whether the service worker succeeded. If it does, then the user will enjoy a faster navigation. If it doesn't the page still needs to navigate to the new page. It's just going to take a little longer.
 

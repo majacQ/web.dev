@@ -15,7 +15,7 @@ tags:
 
 ¡Hoy estamos lanzamos Lighthouse 6.0!
 
-[Lighthouse](https://github.com/GoogleChrome/lighthouse/) es una herramienta automatizada de auditoría de sitios web que ayuda a los desarrolladores con oportunidades y diagnósticos para mejorar la experiencia del usuario de sus sitios. Está disponible en Chrome DevTools, npm (como módulo de nodo y como CLI) o como extensión del navegador (en [Chrome](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) y [Firefox](https://addons.mozilla.org/firefox/addon/google-lighthouse/)). Es la [base](/measure/) de muchos servicios de Google, incluyendo web.dev/measure y [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/).
+[Lighthouse](https://github.com/GoogleChrome/lighthouse/) es una herramienta automatizada de auditoría de sitios web que ayuda a los desarrolladores con oportunidades y diagnósticos para mejorar la experiencia del usuario de sus sitios. Está disponible en Chrome DevTools, npm (como módulo de nodo y como CLI) o como extensión del navegador (en [Chrome](https://chrome.google.com/webstore/detail/lighthouse/blipmdconlkpinefehnmjammfjpmpbjk) y [Firefox](https://addons.mozilla.org/firefox/addon/google-lighthouse/)). Es la [base](/measure/) de muchos servicios de Google, incluyendo web.dev/measure y [PageSpeed Insights](https://pagespeed.web.dev/).
 
 Lighthouse 6.0 está disponible inmediatamente en npm y en [Chrome Canary](https://www.google.com/chrome/canary/). Otros servicios de Google que aprovechan Lighthouse recibirán la actualización a fin de mes. Llegará a Chrome Stable en Chrome 84 (mediados de julio).
 
@@ -68,7 +68,7 @@ Además, TBT se correlaciona bien con la métrica de campo [Demora de la primera
 
 ## Actualización de la puntuación de rendimiento {: #score }
 
-La [puntuación de rendimiento en Lighthouse](/performance-scoring/) se calcula a partir de una combinación ponderada de varias métricas para resumir la velocidad de una página. A continuación, se muestra la fórmula de puntuación de rendimiento de la versión 6.0.
+La [puntuación de rendimiento en Lighthouse](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/) se calcula a partir de una combinación ponderada de varias métricas para resumir la velocidad de una página. A continuación, se muestra la fórmula de puntuación de rendimiento de la versión 6.0.
 
 &lt;style&gt; .lh-table { min-width: unset; } .lh-table td { min-width: unset; } &lt;/style&gt;
 
@@ -193,7 +193,7 @@ Hemos publicado una [calculadora de puntuación](https://googlechrome.github.io/
 
 ### JavaScript no utilizado {: #unused-javascript }
 
-[Aprovechamos la cobertura del código de DevTools](https://developers.google.com/web/tools/chrome-devtools/coverage) en una nueva auditoría: [**JavaScript no utilizado**](/remove-unused-code/).
+[Aprovechamos la cobertura del código de DevTools](https://developer.chrome.com/docs/devtools/coverage/) en una nueva auditoría: [**JavaScript no utilizado**](/remove-unused-code/).
 
 Esta auditoría no es *completamente* nueva: se [agregó a mediados de 2017](https://github.com/GoogleChrome/lighthouse/issues/1852#issuecomment-306900595), pero debido a la sobrecarga de rendimiento, se deshabilitó de forma predeterminada para mantener Lighthouse lo más rápido posible. La recopilación de estos datos de cobertura es mucho más eficiente ahora, por lo que nos sentimos cómodos habilitándolos de forma predeterminada.
 
@@ -216,7 +216,7 @@ Lighthouse utiliza la maravillosa biblioteca [axe-core](https://github.com/deque
 
 ### Declaración de juego de caracteres {: #charset }
 
-El [elemento meta juego de caracteres](/charset/) declara qué codificación de caracteres debe usarse para interpretar un documento HTML. Si falta este elemento, o si se declara de forma tardía en el documento, los navegadores emplean una serie de heurísticas para adivinar qué codificación se debe utilizar. Si un navegador adivina incorrectamente y se encuentra un elemento de metacaracteres de forma tardía, el analizador generalmente descarta todo el trabajo realizado hasta el momento y comienza de nuevo, lo que genera malas experiencias para el usuario. Esta nueva auditoría verifica que la página tenga una codificación de caracteres válida y que esté definida al principio y al principio.
+El [elemento meta juego de caracteres](https://developer.chrome.com/docs/lighthouse/best-practices/charset/) declara qué codificación de caracteres debe usarse para interpretar un documento HTML. Si falta este elemento, o si se declara de forma tardía en el documento, los navegadores emplean una serie de heurísticas para adivinar qué codificación se debe utilizar. Si un navegador adivina incorrectamente y se encuentra un elemento de metacaracteres de forma tardía, el analizador generalmente descarta todo el trabajo realizado hasta el momento y comienza de nuevo, lo que genera malas experiencias para el usuario. Esta nueva auditoría verifica que la página tenga una codificación de caracteres válida y que esté definida al principio y al principio.
 
 ## Lighthouse CI {: #ci }
 
@@ -236,7 +236,7 @@ Hemos cambiado el nombre del panel **Auditorías** a panel de **Lighthouse**. ¡
 
 Dependiendo del tamaño de la ventana de DevTools, el panel probablemente esté detrás del botón `»` Puede arrastrar la pestaña para cambiar el orden.
 
-Para exhibir rápidamente el panel con el [menú de Comando](https://developers.google.com/web/tools/chrome-devtools/command-menu):
+Para exhibir rápidamente el panel con el [menú de Comando](https://developer.chrome.com/docs/devtools/command-menu/):
 
 1. {% Instruction 'devtools', 'none' %}
 2. {% Instruction 'devtools-command', 'none' %}

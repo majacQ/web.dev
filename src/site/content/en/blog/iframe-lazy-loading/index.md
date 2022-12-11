@@ -5,7 +5,7 @@ subhead: Browser-level built-in lazy-loading for iframes is here
 authors:
   - addyosmani
 date: 2020-07-24
-#updated: 2020-07-21
+updated: 2022-11-29
 hero: image/admin/dMCW2Qqi5Qp2DB3w4DyE.png
 alt: Phone outline with loading image and assets
 description: |
@@ -66,19 +66,20 @@ lazy-loading iframes could lead to 2-3% median data savings, 1-2% [First
 Contentful Paint](/fcp/) reductions at the median, and 2% [First Input
 Delay](/fid/) (FID) improvements at the 95th percentile.
 
+Additionally, lazy-loading off-screen iframes can impart benefits to [Largest Contentful Paint (LCP)](/lcp/).
+[LCP candidates](/lcp/#what-elements-are-considered), such as images or text dependent on web fonts
+in order to render. Because iframes can often require a significant amount of bandwidth in
+order to load all of their subresources, lazy-loading offscreen iframes can significantly
+reduce bandwidth contention on network-constrained devices, leaving more bandwidth to load
+resources which contribute to a page's LCP.
+
 ### How does built-in lazy-loading for iframes work?
 
 The `loading` attribute allows a browser to defer loading offscreen iframes and
-images until users scroll near them. `loading` supports three values:
+images until users scroll near them. `loading` supports two values:
 
 *   `lazy`: is a good candidate for lazy-loading.
 *   `eager`: is not a good candidate for lazy-loading. Load right away.
-*   `auto`: browser will determine whether or not to lazily load.
-
-{% Aside %}
-`auto` is currently a non-standard value, but is the default in Chrome today.
-Chrome intends on bringing a proposal for this value to the standards table.
-{% endAside %}
 
 Using the `loading` attribute on iframes works as follows:
 
@@ -220,22 +221,6 @@ nearby. This enables the embed to still fully function for users that need it,
 while offering data-savings for those who are not scrolling all the way down a
 page. We are hopeful this is the first of many embeds to explore standardized iframe
 lazy-loading in production.
-
-### Wait, can't browsers just automatically lazy-load offscreen iframes?
-
-They certainly can. In Chrome 77, Chrome added support for automatically
-lazy-loading offscreen images and iframes when a user has opted into
-[Lite Mode](https://blog.chromium.org/2019/04/data-saver-is-now-lite-mode.html)
-(Data Saver mode) in Chrome for Android.
-
-Lite Mode is commonly used in regions of the world where network connection
-quality and data plans are not the greatest. Every byte matters and so
-lazy-loading iframes has the potential to make a meaningful difference for
-these users.
-
-Origins can detect what percentage of their traffic is coming from Lite Mode
-users by checking the `navigator.connection.saveData` property,
-which is part of the [`NetworkInformation` API](https://developer.mozilla.org/docs/Web/API/NetworkInformation).
 
 ### Can I lazy-load iframes cross-browser? Yes
 

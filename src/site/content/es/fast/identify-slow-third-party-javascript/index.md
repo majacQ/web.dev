@@ -16,11 +16,11 @@ tags:
 
 Como desarrollador, a menudo no tiene control sobre [qué scripts de terceros](/third-party-javascript/#network) carga su sitio. Antes de que pueda optimizar el contenido de terceros, debe hacer un trabajo de detective para averiguar qué hace que su sitio sea lento. 🕵️
 
-En este post, aprenderá a usar [Lighthouse](https://developers.google.com/web/tools/lighthouse/) y [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/) para identificar recursos lentos de terceros. El post le irá mostrando técnicas cada vez más sólidas que se utilizan mejor combinadas.
+En este post, aprenderá a usar [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) y [Chrome DevTools](https://developer.chrome.com/docs/devtools/) para identificar recursos lentos de terceros. El post le irá mostrando técnicas cada vez más sólidas que se utilizan mejor combinadas.
 
 ## Si solo tiene 5 minutos
 
-La [auditoría de rendimiento](/lighthouse-performance) de Lighthouse le ayuda a descubrir oportunidades para acelerar la carga de páginas. Es probable que aparezcan scripts lentos de terceros en la sección **Diagnósticos** en las auditorías **Reducir el tiempo de ejecución de JavaScript** y **Evitar enormes cargas útiles de red**.
+La [auditoría de rendimiento](https://developer.chrome.com/docs/lighthouse/performance/) de Lighthouse le ayuda a descubrir oportunidades para acelerar la carga de páginas. Es probable que aparezcan scripts lentos de terceros en la sección **Diagnósticos** en las auditorías **Reducir el tiempo de ejecución de JavaScript** y **Evitar enormes cargas útiles de red**.
 
 Para ejecutar una auditoría:
 
@@ -42,13 +42,13 @@ La auditoría de **uso de de terceros** de Lighthouse muestra una lista de los p
 
 ### Reducir el tiempo de ejecución de JavaScript
 
-La auditoría [Reducir el tiempo de ejecución de JavaScript](/bootup-time) de Lighthouse destaca los scripts que tardan mucho en analizarse, compilarse o evaluarse. Seleccione la casilla de verificación **Mostrar recursos de terceros** para descubrir scripts de terceros que usen intensivamente la CPU.
+La auditoría [Reducir el tiempo de ejecución de JavaScript](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/) de Lighthouse destaca los scripts que tardan mucho en analizarse, compilarse o evaluarse. Seleccione la casilla de verificación **Mostrar recursos de terceros** para descubrir scripts de terceros que usen intensivamente la CPU.
 
 {% Img src="image/admin/O7vN1En6dtbL3Q8TbufC.png", alt="Captura de pantalla que muestra que la casilla de verificación 'Mostrar recursos de terceros' está marcada.", width="800", height="981" %}
 
 ### Evite cargas útiles de red enormes
 
-La auditoría [Evitar enormes cargas útiles de red](/total-byte-weight) de Lighthouse identifica las solicitudes de red, incluidas las de terceros, que pueden ralentizar el tiempo de carga de la página. La auditoría falla cuando su carga útil de red supera los 4,000 KB.
+La auditoría [Evitar enormes cargas útiles de red](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/) de Lighthouse identifica las solicitudes de red, incluidas las de terceros, que pueden ralentizar el tiempo de carga de la página. La auditoría falla cuando su carga útil de red supera los 4,000 KB.
 
 {% Img src="image/admin/9Pnoz73MLeNzooUQLuam.png", alt="Captura de pantalla de la auditoría de Chrome DevTools 'Evitar enormes cargas útiles de red'", width="799", height="631" %}
 

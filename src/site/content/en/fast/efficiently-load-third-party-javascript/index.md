@@ -5,6 +5,7 @@ subhead: Avoid the common pitfalls of using third-party scripts to improve load 
 authors:
   - mihajlija
 date: 2019-08-14
+updated: 2022-08-18
 description: |
   Learn how to avoid the common pitfalls of using third-party scripts to improve load times and user experience.
 hero: image/admin/udp7L9LSo5mfI3F0tvNY.jpg
@@ -107,6 +108,7 @@ The `preconnect` hint is best used for only the most critical connections; for l
 <link rel="preconnect" href="http://example.com">
 <link rel="dns-prefetch" href="http://example.com">
 ```
+
 ## Lazy-load third-party resources
 
 Embedded third-party resources can be a big contributor to slow page speed when constructed poorly. If they aren't critical or are below the fold (that is, if users have to scroll to view them), lazy-loading is a good way to improve page speed and paint metrics. This way, users will get the main page content faster and have a better experience.
@@ -121,7 +123,7 @@ Ads are an important source of income for many sites, but users come for the con
 
 An alternative approach is to load third-party content only when users scroll down to that section of the page.
 
-[Intersection Observer](https://developers.google.com/web/updates/2016/04/intersectionobserver) is a browser API that efficiently detects when an element enters or exits the browser's viewport and it can be used to implement this technique. [lazysizes](/use-lazysizes-to-lazyload-images/) is a popular JavaScript library for lazy-loading images and [`iframes`](http://afarkas.github.io/lazysizes/#examples). It supports YouTube embeds and [widgets](https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/unveilhooks). It also has [optional support](https://github.com/aFarkas/lazysizes/blob/097a9878817dd17be3366633e555f3929a7eaaf1/src/lazysizes-intersection.js) for IntersectionObserver.
+[Intersection Observer](https://developer.chrome.com/blog/intersectionobserver/) is a browser API that efficiently detects when an element enters or exits the browser's viewport and it can be used to implement this technique. [lazysizes](/use-lazysizes-to-lazyload-images/) is a popular JavaScript library for lazy-loading images and [`iframes`](http://afarkas.github.io/lazysizes/#examples). It supports YouTube embeds and [widgets](https://github.com/aFarkas/lazysizes/tree/gh-pages/plugins/unveilhooks). It also has [optional support](https://github.com/aFarkas/lazysizes/blob/097a9878817dd17be3366633e555f3929a7eaaf1/src/lazysizes-intersection.js) for IntersectionObserver.
 
 {% Aside 'caution' %}
 Be careful when lazy-loading resources with JavaScript. If JavaScript fails to load, perhaps due to flaky network conditions, your resources won't load at all.
@@ -145,8 +147,8 @@ When you use files from third-party servers, you rarely have control over cachin
 Self-hosting third-party scripts is an option that gives you more control over a script's loading process. By self-hosting you can:
 
 * Reduce DNS lookup and round-trip times.
-* Improve [HTTP caching](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching) headers.
-* Take advantage of [HTTP/2 server push](https://developers.google.com/web/fundamentals/performance/http2/).
+* Improve [HTTP caching](/http-cache/) headers.
+* Take advantage of [HTTP/2](/performance-http2/), or the newer HTTP/3.
 
 For example, Casper managed to [shave 1.7 seconds](https://medium.com/caspertechteam/we-shaved-1-7-seconds-off-casper-com-by-self-hosting-optimizely-2704bcbff8ec) off load time by self-hosting an A/B testing script.
 
@@ -159,4 +161,4 @@ Manually updating scripts can add a lot of overhead to your development process 
 
 ### Use service workers to cache scripts from third-party servers
 
-An alternative to self-hosting that allows you greater control over caching while still getting the third-party CDN benefits is [using service workers to cache scripts from third-party servers](https://developers.google.com/web/tools/workbox/guides/handle-third-party-requests). This gives you control over how often scripts are re-fetched from the network and makes it possible to create a loading strategy that throttles requests for non-essential third-party resources until the page reaches a key user moment. Using `preconnect` to establish early connections in this case can also mitigate the network costs to an extent.
+An alternative to self-hosting that allows you greater control over caching while still getting the third-party CDN benefits is [using service workers to cache scripts from third-party servers](https://developer.chrome.com/docs/workbox/caching-resources-during-runtime/#cross-origin-considerations). This gives you control over how often scripts are re-fetched from the network and makes it possible to create a loading strategy that throttles requests for non-essential third-party resources until the page reaches a key user moment. Using `preconnect` to establish early connections in this case can also mitigate the network costs to an extent.

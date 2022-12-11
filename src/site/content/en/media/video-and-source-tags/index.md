@@ -10,7 +10,7 @@ description: |
   dimensions and the correct resolution. You've even created separate WebM and
   MP4 files for different browsers. For anyone to see it, you still need to add
   it to a web page.
-date: 2014-14-15
+date: 2014-02-15
 updated: 2021-07-05
 tags:
   - media
@@ -372,15 +372,15 @@ impaired, or when playing the audio is not a viable option.
 [Try it on Glitch]: https://track-demonstration.glitch.me
 [source]: https://glitch.com/edit/#!/track-demonstration
 [A Digital Media Primer for Geeks]: https://www.xiph.org/video/vid1.shtml
-[remote debugging]: https://developers.google.com/web/tools/chrome-devtools/remote-debugging
+[remote debugging]: https://developer.chrome.com/docs/devtools/remote-debugging/
 [with type attributes]: https://googlesamples.github.io/web-fundamentals/fundamentals/media/video-main.html
 [without type attributes]: https://googlesamples.github.io/web-fundamentals/fundamentals/design-and-ux/responsive/notype.html
 [ensure your server reports the right MIME type]: https://developer.mozilla.org/en/docs/Properly_Configuring_Server_MIME_Types
-[Network panel]: https://developers.google.com/web/tools/chrome-devtools/?utm_source=devtools#network
-[Efficiently encode images]: /uses-optimized-images/
+[Network panel]: https://developer.chrome.com/docs/devtools/#network
+[Efficiently encode images]: https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/
 [FitVids]: http://fitvidsjs.com/
-[network payload sizes]: /total-byte-weight/
-[CSS media queries]: https://developers.google.com/web/fundamentals/design-and-ux/responsive/#css-media-queries
+[network payload sizes]: https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/
+[CSS media queries]: /responsive-web-design-basics/#media-queries
 [proposed by John Surdakowski]: http://avexdesigns.com/responsive-youtube-embed/
 [aspect ratio]: https://www.google.com/search?q=aspect+ratio&oq=aspect+ratio&aqs=chrome..69i57j35i39j0l6.1896j0j7&sourceid=chrome&ie=UTF-8
 [Try it]: https://googlesamples.github.io/web-fundamentals/fundamentals/media/responsive_embed.html

@@ -21,9 +21,9 @@ how to choose one that best fits your needs and current setup. 🕵️‍♀️
 
 ## Lighthouse performance budgets
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse/) is an auditing tool that tests sites in a few key areas—performance, accessibility, best practices and how well your site performs as a progressive web application.
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) is an auditing tool that tests sites in a few key areas—performance, accessibility, best practices and how well your site performs as a progressive web application.
 
-The [command line version](https://developers.google.com/web/tools/lighthouse/#cli) of Lighthouse (v5+) supports setting [performance budgets](https://developers.google.com/web/tools/lighthouse/audits/budgets) based on:
+The [command line version](https://developer.chrome.com/docs/lighthouse/overview/#cli) of Lighthouse (v5+) supports setting [performance budgets](/use-lighthouse-for-performance-budgets/) based on:
 
 - resource size
 - resource count
@@ -50,7 +50,7 @@ Budgets are set in a JSON file and after defining them the new "Over Budget" col
 
 ## Webpack performance hints
 
-[Webpack](https://developers.google.com/web/fundamentals/performance/webpack/) is a powerful build tool for optimizing how your code is delivered to the users. It also supports setting performance budgets based on **asset size**.
+[Webpack](/webpack/) is a powerful build tool for optimizing how your code is delivered to the users. It also supports setting performance budgets based on **asset size**.
 
 Turn on [performance hints](https://webpack.js.org/configuration/performance/) in `webpack.config.js` to get command line warnings or errors when your bundle size grows over the limit. It's a great way to stay mindful about asset sizes throughout the development.
 
@@ -173,7 +173,7 @@ If the scores for a pull request on GitHub fall below the threshold you've set, 
   </figcaption>
 </figure>
 
-If you find your pull request blocked by a poor Lighthouse score, run an audit with [Lighthouse CLI](https://developers.google.com/web/tools/lighthouse/#cli) or in [Dev Tools](https://developers.google.com/web/tools/lighthouse/#devtools). It generates a report with details about bottlenecks and hints for simple optimizations.
+If you find your pull request blocked by a poor Lighthouse score, run an audit with [Lighthouse CLI](https://developer.chrome.com/docs/lighthouse/overview/#cli) or in [Dev Tools](https://developer.chrome.com/docs/lighthouse/overview/#devtools). It generates a report with details about bottlenecks and hints for simple optimizations.
 
 ## Summary
 

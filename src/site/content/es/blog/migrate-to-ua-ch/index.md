@@ -102,7 +102,7 @@ Si está utilizando el encabezado de solicitud de `agente de usuario` en el serv
 
 Considere esta estrategia si está transformando o personalizando las respuestas entregadas en función de los datos del agente de usuario.
 
-{% Aside %} También puede considerar migrar a la estrategia de [API de JavaScript del lado del cliente bajo demanda](#strategy:-on-demand-client-side-javascript-api) en lugar de enviar encabezados adicionales. {% endAside %}
+{% Aside %} También puede considerar migrar a la estrategia de [API de JavaScript del lado del cliente bajo demanda](#strategy-on-demand-client-side-javascript-api) en lugar de enviar encabezados adicionales. {% endAside %}
 
 Los navegadores u otros clientes pueden optar por proporcionar diferentes indicadores predeterminados, por lo que es una buena práctica especificar todo lo que necesita, incluso si generalmente se proporciona de forma predeterminada.
 
@@ -132,7 +132,7 @@ Al procesar esto en el lado del servidor, primero debe verificar si se ha enviad
 
 Si solicita subrecursos de origen cruzado o entre sitios que requieren que se envíen indicadores de cliente de agente de usuario en sus solicitudes, deberá especificar explícitamente los indicadores deseados mediante una política de permisos.
 
-{% Aside %} La [política de permisos](https://www.w3.org/TR/permissions-policy-1/) es la nueva forma de política de funciones {%  endAside %}
+{% Aside %} La [política de permisos](https://developer.chrome.com/docs/privacy-sandbox/permissions-policy/) es la nueva forma de política de funciones {%  endAside %}
 
 Por ejemplo, digamos que `https://blog.site` aloja recursos en `https://cdn.site` que puede devolver recursos optimizados para un dispositivo específico. `https://blog.site` puede solicitar el indicador `Sec-CH-UA-Model`, pero debe delegarlo explícitamente en `https://cdn.site` mediante el encabezado `Permissions-Policy`. La lista de indicadores controlados por políticas está disponible en el [borrador de infraestructura de indicadores para clientes](https://wicg.github.io/client-hints-infrastructure/#policy-controlled-client-hints-features).
 
@@ -211,7 +211,7 @@ Puede haber casos en los que requiera más indicadores que el conjunto predeterm
 
 La primera solicitud realmente significa la primera solicitud de nivel superior para ese origen enviada en esa sesión de navegación. El conjunto predeterminado de indicadores incluye el nombre del navegador con la versión principal, la plataforma y el indicador móvil. Entonces, la pregunta que debe hacerse aquí es, ¿necesita datos extendidos en la carga de la página inicial?
 
-{% Aside %} Considere también hacer uso de la [estrategia de API de JavaScript del lado del cliente bajo demanda](#strategy:-on-demand-client-side-javascript-api) para modificar el contenido dentro de la página en lugar del lado del servidor. {% endAside %}
+{% Aside %} Considere también hacer uso de la [estrategia de API de JavaScript del lado del cliente bajo demanda](#strategy-on-demand-client-side-javascript-api) para modificar el contenido dentro de la página en lugar del lado del servidor. {% endAside %}
 
 Para obtener indicadores adicionales durante la primera solicitud, hay dos opciones. Primero, puede hacer uso del encabezado `Critical-CH`. Esto toma el mismo formato que `Accept-CH` pero le dice al navegador que debe reintentar inmediatamente la solicitud si la primera se envió sin el indicador crítico.
 

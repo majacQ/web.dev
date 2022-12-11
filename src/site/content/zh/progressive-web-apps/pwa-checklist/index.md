@@ -5,7 +5,7 @@ authors:
   - samrichard
   - petelepage
 date: 2020-01-06
-updated: 2020-02-24
+updated: 2022-07-18
 description: 什么是优秀或出色的渐进式 Web 应用程序？
 tags:
   - progressive-web-apps
@@ -35,7 +35,7 @@ tags:
 
 为了让用户*使用*您的应用程序，速度至关重要。实际上，随着页面加载时间从 1 秒变为 10 秒，用户的跳出率会增加 123%。不是说只要完成 <code>load</code> 事件，就不再需要考虑性能。不能让用户对他们的交互（例如，点击按钮）是否已注册产生疑问。滚动和动画要让用户感觉平滑顺畅。性能会影响用户的整体体验，不论是用户如何看待您的应用程序，还是应用程序的实际表现，都会受到影响。
 
-虽然所有应用程序都有不同的需求，但 Lighthouse 中的性能审核基于 [RAIL 以用户为中心的性能模型](https://developers.google.com/web/fundamentals/performance/rail)，如果在这些审核中得到高分，则说明您的用户更有可能获得愉快的体验。您还可以使用 [PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) 或 [Chrome 用户体验报告](https://developers.google.com/web/tools/chrome-user-experience-report/)来获取 Web 应用程序的实际性能数据。
+虽然所有应用程序都有不同的需求，但 Lighthouse 中的性能审核基于 [RAIL 以用户为中心的性能模型](/rail/)，如果在这些审核中得到高分，则说明您的用户更有可能获得愉快的体验。您还可以使用 [PageSpeed Insights](https://pagespeed.web.dev/) 或 [Chrome 用户体验报告](https://developer.chrome.com/docs/crux/)来获取 Web 应用程序的实际性能数据。
 
 #### 方法
 
@@ -161,7 +161,7 @@ Jeremy Keith 的[弹性 Web 设计](https://resilientwebdesign.com/)是非常好
 
 #### 方法
 
-确定用户希望在离线使用哪些功能后，您需要让您的内容可用且适应离线环境。此外，您可以使用 [IndexedDB](https://developers.google.com/web/ilt/pwa/working-with-indexeddb)（一种浏览器内的 NoSQL 存储系统）来存储和检索数据，还可以使用[后台同步](https://developers.google.com/web/updates/2015/12/background-sync)来允许用户在离线时执行操作和推迟服务器通信，直到再次建立稳定的连接。您还可以使用服务工作进程来存储其他类型的内容，例如供离线时使用的图像、视频文件和音频文件，以及使用它们来实现[安全且长期活动的会话](https://developers.google.com/web/updates/2016/06/2-cookie-handoff)，从而保持用户的身份验证。从用户体验的角度来看，您可以使用[骨架屏](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a)，让用户在加载时感知速度和内容，然后根据需要回退到缓存的内容或离线指示器。
+确定用户希望在离线使用哪些功能后，您需要让您的内容可用且适应离线环境。此外，您可以使用 [IndexedDB](https://developers.google.com/web/ilt/pwa/working-with-indexeddb)（一种浏览器内的 NoSQL 存储系统）来存储和检索数据，还可以使用[后台同步](https://developer.chrome.com/blog/background-sync/)来允许用户在离线时执行操作和推迟服务器通信，直到再次建立稳定的连接。您还可以使用服务工作进程来存储其他类型的内容，例如供离线时使用的图像、视频文件和音频文件，以及使用它们来实现[安全且长期活动的会话](https://developer.chrome.com/blog/2-cookie-handoff/)，从而保持用户的身份验证。从用户体验的角度来看，您可以使用[骨架屏](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a)，让用户在加载时感知速度和内容，然后根据需要回退到缓存的内容或离线指示器。
 
 {% endDetails %}
 
@@ -181,7 +181,7 @@ Jeremy Keith 的[弹性 Web 设计](https://resilientwebdesign.com/)是非常好
 
 #### 方法
 
-W3C 的 [Web 可访问性简介](https://www.w3.org/WAI/fundamentals/accessibility-intro/)是非常好的入门资源。大多数可访问性测试必须手动完成。Lighthouse 中的[可访问性](/lighthouse-accessibility/)审核、[Axe](https://github.com/dequelabs/axe-core) 和[可访问性洞察](https://accessibilityinsights.io/)等工具可以帮助您自动执行一些可访问性功能测试。使用语义正确的元素（而不是重新创建）也很重要，例如 `a` 和 `button` 元素。这样可以确保在确实需要构建更高级的功能时，您仍可以满足用户的可访问预期（例如使用箭头与选项卡时）。[A11Y Nutrition Cards](https://accessibilityinsights.io/) 为一些常见组件提供了一些非常好的建议。
+W3C 的 [Web 可访问性简介](https://www.w3.org/WAI/fundamentals/accessibility-intro/)是非常好的入门资源。大多数可访问性测试必须手动完成。Lighthouse 中的[可访问性](https://developer.chrome.com/docs/lighthouse/accessibility/)审核、[Axe](https://github.com/dequelabs/axe-core) 和[可访问性洞察](https://accessibilityinsights.io/)等工具可以帮助您自动执行一些可访问性功能测试。使用语义正确的元素（而不是重新创建）也很重要，例如 `a` 和 `button` 元素。这样可以确保在确实需要构建更高级的功能时，您仍可以满足用户的可访问预期（例如使用箭头与选项卡时）。[A11Y Nutrition Cards](https://accessibilityinsights.io/) 为一些常见组件提供了一些非常好的建议。
 
 {% endDetails %}
 
@@ -201,7 +201,7 @@ Web 的最大优势之一是能够通过搜索发现网站和应用程序。实�
 
 #### 方法
 
-首先，确保每个 URL 具有唯一的描述性标题和元描述。然后，您可以使用 [Google Search Console](https://search.google.com/search-console/about) 和 Lighthouse 中的[搜索引擎优化审核](/lighthouse-seo/)来帮助您调试和修复 PWA 的可发现性问题。您还可以使用 [Bing](https://www.bing.com/toolbox/webmaster) 或 [Yandex](https://webmaster.yandex.com/welcome/) 的网站管理员工具，并考虑在您的 PWA 中利用 [Schema.org](https://schema.org/) 中提供的架构来包含[结构化数据](https://goo.gle/search-gallery)。
+首先，确保每个 URL 具有唯一的描述性标题和元描述。然后，您可以使用 [Google Search Console](https://search.google.com/search-console/about) 和 Lighthouse 中的[搜索引擎优化审核](https://developer.chrome.com/docs/lighthouse/seo/)来帮助您调试和修复 PWA 的可发现性问题。您还可以使用 [Bing](https://www.bing.com/toolbox/webmaster) 或 [Yandex](https://webmaster.yandex.com/welcome/) 的网站管理员工具，并考虑在您的 PWA 中利用 [Schema.org](https://schema.org/) 中提供的架构来包含[结构化数据](https://goo.gle/search-gallery)。
 
 {% endDetails %}
 
@@ -221,7 +221,7 @@ Web 的最大优势之一是能够通过搜索发现网站和应用程序。实�
 
 #### 方法
 
-[指针事件 API](https://developers.google.com/web/updates/2016/10/pointer-events) 提供了一个统一的界面来处理各种输入选项，非常适合添加手写笔支持。为了同时支持触摸和键盘键入，请确保使用正确的语义元素（定位点、按钮、表单控件等），而不是使用非语义 HTML（对可访问性有利）来重建这些元素。当包含在悬停时激活的交互时，确保它们也可以在单击或点击时激活。
+[指针事件 API](https://developer.chrome.com/blog/pointer-events/) 提供了一个统一的界面来处理各种输入选项，非常适合添加手写笔支持。为了同时支持触摸和键盘键入，请确保使用正确的语义元素（定位点、按钮、表单控件等），而不是使用非语义 HTML（对可访问性有利）来重建这些元素。当包含在悬停时激活的交互时，确保它们也可以在单击或点击时激活。
 
 {% endDetails %}
 

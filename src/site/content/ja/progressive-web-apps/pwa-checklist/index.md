@@ -5,7 +5,7 @@ authors:
   - samrichard
   - petelepage
 date: 2020-01-06
-updated: 2020-02-24
+updated: 2022-07-18
 description: 優れたまたは素晴らしいプログレッシブ Web アプリとは？
 tags:
   - progressive-web-apps
@@ -35,7 +35,7 @@ tags:
 
 ユーザーにアプリを*使用*させるには、速度が重要です。実際、ページの読み込み時間が 1 秒から 10 秒になると、ユーザーがバウンスする確率は 123％ 増加します。パフォーマンスは `load` イベントに限られたことではありません。ユーザーが、ボタンのクリックなどの操作が届いているかどうかを考えるようなことがあってはいけません。スクロールとアニメーションはスムーズに感じられなければなりません。パフォーマンスは、アプリケーションに対するユーザーの認識から実際の実行まで、エクスペリエンス全体に影響を及ぼします。
 
-アプリケーションごとにニーズは異なりますが、Lighthouse のパフォーマンス監査は、[RAIL ユーザー中心のパフォーマンスモデル](https://developers.google.com/web/fundamentals/performance/rail)に基づいており、これらの監査で高いスコアを得られれば、ユーザーが楽しい体験を得る可能性が高くなります。また、[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) や [Chrome ユーザーエクスペリエンスレポート](https://developers.google.com/web/tools/chrome-user-experience-report/)を使用して、Web アプリの実際のパフォーマンスデータを取得することもできます。
+アプリケーションごとにニーズは異なりますが、Lighthouse のパフォーマンス監査は、[RAIL ユーザー中心のパフォーマンスモデル](/rail/)に基づいており、これらの監査で高いスコアを得られれば、ユーザーが楽しい体験を得る可能性が高くなります。また、[PageSpeed Insights](https://pagespeed.web.dev/) や [Chrome ユーザーエクスペリエンスレポート](https://developer.chrome.com/docs/crux/)を使用して、Web アプリの実際のパフォーマンスデータを取得することもできます。
 
 #### 方法
 
@@ -161,7 +161,7 @@ Service Worker の `install` イベント中に、後で使用するためのカ
 
 #### 方法
 
-ユーザーがオフラインで作業できることを期待している機能を決定したら、コンテンツを利用可能にしてオフラインのコンテキストに適応できるようにする必要があります。さらに、ブラウザ内の NoSQL ストレージシステムである [IndexedDB](https://developers.google.com/web/ilt/pwa/working-with-indexeddb) を使用してデータを保存および取得し、[バックグラウンド同期](https://developers.google.com/web/updates/2015/12/background-sync)を使用して、ユーザーがオフライン中にアクションを実行し、ユーザーが再び安定した接続を確立するまでサーバー通信を延期できるようにすることができます。また、Service Worker を使用して、オフラインで使用する画像、動画ファイル、音声ファイルなどの他の種類のコンテンツを保存したり、それらを使用して[安全で長期間有効なセッション](https://developers.google.com/web/updates/2016/06/2-cookie-handoff)を実装し、ユーザーの認証を維持したりすることもできます。ユーザーエクスペリエンスの観点から、読み込み中に速度とコンテンツをユーザーに認識させる[スケルトン画面](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a)を使用して、必要に応じてキャッシュされたコンテンツまたはオフラインインジケーターにフォールバックできます。
+ユーザーがオフラインで作業できることを期待している機能を決定したら、コンテンツを利用可能にしてオフラインのコンテキストに適応できるようにする必要があります。さらに、ブラウザ内の NoSQL ストレージシステムである [IndexedDB](https://developers.google.com/web/ilt/pwa/working-with-indexeddb) を使用してデータを保存および取得し、[バックグラウンド同期](https://developer.chrome.com/blog/background-sync/)を使用して、ユーザーがオフライン中にアクションを実行し、ユーザーが再び安定した接続を確立するまでサーバー通信を延期できるようにすることができます。また、Service Worker を使用して、オフラインで使用する画像、動画ファイル、音声ファイルなどの他の種類のコンテンツを保存したり、それらを使用して[安全で長期間有効なセッション](https://developer.chrome.com/blog/2-cookie-handoff/)を実装し、ユーザーの認証を維持したりすることもできます。ユーザーエクスペリエンスの観点から、読み込み中に速度とコンテンツをユーザーに認識させる[スケルトン画面](https://uxdesign.cc/what-you-should-know-about-skeleton-screens-a820c45a571a)を使用して、必要に応じてキャッシュされたコンテンツまたはオフラインインジケーターにフォールバックできます。
 
 {% endDetails %}
 
@@ -181,7 +181,7 @@ Service Worker の `install` イベント中に、後で使用するためのカ
 
 #### 方法
 
-W3C の『[Introduction to Web Accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/)』は最適な出発点です。アクセシビリティテストの大部分は手動で行う必要があります。Lighthouse の[アクセシビリティ](https://github.com/dequelabs/axe-core)監査、[axe](https://accessibilityinsights.io/)、[Accessibility Insights](/lighthouse-accessibility/) などのツールは、アクセシビリティテストを自動化するのに役立ちます。また、`a` や `button` 要素のように、意味的に正しい要素を独自に再作成せずに使用することも重要です。そうすることで、より高度な機能を構築する必要がある場合に、アクセシビリティへの期待を確実に満たすことができます（矢印とタブのどちらをいつ使用するかなど）。[A11Y Nutrition Cards](https://accessibilityinsights.io/) には、いくつかの一般的なコンポーネントについて、これに関する優れたアドバイスをていきょうしています。
+W3C の『[Introduction to Web Accessibility](https://www.w3.org/WAI/fundamentals/accessibility-intro/)』は最適な出発点です。アクセシビリティテストの大部分は手動で行う必要があります。Lighthouse の[アクセシビリティ](https://github.com/dequelabs/axe-core)監査、[axe](https://accessibilityinsights.io/)、[Accessibility Insights](https://developer.chrome.com/docs/lighthouse/accessibility/) などのツールは、アクセシビリティテストを自動化するのに役立ちます。また、`a` や `button` 要素のように、意味的に正しい要素を独自に再作成せずに使用することも重要です。そうすることで、より高度な機能を構築する必要がある場合に、アクセシビリティへの期待を確実に満たすことができます（矢印とタブのどちらをいつ使用するかなど）。[A11Y Nutrition Cards](https://accessibilityinsights.io/) には、いくつかの一般的なコンポーネントについて、これに関する優れたアドバイスをていきょうしています。
 
 {% endDetails %}
 
@@ -201,7 +201,7 @@ Web の最大の利点の1つは、検索を通じてサイトやアプリを発
 
 #### 方法
 
-まず、各 URL に一意の説明的なタイトルとメタ説明があることを確認します。次に、Lighthouse の [Google 検索コンソール](https://search.google.com/search-console/about)と[検索エンジン最適化監査](/lighthouse-seo/)を使用して、PWA の検出可能性の問題をデバッグして修正することができます。[Bing](https://www.bing.com/toolbox/webmaster) や [Yandex](https://webmaster.yandex.com/welcome/) の Web マスターツールを使用して、[Schema.org](https://goo.gle/search-gallery) のスキーマを介して[構造化データ](https://schema.org/)をPWAに含めることを検討することもできます。
+まず、各 URL に一意の説明的なタイトルとメタ説明があることを確認します。次に、Lighthouse の [Google 検索コンソール](https://search.google.com/search-console/about)と[検索エンジン最適化監査](https://developer.chrome.com/docs/lighthouse/seo/)を使用して、PWA の検出可能性の問題をデバッグして修正することができます。[Bing](https://www.bing.com/toolbox/webmaster) や [Yandex](https://webmaster.yandex.com/welcome/) の Web マスターツールを使用して、[Schema.org](https://goo.gle/search-gallery) のスキーマを介して[構造化データ](https://schema.org/)をPWAに含めることを検討することもできます。
 
 {% endDetails %}
 
@@ -221,7 +221,7 @@ PWA は、マウス、キーボード、スタイラス、またはタッチで�
 
 #### 方法
 
-[Pointer Events API](https://developers.google.com/web/updates/2016/10/pointer-events) は、さまざまな入力オプションを操作するための統一されたインターフェイスを提供し、スタイラスサポートを追加するのに特に適しています。タッチとキーボードの両方をサポートするには、正しいセマンティック要素（アンカー、ボタン、フォームコントロールなど）を使用し、非セマンティック HTML（アクセシビリティに適している）でこれらを再構築しないようにしてください。ホバー時にアクティブになる操作を含める場合は、クリックまたはタップでもアクティブにできることを確認してください。
+[Pointer Events API](https://developer.chrome.com/blog/pointer-events/) は、さまざまな入力オプションを操作するための統一されたインターフェイスを提供し、スタイラスサポートを追加するのに特に適しています。タッチとキーボードの両方をサポートするには、正しいセマンティック要素（アンカー、ボタン、フォームコントロールなど）を使用し、非セマンティック HTML（アクセシビリティに適している）でこれらを再構築しないようにしてください。ホバー時にアクティブになる操作を含める場合は、クリックまたはタップでもアクティブにできることを確認してください。
 
 {% endDetails %}
 

@@ -1,7 +1,7 @@
 ---
 title: Responsive images
 description: >
-  Give your visitors the most appropriate images for their devices and screens. 
+  Give your visitors the most appropriate images for their devices and screens.
 authors:
   - adactio
 date: 2021-12-09
@@ -14,6 +14,7 @@ Fortunately, you can take measures in CSS to stop this from happening.
 ## Constrain your images
 
 In your stylesheet, you can declare that images should never be rendered at a size wider than their containing element using [`max-inline-size`](https://developer.mozilla.org/docs/Web/CSS/max-inline-size).
+{% BrowserCompat 'css.properties.max-inline-size' %}
 
 ```css
 img {
@@ -23,7 +24,7 @@ img {
 ```
 
 {% Aside %}
-You can use `max-width` instead of `max-inline-size` if you prefer, but remember it's good to get in the habit of thinking in terms of [logical properties](/internationalization/#logical-properties).
+You can use `max-width` instead of `max-inline-size` if you prefer, but remember it's good to get in the habit of thinking in terms of [logical properties](/learn/design/internationalization/#logical-properties).
 {% endAside %}
 
 You can apply the same rule to other kinds of embedded content too, like videos and iframes.
@@ -59,6 +60,7 @@ But then the browser might squash or stretch the image to make it fit your prefe
 {% Img src="image/KT4TDYaWOHYfN59zz6Rc0X4k4MH3/GNEkQTnMZTde5QB2mkvh.jpg", alt="Profile of a happy-looking handsome dog with a ball in its mouth, but the image is squashed.", width="800", height="400" %}
 
 To prevent that happening, use the [`object-fit`](https://developer.mozilla.org/docs/Web/CSS/object-fit) property.
+{% BrowserCompat 'css.properties.object-fit' %}
 
 An `object-fit` value of `contain` tells the browser to preserve the image's aspect ratio, even if that means leaving empty space above and below.
 
@@ -86,13 +88,16 @@ img {
 {% Img src="image/KT4TDYaWOHYfN59zz6Rc0X4k4MH3/VCC9WmZ2BFqLrkRlFViy.jpg", alt="Profile of a happy-looking handsome dog with a ball in its mouth; there is extra space on either side of the image.", width="800", height="400" %}
 {% Img src="image/KT4TDYaWOHYfN59zz6Rc0X4k4MH3/FgeMDACB094Myj6cVCZu.jpg", alt="Profile of a happy-looking handsome dog with a ball in its mouth; the image has been cropped at the top and bottom.", width="800", height="400" %}
  <figcaption>
-   The same image with two different values for `object-fit` applied. The first has an `object-fit` value of `contain`. The second has an `object-fit` value of `cover`. 
+   The same image with two different values for `object-fit` applied. The first has an `object-fit` value of `contain`. The second has an `object-fit` value of `cover`.
  </figcaption>
 </figure>
 
 
 
-If the cropping at the top and bottom evenly is an issue, use  the [object-position](https://developer.mozilla.org/docs/Web/CSS/object-position) CSS property to adjust the focus of the crop. You can make sure the most important image content is still visible.
+If the cropping at the top and bottom evenly is an issue, use the [object-position](https://developer.mozilla.org/docs/Web/CSS/object-position) CSS property to adjust the focus of the crop.
+{% BrowserCompat 'css.properties.object-position' %}
+
+You can make sure the most important image content is still visible.
 
 ```css/5-5
 img {
@@ -105,7 +110,6 @@ img {
 ```
 
 {% Img src="image/KT4TDYaWOHYfN59zz6Rc0X4k4MH3/mZDZFob5QnBl5YmAHh2A.jpg", alt="Profile of a happy-looking handsome dog with a ball in its mouth; the image has only been cropped at the bottom.", width="800", height="400" %}
-
 
 ## Deliver your images
 
@@ -128,7 +132,7 @@ If you know the dimensions of the image you should include `width` and `height` 
 {% Video src="/video/tcFciHGuF3MxnTr1y5ue01OGLBn2/WOQn6K6OQcoElRw0NCkZ.mp4", controls=true, loop=true %}
 {% Video src="/video/tcFciHGuF3MxnTr1y5ue01OGLBn2/sFxDb36aEMvTPIyZHz1O.mp4", controls=true, loop=true %}
  <figcaption>
-   The first video shows a layout without defined image dimensions. Notice how the text jumps once the images load. In the second video, image dimensions have been provided; space is left for the image so that once they load, the text doesn't jump around.  
+   The first video shows a layout without defined image dimensions. Notice how the text jumps once the images load. In the second video, image dimensions have been provided; space is left for the image so that once they load, the text doesn't jump around.
  </figcaption>
 </figure>
 
@@ -216,7 +220,7 @@ In this example, the metadata describes the width of each width using the `w` un
  height="200"
  loading="lazy"
  decoding="async"
- srcset="small-image.png 300w, 
+ srcset="small-image.png 300w,
   medium-image.png 600w,
   large-image.png 1200w"
 >
@@ -346,11 +350,11 @@ element {
 ```
 The browser will choose the most appropriate image for the device's pixel density.
 
-There are many factors to consider when you're adding images to your site: 
+There are many factors to consider when you're adding images to your site:
 
 Reserving the right space for each image.
 Figuring out how many sizes you need.
-Deciding whether the image is content or decorative. 
+Deciding whether the image is content or decorative.
 
 It's worth spending the time to get images right. Poor image strategies are responsible for frustration and annoyance for users. A good image strategy makes your site feel snappy and sharp, regardless of the user's device or network connection.
 

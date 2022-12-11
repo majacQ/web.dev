@@ -17,7 +17,7 @@ tags:
 
 TTI 메트릭은 페이지가 로드되기 시작한 시점부터 주요 하위 리소스가 로드되고 사용자 입력에 신속하게 안정적으로 응답할 수 있는 시점까지의 시간을 측정합니다.
 
-[웹 페이지의 성능 추적](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)을 기반으로 TTI를 계산하려면 다음 단계를 따르세요.
+[웹 페이지의 성능 추적](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/)을 기반으로 TTI를 계산하려면 다음 단계를 따르세요.
 
 1. [First Contentful Paint(최초 콘텐츠풀 페인트, FCP)](/fcp/)에서 시작합니다.
 2. 이 시점 이후부터 최소 5초 정도의 조용한 기간을 검색합니다. 여기서 *조용한 기간*이란 [긴 작업](/custom-metrics/#long-tasks-api)이 없고 전송 중 네트워크 GET 요청이 2개 미만인 기간을 뜻합니다.
@@ -45,7 +45,7 @@ TTI는 [실험실에서](/user-centric-performance-metrics/#in-the-lab) 가장 �
 
 ### 실험실 도구
 
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 - [WebPageTest](https://www.webpagetest.org/)
 
 {% Aside %} TTI는 현장에서 측정하는 것도 가능하지만, 사용자 상호 작용이 보고서에서 많은 편차를 일으키는 방식으로 페이지의 TTI에 영향을 줄 수 있으므로 권장하지 않습니다. 현장에서 페이지의 상호 작용을 이해하려면 [First Input Delay(최초 입력 지연, FID)](/fid/)를 측정해야 합니다. {% endAside %}
@@ -54,19 +54,19 @@ TTI는 [실험실에서](/user-centric-performance-metrics/#in-the-lab) 가장 �
 
 우수한 사용자 경험을 제공하기 위해 사이트는 **평균 모바일 하드웨어**에서 테스트할 때 상호 작용까지의 시간이 **5초** 미만이 될 수 있도록 해야 합니다.
 
-페이지의 TTI가 Lighthouse 성능 점수에 미치는 영향에 대한 자세한 내용은 [Lighthouse가 TTI 점수를 결정하는 방법](/interactive/#how-lighthouse-determines-your-tti-score)을 참조하세요.
+페이지의 TTI가 Lighthouse 성능 점수에 미치는 영향에 대한 자세한 내용은 [Lighthouse가 TTI 점수를 결정하는 방법](https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score)을 참조하세요.
 
 ## TTI를 개선하는 방법
 
-특정 사이트에 대한 TTI를 개선하는 방법을 알아보려면 Lighthouse 성능 감사를 실행하고 감사에서 제안하는 특정한 [기회](/lighthouse-performance/#opportunities)를 주의 깊게 살펴보시기 바랍니다.
+특정 사이트에 대한 TTI를 개선하는 방법을 알아보려면 Lighthouse 성능 감사를 실행하고 감사에서 제안하는 특정한 [기회](https://developer.chrome.com/docs/lighthouse/performance/#opportunities)를 주의 깊게 살펴보시기 바랍니다.
 
 모든 사이트에 대해 일반적으로 TTI를 개선하는 방법을 알아보려면 다음 성능 가이드를 참조하세요.
 
-- [JavaScript 축소](/unminified-javascript/)
-- [필요한 원본에 사전 연결](/uses-rel-preconnect/)
-- [핵심 요청 사전 로드](/uses-rel-preload/)
-- [타사 코드의 영향 줄이기](/third-party-summary/)
-- [크리티컬 요청 깊이 최소화](/critical-request-chains/)
-- [JavaScript 실행 시간 단축](/bootup-time/)
-- [메인 스레드 작업 최소화](/mainthread-work-breakdown/)
-- [요청 수를 낮게 유지하고 전송 크기를 작게 유지](/resource-summary/)
+- [JavaScript 축소](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/)
+- [필요한 원본에 사전 연결](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/)
+- [핵심 요청 사전 로드](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preload/)
+- [타사 코드의 영향 줄이기](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [크리티컬 요청 깊이 최소화](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)
+- [JavaScript 실행 시간 단축](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [메인 스레드 작업 최소화](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [요청 수를 낮게 유지하고 전송 크기를 작게 유지](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

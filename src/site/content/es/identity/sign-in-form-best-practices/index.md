@@ -37,7 +37,7 @@ El siguiente es un ejemplo de un formulario de inicio de sesión simple que mues
 - [Etiquete cada entrada con una `<label>`](#label).
 - Utilice los atributos de los elementos para [acceder a las funciones integradas del navegador](#element-attributes): `type`, `name`, `autocomplete`, `required`.
 - Otórgueles a los atributos de entrada `name` e `id` valores que no cambien entre cargas de página o implementaciones de sitios web.
-- Coloque el inicio de sesión [en su propio elemento &lt;form&gt;](#single-form).
+- Coloque el inicio de sesión [en su propio elemento &lt;form&gt;](#form).
 - [Asegure el envío exitoso del formulario](#submission).
 - Utilice [`autocomplete="new-password"`](#new-password) e [`id="new-password"`](#new-password) para ingresar la contraseña en un formulario de registro y para la nueva contraseña en un formulario de restablecimiento de contraseña.
 - Utilice [`autocomplete="current-password"`](#current-password) e [`id="current-password"`](#current-password) para ingresar la contraseña de inicio de sesión.
@@ -55,7 +55,7 @@ El siguiente es un ejemplo de un formulario de inicio de sesión simple que mues
 También hay dos API relativamente nuevas que no se tratan en este artículo, que pueden ayudarlo a crear una mejor experiencia de inicio de sesión:
 
 - [**WebOTP:**](/web-otp/) para enviar códigos de acceso de un solo uso o números PIN a través de SMS a teléfonos móviles. Esto puede permitirles a los usuarios seleccionar un número de teléfono como identificador (¡no es necesario ingresar una dirección de correo electrónico!). Además, también habilita la verificación en dos pasos para el inicio de sesión y los códigos de un solo uso para la confirmación del pago.
-- [**Gestión de credenciales**](https://developers.google.com/web/updates/2016/04/credential-management-api): para permitir que los desarrolladores almacenen y recuperen las credenciales de contraseña y credenciales federadas mediante programación. {% endAside %}
+- [**Gestión de credenciales**](https://developer.chrome.com/blog/credential-management-api/): para permitir que los desarrolladores almacenen y recuperen las credenciales de contraseña y credenciales federadas mediante programación. {% endAside %}
 
 ## Utilice HTML significativo {: #meaningful-html }
 
@@ -65,7 +65,7 @@ Utilice elementos creados para el trabajo: `<form>`, `<label>` y `<button>`. Est
 
 Es posible que tenga la tentación de agrupar las entradas en un `<div>` y manejar el envío de datos de entrada únicamente con JavaScript. Por lo general, es mejor usar un elemento plano [`<form>`](https://developer.mozilla.org/docs/Web/HTML/Element/form) a la antigua. Esto hace que su sitio sea accesible para lectores de pantalla y otros dispositivos de asistencia, habilita una variedad de funciones integradas del navegador, simplifica la creación de un inicio de sesión funcional básico para navegadores más antiguos y aún puede funcionar incluso si JavaScript falla.
 
-{: #single-form } {% Aside 'gotchas' %} Un error común es agrupar una página web completa en un solo formulario, pero esto puede causar problemas a los administradores de contraseñas del navegador y a la función autocompletar. Utilice un elemento &lt;form&gt; diferente para cada componente de la interfaz de usuario que necesite un formulario. Por ejemplo, si tiene un inicio de sesión y un espacio de búsqueda en la misma página, debe usar dos elementos de formulario. {% endAside %}
+{% Aside 'gotchas' %} Un error común es agrupar una página web completa en un solo formulario, pero esto puede causar problemas a los administradores de contraseñas del navegador y a la función autocompletar. Utilice un elemento &lt;form&gt; diferente para cada componente de la interfaz de usuario que necesite un formulario. Por ejemplo, si tiene un inicio de sesión y un espacio de búsqueda en la misma página, debe usar dos elementos de formulario. {% endAside %}
 
 ### Utilice `<label>` {: #label }
 
@@ -246,7 +246,7 @@ El tamaño y el relleno predeterminados para las entradas y los botones es demas
 
 Según la [Guía de accesibilidad de Android](https://support.google.com/accessibility/android/answer/7101858?hl=en-GB), el tamaño objetivo recomendado para los objetos de la pantalla táctil es de 7 a 10 mm. Las pautas de la interfaz de Apple sugieren 48x48 px, y el W3C sugiere [al menos 44x44 píxeles CSS](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html). Sobre esa base, agregue (al menos) alrededor de 15 px de relleno a los elementos de entrada y botones para dispositivos móviles, y alrededor de 10 px en dispositivos de escritorio. Pruebe esto con un dispositivo móvil real y un dedo o pulgar real. Debería estar en capacidad de tocar cómodamente cada una de sus entradas y botones.
 
-La auditoría de Lighthouse [Los objetivos táctiles no tienen el tamaño adecuado](/tap-targets/) puede ayudarlo a automatizar el proceso de detección de elementos de entrada que son demasiado pequeños.
+La auditoría de Lighthouse [Los objetivos táctiles no tienen el tamaño adecuado](https://developer.chrome.com/docs/lighthouse/seo/http-status-code/) puede ayudarlo a automatizar el proceso de detección de elementos de entrada que son demasiado pequeños.
 
 #### Diseñe para pulgares {: #design-for-thumbs }
 
@@ -262,7 +262,7 @@ Los navegadores de diferentes plataformas dimensionan las fuentes de manera dife
 
 Esto significa que debe usar un tamaño de píxeles más grande en el dispositivo móvil: un tamaño de `16px` en Chrome para equipos de escritorio es bastante legible, pero incluso con una buena visión es difícil leer `16px` en Chrome para Android. Puede establecer diferentes tamaños de píxeles de fuente para diferentes tamaños de ventana gráfica mediante las [consultas de medios](https://developers.google.com/web/fundamentals/design-and-ux/responsive#apply_media_queries_based_on_viewport_size). Un tamaño de `20px` es adecuado en dispositivos móviles, pero debe probarlo con amigos o colegas que tengan problemas de visión.
 
-La auditoría de Lighthouse [El documento no usa tamaños de fuente legibles](/font-size/) puede ayudarlo a automatizar el proceso de detección de texto que es demasiado pequeño.
+La auditoría de Lighthouse [El documento no usa tamaños de fuente legibles](https://developer.chrome.com/docs/lighthouse/seo/font-size/) puede ayudarlo a automatizar el proceso de detección de texto que es demasiado pequeño.
 
 ### Proporcione suficiente espacio entre las entradas {: #size-margins-correctly }
 
@@ -421,11 +421,11 @@ Una interfaz de usuario y una experiencia de usuario bien diseñadas pueden redu
 
 ## Siga aprendiendo {: #resources }
 
-- [Cree formas asombrosas](https://developers.google.com/web/fundamentals/design-and-ux/input/forms)
+- [Cree formas asombrosas](/learn/forms/)
 - [Prácticas recomendadas para el diseño de formularios para dispositivos móviles](https://www.smashingmagazine.com/2018/08/best-practices-for-mobile-form-design/)
 - [Controles de formulario más capaces](/more-capable-form-controls)
 - [Crear formularios accesibles](https://webaim.org/techniques/forms/)
-- [Optimización del flujo de inicio de sesión mediante la API de gestión de credenciales](https://developers.google.com/web/updates/2016/04/credential-management-api)
+- [Optimización del flujo de inicio de sesión mediante la API de gestión de credenciales](https://developer.chrome.com/blog/credential-management-api/)
 - [Verifique los números de teléfono en la web con la API de WebOTP](/web-otp/)
 
 Foto de [Meghan Schiereck](https://unsplash.com/photos/_XFObcM_7KU) en [Unsplash](https://unsplash.com).

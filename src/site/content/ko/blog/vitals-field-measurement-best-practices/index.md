@@ -71,7 +71,7 @@ getLCP(sendToAnalytics);
 
 일부 성능 메트릭은 페이지 로드가 완료되면 계산할 수 있는 반면 CLS와 같은 다른 성능 메트릭은 페이지의 전체 수명을 고려하며 페이지에서 언로드를 시작한 후에야 최종적으로 결정됩니다.
 
-하지만 이러한 방법은 특히 모바일에서 `beforeunload` 및 `unload` 이벤트를 모두 신뢰할 수 없으며 사용이 [권장되지 않기](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid) 때문에 문제가 될 수 있습니다. 이로 인해 페이지가 [Back-Forward Cache](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#page-navigation-cache)에 부적합해질 수 있기 때문입니다.
+하지만 이러한 방법은 특히 모바일에서 `beforeunload` 및 `unload` 이벤트를 모두 신뢰할 수 없으며 사용이 [권장되지 않기](https://developer.chrome.com/blog/page-lifecycle-api/#legacy-lifecycle-apis-to-avoid) 때문에 문제가 될 수 있습니다. 이로 인해 페이지가 [Back-Forward Cache](https://developer.chrome.com/blog/page-lifecycle-api/#what-is-the-back-forward-cache)에 부적합해질 수 있기 때문입니다.
 
 페이지의 전체 수명을 추적하는 메트릭의 경우 `visibilitychange` 이벤트 동안 페이지의 페이지의 가시성 상태가 `hidden`으로 변경될 때마다 메트릭의 현재 값을 보내는 것이 가장 좋습니다. 페이지의 가시성 상태가 `hidden`으로 변경되면 해당 페이지의 스크립트가 다시 실행될 수 있다는 보장이 없기 때문입니다. 이는 페이지 콜백이 실행되지 않고 브라우저 앱 자체를 닫을 수 있는 모바일 운영 체제에서 특히 그렇습니다.
 
@@ -111,7 +111,7 @@ Core Web Vitals 메트릭을 추적하고 보고하도록 분석 구현을 업�
 
 Core Web Vitals 메트릭을 측정하는 데 사용되는 모든 API는 [`buffered`](https://www.chromestatus.com/feature/5118272741572608) 플래그를 통해 비동기 및 지연된 스크립트 로드를 지원하도록 특별히 설계되었으므로 스크립트를 일찍 로드하기 위해 서두를 필요가 없습니다.
 
-페이지 로드 타임라인에서 나중에 계산할 수 없는 메트릭을 측정하는 경우라면 *초기에 실행해야 하는 코드만* 문서의 `<head>`에 인라인해야 합니다(그러므로 [렌더링 차단 요청이](/render-blocking-resources/) 아님). 그리고 나머지는 미루세요. 단일 메트릭에 필요하다고 해서 모든 분석을 초반에 로드할 필요는 없습니다.
+페이지 로드 타임라인에서 나중에 계산할 수 없는 메트릭을 측정하는 경우라면 *초기에 실행해야 하는 코드만* 문서의 `<head>`에 인라인해야 합니다(그러므로 [렌더링 차단 요청이](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/) 아님). 그리고 나머지는 미루세요. 단일 메트릭에 필요하다고 해서 모든 분석을 초반에 로드할 필요는 없습니다.
 
 ### 긴 작업을 생성하지 말 것
 

@@ -77,7 +77,7 @@ compilation target for traditional synchronisation primitives.
 
 `SharedArrayBuffer` has a complicated history. It was initially shipped in several browsers
 mid-2017, but had to be disabled in the beginning of 2018 due to discovery of [Spectre
-vulnerabilities](https://developers.google.com/web/updates/2018/02/meltdown-spectre). The particular
+vulnerabilities](https://developer.chrome.com/blog/meltdown-spectre/). The particular
 reason was that data extraction in Spectre relies on timing attacks—measuring execution time of a
 particular piece of code. To make this kind of attack harder, browsers reduced precision of standard
 timing APIs like `Date.now` and `performance.now`. However, shared memory, combined with a simple
@@ -86,7 +86,7 @@ timing](https://github.com/tc39/security/issues/3), and it's much harder to miti
 significantly throttling runtime performance.
 
 Instead, Chrome 68 (mid-2018) re-enabled `SharedArrayBuffer` again by leveraging [Site
-Isolation](https://developers.google.com/web/updates/2018/07/site-isolation)—a feature that puts
+Isolation](https://developer.chrome.com/blog/site-isolation)—a feature that puts
 different websites into different processes and makes it much more difficult to use side-channel
 attacks like Spectre. However, this mitigation was still limited only to Chrome desktop, as Site
 Isolation is a fairly expensive feature, and couldn't be enabled by default for all sites on

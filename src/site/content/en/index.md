@@ -12,11 +12,11 @@ intro:
   imageWidth: '333'
   imageHeight: '240'
 featureCard:
-  theme: 'dark'
-  title: 'A celebration of web design'
-  eyebrow: 'Event'
-  url: 'https://designcember.com'
-  background: 'https://web-dev.imgix.net/image/jxu1OdD7LKOGIDU7jURMpSH2lyK2/eLup3ce5FiasuQ3DX61F.jpg?auto=format'
+  theme: 'light'
+  title: 'Celebrate Chrometober with web tricks and treats.'
+  eyebrow: 'Featured'
+  url: 'https://web.dev/chrometober-2022'
+  background: 'https://web-dev.imgix.net/image/HodOHWjMnbNw56hvNASHWSgZyAf2/AwSceHfK5B3n1z1XSx1Z.gif'
 promoPanel:
   title: 'Chrome Dev Summit 2021'
   summary: 'Join the Chrome team for workshops, office hours, and learning lounges taking place throughout November.'
@@ -27,20 +27,8 @@ promoPanel:
   image: 'https://web-dev.imgix.net/image/jxu1OdD7LKOGIDU7jURMpSH2lyK2/KwS4L954TzN3KK3pWmtA.svg'
   imageWidth: '530'
   imageHeight: '483'
-pickedCaseStudyUrl: '/mainline-mensware/'
+pickedCaseStudyUrl: '/mishipay/'
 pickedCaseStudyTheme: 'light'
-pageSpeed:
-  eyebrow: 'PageSpeed Insights'
-  title: 'Measure performance with PageSpeed Insights'
-  summary: |
-    PageSpeed Insights is a tool for measuring the performance and Core Web Vitals of a page with lab and field data.
-  image: 'https://web-dev.imgix.net/image/VbAJIREinuYvovrBzzvEyZOpw5w1/6Ye3EKc6quNaopPrigno.png'
-  imageWidth: '546'
-  imageHeight: '421'
-  primaryButtonText: 'Try PageSpeed Insights'
-  primaryButtonUrl: 'https://pagespeed.web.dev/'
-  secondaryButtonText: 'Learn more'
-  secondaryButtonUrl: 'https://developers.google.com/speed/docs/insights/v5/about?hl=en-US&utm_source=PSI&utm_medium=incoming-link&utm_campaign=PSI#faq'
 courses:
   title: 'Featured courses'
   summary: 'Explore our structured learning paths to discover everything you need to know about building for the modern web.'
@@ -56,7 +44,7 @@ podcasts:
   buttonUrl: '/podcasts/'
 patterns:
   title: 'Patterns'
-  summary: 'A collection of code snippets to help you optmize your web projects.'
+  summary: 'A collection of code snippets to help you optimize your web projects.'
   buttonText: 'See all'
   buttonUrl: '/patterns/'
 ---

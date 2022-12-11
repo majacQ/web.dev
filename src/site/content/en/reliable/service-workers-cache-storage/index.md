@@ -46,6 +46,7 @@ having to worry about the network. That entails using the other piece of the
 puzzle: the Cache Storage API.
 
 ## The Cache Storage API
+{% BrowserCompat 'api.CacheStorage' %}
 
 The Cache Storage  API opens up a whole new range of possibilities, by giving
 developers complete control over the contents of the cache. Instead of relying
@@ -132,7 +133,7 @@ workers and the Cache Storage API are effectively lower-level building blocks,
 with a number of edge cases and "gotchas". There are some higher-level tools
 that can help smooth the difficult bits of those APIs, and provide all you need
 to build a production-ready service worker. The next guide covers one such tool:
-[Workbox](https://developers.google.com/web/tools/workbox/).
+[Workbox](https://developer.chrome.com/docs/workbox/).
 
 {% Aside 'success' %}
 Learn while having fun. Check out the new [Service Workies game!](https://serviceworkies.com/).

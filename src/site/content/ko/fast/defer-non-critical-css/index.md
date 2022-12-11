@@ -12,7 +12,7 @@ tags:
 
 CSS 파일은 [렌더링 차단 리소스](https://developers.google.com/web/tools/lighthouse/audits/blocking-resources)입니다. 브라우저가 페이지를 렌더링하기 전에 로드 및 처리해야 합니다. 불필요하게 큰 스타일이 포함된 웹 페이지는 렌더링하는 데 시간이 더 오래 걸립니다.
 
-이 가이드에서는 [중요 렌더링 경로](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/)를 최적화하고 [FCP(First Contentful Paint)](/fcp/)를 개선하기 위해 중요하지 않은 CSS를 연기하는 방법에 대해 배우게 됩니다.
+이 가이드에서는 [중요 렌더링 경로](/critical-rendering-path/)를 최적화하고 [FCP(First Contentful Paint)](/fcp/)를 개선하기 위해 중요하지 않은 CSS를 연기하는 방법에 대해 배우게 됩니다.
 
 ## 차선책으로 CSS 로드하기
 
@@ -30,9 +30,9 @@ CSS 파일은 [렌더링 차단 리소스](https://developers.google.com/web/too
 
 보고서는 값이 "1s"인 **First Contentful Paint** 메트릭과 **style.css** 파일을 가리키는 **렌더 차단 리소스 제거** 기회를 보여줍니다.
 
-<figure>% Img src="image/admin/eZtuQ2IwL3Mtnmz09bmp.png", alt="'1s'의 FCP를 표시하는 최적화되지 않은 페이지의 Lighthouse 보고서 및  '기회'" 아래 '차단 리소스 제거', width="800", height="640" %}</figure>
+<figure>{% Img src="image/admin/eZtuQ2IwL3Mtnmz09bmp.png", alt="'1초'의 FCP 및 'Opportunities' 아래에 'Eliminate blocking resources'가 표시되는 최적화되지 않은 페이지에 대한 Lighthouse 보고서, ", width="800", height="640" %}</figure>
 
-{% Aside %} 이 데모 사이트에 사용하는 CSS는 매우 작습니다.  더 큰 CSS 파일(프로덕션 시나리오에서 흔히 볼 수 있음)을 요청하는 경우 그리고 Lighthouse가 **폴드 상에 있는** 콘텐츠를  렌더링하는 동안 사용되지 않은 2048바이트 이상의 CSS 규칙이 페이지에 있음을 감지하면 **미사용 CSS 제거**라는 제안도 받게 됩니다. {% endAside %}
+{% Aside %} 이 데모 사이트에 사용하는 CSS는 매우 작습니다. 더 큰 CSS 파일(프로덕션 시나리오에서 흔히 볼 수 있음)을 요청하는 경우 그리고 Lighthouse가 **폴드 상에 있는** 콘텐츠를 렌더링하는 동안 사용되지 않은 2048바이트 이상의 CSS 규칙이 페이지에 있음을 감지하면 **미사용 CSS 제거**라는 제안도 받게 됩니다. {% endAside %}
 
 이 CSS가 렌더링을 차단하는 방법을 시각화하려면:
 
@@ -49,7 +49,7 @@ CSS 파일은 [렌더링 차단 리소스](https://developers.google.com/web/too
 
 이 페이지를 최적화하려면 "중요"로 간주되는 클래스를 알아야 합니다. 이를 위해 [Coverage Tool](https://developer.chrome.com/docs/devtools/css/reference/#coverage)을 사용합니다.
 
-1. DevTools에서 {`Control+Shift+P` 또는 `Command+Shift+P` (Mac)를 눌러 [명령 메뉴](https://developers.google.com/web/tools/chrome-devtools/command-menu)를 엽니다.
+1. DevTools에서 {`Control+Shift+P` 또는 `Command+Shift+P` (Mac)를 눌러 [명령 메뉴](https://developer.chrome.com/docs/devtools/command-menu/)를 엽니다.
 2. "Coverage"를 입력하고 **Show Coverage**를 선택합니다.
 3. 페이지를 다시 로드하고 커버리지 캡처를 시작하려면 **리로드** 버튼을 클릭하십시오.
 

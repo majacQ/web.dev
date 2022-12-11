@@ -91,7 +91,7 @@ RAILのコンテキストにおいて、**目標**と**ガイドライン**と�
 
 - アニメーションのようにプレッシャーの高いポイントでは、他の作業が一切必要なければ何もしない、何らかの作業が必要な場合は、極力最小の作業に抑えるのがカギです。可能であれば、60fpsに達する可能性を最大限に引き出せるように、100ミリ秒の応答を利用して高価な作業を事前に計算するようにします。
 
-- アニメーションを最適化するさまざまな戦略については、[Rendering Performance (パフォーマンスのレンダリング)](https://developers.google.com/web/fundamentals/performance/rendering)を参照してください。
+- アニメーションを最適化するさまざまな戦略については、[Rendering Performance (パフォーマンスのレンダリング)](/rendering-performance/)を参照してください。
 
 {% Aside %}すべての種類のアニメーションを認識します。アニメーションは、単なるUI効果ではありません。以下のインタラクションは、すべてアニメーションと見なされます。
 
@@ -133,7 +133,7 @@ RAILのコンテキストにおいて、**目標**と**ガイドライン**と�
 
 - 通常のモバイルユーザーのデバイスは2G、3G、または4G接続であると主張される場合がありますが、実際の[実効接続速度](/adaptive-serving-based-on-network-quality/#how-it-works)はパケットの損失やネットワークの変動により、大幅に遅くなることがよくあります。
 
-- [レンダリングをブロックするリソースを排除する](/render-blocking-resources/)。
+- [レンダリングをブロックするリソースを排除する](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/)。
 
 - 読み込みが完全に完了したという認識を生むために、すべてを5秒以内に読み込む必要はありません。[画像の遅延読み込み](/browser-level-image-lazy-loading/)、[JavaScriptのコード分割バンドル](/reduce-javascript-payloads-with-code-splitting/)、および[web.devで提案されているその他の最適化方法](/fast/)を検討してください。
 
@@ -151,71 +151,71 @@ RAILの評価を自動化するのに役立つツールはいくつかありま�
 
 ### Chrome DevTools
 
-[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools)は、ページの読み込み中または実行中に発生するすべてのイベントについて詳細な分析を提供します。**パフォーマンス**パネルのUIを理解するには、[Get Started With Analyzing Runtime Performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance)を参照してください。
+[Chrome DevTools](https://developer.chrome.com/docs/devtools/)は、ページの読み込み中または実行中に発生するすべてのイベントについて詳細な分析を提供します。**パフォーマンス**パネルのUIを理解するには、[Get Started With Analyzing Runtime Performance](https://developer.chrome.com/docs/devtools/evaluate-performance/)を参照してください。
 
 以下のDevTools機能は特に関連性が高いと言えます。
 
-- さほど強力でないデバイスをシミュレートするために、[CPUをスロットルする](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#cpu-throttle)。
+- さほど強力でないデバイスをシミュレートするために、[CPUをスロットルする](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#cpu-throttle)。
 
-- 低速の接続をシミュレートするために、[ネットワークをスロットルする](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#network-throttle)。
+- 低速の接続をシミュレートするために、[ネットワークをスロットルする](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#network-throttle)。
 
-- [メインスレッドのアクティビティを表示](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#main)して、記録中にメインスレッドで発生したすべてのイベントを表示する。
+- [メインスレッドのアクティビティを表示](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#main)して、記録中にメインスレッドで発生したすべてのイベントを表示する。
 
-- [メインスレッドのアクティビティをテーブルに表示](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#activities)して、最も時間を要したものの順にアクティビティを並べ替えます。
+- [メインスレッドのアクティビティをテーブルに表示](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#activities)して、最も時間を要したものの順にアクティビティを並べ替えます。
 
-- アニメーションが本当にスムーズに実行されているかを評価するために、[1秒あたりのフレーム数（FPS）](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#fps)を分析する。
+- アニメーションが本当にスムーズに実行されているかを評価するために、[1秒あたりのフレーム数（FPS）](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#fps)を分析する。
 
 - [**パフォーマンスモニター**を使用して、CPU使用率、JSヒープサイズ、DOMノード、1秒あたりのレイアウトなど](https://developers.google.com/web/updates/2017/11/devtools-release-notes#perf-monitor)をリアルタイムに監視します。
 
-- **ネットワーク**セクションで記録している間に発生した[ネットワーク要求を視覚化](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#network)する。
+- **ネットワーク**セクションで記録している間に発生した[ネットワーク要求を視覚化](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#network)する。
 
-- ページの読み込み中またはアニメーションの起動中にページがどのようにレンダリングされたかを正確に再生するために、[記録中にスクリーンショットをキャプチャ](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#screenshots)する。
+- ページの読み込み中またはアニメーションの起動中にページがどのようにレンダリングされたかを正確に再生するために、[記録中にスクリーンショットをキャプチャ](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#screenshots)する。
 
-- ユーザーがページを操作した後にページで何が起こったかをすばやく特定するために、[インタラクションを表示](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#interactions)する。
+- ユーザーがページを操作した後にページで何が起こったかをすばやく特定するために、[インタラクションを表示](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#interactions)する。
 
-- 潜在的に問題のあるリスナーが起動するたびに、ページを強調表示することにより、[スクロールパフォーマンスの問題をリアルタイムに見つける](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#scrolling-performance-issues)。
+- 潜在的に問題のあるリスナーが起動するたびに、ページを強調表示することにより、[スクロールパフォーマンスの問題をリアルタイムに見つける](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#scrolling-performance-issues)。
 
-- アニメーションのパフォーマンスに悪影響を与える可能性がある高価なペイントイベントを特定するために、[ペイントイベントをリアルタイムに表示](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#paint-flashing)する。
+- アニメーションのパフォーマンスに悪影響を与える可能性がある高価なペイントイベントを特定するために、[ペイントイベントをリアルタイムに表示](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#paint-flashing)する。
 
 ### Lighthouse
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse)は、Chrome DevTools、 [web.dev / measure](/measure/) 、Chrome拡張機能、Node.jsモジュール、およびWebPageTest内で利用できます。 URLを指定すると、3G接続が遅いミッドレンジデバイスをシミュレートし、ページで一連の監査を実行してから、読み込みパフォーマンスに関するレポートと改善方法の提案を行います。
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)は、Chrome DevTools、 [web.dev / measure](/measure/) 、Chrome拡張機能、Node.jsモジュール、およびWebPageTest内で利用できます。 URLを指定すると、3G接続が遅いミッドレンジデバイスをシミュレートし、ページで一連の監査を実行してから、読み込みパフォーマンスに関するレポートと改善方法の提案を行います。
 
 以下の監査は特に関連性が高いと言えます。
 
 **応答**
 
-- [Max Potential First Input Delay (最初の入力の最大潜在遅延)](/lighthouse-max-potential-fid/)。メインスレッドのアイドル時間に基づいて、アプリがユーザー入力に応答するのにかかる時間を推定する。
+- [Max Potential First Input Delay (最初の入力の最大潜在遅延)](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/)。メインスレッドのアイドル時間に基づいて、アプリがユーザー入力に応答するのにかかる時間を推定する。
 
-- [Does not use passive listeners to improve scrolling performance (スクロールパフォーマンスを向上させるためにパッシブリスナーを使用していない)](/uses-passive-event-listeners/)。
+- [Does not use passive listeners to improve scrolling performance (スクロールパフォーマンスを向上させるためにパッシブリスナーを使用していない)](https://developer.chrome.com/docs/lighthouse/best-practices/uses-passive-event-listeners/)。
 
-- [Total Blocking Time (合計ブロッキング時間)](/lighthouse-total-blocking-time/)。マウスをクリックしたり、画面をタップしたり、キーボードを押すといった、ユーザー入力への応答がブロックされる合計時間を測定する。
+- [Total Blocking Time (合計ブロッキング時間)](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/)。マウスをクリックしたり、画面をタップしたり、キーボードを押すといった、ユーザー入力への応答がブロックされる合計時間を測定する。
 
 - [Time To Interactive (インタラクティブになるまでの時間)](https://developers.google.com/web/tools/lighthouse/audits/consistently-interactive)。ユーザーがすべてのページ要素を絶えず操作できるようになるまでの時間を測定する。
 
 **読み込み**
 
-- [Does not register a service worker that controls page and start_url (pageとstart_urlを制御するServiceWorkerを登録しない](/service-worker/)。Service Workerは、ユーザーのデバイスに共通のリソースをキャッシュして、ネットワーク経由でリソースをフェッチするために費やす時間を削減できます。
+- [Does not register a service worker that controls page and start_url (pageとstart_urlを制御するServiceWorkerを登録しない](https://developer.chrome.com/docs/lighthouse/pwa/service-worker/)。Service Workerは、ユーザーのデバイスに共通のリソースをキャッシュして、ネットワーク経由でリソースをフェッチするために費やす時間を削減できます。
 
-- [Page load is not fast enough on mobile networks (モバイルネットワークにおけるページの読み込み速度が十分でない)](/load-fast-enough-for-pwa/)。
+- [Page load is not fast enough on mobile networks (モバイルネットワークにおけるページの読み込み速度が十分でない)](https://developer.chrome.com/docs/lighthouse/pwa/load-fast-enough-for-pwa/)。
 
 - [Eliminate render-blocking resources (レンダリングをブロックするリソースを排除する)](https://developers.google.com/web/tools/lighthouse/audits/blocking-resources)。
 
-- [Defer offscreen images (オフスクリーンの画像を延期する)](/offscreen-images/)。オフスクリーン画像の読み込みは、必要になるまで延期します。
+- [Defer offscreen images (オフスクリーンの画像を延期する)](https://developer.chrome.com/docs/lighthouse/performance/offscreen-images/)。オフスクリーン画像の読み込みは、必要になるまで延期します。
 
-- [Properly size images (画像を適切なサイズにする)](/uses-responsive-images/)。モバイルビューポートでレンダリングされるサイズよりも大幅に大きい画像を提供してはいけません。
+- [Properly size images (画像を適切なサイズにする)](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/)。モバイルビューポートでレンダリングされるサイズよりも大幅に大きい画像を提供してはいけません。
 
-- [Avoid chaining critical requests (重要なリクエストを連鎖させない)](/critical-request-chains/)。
+- [Avoid chaining critical requests (重要なリクエストを連鎖させない)](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)。
 
-- [Does not use HTTP/2 for all of its resources (すべてのリソースにHTTP / 2を使用していない)](/uses-http2/)。
+- [Does not use HTTP/2 for all of its resources (すべてのリソースにHTTP / 2を使用していない)](https://developer.chrome.com/docs/lighthouse/best-practices/uses-http2/)。
 
-- [Efficiently encode images (画像を効率的にエンコードしている)](/uses-optimized-images/)。
+- [Efficiently encode images (画像を効率的にエンコードしている)](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/)。
 
-- [Enable text compression (テキスト圧縮を有効にしている)](/uses-text-compression/)。
+- [Enable text compression (テキスト圧縮を有効にしている)](https://developer.chrome.com/docs/lighthouse/performance/uses-text-compression/)。
 
-- [Avoid enormous network payloads (巨大なネットワークペイロードを避けている)](/total-byte-weight/)。
+- [Avoid enormous network payloads (巨大なネットワークペイロードを避けている)](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/)。
 
-- [Avoid an excessive DOM size (過度のDOMサイズを避けている)](/dom-size/)。ページのレンダリングに必要なDOMノードのみを渡すことにより、ネットワークバイトを削減します。
+- [Avoid an excessive DOM size (過度のDOMサイズを避けている)](https://developer.chrome.com/docs/lighthouse/performance/dom-size/)。ページのレンダリングに必要なDOMノードのみを渡すことにより、ネットワークバイトを削減します。
 
 ### WebPageTest
 

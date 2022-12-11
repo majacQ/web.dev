@@ -24,7 +24,7 @@ over the coming year.
 ## Lighthouse now supports Performance Budgeting
 
 
-[LightWallet](https://developers.google.com/web/tools/lighthouse/audits/budgets)
+[LightWallet](/use-lighthouse-for-performance-budgets/)
 is a new feature in Lighthouse that adds support for [performance
 budgets](/fast#set-performance-budgets). Performance budgets establish
 standards for the performance of your site. More importantly, they make it is
@@ -36,7 +36,7 @@ easy to identify and fix performance regressions before they ship.
 
 LightWallet is available in the newest version of the Lighthouse CLI and only
 takes a couple minutes to set up. These[
-instructions](https://developers.google.com/web/tools/lighthouse/audits/budgets)
+instructions](/use-lighthouse-for-performance-budgets/)
 provide more information.
 
 Unsure what your budgets should be? Try our experimental [Performance Budget
@@ -109,7 +109,7 @@ addition.
 
 Here's a [demo](https://glitch.com/~truth-bookcase) on Glitch of using display
 with multiple font families. Try it out with [DevTools network
-emulation](https://developers.google.com/web/tools/chrome-devtools/network/#throttle)
+emulation](https://developer.chrome.com/docs/devtools/network/#throttle)
 to see the impact of `font-display: swap`.
 
 ## Watch for more

@@ -37,7 +37,7 @@ codelabs:
 - [각 입력에`<label>` 레이블을 지정하십시오](#label).
 - 요소 속성을 사용하여 [내장 브라우저 기능(](#element-attributes)`type`, `name`, `autocomplete`, `required`)에 액세스합니다.
 - 입력 `name` 및 `id` 속성은 페이지 로드나 웹사이트 배포 간에 변하지 않는 안정적인 값을 부여합니다.
-- [자체 &lt;form&gt; 요소에](#single-form) 로그인을 넣습니다.
+- [자체 &lt;form&gt; 요소에](#form) 로그인을 넣습니다.
 - [성공적인 양식 제출을 확인하십시오](#submission) .
 - 로그인 양식의 비밀번호 입력과 재설정 비밀번호 형식의 새 비밀번호 입력에는 [`autocomplete="new-password"`](#new-password) 및 [`id="new-password"`](#new-password)를 사용합니다.
 - 로그인 비밀번호 입력에 [`autocomplete="current-password"`](#current-password) 및 [`id="current-password"`](#current-password)를 사용합니다.
@@ -55,7 +55,7 @@ codelabs:
 또한 더 나은 로그인 환경을 구축하는 데 도움이 될 수 있는 이 문서에서 다루지 않은 두 가지 비교적 새로운 API가 있습니다.
 
 - [**WebOTP**](/web-otp/): SMS를 통해 휴대폰으로 일회용 비밀번호 또는 PIN 번호를 전달합니다. 이를 통해 사용자는 전화번호를 식별자로 선택할 수 있고(이메일 주소를 입력할 필요가 없음!) 로그인을 위한 2단계 인증과 결제 확인을 위한 일회성 코드를 사용할 수 있습니다.
-- [**자격 증명 관리**](https://developers.google.com/web/updates/2016/04/credential-management-api): 개발자가 비밀번호 자격 증명 및 연합 자격 증명을 프로그래밍 방식으로 저장 및 검색할 수 있도록 합니다. {% endAside %}
+- [**자격 증명 관리**](https://developer.chrome.com/blog/credential-management-api/): 개발자가 비밀번호 자격 증명 및 연합 자격 증명을 프로그래밍 방식으로 저장 및 검색할 수 있도록 합니다. {% endAside %}
 
 ## 의미 있는 HTML 사용 {: #meaningful-html }
 
@@ -65,7 +65,7 @@ codelabs:
 
 `<div>`로 래핑하고 순수 자바스크립트로 입력 데이터 제출을 처리하고 싶을 수 있습니다. [`<form>`](https://developer.mozilla.org/docs/Web/HTML/Element/form) 요소를 사용하는 것이 좋습니다. 이렇게 하면 화면 판독기 및 기타 보조 장치에서 사이트에 액세스할 수 있고, 다양한 내장 브라우저 기능이 활성화되고, 이전 브라우저를 위한 기본 기능 로그인을 더 간단하게 구축할 수 있으며, JavaScript가 실패하더라도 계속 작동할 수 있습니다.
 
-{: #single-form } {% Aside 'gotchas' %} 일반적인 실수는 전체 웹페이지를 단일 형식으로 래핑하는 것이지만 이는 브라우저 비밀번호 관리자 및 자동 완성에 문제를 일으킬 수 있습니다. 양식이 필요한 각 UI 구성 요소에 대해 다른 &lt;form&gt;을 사용합니다. 예를 들어 동일한 페이지에서 로그인과 검색이 있는 경우 두 개의 양식 요소를 사용해야 합니다. {% endAside %}
+{% Aside 'gotchas' %} 일반적인 실수는 전체 웹페이지를 단일 형식으로 래핑하는 것이지만 이는 브라우저 비밀번호 관리자 및 자동 완성에 문제를 일으킬 수 있습니다. 양식이 필요한 각 UI 구성 요소에 대해 다른 &lt;form&gt;을 사용합니다. 예를 들어 동일한 페이지에서 로그인과 검색이 있는 경우 두 개의 양식 요소를 사용해야 합니다. {% endAside %}
 
 ### `<label>` 사용 {: #label }
 
@@ -246,7 +246,7 @@ codelabs:
 
 [Android 접근성 지침](https://support.google.com/accessibility/android/answer/7101858?hl=en-GB)에 따르면 터치스크린 개체의 권장 대상 크기는 7–10mm입니다. Apple 인터페이스 지침은 48x48 픽셀을 제안하고 W3C는 [최소 44x44 CSS 픽셀](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html)을 제안합니다. 이를 기반으로 모바일의 경우 입력 요소 및 버튼에 약 15픽셀, 데스크톱에서 약 10픽셀의 패딩을 추가합니다. 실제 모바일 장치와 실제 손가락 또는 엄지 손가락으로 이것을 시도하십시오. 각 입력과 버튼을 편안하게 누를 수 있어야 합니다.
 
-[탭 대상의 크기가 적절하지 않습니다.](/tap-targets/) Lighthouse 감사는 너무 작은 입력 요소를 감지하는 프로세스를 자동화하는 데 도움이 될 수 있습니다.
+[탭 대상의 크기가 적절하지 않습니다.](https://developer.chrome.com/docs/lighthouse/seo/http-status-code/) Lighthouse 감사는 너무 작은 입력 요소를 감지하는 프로세스를 자동화하는 데 도움이 될 수 있습니다.
 
 #### 엄지손가락을 위한 디자인 {: #design-for-thumbs }
 
@@ -262,7 +262,7 @@ codelabs:
 
 즉, 모바일에서는 더 큰 픽셀 크기를 사용해야 합니다. `16px`는 꽤 읽을 수 있지만 시력이 좋아도 Android용 Chrome에서는 `16px` [미디어 쿼리](https://developers.google.com/web/fundamentals/design-and-ux/responsive#apply_media_queries_based_on_viewport_size)를 사용하여 다양한 표시 영역 크기에 대해 다른 글꼴 픽셀 크기를 설정할 수 있습니다. `20px`가 적당하지만 시력이 좋지 않은 친구나 동료와 함께 테스트해야 합니다.
 
-[문서에서 읽을 수 있는 글꼴 크기를 사용하지 않습니다.](/font-size/) Lighthouse 감사를 사용하면 너무 작은 텍스트를 감지하는 프로세스를 자동화할 수 있습니다.
+[문서에서 읽을 수 있는 글꼴 크기를 사용하지 않습니다.](https://developer.chrome.com/docs/lighthouse/seo/font-size/) Lighthouse 감사를 사용하면 너무 작은 텍스트를 감지하는 프로세스를 자동화할 수 있습니다.
 
 ### 입력 사이에 충분한 공간 제공 {: #size-margins-correctly }
 
@@ -421,11 +421,11 @@ HTML 양식 요소 및 속성에는 기본 유효성 검사를 위한 기본 제
 
 ## 학습 계속 {: #resources }
 
-- [놀라운 양식 만들기](https://developers.google.com/web/fundamentals/design-and-ux/input/forms)
+- [놀라운 양식 만들기](/learn/forms/)
 - [모바일 양식 디자인 모범 사례](https://www.smashingmagazine.com/2018/08/best-practices-for-mobile-form-design/)
 - [더 많은 기능을 갖춘 양식 컨트롤](/more-capable-form-controls)
 - [액세스 가능한 양식 만들기](https://webaim.org/techniques/forms/)
-- [Credential Management API를 사용하여 로그인 흐름 간소화](https://developers.google.com/web/updates/2016/04/credential-management-api)
+- [Credential Management API를 사용하여 로그인 흐름 간소화](https://developer.chrome.com/blog/credential-management-api/)
 - [WebOTP API로 웹에서 전화번호 확인](/web-otp/)
 
 사진 제공: [Unsplash](https://unsplash.com)에서 [Meghan Schiereck](https://unsplash.com/photos/_XFObcM_7KU)

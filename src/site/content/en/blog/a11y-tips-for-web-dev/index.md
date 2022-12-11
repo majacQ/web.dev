@@ -163,7 +163,7 @@ to help them with reading text, so it's important to ensure text alternatives ex
   or flash, which can cause [issues](http://www.w3.org/TR/WCAG20/#seizure)
   for some users.
 
-  The [`prefers-reduced-motion`](https://developers.google.com/web/updates/2019/03/prefers-reduced-motion#too_much_motion_in_real_life_and_on_the_web)
+  The [`prefers-reduced-motion`](/prefers-reduced-motion/#too-much-motion-in-real-life-and-on-the-web)
   CSS media query allows you to limit animations
   and autoplaying videos for users who prefer reduced motion:
 
@@ -193,7 +193,7 @@ to spread awareness of best practices in your team:
 
 ## Are your UI components accessible?
 
-**Summary (tl;dr)**
+**Summary**
 
 When auditing your page's UI components for accessibility, ask yourself:
 
@@ -453,7 +453,7 @@ debugging the accessibility of your visual components.
   for your framework or browser of choice.
   [Axe Puppeteer](https://www.deque.com/blog/axe-and-attest-integration-puppeteer/)
   can be used for writing automated accessibility tests.
-- The [Lighthouse](https://developers.google.com/web/tools/lighthouse)
+- The [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
   Accessibility audits provide helpful insights for discovering common accessibility issues.
   The accessibility score is a weighted average of all accessibility audits
   based on [Axe user impact assessments](https://github.com/dequelabs/axe-core/blob/develop/doc/rule-descriptions.md).

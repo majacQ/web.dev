@@ -59,7 +59,7 @@ tags:
 
 {% Aside '注意' %}为确保旧版浏览器可以正确解析属性，请使用逗号分隔属性。{% endAside %}
 
-[没有包含`width`或`initial-scale`的`<meta name="viewport">`标签](/viewport/) Lighthouse 审计可以帮助您自动确保您的 HTML 文档正确使用了可视区域元标签。
+[没有包含`width`或`initial-scale`的`<meta name="viewport">`标签](https://developer.chrome.com/docs/lighthouse/pwa/viewport/) Lighthouse 审计可以帮助您自动确保您的 HTML 文档正确使用了可视区域元标签。
 
 ### 确保可视区域的可访问性 {: #accessible-viewport }
 
@@ -77,7 +77,7 @@ tags:
 
 在开发带有元可视区域标签的移动端网站时，很容易意外创建尺寸与指定可视区域不太匹配的页面内容。例如，若显示图像的宽度大于可视区域宽度，就可能会导致可视区域水平滚动。您应该调整内容来匹配可视区域的宽度，使用户无需进行水平滚动。
 
-[内容尺寸与可视区域不匹配](/content-width/)的 Lighthouse 审计可以帮助您自动检测溢出内容。
+[内容尺寸与可视区域不匹配](https://developer.chrome.com/docs/lighthouse/pwa/content-width/)的 Lighthouse 审计可以帮助您自动检测溢出内容。
 
 ### 图像 {: #images }
 
@@ -326,8 +326,8 @@ CSS 网格布局使您能够非常直观地创建灵活的网格。如果考虑�
 
 如需在不同的断点下查看您的页面：
 
-请[打开 DevTools](https://developers.google.com/web/tools/chrome-devtools#open)，然后开启[设备模式](https://developers.google.com/web/tools/chrome-devtools/device-mode#toggle)。默认情况下开启的是[响应模式](https://developers.google.com/web/tools/chrome-devtools/device-mode#responsive)。
+请[打开 DevTools](https://developer.chrome.com/docs/devtools/open/)，然后开启[设备模式](https://developer.chrome.com/docs/devtools/device-mode/#toggle)。默认情况下开启的是[响应模式](https://developer.chrome.com/docs/devtools/device-mode/#responsive)。
 
-要想查看您的媒体查询，请打开设备模式菜单并选择[显示媒体查询](https://developers.google.com/web/tools/chrome-devtools/device-mode#queries)，您的断点将以彩色条的形式显示在页面上方。
+要想查看您的媒体查询，请打开设备模式菜单并选择[显示媒体查询](https://developer.chrome.com/docs/devtools/device-mode/#queries)，您的断点将以彩色条的形式显示在页面上方。
 
 单击其中一个彩色条来查看对应的媒体查询处于活跃状态时的页面效果。右键单击一个彩色条可以跳转至媒体查询定义。

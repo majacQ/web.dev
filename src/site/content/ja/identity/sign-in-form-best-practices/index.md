@@ -37,7 +37,7 @@ codelabs:
 - [各入力に `<label>` タグを付ける](#label) 。
 - 要素の属性を使って、[組み込みのブラウザ機能にアクセスする](#element-attributes) (`type` 、`name` 、`autocomplete` 、`required`)。
 - 入力の `name` と `id` 属性に、ページの読み込みやウェブサイトのデプロイ中に変更されない安定した値を指定する。
-- サインインを[独自の &lt;form&gt; 要素に配置する](#single-form)。
+- サインインを[独自の &lt;form&gt; 要素に配置する](#form)。
 - [フォームが正常に送信されることを確認する](#submission)。
 - サインアップフォームのパスワード入力と reset-password フォームの新しいパスワードに、[`autocomplete="new-password"`](#new-password) と [`id="new-password"`](#new-password) を使用する。
 - サインインパスワードの入力に、[`autocomplete="current-password"`](#current-password) と [`id="current-password"`](#current-password) を使用する。
@@ -55,7 +55,7 @@ codelabs:
 また、この記事では取り上げませんが、サインインの体験を向上させるのに役立つ比較的新しい API が 2 つあります。
 
 - [**WebOTP**](/web-otp/): SMS を使って携帯電話にワンタイムパスコードまたは PIN 番号を送信します。これにより、ユーザーは電話番号を識別子として選択できる (メールアドレスを入力する必要はありません！) ほか、サインインの際に使う 2 要素認証と支払いの確認に使うワンタイムコードも利用できるようになります。
-- [**認証情報管理**](https://developers.google.com/web/updates/2016/04/credential-management-api): 開発者がプログラムを使ってパスワードの認証情報と統合された認証情報を保存および取得できるようにします。{% endAside %}
+- [**認証情報管理**](https://developer.chrome.com/blog/credential-management-api/): 開発者がプログラムを使ってパスワードの認証情報と統合された認証情報を保存および取得できるようにします。{% endAside %}
 
 ## 用途がはっきりした HTML を使用する {: #meaningful-html }
 
@@ -65,7 +65,7 @@ codelabs:
 
 入力を `<div>` 要素でラップして、送信されてくる入力データを純粋に JavaScript だけで処理しようと考えることがあるかもしれません。多くの場合は、昔ながらの [`<form>`](https://developer.mozilla.org/docs/Web/HTML/Element/form) 要素を使用する方がベターでしょう。これにより、スクリーンリーダーや他の支援デバイスがサイトにアクセスできるようになり、ブラウザのさまざまな組み込み機能が有効になり、古いブラウザーに対してベーシックで実用的なサインインを簡単に構築できるようになり、JavaScript が失敗した場合でも機能させることができます。
 
-{: #single-form } {% Aside 'gotchas' %} ウェブページ全体を 1 つのフォームでラップするというミスがよく見られます。これはブラウザーのパスワードマネージャーと自動入力機能にとって問題となる恐れがあります。フォームを必要とする UI コンポーネントごとに別の &lt;form&gt; を使用します。たとえば、同じページにサインイン機能と検索機能がある場合は、2 つのフォーム要素を使用する必要があります。{% endAside %}
+{% Aside 'gotchas' %} ウェブページ全体を 1 つのフォームでラップするというミスがよく見られます。これはブラウザーのパスワードマネージャーと自動入力機能にとって問題となる恐れがあります。フォームを必要とする UI コンポーネントごとに別の &lt;form&gt; を使用します。たとえば、同じページにサインイン機能と検索機能がある場合は、2 つのフォーム要素を使用する必要があります。{% endAside %}
 
 ### `<label>` を使用する {: #label }
 
@@ -246,7 +246,7 @@ Amazon や eBay を含む一部のサイトでは、電子メールアドレス/
 
 [Android のアクセシビリティガイダンスに](https://support.google.com/accessibility/android/answer/7101858?hl=en-GB)よると、タッチスクリーンオブジェクトの推奨ターゲットサイズは 7〜10mm です。Apple インターフェイスガイドラインは、48x48 ピクセルを提案し、W3C は[少なくとも 44x44 CSS ピクセル](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html)を提案しています。その上で、モバイルの入力要素とボタンに (少なくとも) 約15ピクセルのパディングを追加し、デスクトップの場合は約10ピクセルを追加します。実際のモバイルデバイスと実際の指または親指でこれを試してください。各入力とボタンを快適にタップできるはずです。
 
-Lighthouse による [Tap targets are not sized appropriately (タップターゲットのサイズが適切でない)](/tap-targets/) 監査は、小さすぎる入力要素を検出するプロセスを自動化するのに役立ちます。
+Lighthouse による [Tap targets are not sized appropriately (タップターゲットのサイズが適切でない)](https://developer.chrome.com/docs/lighthouse/seo/http-status-code/) 監査は、小さすぎる入力要素を検出するプロセスを自動化するのに役立ちます。
 
 #### 親指のデザイン {: #design-for-thumbs}
 
@@ -262,7 +262,7 @@ Lighthouse による [Tap targets are not sized appropriately (タップター�
 
 つまり、モバイルではもっと大きなピクセルサイズを使用する必要があります (デスクトップ版の Chrome だと、`16px` ピクセルはとても読みやすいですが、Android 版の Chrome だと、`16px` のテキストは視力が高い人でも読みにくいでしょう。[メディアクエリ](https://developers.google.com/web/fundamentals/design-and-ux/responsive#apply_media_queries_based_on_viewport_size)を使用すれば、ビューポートの各サイズに異なるフォントピクセルサイズを設定できます。モバイルでは `20px` がちょうどいいと思いますが、視力の弱い友人や同僚に見せてみるべきだと思います。
 
-Lighthouse による [Document doesn't use legible font sizes (ドキュメントは読みやすいフォントサイズを使用していない)](/font-size/) e監査は、小さすぎるテキストを検出するプロセスを自動化するのに役立ちます。
+Lighthouse による [Document doesn't use legible font sizes (ドキュメントは読みやすいフォントサイズを使用していない)](https://developer.chrome.com/docs/lighthouse/seo/font-size/) e監査は、小さすぎるテキストを検出するプロセスを自動化するのに役立ちます。
 
 ### 各入力の間に十分なスペースを設ける {: #size-margins-correctly}
 
@@ -421,11 +421,11 @@ UI と UX を適切に設計すれば、サインインフォームからの離�
 
 ## 学習を続けしましょう {: #resources}
 
-- [Create Amazing Forms (すばらしいフォームを作成する)](https://developers.google.com/web/fundamentals/design-and-ux/input/forms)
+- [Create Amazing Forms (すばらしいフォームを作成する)](/learn/forms/)
 - [Best Practices For Mobile Form Design (モバイルフォームデザインのベストプラクティス)](https://www.smashingmagazine.com/2018/08/best-practices-for-mobile-form-design/)
 - [More capable form controls (より細かく機能するフォームコントロール)](/more-capable-form-controls)
 - [Creating Accessible Forms (使いやすいフォームの作成)](https://webaim.org/techniques/forms/)
-- [Streamlining the Sign-in Flow Using Credential Management API (認証情報管理 API を使用したサインインフローの合理化)](https://developers.google.com/web/updates/2016/04/credential-management-api)
+- [Streamlining the Sign-in Flow Using Credential Management API (認証情報管理 API を使用したサインインフローの合理化)](https://developer.chrome.com/blog/credential-management-api/)
 - [WebOTPAPIを使用してWeb上の電話番号を確認する](/web-otp/)
 
 写真は、[Unsplash](https://unsplash.com) の [Meghan Schiereck 氏](https://unsplash.com/photos/_XFObcM_7KU) にご提供いただきました。

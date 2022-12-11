@@ -64,9 +64,9 @@ and [FCP](/fcp/). Specific optimizations included:
     network](/content-delivery-networks/).
 +   [Lazy loading images](/browser-level-image-lazy-loading/)
     with `loading="lazy"`.
-+   [Server-side rendering](https://developers.google.com/web/updates/2019/02/rendering-on-the-web)
++   [Server-side rendering](/rendering-on-the-web/)
     of
-    [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path)
+    [critical rendering path](/critical-rendering-path/)
     content.
 +   [Preloading and preconnecting](/fast/#optimize-your-resource-delivery)
     critical resources to minimize handshake times.
@@ -90,7 +90,7 @@ different metrics:
 +   CLS improved 72%.
 +   Blocking JS requests reduced 100% and blocking CSS requests 80%.
 +   [Long tasks](/long-tasks-devtools/) reduced 72%.
-+   [First CPU Idle](/first-cpu-idle/) improved 25%.
++   [First CPU Idle](https://developer.chrome.com/docs/lighthouse/performance/first-cpu-idle/) improved 25%.
 
 Over the same time frame, real user monitoring data (also known as [field
 data](/how-to-measure-speed/#lab-data-vs-field-data)) showed that

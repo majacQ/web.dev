@@ -2,14 +2,14 @@
 layout: post
 title: Photoshop's journey to the web
 subhead: >
-  The idea of running software as complex as Photoshop directly in the browser would have been hard to imagine just a few years ago. However, by using various new standardized web technologies, Adobe has now brought a public beta of Photoshop to the web.
+  The idea of running software as complex as Photoshop directly in the browser would have been hard to imagine just a few years ago. However, by using various new web technologies, Adobe has now brought a public beta of Photoshop to the web.
 authors:
   - nattestad
   - nabeelalshamma
 description: >
-  Over the last three years, Chrome has been working to empower web applications that want to push the boundaries of what's possible in the browser. One such web application has been Photoshop. The idea of running software as complex as Photoshop directly in the browser would have been hard to imagine just a few years ago. However, by using various new standardized web technologies, Adobe has now brought a public beta of Photoshop to the web.
+  Over the last three years, Chrome has been working to empower web applications that want to push the boundaries of what's possible in the browser. One such web application has been Photoshop. The idea of running software as complex as Photoshop directly in the browser would have been hard to imagine just a few years ago. However, by using various new web technologies, Adobe has now brought a public beta of Photoshop to the web.
 date: 2021-10-26
-updated: 2022-02-14
+updated: 2022-05-12
 hero: image/8WbTDNrhLsU0El80frMBGE4eMCD3/pYiISdhsJe3oEL871Dqp.png
 alt: A part of Photoshop's user interface.
 tags:
@@ -17,7 +17,12 @@ tags:
   - capabilities
 ---
 
-Over the last three years, Chrome has been working to empower web applications that want to push the boundaries of what's possible in the browser. One such web application has been Photoshop. The idea of running software as complex as Photoshop directly in the browser would have been hard to imagine just a few years ago. However, by using various new standardized web technologies, Adobe has now brought a public beta of Photoshop to the web.
+Over the last three years, Chrome has been working to empower web applications that want to push the boundaries of what's possible in the browser. One such web application has been Photoshop. The idea of running software as complex as Photoshop directly in the browser would have been hard to imagine just a few years ago. However, by using various new web technologies, Adobe has now brought a public beta of Photoshop to the web.
+
+{% YouTube "CF5zZZy0R9U" %}
+
+(If you prefer watching over reading, this article is also available as a
+[video](https://www.youtube.com/watch?v=CF5zZZy0R9U).)
 
 {% Img src="image/8WbTDNrhLsU0El80frMBGE4eMCD3/kfFAUTzDHzvE3hXISyQO.png", alt="The Photoshop web app running in a browser with an image showing an elephant on the canvas and the 'selection tools' menu item open. ", width="800", height="500" %}
 
@@ -39,7 +44,7 @@ Adobe previously brought [Spark](https://spark.adobe.com/sp/) and [Lightroom](ht
 
 ## WebAssembly porting with Emscripten
 
-WebAssembly and its C++ toolchain [Emscripten](https://emscripten.org/) have been the key to unlocking Photoshop's ability to come to the web, as it meant that Adobe would not have to start from scratch, but could leverage their existing Photoshop codebase. WebAssembly is a portable binary instruction set shipping in all browsers that was designed as a compilation target for programming languages. This means that applications such as Photoshop that are written in C++ can be ported directly to the web without requiring a rewrite in JavaScript. To get started porting yourself, check out the full [Emscripten documentation](https://emscripten.org/docs/index.html), or follow this [guided example of how to port a library](https://developers.google.com/web/updates/2018/03/emscripting-a-c-library).
+WebAssembly and its C++ toolchain [Emscripten](https://emscripten.org/) have been the key to unlocking Photoshop's ability to come to the web, as it meant that Adobe would not have to start from scratch, but could leverage their existing Photoshop codebase. WebAssembly is a portable binary instruction set shipping in all browsers that was designed as a compilation target for programming languages. This means that applications such as Photoshop that are written in C++ can be ported directly to the web without requiring a rewrite in JavaScript. To get started porting yourself, check out the full [Emscripten documentation](https://emscripten.org/docs/index.html), or follow this [guided example of how to port a library](/emscripting-a-c-library/).
 
 Emscripten is a fully-featured toolchain that not only helps you compile your C++ to Wasm, but provides a translation layer that turns POSIX API calls into web API calls and even converts OpenGL into WebGL. For example, you can port applications that reference the local filesystem and [Emscripten will provide an emulated file system](https://emscripten.org/docs/porting/files/file_systems_overview.html#file-system-overview) to maintain functionality.
 
@@ -80,9 +85,9 @@ What's more, the entire Photoshop app is built using Lit-based Web Components. L
 
 [Service workers](https://developer.mozilla.org/docs/Web/API/Service_Worker_API) act as a programmable local proxy, intercepting network requests and responding with data from the network, long-lived caches, or a mixture of both.
 
-As part of the [V8](https://v8.dev/) team's efforts to improve performance, the first time a service worker responds with a cached WebAssembly response, Chrome generates and stores an optimized version of the code—even for multi-megabyte WebAssembly scripts, which are common in the Photoshop codebase. A similar precompilation takes place when [JavaScript is cached](https://v8.dev/blog/code-caching-for-devs#use-service-worker-caches) by a service worker during its [`install` step](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle#install). In both cases, Chrome is able to load and execute the optimized versions of cached scripts with minimal runtime overhead.
+As part of the [V8](https://v8.dev/) team's efforts to improve performance, the first time a service worker responds with a cached WebAssembly response, Chrome generates and stores an optimized version of the code—even for multi-megabyte WebAssembly scripts, which are common in the Photoshop codebase. A similar precompilation takes place when [JavaScript is cached](https://v8.dev/blog/code-caching-for-devs#use-service-worker-caches) by a service worker during its [`install` step](/service-worker-lifecycle/#install). In both cases, Chrome is able to load and execute the optimized versions of cached scripts with minimal runtime overhead.
 
-Photoshop on the web takes advantage of this by deploying a service worker that precaches many of its JavaScript and WebAssembly scripts. Because the URLs for these scripts are generated at build time, and because the logic of keeping caches up to date can be complex, they turned to a set of libraries maintained by Google called [Workbox](https://developers.google.com/web/tools/workbox/) to generate their service worker as part of their build process.
+Photoshop on the web takes advantage of this by deploying a service worker that precaches many of its JavaScript and WebAssembly scripts. Because the URLs for these scripts are generated at build time, and because the logic of keeping caches up to date can be complex, they turned to a set of libraries maintained by Google called [Workbox](https://developer.chrome.com/docs/workbox/) to generate their service worker as part of their build process.
 
 A Workbox-based service worker along with the V8 engine's script caching led to measurable performance improvements. The specific numbers vary based on the device executing the code, but the team estimates these optimizations decreased the time spent on code initialization by 75%.
 

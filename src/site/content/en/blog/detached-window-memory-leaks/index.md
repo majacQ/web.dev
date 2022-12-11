@@ -216,7 +216,7 @@ prevent the inspected objects from being garbage collected. To that end, it's us
 tools that specifically avoid introducing this possibility.
 
 A great place to start debugging memory problems is to
-[take a heap snapshot](https://developers.google.com/web/tools/chrome-devtools/memory-problems#discover_detached_dom_tree_memory_leaks_with_heap_snapshots).
+[take a heap snapshot](https://developer.chrome.com/docs/devtools/memory-problems/#discover_detached_dom_tree_memory_leaks_with_heap_snapshots).
 This provides a point-in-time view into the memory currently used by an application - all the
 objects that have been created but not yet garbage-collected. Heap snapshots contain useful
 information about objects, including their size and a list of the variables and closures that
@@ -348,7 +348,7 @@ both cases, the browser fires an `pagehide` event to signal that the document is
 {% Aside 'caution' %}
 There's another event called`unload` which is similar to`pagehide` but is considered harmful and
 should be avoided as much as possible. See
-[Legacy lifecycle APIs to avoid: the unload event](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#the-unload-event)
+[Legacy lifecycle APIs to avoid: the unload event](https://developer.chrome.com/blog/page-lifecycle-api/#the-unload-event)
 for details.
 {% endAside %}
 
@@ -538,4 +538,4 @@ app, I'd love to know! You can find me on Twitter [@\_developit](https://twitter
 [finalizationregistry]: https://v8.dev/features/weak-references#:~:text=FinalizationRegistry
 [weakref]: https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/WeakRef
 [noopener]: https://developer.mozilla.org/docs/Web/API/Window/open#noopener
-[rel-noopener]: /external-anchors-use-rel-noopener/
+[rel-noopener]: https://developer.chrome.com/docs/lighthouse/best-practices/external-anchors-use-rel-noopener/

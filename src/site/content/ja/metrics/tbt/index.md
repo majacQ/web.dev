@@ -84,12 +84,12 @@ TTI は、メイン スレッドに長く時間がかかっているタスクが
 
 ## TBT の測定方法
 
-TBT は、[ラボ環境](/user-centric-performance-metrics/#in-the-lab)で測定する場合に最適な指標です。TBT の測定に最適な方法には、サイトでの Lighthouse のパフォーマンス監査の実行が挙げられます。使用方法の詳細については、「[TBT に関する Lighthouse ドキュメント](/lighthouse-total-blocking-time)」を参照してください。
+TBT は、[ラボ環境](/user-centric-performance-metrics/#in-the-lab)で測定する場合に最適な指標です。TBT の測定に最適な方法には、サイトでの Lighthouse のパフォーマンス監査の実行が挙げられます。使用方法の詳細については、「[TBT に関する Lighthouse ドキュメント](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/)」を参照してください。
 
 ### ラボ測定を実施するためのツール
 
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 - [WebPageTest](https://www.webpagetest.org/)
 
 {% Aside %}実際のユーザー環境での TBT の測定は可能ですが、ユーザーの操作がページの TBT に影響を与え、レポートに多数のばらつきが出てしまう可能性があるため、お勧めできません。実際のユーザー環境でのページのインタラクティブ性を理解するためには、[First Input Delay (FID)](/fid/) を測定する必要があります。{% endAside %}
@@ -98,15 +98,15 @@ TBT は、[ラボ環境](/user-centric-performance-metrics/#in-the-lab)で測定
 
 優れたユーザー エクスペリエンスを提供するためには、**平均的なモバイル ハードウェア**でテストを行った場合に、Total Blocking Time を **300 ミリ秒**以下に抑えるよう努力する必要があります。
 
-ページの TBT が Lighthouse のパフォーマンス スコアにどのような影響を及ぼすかについては、「[Lighthouse による TBT スコアの決定方法](/lighthouse-total-blocking-time/#how-lighthouse-determines-your-tbt-score)」を参照してください。
+ページの TBT が Lighthouse のパフォーマンス スコアにどのような影響を及ぼすかについては、「[Lighthouse による TBT スコアの決定方法](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/#how-lighthouse-determines-your-tbt-score)」を参照してください。
 
 ## TBT の改善方法
 
-特定のサイトについて TBT の改善方法を把握するには、Lighthouse でパフォーマンス監査を実行し、そこで推奨される具体的な [Opportunities](/lighthouse-performance/#opportunities) (改善機会) に注目します。
+特定のサイトについて TBT の改善方法を把握するには、Lighthouse でパフォーマンス監査を実行し、そこで推奨される具体的な [Opportunities](https://developer.chrome.com/docs/lighthouse/performance/#opportunities) (改善機会) に注目します。
 
 TBT の (あらゆるサイトに共通する) 一般的な改善方法については、以下のパフォーマンス ガイドを参照してください。
 
-- [サードパーティ製コードの影響を減らす](/third-party-summary/)
-- [JavaScript の実行にかかる時間を短縮する](/bootup-time/)
-- [メイン スレッドの作業を最小限に抑える](/mainthread-work-breakdown/)
-- [リクエスト数を少なく、転送サイズを小さく維持する](/resource-summary/)
+- [サードパーティ製コードの影響を減らす](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [JavaScript の実行にかかる時間を短縮する](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [メイン スレッドの作業を最小限に抑える](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [リクエスト数を少なく、転送サイズを小さく維持する](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

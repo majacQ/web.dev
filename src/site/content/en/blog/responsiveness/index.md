@@ -5,6 +5,7 @@ description: An update on our plans for measuring responsiveness on the web.
 authors:
   - hbsong
 date: 2021-11-03
+updated: 2022-05-11
 hero: image/eqprBhZUGfb8WYnumQ9ljAxRrA72/GNWyQZ5l1uy1b7s5ursN.jpeg
 alt: Water droplet rippling outward
 tags:
@@ -12,6 +13,10 @@ tags:
   - performance
   - web-vitals
 ---
+
+{% Aside 'important' %}
+This article was written during a period of time in which a new responsiveness metric was being developed to measure end-to-end latency on web pages. That new metric has been released, and is named [Interaction to Next Paint (INP)](/inp/).
+{% endAside %}
 
 Earlier this year, the Chrome Speed Metrics Team shared [some of the
 ideas](/better-responsiveness-metric/) we were considering for a
@@ -57,8 +62,7 @@ durations, we are considering two potential approaches:
 As an example, the diagram below shows a _key press_ interaction that consists
 of a `keydown` and a `keyup` event. In this example there is a duration overlap
 between these two events. To measure the latency of the key press interaction,
-we could use `max(keydown duration, keyup duration)` or `sum(keydown duration,
-keyup duration) - duration overlap`:
+we could use `max(keydown duration, keyup duration)` or `sum(keydown duration, keyup duration) - duration overlap`:
 
 {% Img src="image/jL3OLOhcWUQDnR4XjewLBx4e3PC3/td8jMQBTjyR34ZO1QBvp.svg", alt="A
 diagram showing interaction latency based on event durations", width="800",
@@ -68,17 +72,17 @@ There are pros and cons of each approach, and we'd like to collect more data and
 [feedback](#feedback) before finalizing a latency definition.
 
 {% Aside %}
-  The event duration is meant to be the time from the event hardware timestamp
-  to the time when the next paint is performed after the event is handled. But
-  if the event doesn't cause any update, the duration will be the time from
-  event hardware timestamp to the time when we are sure it will not cause any
-  update.
+The event duration is meant to be the time from the event hardware timestamp
+to the time when the next paint is performed after the event is handled. But
+if the event doesn't cause any update, the duration will be the time from
+event hardware timestamp to the time when we are sure it will not cause any
+update.
 {% endAside %}
 
 {% Aside %}
-  For keyboard interactions, we usually measure the `keydown` and `keyup`. But
-  for IME, such as input methods for Chinese and Japanese, we measure the
-  `input` events between a `compositionstart` and a `compositionend`.
+For keyboard interactions, we usually measure the `keydown` and `keyup`. But
+for IME, such as input methods for Chinese and Japanese, we measure the
+`input` events between a `compositionstart` and a `compositionend`.
 {% endAside %}
 
 ## Aggregate all interactions per page
@@ -210,8 +214,7 @@ score would be `(20 + 0 + 10 + 30) = 60 ms`.
 #### Average interaction latency over budget
 
 The total over-budget interaction latency divided by the total number of
-interactions. Using the above example, the score would be `(20 + 0 + 10 + 30) /
-4 = 15 ms`.
+interactions. Using the above example, the score would be `(20 + 0 + 10 + 30) / 4 = 15 ms`.
 
 #### High quantile approximation
 
@@ -262,8 +265,10 @@ new PerformanceObserver((entries) => {
 
       const budget = entry.name.includes('key') ? 50 : 100;
       const latencyOverBudget = Math.max(latency - budget, 0);
-      worstLatencyOverBudget =
-          Math.max(latencyOverBudget, worstLatencyOverBudget);
+      worstLatencyOverBudget = Math.max(
+        latencyOverBudget,
+        worstLatencyOverBudget,
+      );
 
       if (latencyOverBudget) {
         const oldLatencyOverBudget = Math.max(interaction.latency - budget, 0);
@@ -281,17 +286,17 @@ new PerformanceObserver((entries) => {
       });
     }
   }
-// Set the `durationThreshold` to 50 to capture keyboard interactions
-// that are over-budget (the default `durationThreshold` is 100).
+  // Set the `durationThreshold` to 50 to capture keyboard interactions
+  // that are over-budget (the default `durationThreshold` is 100).
 }).observe({type: 'event', buffered: true, durationThreshold: 50});
 ```
 
 {% Aside 'caution' %}
-  There are currently [a few
-  bugs](https://bugs.chromium.org/p/chromium/issues/list?q=label:proj-responsiveness-bugs)
-  in Chrome that affect accuracy of the reported interaction timestamps. These
-  bugs have been fixed in version 98, so we recommend developers test these
-  strategies in Chrome Canary to get the most accurate results.
+There are currently [a few
+bugs](https://bugs.chromium.org/p/chromium/issues/list?q=label:proj-responsiveness-bugs)
+in Chrome that affect accuracy of the reported interaction timestamps. These
+bugs have been fixed in version 98, so we recommend developers test these
+strategies in Chrome Canary to get the most accurate results.
 {% endAside %}
 
 ## Feedback
@@ -299,7 +304,7 @@ new PerformanceObserver((entries) => {
 We want to encourage developers to try out these new responsiveness metrics on
 their sites, and let us know if you discover any issue.
 
-Please also email any general feedback on the approaches outlined here to the
+Email any general feedback on the approaches outlined here to the
 [web-vitals-feedback](https://groups.google.com/g/web-vitals-feedback) Google
 group with "[Responsiveness Metrics]" in the subject line. We're really looking
 forward to hearing what you think!

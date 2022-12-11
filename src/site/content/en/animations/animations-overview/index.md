@@ -48,7 +48,7 @@ is therefore more expensive than animating something that only changes compositi
 {% Aside %}
 For an in-depth look at exactly how this process happens in the browser
 read [From Braces to Pixels](https://alistapart.com/article/braces-to-pixels/) and
-[Inside look at modern browser browser](https://developers.google.com/web/updates/2018/09/inside-browser-part3).
+[Inside look at modern browser browser](https://developer.chrome.com/blog/inside-browser-part3/).
 {% endAside %}
 
 ### Animating layout properties {: #layout }
@@ -65,7 +65,7 @@ the longer it takes to perform layout calculations.
 
 ### Animating paint properties {: #paint }
 
-[Paint](https://developers.google.com/web/updates/2018/09/inside-browser-part3#paint)
+[Paint](https://developer.chrome.com/blog/inside-browser-part3/#paint)
 is the process of determining in what order elements should be painted to the screen.
 It is often the longest-running of all tasks in the pipeline.
 
@@ -76,7 +76,7 @@ other elements besides the one that changed may also need to be painted.
 
 ### Animating composite properties {: #composite }
 
-[Compositing](https://developers.google.com/web/updates/2018/09/inside-browser-part3#what_is_compositing)
+[Compositing](https://developer.chrome.com/blog/inside-browser-part3/#what-is-compositing)
 is the process of separating the page into layers, converting the information about how the page should look
 into pixels (rasterization), and putting the layers together to create a page (compositing).
 

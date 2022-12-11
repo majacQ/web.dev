@@ -84,12 +84,12 @@ TTI는 메인 스레드에 최소 5초 동안 긴 작업이 없는 경우 페이
 
 ## TBT 측정 방법
 
-TBT는 [실험실에서](/user-centric-performance-metrics/#in-the-lab) 측정해야 하는메트릭입니다. TBT를 측정하는 가장 좋은 방법은 사이트에서 Lighthouse 성능 감사를 실행하는 것입니다. 사용법에 대한 자세한 내용은 [TBT에 대한 Lighthouse 문서](/lighthouse-total-blocking-time)를 참조하세요.
+TBT는 [실험실에서](/user-centric-performance-metrics/#in-the-lab) 측정해야 하는메트릭입니다. TBT를 측정하는 가장 좋은 방법은 사이트에서 Lighthouse 성능 감사를 실행하는 것입니다. 사용법에 대한 자세한 내용은 [TBT에 대한 Lighthouse 문서](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/)를 참조하세요.
 
 ### 실험실 도구
 
-- [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+- [Chrome DevTools](https://developer.chrome.com/docs/devtools/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 - [WebPageTest](https://www.webpagetest.org/)
 
 {% Aside %} TBT는 현장에서 측정하는 것도 가능하지만, 사용자 상호 작용이 보고서에서 많은 편차를 일으키는 방식으로 페이지의 TBT에 영향을 줄 수 있으므로 권장하지 않습니다. 현장에서 페이지의 상호 작용을 이해하려면 [First Input Delay(최초 입력 지연, FID)](/fid/)를 측정해야 합니다. {% endAside %}
@@ -98,15 +98,15 @@ TBT는 [실험실에서](/user-centric-performance-metrics/#in-the-lab) 측정�
 
 우수한 사용자 경험을 제공하기 위해 사이트는 **평균 모바일 하드웨어**에서 테스트할 때 총 차당 시간이 **300밀리초** 미만이 될 수 있도록 해야 합니다.
 
-페이지의 TBT가 Lighthouse 성능 점수에 미치는 영향에 대한 자세한 내용은 [Lighthouse가 TBT 점수를 결정하는 방법](/lighthouse-total-blocking-time/#how-lighthouse-determines-your-tbt-score)을 참조하세요.
+페이지의 TBT가 Lighthouse 성능 점수에 미치는 영향에 대한 자세한 내용은 [Lighthouse가 TBT 점수를 결정하는 방법](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/#how-lighthouse-determines-your-tbt-score)을 참조하세요.
 
 ## TBT를 개선하는 방법
 
-특정 사이트에 대한 TBT를 개선하는 방법을 알아보려면 Lighthouse 성능 감사를 실행하고 감사에서 제안하는 특정한 [기회](/lighthouse-performance/#opportunities)를 주의 깊게 살펴보시기 바랍니다.
+특정 사이트에 대한 TBT를 개선하는 방법을 알아보려면 Lighthouse 성능 감사를 실행하고 감사에서 제안하는 특정한 [기회](https://developer.chrome.com/docs/lighthouse/performance/#opportunities)를 주의 깊게 살펴보시기 바랍니다.
 
 모든 사이트에 대해 일반적으로 TBT를 개선하는 방법을 알아보려면 다음 성능 가이드를 참조하세요.
 
-- [타사 코드의 영향 줄이기](/third-party-summary/)
-- [JavaScript 실행 시간 단축](/bootup-time/)
-- [메인 스레드 작업 최소화](/mainthread-work-breakdown/)
-- [요청 수를 낮게 유지하고 전송 크기를 작게 유지](/resource-summary/)
+- [타사 코드의 영향 줄이기](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [JavaScript 실행 시간 단축](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [메인 스레드 작업 최소화](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [요청 수를 낮게 유지하고 전송 크기를 작게 유지](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

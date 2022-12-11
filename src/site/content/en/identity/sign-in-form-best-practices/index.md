@@ -51,7 +51,7 @@ Here is an example of a simple sign-in form that demonstrates all of the best pr
   features](#element-attributes): `type`, `name`, `autocomplete`, `required`.
 * Give input `name` and `id` attributes stable values that don't change
 between page loads or website deployments.
-* Put sign-in [in its own &lt;form&gt; element](#single-form).
+* Put sign-in [in its own &lt;form&gt; element](#form).
 * [Ensure successful form submission](#submission).
 * Use [`autocomplete="new-password"`](#new-password) and [`id="new-password"`](#new-password) for
 the password input in a sign-up form, and for the new password in a reset-password form.
@@ -87,7 +87,7 @@ help you build a better sign-in experience:
 PIN numbers via SMS to mobile phones. This can allow users to select a phone
 number as an identifier (no need to enter an email address!) and also enables
 two-step verification for sign-in and one-time codes for payment confirmation.
-* [**Credential Management**](https://developers.google.com/web/updates/2016/04/credential-management-api): to enable developers to store and retrieve password credentials and federated credentials programmatically.
+* [**Credential Management**](https://developer.chrome.com/blog/credential-management-api/): to enable developers to store and retrieve password credentials and federated credentials programmatically.
 {% endAside %}
 
 ## Use meaningful HTML {: #meaningful-html }
@@ -106,7 +106,6 @@ devices, enables a range of built-in browser features, makes it simpler to build
 basic functional sign-in for older browsers, and can still work even if
 JavaScript fails.
 
-{: #single-form }
 {% Aside 'gotchas' %}
 A common mistake is to wrap a whole web page in a single form, but this is liable
 to cause problems for browser password managers and autofill. Use a different
@@ -467,7 +466,7 @@ mobile, and around 10 px on desktop. Try this out with a real mobile device and
 a real finger or thumb. You should comfortably be able to tap each of your
 inputs and buttons.
 
-The [Tap targets are not sized appropriately](/tap-targets/)
+The [Tap targets are not sized appropriately](https://developer.chrome.com/docs/lighthouse/seo/http-status-code/)
 Lighthouse audit can help you automate the process of detecting input elements
 that are too small.
 
@@ -502,7 +501,7 @@ queries](https://developers.google.com/web/fundamentals/design-and-ux/responsive
 `20px` is about right on mobile—but you should test this out with friends or
 colleagues who have low vision.
 
-The [Document doesn't use legible font sizes](/font-size/)
+The [Document doesn't use legible font sizes](https://developer.chrome.com/docs/lighthouse/seo/font-size/)
 Lighthouse audit can help you automate the process of detecting text that's too
 small.
 
@@ -737,11 +736,11 @@ Well designed UI and UX can reduce sign-in form abandonment:
 
 ## Keep learning {: #resources }
 
-* [Create Amazing Forms](https://developers.google.com/web/fundamentals/design-and-ux/input/forms)
+* [Create Amazing Forms](/learn/forms/)
 * [Best Practices For Mobile Form Design](https://www.smashingmagazine.com/2018/08/best-practices-for-mobile-form-design/)
 * [More capable form controls](/more-capable-form-controls)
 * [Creating Accessible Forms](https://webaim.org/techniques/forms/)
-* [Streamlining the Sign-in Flow Using Credential Management API](https://developers.google.com/web/updates/2016/04/credential-management-api)
+* [Streamlining the Sign-in Flow Using Credential Management API](https://developer.chrome.com/blog/credential-management-api/)
 * [Verify phone numbers on the web with the WebOTP API](/web-otp/)
 
 Photo by [Meghan Schiereck](https://unsplash.com/photos/_XFObcM_7KU) on [Unsplash](https://unsplash.com).

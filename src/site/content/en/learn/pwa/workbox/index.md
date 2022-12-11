@@ -5,6 +5,7 @@ description: >
 authors:
   - firt
 date: 2022-01-10
+updated: 2022-02-23
 ---
 
 Maintaining your service worker and cache storage logic can be a challenge as your PWA grows. [Workbox](https://developer.chrome.com/docs/workbox/what-is-workbox/), is a set of open-source libraries to help with that. Workbox encapsulates the low-level APIs, like the Service Worker API and Cache Storage API, and exposes more developer-friendly interfaces.
@@ -32,7 +33,7 @@ Workbox modules work in different contexts, such as:
 
 - **Within a service worker context**: you import the modules you need and use them from your service worker file, for example to help manage caching and serve files with different strategies.
 - **Within the main `window` context**: helping to register a service worker and communicating with it
-- **As part of a build system**: for example, WebPack, for purposes such as creating a manifest of your assets, or even generating your entire service worker.
+- **As part of a build system**: for example, webpack, for purposes such as creating a manifest of your assets, or even generating your entire service worker.
 
 Some popular modules are:
 - [workbox-routing](https://developer.chrome.com/docs/workbox/modules/workbox-routing/): When the service worker intercepts requests this module routes those requests to different functions that provide responses; it's an implementation of the `fetch` event handler as mentioned in the [Serving chapter](/learn/pwa/serving).
@@ -112,7 +113,7 @@ First, during the service worker's install lifecycle, the `offline-fallbacks` ca
 ```js
 import { setCatchHandler } from 'workbox-routing';
 
-// Warm the cache when the Service Worker installs
+// Warm the cache when the service worker installs
 self.addEventListener('install', event => {
   const files = ['/offline.html']; // you can add more resources here
   event.waitUntil(
@@ -138,7 +139,7 @@ setCatchHandler(async (options) => {
 
 ## Recipes
 
-Several routing and caching patterns, like `NetworkFirst` navigations and offline fallbacks, are common enough to be encapsulated into reusable recipes. Check [workbox-recipes](https://developers.google.com/web/tools/workbox/modules/workbox-recipes) as they can help you if they provide a solution suitable for your architecture. They are usually available as one line of code that you need to add to your service worker's code.
+Several routing and caching patterns, like `NetworkFirst` navigations and offline fallbacks, are common enough to be encapsulated into reusable recipes. Check [workbox-recipes](https://developer.chrome.com/docs/workbox/modules/workbox-recipes/) as they can help you if they provide a solution suitable for your architecture. They are usually available as one line of code that you need to add to your service worker's code.
 
 ### Caching and updating assets
 
@@ -146,6 +147,7 @@ Caching assets also involves updating them. Workbox helps with updating your ass
 You'll learn more about updating in the [Update chapter](/learn/pwa/update).
 
 ## Play with Workbox
+
 You can play with Workbox right away using the following code lab:
 
 {% Aside 'codelab' %}

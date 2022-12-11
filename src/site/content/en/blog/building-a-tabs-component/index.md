@@ -501,7 +501,7 @@ accessible. Strong foundation for UX enhancements, style and delight.
 Scroll snapped children maintain their locked position during resize. This means
 JavaScript won't need to bring anything into view on device rotate or browser
 resize. Try it out in Chromium DevTools [Device
-Mode](https://developers.google.com/web/tools/chrome-devtools/device-mode) by
+Mode](https://developer.chrome.com/docs/devtools/device-mode/) by
 selecting any mode other than **Responsive**, and then resizing the device frame.
 Notice the element stays in view and locked with its content. This has been
 available since Chromium updated their implementation to match the spec. Here's
@@ -924,5 +924,5 @@ section below.
 
 ## Community remixes
 
-- [@devnook](https://twitter.com/devnook), [@rob_dodson](https://twitter.com/rob_dodson), and [@DasSurma](https://twitter.com/DasSurma) with Web Components: [article](https://developers.google.com/web/fundamentals/web-components/examples/howto-tabs).
+- [@devnook](https://twitter.com/devnook), [@rob_dodson](https://twitter.com/rob_dodson), and [@DasSurma](https://twitter.com/DasSurma) with Web Components: [article](/components-howto-tabs/).
 - [@jhvanderschee](https://twitter.com/jhvanderschee) with buttons: [Codepen](https://codepen.io/joosts/pen/PoKdZYP).

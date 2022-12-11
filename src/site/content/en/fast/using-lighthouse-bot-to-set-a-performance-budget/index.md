@@ -14,10 +14,10 @@ tags:
 You've done hard work to get fast, now make sure you stay fast by automating
 performance testing with [Lighthouse Bot](https://github.com/ebidel/lighthousebot).
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse) grades your app
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) grades your app
 in 5 categories, and one of those is performance. While you could try to remember to
-monitor performance changes with [DevTools](https://developers.google.com/web/tools/lighthouse/#devtools)
-or [Lighthouse CLI](https://developers.google.com/web/tools/lighthouse/#cli) every
+monitor performance changes with [DevTools](https://developer.chrome.com/docs/lighthouse/overview/#devtools)
+or [Lighthouse CLI](https://developer.chrome.com/docs/lighthouse/overview/#cli) every
 time you edit your code, you don't have to do that. Tools can do the tedious
 stuff for you. [Travis CI](https://travis-ci.com/) is a great service that
 automatically runs tests for your app in the cloud every time you push new code.

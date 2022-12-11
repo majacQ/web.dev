@@ -87,9 +87,9 @@ so if `flex-direction` is `row` the cross axis runs along the column.
 </figure>
 
 You can do two things on the cross axis.
-You can move the items individually or as a group so they align against each other and the flex
+You can move the items individually or as a group, so they align against each other and the flex
 container. Also, if you have wrapped flex lines,
-you can treat those lines as a group in order to control how space is assigned to those lines.
+you can treat those lines as a group to control how space is assigned to those lines.
 You will see how this all works in practice throughout this guide,
 for now just keep in mind that the main axis follows your `flex-direction`.
 
@@ -549,7 +549,7 @@ See [the full list of values on MDN](https://developer.mozilla.org/docs/Web/CSS/
 The next demo has a single line of flex items with `flex-direction: row`.
 The last item defines the height of the flex container.
 The first item has the `align-self` property with a value of `flex-start`.
-Try changing the value on that property to see how it moves within it's space on the cross axis.
+Try changing the value on that property to see how it moves within its space on the cross axis.
 
 {% Codepen {
   user: 'web-dot-dev',
@@ -634,3 +634,4 @@ If you need to align something it's a great way to do it.
 - [Everything You Need To Know About Alignment In Flexbox](https://www.smashingmagazine.com/2018/08/flexbox-alignment/)
 - [How Big Is That Flexible Box?](https://www.smashingmagazine.com/2018/09/flexbox-sizing-flexible-box/)
 - [Use Cases For Flexbox](https://www.smashingmagazine.com/2018/10/flexbox-use-cases/)
+- [Inspect and debug CSS Flexbox layouts in Chrome DevTools](https://developer.chrome.com/docs/devtools/css/flexbox/)

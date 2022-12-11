@@ -59,7 +59,7 @@ Usando o valor meta viewport de `width=device-width` instrui a página a corresp
 
 {% Aside 'caution' %} Para garantir que os navegadores mais antigos possam analisar corretamente os atributos, use uma vírgula para separar os atributos. {% endAside %}
 
-A auditoria do Lighthouse [Não tem uma tag `<meta name="viewport">` com `width` ou `initial-scale`](/viewport/) pode ajudá-lo a automatizar o processo de certificar-se de que seus documentos HTML estão usando a meta tag viewport corretamente.
+A auditoria do Lighthouse [Não tem uma tag `<meta name="viewport">` com `width` ou `initial-scale`](https://developer.chrome.com/docs/lighthouse/pwa/viewport/) pode ajudá-lo a automatizar o processo de certificar-se de que seus documentos HTML estão usando a meta tag viewport corretamente.
 
 ### Garanta uma viewport acessível {: #accessible-viewport}
 
@@ -77,7 +77,7 @@ Tanto em desktops quanto em dispositivos móveis, os usuários estão acostumado
 
 Ao desenvolver um site para celular com uma meta tag viewport (que define as dimensões da janela de visualização), é fácil criar acidentalmente conteúdo de página que não cabe na janela de visualização especificada. Por exemplo, uma imagem exibida com uma largura maior do que a viewport pode fazer com que a janela de visualização role horizontalmente. Você deve ajustar esse conteúdo para caber na largura da janela de visualização, de modo que o usuário não precise rolar horizontalmente.
 
-A auditoria do Lighthouse [O conteúdo não está dimensionado corretamente para a viewport](/content-width/) pode ajudá-lo a automatizar o processo de detecção de conteúdo que extrapola a janela de visualização.
+A auditoria do Lighthouse [O conteúdo não está dimensionado corretamente para a viewport](https://developer.chrome.com/docs/lighthouse/pwa/content-width/) pode ajudá-lo a automatizar o processo de detecção de conteúdo que extrapola a janela de visualização.
 
 ### Imagens {: #images}
 
@@ -326,8 +326,8 @@ Depois de configurar seus breakpoints de media query, você vai querer ver como 
 
 Para visualizar sua página em diferentes breakpoints:
 
-[Abra DevTools](https://developers.google.com/web/tools/chrome-devtools#open) e ative o [Modo de Dispositivo](https://developers.google.com/web/tools/chrome-devtools/device-mode#toggle). Isto abre no [modo responsivo](https://developers.google.com/web/tools/chrome-devtools/device-mode#responsive) por default.
+[Abra DevTools](https://developer.chrome.com/docs/devtools/open/) e ative o [Modo de Dispositivo](https://developer.chrome.com/docs/devtools/device-mode/#toggle). Isto abre no [modo responsivo](https://developer.chrome.com/docs/devtools/device-mode/#responsive) por default.
 
-Para ver suas media queries, abra o menu Modo de Dispositivo e selecione [Mostrar media queries](https://developers.google.com/web/tools/chrome-devtools/device-mode#queries) para exibir seus breakpoints como barras coloridas acima de sua página.
+Para ver suas media queries, abra o menu Modo de Dispositivo e selecione [Mostrar media queries](https://developer.chrome.com/docs/devtools/device-mode/#queries) para exibir seus breakpoints como barras coloridas acima de sua página.
 
 Clique numa das barras para visualizar sua página enquanto a media query está ativa. Clique com o botão direito numa barra para ir para a definição da media query.

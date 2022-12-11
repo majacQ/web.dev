@@ -182,7 +182,7 @@ You can also check if persistent storage is already granted in the current origi
 {% Img src="image/RK2djpBgopg9kzCyJbUSjhEGmnw1/W89sHSgKqkh9xV8nVD0C.png", alt="Mozilla Firefox asking the user for storage persistence permission.", width="800", height="279" %}
 
 {% Aside 'caution' %}
-The `StorageManager` interface has `persist()` and `persisted()` methods that both return Promisesd that resolve with a boolean. The `persist()` function asks for enabling persistent storage and returns the result, and `persisted()` returns the current state without affecting it.
+The `StorageManager` interface has `persist()` and `persisted()` methods that both return Promises that resolve with a boolean. The `persist()` function asks for enabling persistent storage and returns the result, and `persisted()` returns the current state without affecting it.
 {% endAside %}
 
 {% Aside %}
@@ -190,6 +190,17 @@ The `StorageManager` interface has `persist()` and `persisted()` methods that bo
 If you register your offline-ready content using this API, the user will see them in Downloads within the browser even when there is no network connection.
 {% Img src="image/RK2djpBgopg9kzCyJbUSjhEGmnw1/b1o5a6iCgjqOVMVfcbuj.png", alt="The Content Indexing API results available in Chrome for Android.", width="800", height="1480" %}
 {% endAside %}
+
+## API Browser support
+
+### Web Storage
+{% BrowserCompat 'api.Window.localStorage' %}
+
+### File System Access
+{% BrowserCompat 'api.FileSystemHandle' %}
+
+### Storage Manager
+{% BrowserCompat 'api.StorageManager' %}
 
 ##  Resources
 

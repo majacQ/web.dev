@@ -17,7 +17,7 @@ tags:
 
 A métrica TTI mede o tempo desde o início do carregamento da página até o carregamento de seus principais sub-recursos e é capaz de responder de forma confiável e rápida à entrada do usuário.
 
-Para calcular a TTI com base num [rastreamento de desempenho](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference) de uma página da web, siga as etapas a seguir:
+Para calcular a TTI com base num [rastreamento de desempenho](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/) de uma página da web, siga as etapas a seguir:
 
 1. Comece com a [First Contentful Paint (FCP)](/fcp/).
 2. Pesquise para frente no tempo por uma janela silenciosa de pelo menos cinco segundos, onde a *janela silenciosa* é definida como: nenhuma [tarefa longa](/custom-metrics/#long-tasks-api) e não mais do que duas solicitações GET de rede durante a carga.
@@ -45,7 +45,7 @@ A TTI é uma métrica que é idealmente medida [em laboratório](/user-centric-p
 
 ### Ferramentas de laboratório
 
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 - [WebPageTest](https://www.webpagetest.org/)
 
 {% Aside %} Embora seja possível medir a TTI em campo, isto não é recomendado, pois a interação com o usuário pode afetar a TTI de sua página de maneiras que podem levar a muitas variações em seus relatórios. Para entender a interatividade de uma página em campo, você deve medir a [First Input Delay (FID)](/fid/). {% endAside %}
@@ -54,19 +54,19 @@ A TTI é uma métrica que é idealmente medida [em laboratório](/user-centric-p
 
 Para garantir uma boa experiência ao usuário, os sites devem se esforçar para ter um tempo de interação de menos de **5 segundos** quando testados num **hardware móvel típico**.
 
-Para obter detalhes sobre como a TTI da sua página afeta sua pontuação de desempenho no Lighthouse, consulte [Como o Lighthouse determina sua pontuação TTI](/interactive/#how-lighthouse-determines-your-tti-score)
+Para obter detalhes sobre como a TTI da sua página afeta sua pontuação de desempenho no Lighthouse, consulte [Como o Lighthouse determina sua pontuação TTI](https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score)
 
 ## Como melhorar a TTI
 
-Para aprender como melhorar a TTI para um site específico, você pode executar uma auditoria de desempenho do Lighthouse e prestar atenção a quaisquer [oportunidades](/lighthouse-performance/#opportunities) específicas que a auditoria sugerir.
+Para aprender como melhorar a TTI para um site específico, você pode executar uma auditoria de desempenho do Lighthouse e prestar atenção a quaisquer [oportunidades](https://developer.chrome.com/docs/lighthouse/performance/#opportunities) específicas que a auditoria sugerir.
 
 Para saber como melhorar a TTI em geral (para qualquer site), consulte os seguintes guias de desempenho:
 
-- [Minifique o JavaScript](/unminified-javascript/)
-- [Pré-conecte a origens necessárias](/uses-rel-preconnect/)
-- [Pré-carregue solicitações importantes](/uses-rel-preload/)
-- [Reduza o impacto do código de terceiros](/third-party-summary/)
-- [Minimize a profundidade de solicitações críticas](/critical-request-chains/)
-- [Reduza o tempo de execução do JavaScript](/bootup-time/)
-- [Minimize o trabalho da thread principal](/mainthread-work-breakdown/)
-- [Mantenha as contagens de solicitações baixas e os tamanhos de transferência pequenos](/resource-summary/)
+- [Minifique o JavaScript](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/)
+- [Pré-conecte a origens necessárias](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/)
+- [Pré-carregue solicitações importantes](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preload/)
+- [Reduza o impacto do código de terceiros](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [Minimize a profundidade de solicitações críticas](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)
+- [Reduza o tempo de execução do JavaScript](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [Minimize o trabalho da thread principal](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [Mantenha as contagens de solicitações baixas e os tamanhos de transferência pequenos](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

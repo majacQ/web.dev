@@ -46,7 +46,7 @@ Open DevTools, click Audits, and select Accessibility to run the report.
   {% Img src="image/admin/vSFzNOurQO6z2xV6qWuW.png", alt="A screenshot of the output of an audit for color contrast.", width="800", height="218" %}
 </figure>
 
-Chrome also includes an experimental feature to help you [detect all the low contrast texts of your page](https://developers.google.com/web/updates/2020/10/devtools#css-overview). You can also use the [accessible color suggestion](https://developers.google.com/web/updates/2020/08/devtools#accessible-color) to fix the low contrast text.
+Chrome also includes an experimental feature to help you [detect all the low contrast texts of your page](https://developer.chrome.com/blog/new-in-devtools-87/#css-overview). You can also use the [accessible color suggestion](https://developer.chrome.com/blog/new-in-devtools-86/#accessible-color) to fix the low contrast text.
 
 <figure>
   {% Img src="image/admin/VYZeK2l2vs6pIoWhH2hO.png", alt="A screenshot of the output of the Chrome low contrast text experimental feature.", width="800", height="521" %}
@@ -62,7 +62,7 @@ You will get a detailed report of any failing elements.
 
 ## Advanced Perceptual Contrast Algorithm (APCA)
 
-The [Advanced Perceptual Contrast Algorithm (APCA)](https://w3c.github.io/silver/guidelines/methods/Method-font-characteristic-contrast.html) is a new way to compute contrast based on modern research on color perception.
+The [Advanced Perceptual Contrast Algorithm (APCA)](https://git.apcacontrast.com/documentation/WhyAPCA) is a new way to compute contrast based on modern research on color perception.
 
 Compared to [AA](https://www.w3.org/WAI/WCAG21/quickref/#contrast-minimum)/[AAA](https://www.w3.org/WAI/WCAG21/quickref/#contrast-enhanced) guidelines, APCA is more context-dependent.
 
@@ -72,7 +72,7 @@ The contrast is calculated based on the following features:
 - Text color (perceived lightness difference between text and background)
 - Context (ambient light, surroundings, and intended purpose of the text)
 
-Chrome includes an [experimental feature to replace the AA/AAA contrast ratio guidelines with APCA](https://developers.google.com/web/updates/2021/01/devtools#apca).
+Chrome includes an [experimental feature to replace the AA/AAA contrast ratio guidelines with APCA](https://developer.chrome.com/blog/new-in-devtools-89/#apca).
 
 <figure>
   {% Img src="image/admin/YhGKRLYvt37j3ldlwiXE.png", alt="A screenshot of the output of the APCA feature in Chrome.", width="800", height="543" %}
@@ -123,7 +123,7 @@ If you're curious about how your site looks to different people,
 or if you rely heavily on the use of color in your UI,
 you can use DevTools to simulate various forms of visual impairment,
 including different types of color blindness.
-Chrome includes an [Emulate Vision Deficiencies feature](https://developers.google.com/web/updates/2020/03/devtools#vision-deficiencies).
+Chrome includes an [Emulate Vision Deficiencies feature](https://developer.chrome.com/blog/new-in-devtools-83/#vision-deficiencies).
 To access it open DevTools and then open the **Rendering** tab in the Drawer,
 you can then emulate the following color deficiencies.
 

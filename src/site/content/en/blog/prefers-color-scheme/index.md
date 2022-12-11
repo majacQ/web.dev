@@ -207,7 +207,7 @@ a way for sites to detect the user's preferred way to display content.
 ☝️ An established user preference media feature is `prefers-reduced-motion`
 that lets you detect the desire for less motion on a page.
 I have
-[written about `prefers-reduced-motion`](https://developers.google.com/web/updates/2019/03/prefers-reduced-motion)
+[written about `prefers-reduced-motion`](/prefers-reduced-motion/)
 before.
 {% endAside %}
 
@@ -468,7 +468,7 @@ in order to see the theme color and favicon changes, open the
 
 ```js
 const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-darkModeMediaQuery.addListener((e) => {
+darkModeMediaQuery.addEventListener('change', (e) => {
   const darkModeOn = e.matches;
   console.log(`Dark mode is ${darkModeOn ? '🌒 on' : '☀️ off'}.`);
 });
@@ -497,7 +497,7 @@ issue](https://github.com/w3c/manifest/issues/975).
 Switching the entire operating system's color scheme can get annoying real quick,
 so Chrome DevTools now allows you to emulate the user's preferred color scheme
 in a way that only affects the currently visible tab.
-Open the [Command Menu](https://developers.google.com/web/tools/chrome-devtools/command-menu), start typing `Rendering`, run the `Show Rendering` command, and then change the **Emulate CSS media feature prefers-color-scheme** option.
+Open the [Command Menu](https://developer.chrome.com/docs/devtools/command-menu/), start typing `Rendering`, run the `Show Rendering` command, and then change the **Emulate CSS media feature prefers-color-scheme** option.
 
 <figure>
   {% Img src="image/admin/RIq2z6Ja1zSzfNTHic5z.png", alt="A screenshot of the 'Emulate CSS media feature prefers-color-scheme' option that is located in the Rendering tab of Chrome DevTools", width="800", height="552" %}

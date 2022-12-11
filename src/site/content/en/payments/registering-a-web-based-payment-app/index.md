@@ -31,7 +31,7 @@ declaratively with a web app manifest or imperatively with JavaScript.
 ## Configuring a payment app with a web app manifest
 
 To configure your web-based payment app declaratively, [serve a web app
-manifest](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest).
+manifest](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest).
 
 The following properties in the web app manifest are relevant for web-based payment apps:
 * `name`
@@ -42,7 +42,7 @@ The following properties in the web app manifest are relevant for web-based paym
     * `use_cache`
 
 Check out [Setting up a payment
-method](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest)
+method](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest)
 to make sure your payment method manifest points to your web app manifest
 properly.
 
@@ -56,7 +56,7 @@ registration*.
 {% endAside %}
 
 The JIT registration requires only serving [the web app
-manifest](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest)
+manifest](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest)
 and no additional coding. If you've already configured your web app manifest and
 are serving it properly, you should be all set. The browser will handle the
 rest.
@@ -108,7 +108,7 @@ if ('serviceWorker' in navigator) {
 
 {% Aside %}
 If you are new to the service worker, learn more at [Service Workers: an
-Introduction](https://developers.google.com/web/fundamentals/primers/service-workers).
+Introduction](https://developer.chrome.com/docs/workbox/service-worker-overview/).
 {% endAside %}
 
 ### Set a payment instrument
@@ -206,7 +206,7 @@ contains details about the instrument.
 
 {% Aside %}
 Chrome ignores the `name` and `icons` properties. It respects the [web app
-manifest](/setting-up-a-payment-method/#step-3:-serve-a-web-app-manifest)'s
+manifest](/setting-up-a-payment-method/#step-3-serve-a-web-app-manifest)'s
 respective properties instead, but other browsers may behave differently.
 {% endAside %}
 
@@ -253,13 +253,13 @@ flags](https://www.chromium.org/developers/how-tos/run-chromium-with-flags).
 You can port forward the local web server to an Android device using Chrome's
 DevTools and test how it works from a mobile browser. To learn how to do it,
 check out [Access Local
-Servers](https://developers.google.com/web/tools/chrome-devtools/remote-debugging/local-server).
+Servers](https://developer.chrome.com/docs/devtools/remote-debugging/local-server/).
 
 ### Remote debugging a website on Android Chrome from desktop DevTools
 
 You can also debug Android Chrome on desktop DevTools. To learn how to do it,
 check out [Get Started with Remote Debugging Android
-Devices](https://developers.google.com/web/tools/chrome-devtools/remote-debugging).
+Devices](https://developer.chrome.com/docs/devtools/remote-debugging/).
 
 ### Payment Handler event logging
 

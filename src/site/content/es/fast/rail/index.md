@@ -91,7 +91,7 @@ Si el objetivo es responder a la entrada en menos de 100 ms, entonces, ¿por qu�
 
 - En puntos de alta presión como las animaciones, la clave es no hacer nada donde se pueda y el mínimo absoluto donde no puedas. Siempre que sea posible, utiliza la respuesta de 100 ms para calcular previamente el trabajo costoso para maximizar sus posibilidades de alcanzar los 60 fps.
 
-- Consulta [Rendimiento del renderizado](https://developers.google.com/web/fundamentals/performance/rendering) para conocer varias estrategias de optimización de animaciones.
+- Consulta [Rendimiento del renderizado](/rendering-performance/) para conocer varias estrategias de optimización de animaciones.
 
 {% Aside %} Reconoce todos los tipos de animaciones. Las animaciones no son solo efectos de interfaz de usuario sofisticados. Cada una de estas interacciones se consideran animaciones:
 
@@ -133,7 +133,7 @@ Ten en cuenta que estos objetivos pueden cambiar con el tiempo.
 
 - Ten en cuenta que, aunque el dispositivo de un usuario móvil típico puede afirmar que está en una conexión 2G, 3G o 4G, en realidad la [velocidad de conexión efectiva](/adaptive-serving-based-on-network-quality/#how-it-works) suele ser significativamente más lenta debido a la pérdida de paquetes y la variación de la red.
 
-- [Elimina los recursos que bloquean el procesamiento](/render-blocking-resources/).
+- [Elimina los recursos que bloquean el procesamiento](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).
 
 - No tienes que cargar todo en menos de 5 segundos para producir la percepción de una carga completa. Considera las  [imágenes de carga diferida](/browser-level-image-lazy-loading/), [dividir el código de Javascript en paquetes](/reduce-javascript-payloads-with-code-splitting/) y otras [optimizaciones sugeridas en web.dev](/fast/).
 
@@ -151,71 +151,71 @@ Hay algunas herramientas que te ayudarán a automatizar tus mediciones RAIL. La 
 
 ### Chrome DevTools
 
-[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) proporciona un análisis en profundidad de todo lo que sucede mientras tu página se carga o se ejecuta. Consulta [Introducción al análisis del rendimiento en tiempo de ejecución](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance) para familiarizarse con la interfaz de usuario del panel de **Rendimiento**.
+[Chrome DevTools](https://developer.chrome.com/docs/devtools/) proporciona un análisis en profundidad de todo lo que sucede mientras tu página se carga o se ejecuta. Consulta [Introducción al análisis del rendimiento en tiempo de ejecución](https://developer.chrome.com/docs/devtools/evaluate-performance/) para familiarizarse con la interfaz de usuario del panel de **Rendimiento**.
 
 Las siguientes funciones de DevTools son especialmente relevantes:
 
-- [Throttle (estrangula) tu CPU](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#cpu-throttle) para simular un dispositivo menos potente.
+- [Throttle (estrangula) tu CPU](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#cpu-throttle) para simular un dispositivo menos potente.
 
-- [Throttle tu red](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#network-throttle) para simular conexiones más lentas.
+- [Throttle tu red](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#network-throttle) para simular conexiones más lentas.
 
-- [Ver la actividad del hilo principal](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#main) para ver todos los eventos que ocurrieron en el hilo principal mientras estaba grabando.
+- [Ver la actividad del hilo principal](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#main) para ver todos los eventos que ocurrieron en el hilo principal mientras estaba grabando.
 
-- [Ver las actividades del hilo principal en una tabla](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#activities) para ordenar las actividades en función de las que consumieron más tiempo.
+- [Ver las actividades del hilo principal en una tabla](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#activities) para ordenar las actividades en función de las que consumieron más tiempo.
 
-- [Analizar fotogramas por segundo (FPS)](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#fps) para medir si tus animaciones realmente se ejecutan sin problemas.
+- [Analizar fotogramas por segundo (FPS)](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#fps) para medir si tus animaciones realmente se ejecutan sin problemas.
 
 - [Supervisa el uso de la CPU, el tamaño del JS, los nodos DOM, los diseños por segundo y más](https://developers.google.com/web/updates/2017/11/devtools-release-notes#perf-monitor) en tiempo real con el **Monitor de rendimiento**.
 
-- [Visualizar las solicitudes de red](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#network) en la sección de **Red** que se produjeron mientras grababas.
+- [Visualizar las solicitudes de red](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#network) en la sección de **Red** que se produjeron mientras grababas.
 
-- [Obtén captura pantallas mientras grabas](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#screenshots) para reproducir exactamente cómo se veía la página mientras se cargaba, o se activaba una animación, etc.
+- [Obtén captura pantallas mientras grabas](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#screenshots) para reproducir exactamente cómo se veía la página mientras se cargaba, o se activaba una animación, etc.
 
-- [Ver las interacciones](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#interactions) para identificar rápidamente lo que sucedió en una página después de que un usuario interactuó con ella.
+- [Ver las interacciones](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#interactions) para identificar rápidamente lo que sucedió en una página después de que un usuario interactuó con ella.
 
-- [Encuentra problemas de rendimiento de desplazamiento en tiempo real](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#scrolling-performance-issues) resaltando la página cada vez que se dispara un oyente potencialmente problemático.
+- [Encuentra problemas de rendimiento de desplazamiento en tiempo real](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#scrolling-performance-issues) resaltando la página cada vez que se dispara un oyente potencialmente problemático.
 
-- [Ver eventos de pintura en tiempo real](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#paint-flashing) para identificar eventos de pintura costosos que pueden perjudicar el rendimiento de tus animaciones.
+- [Ver eventos de pintura en tiempo real](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#paint-flashing) para identificar eventos de pintura costosos que pueden perjudicar el rendimiento de tus animaciones.
 
 ### Lighthouse
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse) está disponible en Chrome DevTools, en [web.dev/measure](/measure/) como una extensión de Chrome, como un módulo Node.js y dentro de WebPageTest. Ingresas una URL, esta simula un dispositivo de rango medio con una conexión 3G lenta, ejecuta una serie de auditorías en la página y luego te brinda un informe sobre el rendimiento de la carga, así como sugerencias sobre cómo mejorar.
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) está disponible en Chrome DevTools, en [web.dev/measure](/measure/) como una extensión de Chrome, como un módulo Node.js y dentro de WebPageTest. Ingresas una URL, esta simula un dispositivo de rango medio con una conexión 3G lenta, ejecuta una serie de auditorías en la página y luego te brinda un informe sobre el rendimiento de la carga, así como sugerencias sobre cómo mejorar.
 
 Las siguientes auditorías son especialmente relevantes:
 
 **Respuesta**
 
-- [Max Potential First Input Delay (FID): Potencial máximo de la Demora de la primera entrada](/lighthouse-max-potential-fid/). Calcula cuánto tardará su aplicación en responder a la entrada del usuario, según el tiempo de inactividad del hilo principal.
+- [Max Potential First Input Delay (FID): Potencial máximo de la Demora de la primera entrada](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/). Calcula cuánto tardará su aplicación en responder a la entrada del usuario, según el tiempo de inactividad del hilo principal.
 
-- [No utilizas oyentes pasivos para mejorar el rendimiento del desplazamiento](/uses-passive-event-listeners/).
+- [No utilizas oyentes pasivos para mejorar el rendimiento del desplazamiento](https://developer.chrome.com/docs/lighthouse/best-practices/uses-passive-event-listeners/).
 
-- [Total Blocking Time (TBT): Tiempo total de bloqueo](/lighthouse-total-blocking-time/). Mide la cantidad total de tiempo que una página está bloqueada para que no responda a la entrada del usuario, como los clics del mouse, los toques de la pantalla o las pulsaciones del teclado.
+- [Total Blocking Time (TBT): Tiempo total de bloqueo](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/). Mide la cantidad total de tiempo que una página está bloqueada para que no responda a la entrada del usuario, como los clics del mouse, los toques de la pantalla o las pulsaciones del teclado.
 
 - [Time To Interact (TTI): Tiempo para interactuar](https://developers.google.com/web/tools/lighthouse/audits/consistently-interactive). Mide cuándo un usuario puede interactuar constantemente con todos los elementos de la página.
 
 **Carga**
 
-- [No registras un service worker que controla la página y start_url](/service-worker/). Un service worker puede almacenar en caché recursos comunes en el dispositivo de un usuario, lo que reduce el tiempo dedicado a buscar recursos en la red.
+- [No registras un service worker que controla la página y start_url](https://developer.chrome.com/docs/lighthouse/pwa/service-worker/). Un service worker puede almacenar en caché recursos comunes en el dispositivo de un usuario, lo que reduce el tiempo dedicado a buscar recursos en la red.
 
-- [La carga de la página no es lo suficientemente rápida en las redes móviles](/load-fast-enough-for-pwa/).
+- [La carga de la página no es lo suficientemente rápida en las redes móviles](https://developer.chrome.com/docs/lighthouse/pwa/load-fast-enough-for-pwa/).
 
 - [Elimina los recursos que bloquean la renderización](https://developers.google.com/web/tools/lighthouse/audits/blocking-resources).
 
-- [Aplazar las imágenes fuera de la pantalla](/offscreen-images/). Aplaza la carga de imágenes fuera de la pantalla hasta que sean necesarias.
+- [Aplazar las imágenes fuera de la pantalla](https://developer.chrome.com/docs/lighthouse/performance/offscreen-images/). Aplaza la carga de imágenes fuera de la pantalla hasta que sean necesarias.
 
-- [Imágenes de tamaño adecuado](/uses-responsive-images/). No publiques imágenes que sean significativamente más grandes que el tamaño que se muestra en la ventana gráfica del dispositivo móvil.
+- [Imágenes de tamaño adecuado](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/). No publiques imágenes que sean significativamente más grandes que el tamaño que se muestra en la ventana gráfica del dispositivo móvil.
 
-- [Evita encadenar solicitudes críticas](/critical-request-chains/).
+- [Evita encadenar solicitudes críticas](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/).
 
-- [No usas HTTP/2 para todos tus recursos](/uses-http2/).
+- [No usas HTTP/2 para todos tus recursos](https://developer.chrome.com/docs/lighthouse/best-practices/uses-http2/).
 
-- [Codifica imágenes de manera eficiente](/uses-optimized-images/).
+- [Codifica imágenes de manera eficiente](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).
 
-- [Habilita la compresión de texto](/uses-text-compression/).
+- [Habilita la compresión de texto](https://developer.chrome.com/docs/lighthouse/performance/uses-text-compression/).
 
-- [Evita enormes cargas útiles de red](/total-byte-weight/).
+- [Evita enormes cargas útiles de red](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/).
 
-- [Evita un tamaño de DOM excesivo](/dom-size/). Reduce los bytes de red enviando solo los nodos DOM que se necesitan para renderizar la página.
+- [Evita un tamaño de DOM excesivo](https://developer.chrome.com/docs/lighthouse/performance/dom-size/). Reduce los bytes de red enviando solo los nodos DOM que se necesitan para renderizar la página.
 
 ### WebPageTest
 

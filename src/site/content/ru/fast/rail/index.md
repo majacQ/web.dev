@@ -91,7 +91,7 @@ tags:
 
 - В таких условиях высокой нагрузки, как анимация, главное — ничего не делать там, где это возможно, и выполнять абсолютный минимум в остальных случаях. По возможности используйте отклик в 100 мс, чтобы предварительно рассчитать дорогостоящую работу: так вы повысите свои шансы на достижение 60 кадров в секунду.
 
-- Информацию о различных стратегиях оптимизации анимации см. в разделе «[Производительность рендеринга»](https://developers.google.com/web/fundamentals/performance/rendering).
+- Информацию о различных стратегиях оптимизации анимации см. в разделе «[Производительность рендеринга»](/rendering-performance/).
 
 {% Aside %} Различайте все типы анимации. Анимация — это не только навороченные эффекты пользовательского интерфейса. Каждое из этих взаимодействий считается анимацией:
 
@@ -133,7 +133,7 @@ tags:
 
 - Имейте в виду, что хотя мобильное устройство среднестатистического пользователя может сообщать о своем подключении к 2G, 3G или 4G, в действительности [эффективная скорость соединения](/adaptive-serving-based-on-network-quality/#how-it-works) часто значительно ниже из-за потери пакетов и непостоянства сети.
 
-- [Устраняйте ресурсы, блокирующие рендеринг](/render-blocking-resources/).
+- [Устраняйте ресурсы, блокирующие рендеринг](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/).
 
 - Для создания ощущения полной загрузки не обязательно загружать все ресурсы за 5 секунд. Применяйте [отложенную загрузку изображений](/browser-level-image-lazy-loading/), [разделение кода JavaScript](/reduce-javascript-payloads-with-code-splitting/) и другие [оптимизации, предлагаемые на web.dev](/fast/).
 
@@ -151,71 +151,71 @@ tags:
 
 ### Chrome DevTools
 
-[Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools) обеспечивает углубленный анализ всего, что происходит во время загрузки или запуска вашей страницы. См. раздел «[Aнализ производительности во время выполнения](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance)», чтобы ознакомиться с пользовательским интерфейсом панели «**Производительность**».
+[Chrome DevTools](https://developer.chrome.com/docs/devtools/) обеспечивает углубленный анализ всего, что происходит во время загрузки или запуска вашей страницы. См. раздел «[Aнализ производительности во время выполнения](https://developer.chrome.com/docs/devtools/evaluate-performance/)», чтобы ознакомиться с пользовательским интерфейсом панели «**Производительность**».
 
 Следующие функции DevTools особенно важны:
 
-- [Замедлите работу процессора](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#cpu-throttle), чтобы смоделировать менее мощное устройство.
+- [Замедлите работу процессора](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#cpu-throttle), чтобы смоделировать менее мощное устройство.
 
-- [Замедлите работу сети](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#network-throttle), чтобы имитировать более медленные соединения.
+- [Замедлите работу сети](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#network-throttle), чтобы имитировать более медленные соединения.
 
-- [Просматривайте активность основного потока](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#main), чтобы отслеживать все события, произошедшие в основном потоке во время записи.
+- [Просматривайте активность основного потока](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#main), чтобы отслеживать все события, произошедшие в основном потоке во время записи.
 
-- [Просматривайте действия основного потока в таблице](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#activities), чтобы отсортировать действия в зависимости от того, какие из них занимали больше всего времени.
+- [Просматривайте действия основного потока в таблице](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#activities), чтобы отсортировать действия в зависимости от того, какие из них занимали больше всего времени.
 
-- [Анализируйте количество кадров в секунду (FPS)](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#fps), чтобы определить, насколько плавно работает ваша анимация.
+- [Анализируйте количество кадров в секунду (FPS)](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#fps), чтобы определить, насколько плавно работает ваша анимация.
 
 - [Отслеживайте использование ЦП, размер кучи JS, узлы DOM, число макетов в секунду и многое другое](https://developers.google.com/web/updates/2017/11/devtools-release-notes#perf-monitor) в режиме реального времени с помощью **монитора производительности**.
 
-- [Визуализируйте сетевые запросы](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#network), которые произошли во время записи, с помощью раздела «**Сеть**».
+- [Визуализируйте сетевые запросы](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#network), которые произошли во время записи, с помощью раздела «**Сеть**».
 
-- [Делайте снимки экрана во время записи](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#screenshots), чтобы точно воспроизвести то, как страница выглядела во время загрузки, как сработала анимация и т. д.
+- [Делайте снимки экрана во время записи](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#screenshots), чтобы точно воспроизвести то, как страница выглядела во время загрузки, как сработала анимация и т. д.
 
-- [Просматривайте взаимодействия](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#interactions), чтобы быстро определить, что произошло на странице после взаимодействия с ней пользователя.
+- [Просматривайте взаимодействия](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#interactions), чтобы быстро определить, что произошло на странице после взаимодействия с ней пользователя.
 
-- [Находите проблемы с производительностью прокрутки в режиме реального времени](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#scrolling-performance-issues), подсвечивая страницу при срабатывании потенциально проблемного прослушивателя.
+- [Находите проблемы с производительностью прокрутки в режиме реального времени](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#scrolling-performance-issues), подсвечивая страницу при срабатывании потенциально проблемного прослушивателя.
 
-- [Просматривайте события рисования в режиме реального времени](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#paint-flashing), чтобы определять дорогостоящие события рисования, которые могут повлиять на производительность вашей анимации.
+- [Просматривайте события рисования в режиме реального времени](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#paint-flashing), чтобы определять дорогостоящие события рисования, которые могут повлиять на производительность вашей анимации.
 
 ### Lighthouse
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse) доступен в Chrome DevTools по адресу [web.dev/measure](/measure/) как расширение Chrome, как модуль Node.js и в WebPageTest. Вы даете ему URL-адрес, он имитирует устройство среднего класса с медленным 3G-соединением, выполняет серию аудитов на странице, а затем дает отчет о скорости загрузки и предложения по ее улучшению.
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) доступен в Chrome DevTools по адресу [web.dev/measure](/measure/) как расширение Chrome, как модуль Node.js и в WebPageTest. Вы даете ему URL-адрес, он имитирует устройство среднего класса с медленным 3G-соединением, выполняет серию аудитов на странице, а затем дает отчет о скорости загрузки и предложения по ее улучшению.
 
 Наиболее важны следующие аудиты:
 
 **Response**
 
-- [Максимальная потенциальная задержка первого ввода (First Input Delay)](/lighthouse-max-potential-fid/). Оценивает, как долго ваше приложение будет реагировать на ввод данных пользователем, исходя из времени простоя основного потока.
+- [Максимальная потенциальная задержка первого ввода (First Input Delay)](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-max-potential-fid/). Оценивает, как долго ваше приложение будет реагировать на ввод данных пользователем, исходя из времени простоя основного потока.
 
-- [Не использует пассивные прослушиватели для повышения производительности прокрутки](/uses-passive-event-listeners/).
+- [Не использует пассивные прослушиватели для повышения производительности прокрутки](https://developer.chrome.com/docs/lighthouse/best-practices/uses-passive-event-listeners/).
 
-- [Общее время блокировки (Total Blocking Time)](/lighthouse-total-blocking-time/). Измеряет общее время, в течение которого страница блокируется от ответа на действия пользователя, такие как щелчки мыши, касания экрана или нажатия клавиатуры.
+- [Общее время блокировки (Total Blocking Time)](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time/). Измеряет общее время, в течение которого страница блокируется от ответа на действия пользователя, такие как щелчки мыши, касания экрана или нажатия клавиатуры.
 
 - [Время до интерактивности (Time To Interactive)](https://developers.google.com/web/tools/lighthouse/audits/consistently-interactive). Определяет момент времени, когда пользователь сможет стабильно взаимодействовать со всеми элементами страницы.
 
 **Load**
 
-- [Не регистрирует сервис-воркер, который управляет страницей и start_url](/service-worker/). Сервис-воркер может кешировать общие ресурсы на устройстве пользователя, сокращая время, затрачиваемое на получение ресурсов по сети.
+- [Не регистрирует сервис-воркер, который управляет страницей и start_url](https://developer.chrome.com/docs/lighthouse/pwa/service-worker/). Сервис-воркер может кешировать общие ресурсы на устройстве пользователя, сокращая время, затрачиваемое на получение ресурсов по сети.
 
-- [Загрузка страницы в мобильных сетях происходит недостаточно быстро](/load-fast-enough-for-pwa/).
+- [Загрузка страницы в мобильных сетях происходит недостаточно быстро](https://developer.chrome.com/docs/lighthouse/pwa/load-fast-enough-for-pwa/).
 
 - [Устраняйте ресурсы, блокирующие рендеринг](https://developers.google.com/web/tools/lighthouse/audits/blocking-resources).
 
-- [Отложите закадровые изображения](/offscreen-images/). Отложите загрузку закадровых изображений до тех пор, пока они не понадобятся.
+- [Отложите закадровые изображения](https://developer.chrome.com/docs/lighthouse/performance/offscreen-images/). Отложите загрузку закадровых изображений до тех пор, пока они не понадобятся.
 
-- [Правильно масштабируйте изображения](/uses-responsive-images/). Не показывайте изображения, размер которых значительно превышает размер, отображаемый в мобильной области просмотра.
+- [Правильно масштабируйте изображения](https://developer.chrome.com/docs/lighthouse/performance/uses-responsive-images/). Не показывайте изображения, размер которых значительно превышает размер, отображаемый в мобильной области просмотра.
 
-- [Избегайте цепочки критических запросов](/critical-request-chains/).
+- [Избегайте цепочки критических запросов](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/).
 
-- [Не использует HTTP/2 для всех своих ресурсов](/uses-http2/).
+- [Не использует HTTP/2 для всех своих ресурсов](https://developer.chrome.com/docs/lighthouse/best-practices/uses-http2/).
 
-- [Эффективно кодируйте изображения](/uses-optimized-images/).
+- [Эффективно кодируйте изображения](https://developer.chrome.com/docs/lighthouse/performance/uses-optimized-images/).
 
-- [Включите сжатие текста](/uses-text-compression/).
+- [Включите сжатие текста](https://developer.chrome.com/docs/lighthouse/performance/uses-text-compression/).
 
-- [Избегайте чрезмерных нагрузок на сеть](/total-byte-weight/).
+- [Избегайте чрезмерных нагрузок на сеть](https://developer.chrome.com/docs/lighthouse/performance/total-byte-weight/).
 
-- [Избегайте чрезмерного размера DOM](/dom-size/). Уменьшите количество сетевых байтов, доставив только те узлы DOM, которые необходимы для рендеринга страницы.
+- [Избегайте чрезмерного размера DOM](https://developer.chrome.com/docs/lighthouse/performance/dom-size/). Уменьшите количество сетевых байтов, доставив только те узлы DOM, которые необходимы для рендеринга страницы.
 
 ### WebPageTest
 

@@ -121,14 +121,9 @@ To show or hide an element, use [`opacity`](https://developer.mozilla.org/docs/W
 
 ## Avoid properties that trigger layout or paint {: #triggers }
 
-Before using any CSS property for animation (other than `transform` and `opacity`), go to
-[CSS Triggers](https://csstriggers.com/) to determine the property's impact on the
-[rendering pipeline](/animations-overview/#pipeline). Avoid any property
-that triggers layout or paint unless absolutely necessary.
-
-<figure>
-  {% Img src="image/admin/lo6imreXGzuZzsHVWUFf.jpg", alt="The top property detailed on CSS Triggers", width="800", height="432" %}
-</figure>
+Before using any CSS property for animation (other than `transform` and `opacity`),
+determine the property's impact on the [rendering pipeline](/animations-overview/#pipeline).
+Avoid any property that triggers layout or paint unless absolutely necessary.
 
 {% Aside 'warning' %}
   If you must use a property
@@ -233,7 +228,7 @@ and explore performance using DevTools.
 #### Chrome DevTools {: #layout-chrome }
 
 1. Open the **Performance** panel.
-1. [Record runtime performance](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#record-runtime)
+1. [Record runtime performance](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#record-runtime)
    while your animation is happening.
 1. Inspect the **Summary** tab.
 
@@ -267,26 +262,6 @@ can help you to understand where the browser is spending time.
 
 If you see entries for [**Recalculate Style**](https://developer.mozilla.org/docs/Tools/Performance/Scenarios/Animating_CSS_properties)
 then the browser is having to begin at the start of the [rendering waterfall](https://developer.mozilla.org/docs/Tools/Performance/Scenarios/Animating_CSS_properties).
-
-<figure>
-  <img
-       src="waterfall-before.jpg"
-       alt="The Waterfall panel shows many entries for Recalculate Style.">
-  <figcaption>
-    The <a href="https://animation-with-top-left.glitch.me/">animation-with-top-left</a>
-    example causes style recalculation.
-  </figcaption>
-</figure>
-
-<figure>
-  <img
-       src="waterfall-after.jpg"
-       alt="The Waterfall panel shows no entries for Recalculate Style.">
-  <figcaption>
-    The <a href="https://animation-with-transform.glitch.me/">animation-with-transform</a>
-    example does not cause style recalculation.
-  </figcaption>
-</figure>
 
 ### Check if an animation is dropping frames {: #fps }
 
@@ -341,7 +316,7 @@ If you see the whole screen flashing,
 or areas that you don't think should change highlighted then you can do some investigation.
 
 If you need to dig into whether a particular property is causing performance issues due to painting,
-the [paint profiler](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#paint-profiler)
+the [paint profiler](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#paint-profiler)
 in Chrome DevTools can help.
 
 #### Firefox DevTools {: #paint-firefox }
@@ -363,4 +338,4 @@ see if a different CSS property will give the same look and feel with better per
 Use the `will-change` property sparingly,
 and only if you encounter a performance issue.
 
-[rendering]: https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference#rendering
+[rendering]: https://developer.chrome.com/docs/devtools/evaluate-performance/reference/#rendering

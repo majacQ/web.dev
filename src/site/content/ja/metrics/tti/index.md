@@ -17,7 +17,7 @@ tags:
 
 TTI 指標は、ページの読み込みが開始されてから主なサブリソースの読み込みが完了するまでの時間を測定するもので、改善することでページがユーザーの入力に対してすばやく確実に応答できるようになります。
 
-Web ページの[パフォーマンス トレース](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/reference)に基づいて TTI を計算するには、以下の手順に従います。
+Web ページの[パフォーマンス トレース](https://developer.chrome.com/docs/devtools/evaluate-performance/reference/)に基づいて TTI を計算するには、以下の手順に従います。
 
 1. [First Contentful Paint (FCP)](/fcp/) から開始します。
 2. 少なくとも 5 秒間の落ち着いている期間を時間の経過順に探していきます。この場合の*落ち着いている期間*とは、[長く時間がかかっているタスク](/custom-metrics/#long-tasks-api)がなく、実行中のネットワーク GET リクエストが 2 件以下となる期間として定義されます。
@@ -45,7 +45,7 @@ TTI は、[ラボ環境](/user-centric-performance-metrics/#in-the-lab)で測定
 
 ### ラボ測定を実施するためのツール
 
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse/)
+- [Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)
 - [WebPageTest](https://www.webpagetest.org/)
 
 {% Aside %}実際のユーザー環境での TTI の測定は可能ですが、ユーザーの操作がページの TTI に影響を与え、レポートに多数のばらつきが出てしまう可能性があるため、お勧めできません。実際のユーザー環境でのページのインタラクティブ性を理解するためには、[First Input Delay (FID)](/fid/) を測定する必要があります。{% endAside %}
@@ -54,19 +54,19 @@ TTI は、[ラボ環境](/user-centric-performance-metrics/#in-the-lab)で測定
 
 優れたユーザー エクスペリエンスを提供するためには、**平均的なモバイル ハードウェア**でテストを行った場合に、Time to Interactive を **5 秒**以下に抑えるよう努力する必要があります。
 
-ページの TTI が Lighthouse のパフォーマンス スコアにどのような影響を及ぼすかについては、「[Lighthouse による TTI スコアの決定方法](/interactive/#how-lighthouse-determines-your-tti-score)」を参照してください。
+ページの TTI が Lighthouse のパフォーマンス スコアにどのような影響を及ぼすかについては、「[Lighthouse による TTI スコアの決定方法](https://developer.chrome.com/docs/lighthouse/performance/interactive/#how-lighthouse-determines-your-tti-score)」を参照してください。
 
 ## TTI の改善方法
 
-特定のサイトについて TTI の改善方法を把握するには、Lighthouse でパフォーマンス監査を実行し、そこで推奨される具体的な [Opportunities](/lighthouse-performance/#opportunities) (改善機会) に注目します。
+特定のサイトについて TTI の改善方法を把握するには、Lighthouse でパフォーマンス監査を実行し、そこで推奨される具体的な [Opportunities](https://developer.chrome.com/docs/lighthouse/performance/#opportunities) (改善機会) に注目します。
 
 TTI の (あらゆるサイトに共通する) 一般的な改善方法については、以下のパフォーマンス ガイドを参照してください。
 
-- [JavaScript を圧縮する](/unminified-javascript/)
-- [必要なオリジンに事前接続する](/uses-rel-preconnect/)
-- [キー リクエストを事前に読み込む](/uses-rel-preload/)
-- [サードパーティ製コードの影響を減らす](/third-party-summary/)
-- [クリティカルなリクエストの深さを最小化する](/critical-request-chains/)
-- [JavaScript の実行にかかる時間を短縮する](/bootup-time/)
-- [メイン スレッドの作業を最小限に抑える](/mainthread-work-breakdown/)
-- [リクエスト数を少なく、転送サイズを小さく維持する](/resource-summary/)
+- [JavaScript を圧縮する](https://developer.chrome.com/docs/lighthouse/performance/unminified-javascript/)
+- [必要なオリジンに事前接続する](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preconnect/)
+- [キー リクエストを事前に読み込む](https://developer.chrome.com/docs/lighthouse/performance/uses-rel-preload/)
+- [サードパーティ製コードの影響を減らす](https://developer.chrome.com/docs/lighthouse/performance/third-party-summary/)
+- [クリティカルなリクエストの深さを最小化する](https://developer.chrome.com/docs/lighthouse/performance/critical-request-chains/)
+- [JavaScript の実行にかかる時間を短縮する](https://developer.chrome.com/docs/lighthouse/performance/bootup-time/)
+- [メイン スレッドの作業を最小限に抑える](https://developer.chrome.com/docs/lighthouse/performance/mainthread-work-breakdown/)
+- [リクエスト数を少なく、転送サイズを小さく維持する](https://developer.chrome.com/docs/lighthouse/performance/resource-summary/)

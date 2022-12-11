@@ -8,6 +8,7 @@ authors:
   - anniesullie
   - hbsong
 date: 2021-06-21
+updated: 2022-05-11
 hero: image/kns0INkO77RkiEStzHWYrugyWj32/TwRpOuLV9Z5GEZkGmAXi.jpeg
 alt: Hand about to press a key in a keyboard
 tags:
@@ -15,6 +16,10 @@ tags:
   - performance
   - web-vitals
 ---
+
+{% Aside 'important' %}
+This article was written during a period of time in which a new responsiveness metric was being developed to measure end-to-end latency on web pages. That new metric has been released, and is named [Interaction to Next Paint (INP)](/inp/).
+{% endAside %}
 
 On the Chrome Speed Metrics team, we're working on deepening our understanding of how quickly web
 pages respond to user input. We'd like to share some ideas for improving responsiveness metrics and
@@ -190,6 +195,10 @@ scrolling, and dragging as accurately as possible. So we're introducing the conc
 
 #### Interaction types
 
+{% Aside 'important' %}
+This content in this section was written during a time when Interaction to Next Paint (INP) was still being developed. The [current metric](/inp/) _only_ considers keyboard, mouse, and touch events, and does _not_ consider hover or scrolling when calculating INP.
+{% endAside %}
+
 The following table lists the four interactions we want to define along with the DOM events that
 they're associated with. Note that this is not quite the same as the set of all events that are
 dispatched when such user interaction occurs. For instance, when a user scrolls, a scroll event is
@@ -337,7 +346,7 @@ One initial thought would be to use the `pointerdown` and `pointerup` events and
 cover all of the durations that we're interested in. Sadly, this is not the case, as this [edge
 case](https://output.jsbin.com/buyiyew/quiet) shows. Try opening this site on mobile, or with mobile
 emulation, and tapping where it says "Click me". This site triggers the [browser tap
-delay](https://developers.google.com/web/updates/2013/12/300ms-tap-delay-gone-away). It can be seen
+delay](https://developer.chrome.com/blog/300ms-tap-delay-gone-away/). It can be seen
 that the `pointerdown`, `pointerup`, and `touchend` are dispatched quickly, whereas the `mousedown`,
 `mouseup`, and `click` wait for the delay before being dispatched. This means that if we only looked
 at `pointerdown` and `pointerup` then we'd miss the duration from the synthetic events, which is
@@ -388,7 +397,7 @@ and `scroll`. Except for the scroll event, this is largely dependent on the devi
 scrolling: touch events are dispatched when scrolling with the finger on mobile devices, while wheel
 events occur when scrolling with a mouse wheel. The scroll events are fired after initial scrolling
 has completed. And in general, no DOM event blocks scrolling, unless the website uses [non-passive
-event listeners](/uses-passive-event-listeners/). So we think of scrolling as decoupled from DOM
+event listeners](https://developer.chrome.com/docs/lighthouse/best-practices/uses-passive-event-listeners/). So we think of scrolling as decoupled from DOM
 Events altogether. What we want to measure is the time from when the user moves enough to produce a
 scroll gesture until the first frame that shows that scrolling happened.
 

@@ -38,7 +38,7 @@ misleading. There are several ways to deal with this:
 -   Gather multiple metrics and try to narrow and filter afterwards on
     what might be relevant for the task at hand.
 -   Abstract metrics into an overall score, as for example
-    [Lighthouse does](https://developers.google.com/web/tools/lighthouse/v3/scoring#perf).
+    [Lighthouse does](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring).
     This can be especially useful for non-technical staff and other
     stakeholders, but is probably insufficient for deeper technical analysis.
 -   Try to find the one metric which is most relevant as a predictor for
@@ -78,7 +78,7 @@ faster, so analytics may see more bounces even if there aren't more happening.
 ### Solution
 
 This can be eased by measuring
-[real page abandonment](https://developers.google.com/web/fundamentals/performance/user-centric-performance-metrics#load_abandonment) instead.
+[real page abandonment](/user-centric-performance-metrics/) instead.
 
 ## Decreasing relative conversions
 
@@ -137,13 +137,13 @@ across our public tooling.
 
 Website performance is especially prone to being dragged down
 by third party content
-(see [Eliminate render-blocking resources](/render-blocking-resources)).
+(see [Eliminate render-blocking resources](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/)).
 This is a particular problem for e-commerce, often due to trackers and widgets.
 
 Some ways to handle third party content with respect to performance:
 
 -   Always keep third party content out of the
-    [critical rendering path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/).
+    [critical rendering path](/critical-rendering-path/).
     If the third party has server problems and times out, it will impact your
     website heavily. You can test and simulate this via
     [WebPageTest Single-Point-of-Failure](https://css-tricks.com/use-webpagetest-api/#single-point-of-failure)
@@ -159,7 +159,7 @@ Some ways to handle third party content with respect to performance:
 -   Try to stay on one stack from one vendor if possible. For example, if
     you have a tag manager and analytics on one stack, you may only need a
     single script, and may be able to
-    [take advantage of HTTP2 synergies](https://developers.google.com/web/fundamentals/performance/http2/)
+    [take advantage of HTTP2 synergies](/performance-http2/)
      as there is only one host involved.
 -   Make sure not to use the same functionality from two different vendors.
     You shouldn't need two tag managers or two analytics platforms.
@@ -174,7 +174,7 @@ Some ways to handle third party content with respect to performance:
 </figure>
 
 Learn more in
-[Loading Third-Party JavaScript](https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/loading-third-party-javascript/).
+[Loading Third-Party JavaScript](/optimizing-content-efficiency-loading-third-party-javascript/).
 
 ## Performance Culture
 
@@ -199,7 +199,7 @@ to do this:
 -   [Facebook](https://www.theverge.com/2015/10/28/9625062/facebook-2g-tuesdays-slow-internet-developing-world)
     and Google do this by providing slow networks across the company for testing.
 -   Make average, low-spec devices with low
-    [bandwidth or high latencies](https://developers.google.com/web/fundamentals/performance/poor-connectivity/) available
+    [bandwidth or high latencies](/performance-poor-connectivity/) available
     to management and other stakeholders.
 -   Consider adding overlays showing performance metrics on your development
     or staging servers. Connections to these servers from mobile can

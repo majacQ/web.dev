@@ -128,6 +128,32 @@
           "main": "bg-quaternary-box-bg color-quaternary-box-text"
         }
       }
+    },
+    {
+      "name": "celebration",
+      "title": "Celebration",
+      "context": {
+        "content": "Use the celebration aside to celebrate events like a cross-browser launch.",
+        "type": "celebration",
+        "title": "Celebration",
+        "icon": "celebration.svg",
+        "utilities": {
+          "main": "bg-state-good-bg color-state-good-text"
+        }
+      }
+    },
+    {
+      "name": "update",
+      "title": "Update",
+      "context": {
+        "content": "Use the update aside in select cases where updates concerning a developing situation around a certain API or metric can be effectively communicated.",
+        "type": "update",
+        "title": "Update",
+        "icon": "update.svg",
+        "utilities": {
+          "main": "bg-state-update-bg color-state-update-text"
+        }
+      }
     }
   ]
 }

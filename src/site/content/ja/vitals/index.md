@@ -47,7 +47,7 @@ Google では、Core Web Vitals をあらゆる Web エクスペリエンスに�
 
 #### Core Web Vitals のフィールド測定を実施するためのツール
 
-[Chrome User Experience Report](https://developers.google.com/web/tools/chrome-user-experience-report) は、非特定化された実際のユーザーによる測定データを Core Web Vitals の各指標ごとに収集するツールです。このデータを活用すれば、サイト所有者はページに手動でアナリティクス ツールを設置しなくてもパフォーマンスをすばやく評価できるようになり、[PageSpeed Insights](https://developers.google.com/speed/pagespeed/insights/) や Search Console の [Core Web Vitals Report](https://support.google.com/webmasters/answer/9205520)などのツールを強化することもできるようになります。
+[Chrome User Experience Report](https://developer.chrome.com/docs/crux/) は、非特定化された実際のユーザーによる測定データを Core Web Vitals の各指標ごとに収集するツールです。このデータを活用すれば、サイト所有者はページに手動でアナリティクス ツールを設置しなくてもパフォーマンスをすばやく評価できるようになり、[PageSpeed Insights](https://pagespeed.web.dev/) や Search Console の [Core Web Vitals Report](https://support.google.com/webmasters/answer/9205520)などのツールを強化することもできるようになります。
 
 <div class="table-wrapper">
   <table>
@@ -58,7 +58,7 @@ Google では、Core Web Vitals をあらゆる Web エクスペリエンスに�
       <td>CLS</td>
     </tr>
     <tr>
-      <td><a href="https://developers.google.com/web/tools/chrome-user-experience-report">Chrome User Experience Report</a></td>
+      <td><a href="https://developer.chrome.com/docs/crux/">Chrome User Experience Report</a></td>
       <td>✔</td>
       <td>✔</td>
       <td>✔</td>
@@ -170,13 +170,13 @@ Core Web Vitals に関してはフィールド データの測定が何よりも
     </thead>
     <tbody>
       <tr>
-        <td><a href="https://developers.google.com/web/tools/chrome-devtools">Chrome DevTools</a></td>
+        <td><a href="https://developer.chrome.com/docs/devtools/">Chrome DevTools</a></td>
         <td>✔</td>
         <td>✘ (代わりに <a href="/tbt/">TBT</a> を使用してください)</td>
         <td>✔</td>
       </tr>
       <tr>
-        <td><a href="https://developers.google.com/web/tools/lighthouse">Lighthouse</a></td>
+        <td><a href="https://developer.chrome.com/docs/lighthouse/overview/">Lighthouse</a></td>
         <td>✔</td>
         <td>✘ (代わりに <a href="/tbt/">TBT</a> を使用してください)</td>
         <td>✔</td>
@@ -199,17 +199,17 @@ Core Web Vitals の測定によって改善点を見つけたら、次のステ�
 - [FID を最適化する](/optimize-fid/)
 - [CLS を最適化する](/optimize-cls/)
 
-## Web Vitals に含まれているその他の指標
+## Other Web Vitals
 
 Core Web Vitals は優れたユーザー エクスペリエンスについての理解を深め、それらをユーザーに対して提供する際に重要な意味を持つ指標ですが、重要な指標はこれ以外にも存在します。
 
 そういった Web Vitals のその他の指標は、多くの場合 Core Web Vitals の代替指標または補足指標として機能し、ユーザー体験をより大きな観点から把握したり、特定の問題を診断したりする場合に役立ちます。
 
-たとえば [Time to First Byte (サーバーの初期応答時間、TTFB)](/ttfb/) や [First Contentful Paint (視覚コンテンツの初期表示時間、FCP)](/fcp/) などの指標は、どちらも*読み込み*時のユーザー体験に関連する重要な観点であり、それぞれが LCP に関する問題 ([サーバーの応答時間](/overloaded-server/)が長すぎる場合や、[レンダリングを妨げるリソース](/render-blocking-resources/)に関連する問題など) の診断に役立ちます。
+たとえば [Time to First Byte (サーバーの初期応答時間、TTFB)](/ttfb/) や [First Contentful Paint (視覚コンテンツの初期表示時間、FCP)](/fcp/) などの指標は、どちらも*読み込み*時のユーザー体験に関連する重要な観点であり、それぞれが LCP に関する問題 ([サーバーの応答時間](/overloaded-server/)が長すぎる場合や、[レンダリングを妨げるリソース](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/)に関連する問題など) の診断に役立ちます。
 
 同様に、[Total Blocking Time (合計ブロック時間、TBT)](/tbt/) や [Time to Interactive (操作可能になるまでの時間、TTI)](/tti/) などの指標は、FID に影響を及ぼす潜在的な*インタラクティブ性*に関する問題を察知して診断を実施するために不可欠な、ラボ環境での指標です。これらの指標は実際のユーザー環境では測定できず、また[ユーザーを中心とした](/user-centric-performance-metrics/#how-metrics-are-measured)結果も反映していないため、Core Web Vitals には含まれません。
 
-## 進化を続ける Web Vitals
+## Evolving Web Vitals
 
 Web Vitals および Core Web Vitals は、Web 上でのユーザー エクスペリエンス品質の測定に関して現在利用可能な最高品質のシグナルを開発者に提供していますが、これらのシグナルも完璧なものではなく、将来的な改善や機能追加が期待されています。
 

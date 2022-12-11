@@ -5,7 +5,7 @@ authors:
   - philipwalton
 description: How to measure Web Vitals with your current analytics tool
 date: 2020-05-27
-updated: 2021-11-30
+updated: 2022-05-11
 hero: image/admin/WNrgCVjmp8Gyc8EbZ9Jv.png
 alt: How to measure Web Vitals with your current analytics tool
 tags:
@@ -67,7 +67,7 @@ The following code sample shows how easy it can be to track these metrics in
 code and send them to an analytics service.
 
 ```js
-import {getCLS, getFID, getLCP} from 'web-vitals';
+import {onCLS, onFID, onLCP} from 'web-vitals';
 
 function sendToAnalytics({name, value, id}) {
   const body = JSON.stringify({name, value, id});
@@ -76,9 +76,9 @@ function sendToAnalytics({name, value, id}) {
       fetch('/analytics', {body, method: 'POST', keepalive: true});
 }
 
-getCLS(sendToAnalytics);
-getFID(sendToAnalytics);
-getLCP(sendToAnalytics);
+onCLS(sendToAnalytics);
+onFID(sendToAnalytics);
+onLCP(sendToAnalytics);
 ```
 
 ## Avoid averages
@@ -160,9 +160,9 @@ final once the page has started unloading.
 
 This can be problematic, however, since both the `beforeunload` and `unload`
 events are not reliable (especially on mobile) and their use is [not
-recommended](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#legacy-lifecycle-apis-to-avoid)
+recommended](https://developer.chrome.com/blog/page-lifecycle-api/#legacy-lifecycle-apis-to-avoid)
 (since they can prevent a page from being eligible for the [Back-Forward
-Cache](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#page-navigation-cache)).
+Cache](https://developer.chrome.com/blog/page-lifecycle-api/#what-is-the-back-forward-cache)).
 
 For metrics that track the entire lifespan of a page, it's best to send whatever
 the metric's current value is during the `visibilitychange` event, whenever the
@@ -255,7 +255,7 @@ there's no need to rush to get your scripts loaded early.
 In the event that you're measuring a metric that cannot be computed later in the
 page load timeline, you should inline _only_ the code that needs to run early
 into the `<head>` of your document (so it's not a [render-blocking
-request](/render-blocking-resources/)) and defer the rest. Do not load all your
+request](https://developer.chrome.com/docs/lighthouse/performance/render-blocking-resources/)) and defer the rest. Do not load all your
 analytics early just because a single metric requires it.
 
 ### Do not create long tasks
@@ -264,7 +264,7 @@ Analytics code often runs in response to user input, but if your analytics code
 is conducting a lot of DOM measurements or using other processor-intensive APIs
 the analytics code itself can cause poor input responsiveness. In addition, if
 the JavaScript file containing your analytics code is large, executing that file
-can block the main thread and negatively affect FID.
+can block the main thread and negatively affect [First Input Delay (FID)](/fid/) or [Interaction to Next Paint (INP)](/inp/).
 
 ### Use non-blocking APIs
 

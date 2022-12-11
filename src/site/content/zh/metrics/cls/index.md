@@ -5,7 +5,7 @@ authors:
   - philipwalton
   - mihajlija
 date: 2019-06-11
-updated: 2021-06-01
+updated: 2022-10-19
 description: 本篇文章介绍了累积布局偏移 (CLS) 指标并说明了该指标的测量方式。
 tags:
   - performance
@@ -45,7 +45,7 @@ tags:
 
 ## 什么是 CLS？
 
-CLS 测量整个页面生命周期内发生的所有[意外](/cls/#expected-vs.-unexpected-layout-shifts)布局偏移中最大一连串的*布局偏移分数*。
+CLS 测量整个页面生命周期内发生的所有[意外](/cls/#expected-vs-unexpected-layout-shifts)布局偏移中最大一连串的*布局偏移分数*。
 
 每当一个可见元素的位置从一个已渲染帧变更到下一个已渲染帧时，就发生了*布局偏移* 。（有关单次[布局偏移分数](#layout-shift-score)计算方式的详细信息，请参阅下文。）
 
@@ -172,18 +172,21 @@ CLS 可以进行[实验室](/user-centric-performance-metrics/#in-the-lab)测量
 
 ### 实测工具
 
-- [Chrome 用户体验报告](https://developers.google.com/web/tools/chrome-user-experience-report)
-- [PageSpeed Insights 网页速度测量工具](https://developers.google.com/speed/pagespeed/insights/)
+- [Chrome 用户体验报告](https://developer.chrome.com/docs/crux/)
+- [PageSpeed Insights 网页速度测量工具](https://pagespeed.web.dev/)
 - [搜索控制台（核心 Web 指标报告）](https://support.google.com/webmasters/answer/9205520)
 - [`web-vitals` JavaScript 库](https://github.com/GoogleChrome/web-vitals)
 
 ### 实验室工具
 
-- [Chrome 开发者工具](https://developers.google.com/web/tools/chrome-devtools/)
-- [灯塔](https://developers.google.com/web/tools/lighthouse/)
+- [Chrome 开发者工具](https://developer.chrome.com/docs/devtools/)
+- [灯塔](https://developer.chrome.com/docs/lighthouse/overview/)
+- [PageSpeed Insights 网页速度测量工具](https://pagespeed.web.dev/)
 - [WebPageTest 网页性能测试工具](https://webpagetest.org/)
 
 ### 在 JavaScript 中测量 CLS
+
+{% BrowserCompat 'api.LayoutShift' %}
 
 要在 JavaScript 中测量 CLS，您可以使用[布局不稳定性 API](https://github.com/WICG/layout-instability)。以下示例说明了如何创建一个[`PerformanceObserver`](https://developer.mozilla.org/docs/Web/API/PerformanceObserver)来侦听意外`layout-shift`条目、将条目按会话分组、记录最大会话值，并在最大会话值发生改变时更新记录。
 
@@ -230,7 +233,7 @@ new PerformanceObserver((entryList) => {
 
 {% Aside 'warning' %}
 
-上述代码说明了计算和记录 CLS 的基本方法。但是，要想准确测量 CLS，使之与[Chrome 用户体验报告](https://developers.google.com/web/tools/chrome-user-experience-report) (CrUX) 中的测量值相匹配，那么测量方式要更为复杂。详情请见下文：
+上述代码说明了计算和记录 CLS 的基本方法。但是，要想准确测量 CLS，使之与[Chrome 用户体验报告](https://developer.chrome.com/docs/crux/) (CrUX) 中的测量值相匹配，那么测量方式要更为复杂。详情请见下文：
 
 {% endAside %}
 
@@ -249,7 +252,7 @@ new PerformanceObserver((entryList) => {
 - 用户可能会在*很*长一段时间内（几天、几周、几个月）让一个选项卡保持打开状态。事实上，用户可能永远不会关闭该选项卡。
 - 在移动操作系统上，浏览器通常不会为后台选项卡运行页面卸载回调，因为这样很难报告"最终"值。
 
-为了应对这些情况，只要当页面处于后台时就应该报告 CLS，页面卸载时也是如此（[`visibilitychange`事件](https://developers.google.com/web/updates/2018/07/page-lifecycle-api#event-visibilitychange)涵盖这两种情况）。而接收该数据的分析系统则需要在后端计算最终的 CLS 值。
+为了应对这些情况，只要当页面处于后台时就应该报告 CLS，页面卸载时也是如此（[`visibilitychange`事件](https://developer.chrome.com/blog/page-lifecycle-api/#event-visibilitychange)涵盖这两种情况）。而接收该数据的分析系统则需要在后端计算最终的 CLS 值。
 
 开发者不必记住所有这些情况并独自应付，而是可以使用[`web-vitals` JavaScript 库](https://github.com/GoogleChrome/web-vitals)来测量 CLS，库会自行处理上述所有情况：
 
@@ -261,7 +264,7 @@ import {getCLS} from 'web-vitals';
 getCLS(console.log);
 ```
 
-您可以参考[`getCLS)`的源代码](https://github.com/GoogleChrome/web-vitals/blob/master/src/getCLS.ts)，了解如何在 JavaScript 中测量 CLS 的完整示例。
+您可以参考[`getCLS)`的源代码](https://github.com/GoogleChrome/web-vitals/blob/main/src/getCLS.ts)，了解如何在 JavaScript 中测量 CLS 的完整示例。
 
 {% Aside %}在某些情况下（例如跨域 iframe），CLS 无法在 JavaScript 中进行测量。详情请参阅`web-vitals`库的[局限性](https://github.com/GoogleChrome/web-vitals#limitations)部分。 {% endAside %}
 

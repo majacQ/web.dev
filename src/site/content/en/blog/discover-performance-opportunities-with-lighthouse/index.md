@@ -16,7 +16,7 @@ tags:
     - devtools
 ---
 
-[Lighthouse](https://developers.google.com/web/tools/lighthouse/) is a tool that
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/) is a tool that
 helps you measure and find ways to improve a page's performance. Here's the
 general workflow for how you use Lighthouse:
 
@@ -98,7 +98,7 @@ configuration.
 
 The top-right of your report lists your overall performance score. 100 is a
 perfect score. Below the overall score are the metrics scores.
-[Lighthouse v3 Scoring Guide](https://developers.google.com/web/tools/lighthouse/v3/scoring)
+[Lighthouse v3 Scoring Guide](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/)
 explains how each metric score contributes to the overall score.
 
 {% Img src="image/admin/3kKMRoc1EY2kHDy8NIHi.png", alt="Lighthouse metrics scores showing green, passing scores, and yellow, warning scores.", width="800", height="504" %}
