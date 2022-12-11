@@ -11,6 +11,8 @@ tags:
   - javascript
 authors:
   - jakearchibald
+feedback:
+  - api
 ---
 
 Developers, prepare yourself for a pivotal moment in the history of
@@ -18,7 +20,7 @@ web development.
 
 <em>[Drumroll begins]</em>
 
-Promises have arrived natively in JavaScript!
+Promises have arrived in JavaScript!
 
 <em>[Fireworks explode, glittery paper rains from above, the crowd goes wild]</em>
 

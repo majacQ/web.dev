@@ -16,7 +16,10 @@ tags:
   - case-study
   - network
   - service-worker
+  - memory
   - amp
+feedback:
+  - api
 ---
 
 {% YouTube 'fhqCwDP69PI', '161' %}

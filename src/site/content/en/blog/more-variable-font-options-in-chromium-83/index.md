@@ -14,6 +14,8 @@ tags:
   - blog
   - css
   - fonts
+feedback:
+  - api
 ---
 
 The ['system-ui' section](https://drafts.csswg.org/css-fonts-4/#system-ui-def) of the CSS Fonts Module Level 4 spec defines a `system-ui` font keyword that allows developers to use the built-in, turbo-optimized, localized, mega-high-quality, no-download-needed, default operating system font right in their sites and apps. 
@@ -24,7 +26,7 @@ body {
 }
 ```
 
-This typography choice is akin to saying "use the native system font for the current locale of this user."
+This typography choice is akin to saying "use the default system font for the current locale of this user."
 
 On macOS, the `system-ui` font is San Francisco, a font that a design team vetted, tested, and… recently upgraded! First we'll cover the [new exciting variable font features in Catalina](#new-powers), then we'll cover a couple of [bugs and how Chromium engineers resolved them](#regression).
 

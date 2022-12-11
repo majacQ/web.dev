@@ -14,6 +14,8 @@ tags:
   - notifications
 hero: hero-2.jpg
 alt: Neon sign with heart and zero
+feedback:
+  - api
 ---
 
 ## What is the App Badging API? {: #what }
@@ -69,7 +71,7 @@ It has also been confirmed to work on Edge 84 or later.
 Support for Chrome OS is in development and will be available in a future
 release of Chrome. On Android, the Badging API is not supported. Instead,
 Android automatically shows a badge on app icon for the installed web app
-when there is an unread notification, just as for native apps.
+when there is an unread notification, just as for Android apps.
 
 ## Try it
 
