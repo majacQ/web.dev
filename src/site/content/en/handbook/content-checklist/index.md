@@ -2,7 +2,11 @@
 layout: handbook
 title: web.dev content review checklists
 date: 2019-06-26
+  <<<<<<< fix/authors
 updated: 2020-10-05
+  =======
+updated: 2020-04-13
+ >>>>>>> feat/authors-and-tags
 description: |
   The official checklists for web.dev content reviews.
 ---

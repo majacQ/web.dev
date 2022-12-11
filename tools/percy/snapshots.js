@@ -54,6 +54,7 @@ const pagesToTest = [
     title: 'Tags page',
   },
   {
+  <<<<<<< fix/authors
     url: '/podcasts/',
     title: 'Podcasts page',
   },
@@ -65,6 +66,14 @@ const pagesToTest = [
     url: '/live/',
     title: 'Live page',
     navPage: true,
+  =======
+    url: 'authors',
+    title: 'Authors page',
+  },
+  {
+    url: 'tags',
+    title: 'Tags page',
+  >>>>>>> feat/authors-and-tags
   },
 ];
 

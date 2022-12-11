@@ -4,7 +4,11 @@ subhead: The Privacy Sandbox is a series of proposals to satisfy third-party use
 authors:
   - samdutton
 date: 2020-04-08
+  <<<<<<< fix/authors
 updated: 2020-07-30
+  =======
+updated: 2020-04-13
+ >>>>>>> feat/authors-and-tags
 hero: hero.jpg
 thumbnail: thumbnail.jpg
 alt: A black-on-white printed sign saying Private, on a wooden wall.
