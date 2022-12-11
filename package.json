@@ -156,7 +156,7 @@
     "yaml-front-matter": "^4.0.0"
   },
   "optionalDependencies": {
-    "node-sass": "^4.13.1"
+    "node-sass": "^8.0.0"
   },
   "private": true,
   "engines": {
