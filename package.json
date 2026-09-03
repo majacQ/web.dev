@@ -134,7 +134,7 @@
     "rollup-plugin-postcss": "^2.5.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
     "sass": "^1.22.7",
-    "sass-lint": "^1.13.0",
+    "sass-lint": "^1.13.1",
     "scroll-to-bottomjs": "^1.1.0",
     "slugify": "^1.4.5",
     "through2": "^3.0.1",
